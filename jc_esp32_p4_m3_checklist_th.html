@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบตรวจ JC-ESP32P4-M3-DEV</title>
+  <style>
+    @page { size: A4; margin: 12mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #111; font: 14px/1.35 Arial, "Noto Sans Thai", sans-serif; }
+    h1 { margin: 0 0 4px; font-size: 22px; }
+    h2 { margin: 12px 0 5px; padding: 5px 8px; background: #e9eef5; font-size: 16px; }
+    p { margin: 4px 0; }
+    .warning { border: 2px solid #b00020; padding: 7px 9px; color: #8b0018; font-weight: bold; }
+    .row { display: grid; grid-template-columns: 26px 1fr; gap: 5px; margin: 4px 0; }
+    .box { width: 15px; height: 15px; border: 1.5px solid #111; margin-top: 2px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+    th, td { border: 1px solid #555; padding: 5px 6px; vertical-align: top; }
+    th { background: #f2f2f2; text-align: left; }
+    .write { min-width: 75px; height: 22px; }
+    .small { font-size: 12px; color: #333; }
+    .footer { margin-top: 9px; border-top: 1px solid #777; padding-top: 6px; }
+    code { font-family: Consolas, monospace; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>ใบตรวจบอร์ด JC-ESP32P4-M3-DEV</h1>
+  <p>วันที่ ____________ ผู้ตรวจ ____________ พอร์ต COM ____________</p>
+
+  <div class="warning">ห้ามจ่ายไฟ หากค่าความต้านทาน 5V–GND หรือ 3.3V–GND ค้างใกล้ค่าปลายโพรบชนกัน</div>
+
+  <h2>1) เตรียมบอร์ด</h2>
+  <div class="row"><span class="box"></span><span>ถอด USB แบตเตอรี่ SD Card และอุปกรณ์เสริมทั้งหมด</span></div>
+  <div class="row"><span class="box"></span><span>ถอดสเปเซอร์ทองเหลือง/ฐานโลหะ แล้ววางบอร์ดบนกระดาษแข็งหรือพลาสติก</span></div>
+  <div class="row"><span class="box"></span><span>เก็บหรือพันฉนวนปลายสายเปลือย และตรวจว่าไม่มีเศษโลหะบนบอร์ด</span></div>
+
+  <h2>2) วัดตอนถอดไฟ — ตั้งมิเตอร์โหมด Ω</h2>
+  <table>
+    <tr><th>จุดวัด</th><th>วิธีวัด</th><th>ผลที่วัด</th><th>หมายเหตุ</th></tr>
+    <tr><td>ปลายโพรบชนกัน</td><td>แตะโพรบแดงกับดำ</td><td class="write">______ Ω</td><td>เป็นค่าความต้านทานของสายวัด</td></tr>
+    <tr><td><code>5V ↔ GND</code></td><td>ค้างโพรบ 10 วินาที</td><td class="write">______ Ω</td><td>ถ้าค้างใกล้ค่าปลายโพรบ ห้ามจ่ายไฟ</td></tr>
+    <tr><td><code>3V3 ↔ GND</code></td><td>ค้างโพรบ 10 วินาที</td><td class="write">______ Ω</td><td>ค่าที่ค่อย ๆ สูงขึ้นอาจเกิดจากคาปาซิเตอร์</td></tr>
+  </table>
+
+  <h2>3) วัดตอนจ่ายไฟ — ตั้งมิเตอร์ DC V</h2>
+  <p class="small">เสียบเฉพาะ USB-C ช่องล่างสุด TYPE-C to UART (#10) ใช้ขา GND ที่ระบุบนหัวต่อเป็นโพรบดำ</p>
+  <table>
+    <tr><th>จุดวัด</th><th>ค่าปกติ</th><th>ผลที่วัด</th><th>ผ่าน</th></tr>
+    <tr><td><code>5V → GND</code></td><td>4.8–5.2 V</td><td class="write">______ V</td><td>□</td></tr>
+    <tr><td><code>3V3 → GND</code></td><td>3.2–3.4 V</td><td class="write">______ V</td><td>□</td></tr>
+    <tr><td>RESET ขาสัญญาณ ตอนปล่อย</td><td>ประมาณ 3.3 V</td><td class="write">______ V</td><td>□</td></tr>
+    <tr><td>RESET ขาสัญญาณ ตอนกด</td><td>ประมาณ 0 V</td><td class="write">______ V</td><td>□</td></tr>
+    <tr><td>BOOT ขาสัญญาณ ตอนปล่อย</td><td>ประมาณ 3.3 V</td><td class="write">______ V</td><td>□</td></tr>
+    <tr><td>BOOT ขาสัญญาณ ตอนกด</td><td>ประมาณ 0 V</td><td class="write">______ V</td><td>□</td></tr>
+  </table>
+  <p class="small"><b>วิธีหาขาสัญญาณปุ่ม:</b> ขาหนึ่งของปุ่มจะเป็น 0 V ตลอด (GND) อีกขาคือสัญญาณที่ควรเปลี่ยนจากประมาณ 3.3 V เป็น 0 V เมื่อกด ระวังปลายโพรบพาดสองขาพร้อมกัน</p>
+
+  <h2>4) ผลฝั่งคอมพิวเตอร์</h2>
+  <div class="row"><span class="box"></span><span>พบ CH340 และ COM หมายเลข ______</span></div>
+  <div class="row"><span class="box"></span><span>ไม่มี Code 43</span></div>
+  <div class="row"><span class="box"></span><span>กด RESET แล้วมี boot log ที่ 115200 baud</span></div>
+  <div class="row"><span class="box"></span><span><code>esptool chip-id</code> ติดต่อชิปได้</span></div>
+
+  <h2>สรุปเบื้องต้น</h2>
+  <table>
+    <tr><th>อาการ</th><th>จุดที่ควรตรวจ/ซ่อม</th></tr>
+    <tr><td>ไม่มี 3.3 V</td><td>ราง 3.3 V, เรกูเลเตอร์ หรือการลัดวงจร</td></tr>
+    <tr><td>RESET ค้าง 0 V</td><td>วงจร RESET / EN / DTR / RTS</td></tr>
+    <tr><td>BOOT ไม่ลง 0 V เมื่อกด</td><td>ปุ่ม BOOT หรือทางเดิน GPIO35</td></tr>
+    <tr><td>ไฟและปุ่มปกติ แต่ไม่มี boot log</td><td>CH340 TX/RX, UART0 หรือโมดูล ESP32-P4</td></tr>
+  </table>
+
+  <div class="footer">หมายเหตุเพิ่มเติม: ____________________________________________________________________________</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+{
+  "model_type": "robust_median_mad_baseline",
+  "purpose": "sensor anomaly screening; not disease diagnosis",
+  "stale_weather_rule": {
+    "columns": [
+      "air_temperature_c",
+      "humidity_percent",
+      "outdoor_temperature_c",
+      "outdoor_humidity_percent",
+      "pressure_hpa"
+    ],
+    "unchanged_minutes_threshold": 60.0
+  },
+  "anomaly_threshold_robust_z": 4.5,
+  "valid_ranges": {
+    "soil_moisture_percent": [
+      0.0,
+      100.0
+    ],
+    "soil_temperature_c": [
+      -10.0,
+      60.0
+    ],
+    "soil_ec": [
+      0.0,
+      null
+    ],
+    "soil_ph": [
+      0.0,
+      14.0
+    ],
+    "air_temperature_c": [
+      -10.0,
+      60.0
+    ],
+    "humidity_percent": [
+      0.0,
+      100.0
+    ],
+    "outdoor_temperature_c": [
+      -10.0,
+      60.0
+    ],
+    "outdoor_humidity_percent": [
+      0.0,
+      100.0
+    ],
+    "pressure_hpa": [
+      850.0,
+      1100.0
+    ],
+    "rain_1h_mm": [
+      0.0,
+      null
+    ],
+    "uv_index": [
+      0.0,
+      null
+    ],
+    "light_lux": [
+      0.0,
+      null
+    ]
+  },
+  "features": {
+    "soil_moisture_percent": {
+      "median": 36.1,
+      "mad": 9.0,
+      "q1": 26.7,
+      "q3": 43.5,
+      "usable": true
+    },
+    "soil_temperature_c": {
+      "median": 28.7,
+      "mad": 1.1999999999999993,
+      "q1": 27.5,
+      "q3": 29.9,
+      "usable": true
+    },
+    "soil_ec": {
+      "median": 0.0,
+      "mad": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "usable": false
+    },
+    "soil_ph": {
+      "median": 6.3,
+      "mad": 0.6000000000000005,
+      "q1": 5.9,
+      "q3": 7.3,
+      "usable": true
+    },
+    "air_temperature_c": {
+      "median": 29.5,
+      "mad": 1.8000000000000007,
+      "q1": 27.8,
+      "q3": 31.3,
+      "usable": true
+    },
+    "humidity_percent": {
+      "median": 71.0,
+      "mad": 5.0,
+      "q1": 65.0,
+      "q3": 75.0,
+      "usable": true
+    },
+    "outdoor_temperature_c": {
+      "median": 27.7,
+      "mad": 2.599999999999998,
+      "q1": 25.6,
+      "q3": 31.3,
+      "usable": true
+    },
+    "outdoor_humidity_percent": {
+      "median": 85.0,
+      "mad": 9.0,
+      "q1": 70.0,
+      "q3": 91.0,
+      "usable": true
+    },
+    "pressure_hpa": {
+      "median": 1005.0,
+      "mad": 1.0,
+      "q1": 1004.0,
+      "q3": 1006.0,
+      "usable": true
+    },
+    "rain_1h_mm": {
+      "median": 0.0,
+      "mad": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "usable": false
+    },
+    "uv_index": {
+      "median": 0.0,
+      "mad": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "usable": false
+    },
+    "light_lux": {
+      "median": 7750.0,
+      "mad": 7750.0,
+      "q1": 0.0,
+      "q3": 37070.0,
+      "usable": true
+    }
+  },
+  "training_rows": 2621,
+  "excluded_weather_missing": 82,
+  "excluded_weather_stale": 1890,
+  "excluded_invalid_range": 0,
+  "flagged_anomalies": 413,
+  "wet_environment_alerts": 360
+}

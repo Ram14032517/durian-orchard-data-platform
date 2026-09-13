@@ -1,0 +1,208 @@
+﻿{
+    "category":  "qxj",
+    "functions":  [
+                      {
+                          "code":  "temp_unit_convert",
+                          "dp_id":  9,
+                          "type":  "Enum",
+                          "values":  "{\"range\":[\"c\",\"f\"]}"
+                      },
+                      {
+                          "code":  "windspeed_unit_convert",
+                          "dp_id":  10,
+                          "type":  "Enum",
+                          "values":  "{\"range\":[\"kmph\",\"mph\",\"mps\"]}"
+                      },
+                      {
+                          "code":  "pressure_unit_convert",
+                          "dp_id":  11,
+                          "type":  "Enum",
+                          "values":  "{\"range\":[\"hpa\",\"inhg\",\"mmhg\"]}"
+                      },
+                      {
+                          "code":  "rain_unit_convert",
+                          "dp_id":  12,
+                          "type":  "Enum",
+                          "values":  "{\"range\":[\"mm\",\"inch\"]}"
+                      },
+                      {
+                          "code":  "bright_unit_convert",
+                          "dp_id":  13,
+                          "type":  "Enum",
+                          "values":  "{\"range\":[\"wm2\"]}"
+                      }
+                  ],
+    "lang_config":  {
+
+                    },
+    "status":  [
+                   {
+                       "code":  "temp_current",
+                       "dp_id":  1,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-600,\"max\":2550,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "humidity_value",
+                       "dp_id":  2,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "battery_percentage",
+                       "dp_id":  4,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "temp_unit_convert",
+                       "dp_id":  9,
+                       "type":  "Enum",
+                       "values":  "{\"range\":[\"c\",\"f\"]}"
+                   },
+                   {
+                       "code":  "windspeed_unit_convert",
+                       "dp_id":  10,
+                       "type":  "Enum",
+                       "values":  "{\"range\":[\"kmph\",\"mph\",\"mps\"]}"
+                   },
+                   {
+                       "code":  "pressure_unit_convert",
+                       "dp_id":  11,
+                       "type":  "Enum",
+                       "values":  "{\"range\":[\"hpa\",\"inhg\",\"mmhg\"]}"
+                   },
+                   {
+                       "code":  "rain_unit_convert",
+                       "dp_id":  12,
+                       "type":  "Enum",
+                       "values":  "{\"range\":[\"mm\",\"inch\"]}"
+                   },
+                   {
+                       "code":  "bright_unit_convert",
+                       "dp_id":  13,
+                       "type":  "Enum",
+                       "values":  "{\"range\":[\"wm2\"]}"
+                   },
+                   {
+                       "code":  "temp_current_external",
+                       "dp_id":  38,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-600,\"max\":2550,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "humidity_outdoor",
+                       "dp_id":  39,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "temp_current_external_1",
+                       "dp_id":  40,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-600,\"max\":2550,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "humidity_outdoor_1",
+                       "dp_id":  41,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "temp_current_external_2",
+                       "dp_id":  42,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-600,\"max\":2550,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "humidity_outdoor_2",
+                       "dp_id":  43,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "temp_current_external_3",
+                       "dp_id":  44,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-600,\"max\":2550,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "humidity_outdoor_3",
+                       "dp_id":  45,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "atmospheric_pressture",
+                       "dp_id":  54,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"hPa\",\"min\":300,\"max\":1200,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "pressure_drop",
+                       "dp_id":  55,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"hPa\",\"min\":300,\"max\":1200,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "windspeed_avg",
+                       "dp_id":  56,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"km/h\",\"min\":0,\"max\":2500,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "windspeed_gust",
+                       "dp_id":  57,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"km/h\",\"min\":0,\"max\":2500,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "rain_1h",
+                       "dp_id":  59,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"mm\",\"min\":0,\"max\":5000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "rain_24h",
+                       "dp_id":  60,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"mm\",\"min\":0,\"max\":25000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "rain_rate",
+                       "dp_id":  61,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"mm\",\"min\":0,\"max\":5000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "uv_index",
+                       "dp_id":  62,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"\",\"min\":0,\"max\":300,\"scale\":0,\"step\":1}"
+                   },
+                   {
+                       "code":  "dew_point_temp",
+                       "dp_id":  64,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-400,\"max\":2000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "feellike_temp",
+                       "dp_id":  65,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-400,\"max\":2000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "heat_index",
+                       "dp_id":  66,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-400,\"max\":2000,\"scale\":1,\"step\":1}"
+                   },
+                   {
+                       "code":  "windchill_index",
+                       "dp_id":  67,
+                       "type":  "Integer",
+                       "values":  "{\"unit\":\"℃\",\"min\":-400,\"max\":2000,\"scale\":1,\"step\":1}"
+                   }
+               ]
+}

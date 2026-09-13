@@ -1,0 +1,139 @@
+﻿{
+    "properties":  [
+                       {
+                           "code":  "temp_current",
+                           "custom_name":  "",
+                           "dp_id":  1,
+                           "name":  "",
+                           "time":  1783939330057,
+                           "type":  "value",
+                           "value":  318
+                       },
+                       {
+                           "code":  "humidity_value",
+                           "custom_name":  "",
+                           "dp_id":  2,
+                           "name":  "",
+                           "time":  1783939164805,
+                           "type":  "value",
+                           "value":  68
+                       },
+                       {
+                           "code":  "temp_current_external",
+                           "custom_name":  "",
+                           "dp_id":  38,
+                           "name":  "",
+                           "time":  1783939207278,
+                           "type":  "value",
+                           "value":  293
+                       },
+                       {
+                           "code":  "humidity_outdoor",
+                           "custom_name":  "",
+                           "dp_id":  39,
+                           "name":  "",
+                           "time":  1783939387301,
+                           "type":  "value",
+                           "value":  78
+                       },
+                       {
+                           "code":  "atmospheric_pressture",
+                           "custom_name":  "",
+                           "dp_id":  54,
+                           "name":  "",
+                           "time":  1783939164816,
+                           "type":  "value",
+                           "value":  1002
+                       },
+                       {
+                           "code":  "windspeed_avg",
+                           "custom_name":  "",
+                           "dp_id":  56,
+                           "name":  "",
+                           "time":  1783939165005,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "windspeed_gust",
+                           "custom_name":  "",
+                           "dp_id":  57,
+                           "name":  "",
+                           "time":  1783939165014,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "rain_1h",
+                           "custom_name":  "",
+                           "dp_id":  59,
+                           "name":  "",
+                           "time":  1783939165025,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "rain_24h",
+                           "custom_name":  "",
+                           "dp_id":  60,
+                           "name":  "",
+                           "time":  1783939165036,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "rain_rate",
+                           "custom_name":  "",
+                           "dp_id":  61,
+                           "name":  "",
+                           "time":  1783939165045,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "uv_index",
+                           "custom_name":  "",
+                           "dp_id":  62,
+                           "name":  "",
+                           "time":  1783939167173,
+                           "type":  "value",
+                           "value":  0
+                       },
+                       {
+                           "code":  "dew_point_temp",
+                           "custom_name":  "",
+                           "dp_id":  64,
+                           "name":  "",
+                           "time":  1783939387507,
+                           "type":  "value",
+                           "value":  250
+                       },
+                       {
+                           "code":  "feellike_temp",
+                           "custom_name":  "",
+                           "dp_id":  65,
+                           "name":  "",
+                           "time":  1783939387517,
+                           "type":  "value",
+                           "value":  349
+                       },
+                       {
+                           "code":  "heat_index",
+                           "custom_name":  "",
+                           "dp_id":  66,
+                           "name":  "",
+                           "time":  1783939387527,
+                           "type":  "value",
+                           "value":  350
+                       },
+                       {
+                           "code":  "Light_intensity",
+                           "custom_name":  "",
+                           "dp_id":  135,
+                           "name":  "",
+                           "time":  1783939387311,
+                           "type":  "value",
+                           "value":  563
+                       }
+                   ]
+}
