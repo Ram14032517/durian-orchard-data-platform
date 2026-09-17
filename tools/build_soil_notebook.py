@@ -103,7 +103,7 @@ summary.index = summary.index.map({'pure':'A403 ตรงตัว','mixed':'ร
 table = summary[['records','rai','covered_rai','uncovered_rai']].rename(columns={
     'records':'รูปแปลง','rai':'พื้นที่_ไร่','covered_rai':'ซ้อนดินได้_ไร่','uncovered_rai':'ไม่ซ้อนดิน_ไร่'})
 print(table.round(1).to_string())
-print('\nรูปแปลงไม่เท่ากับจำนวนสวน; ไม่รวมพื้นที่ปลูกผสมเป็นทุเรียนล้วน')
+print('รูปแปลงไม่เท่ากับจำนวนสวน; ไม่รวมพื้นที่ปลูกผสมเป็นทุเรียนล้วน')
 ''')
 markdown('### 4. หน่วยดินที่มีพื้นที่ A403 มากที่สุด 10 อันดับ\nเปรียบเทียบขนาดพื้นที่เท่านั้น ไม่ใช่อันดับผลผลิตหรือความเหมาะสม')
 code('''
