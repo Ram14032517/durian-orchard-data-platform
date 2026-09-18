@@ -22,7 +22,7 @@ a {color:#1f6f5f} #legend {font-size:12px;background:white;padding:9px;line-heig
 {% macro html(this, kwargs) %}
 <section id="controls">
  <h1>ทุเรียนประเทศไทย · เปรียบเทียบข้อมูลจริงรายจังหวัด</h1>
- <div class="sub">ผลวิเคราะห์จาก Jupyter | แผนที่ 77 จังหวัด · สถิติผลผลิต 67 จังหวัด · อากาศกริด NASA · ดินซ้อนพื้นที่ทุเรียน: จันทบุรีเท่านั้น</div>
+ <div class="sub">ผลวิเคราะห์จาก Jupyter | แผนที่ 77 จังหวัด · สถิติผลผลิต 67 จังหวัด · อากาศจุดอ้างอิงจังหวัด NASA · ดินซ้อนพื้นที่ทุเรียน: {{ this.soil_count }} จังหวัด</div>
  <label>ปี พ.ศ. <select id="year" aria-label="ปีข้อมูล"></select></label>
  <label>สีแผนที่ <select id="metric" aria-label="ตัวชี้วัดสีแผนที่"></select></label>
  <label>พื้นที่ <select id="region" aria-label="ภาค"></select></label>
@@ -39,7 +39,7 @@ a {color:#1f6f5f} #legend {font-size:12px;background:white;padding:9px;line-heig
  <p class="note"><a href="https://catalog.oae.go.th/dataset/durian_product" target="_blank" rel="noopener">ผลผลิต: สศก.</a> (ไฟล์ปี 2540–2568; ไม่แยกพันธุ์หมอนทอง)<br>
  <a href="https://power.larc.nasa.gov/docs/methodology/meteorology/" target="_blank" rel="noopener">อากาศ: NASA POWER</a> ปี 2564–2568; 1 จุดอ้างอิงต่อจังหวัด อ่านค่ากริด ไม่ใช่ค่าเฉลี่ยทั้งจังหวัดหรือค่าจากสวน<br>
  <a href="https://gistdaportal.gistda.or.th/arcgis/rest/services/ข้อมูลเขตการปกครอง/MapServer/2" target="_blank" rel="noopener">ขอบเขต: GISTDA</a>; ภาคใช้ DPM REGION_6 และเติมสตูลเป็นภาคใต้ ไม่ใช่ภาคตามตาราง สศก.<br>
- <a href="https://lddcatalog.ldd.go.th/dataset/ldd_11_01" target="_blank" rel="noopener">ดิน: กรมพัฒนาที่ดิน</a> จันทบุรีปีผลิต 2561 × การใช้ที่ดินปีไฟล์ 2568<br>ดาวน์โหลด 17 ก.ย. 2569 · ไฟล์นี้เปิดออฟไลน์ได้ ไม่มีการส่งข้อมูลสวน</p>
+ <a href="https://lddcatalog.ldd.go.th/dataset/ldd_11_01" target="_blank" rel="noopener">ดิน: กรมพัฒนาที่ดิน</a> ปีผลิต 2561 × การใช้ที่ดินต่างปี ระบุในรายละเอียดจังหวัด<br>ดาวน์โหลด 17–18 ก.ย. 2569 · ไฟล์นี้เปิดออฟไลน์ได้ ไม่มีการส่งข้อมูลสวน<br>อากาศแบบจุดใน A403 ถ่วงพื้นที่ 20 ปีและการเปรียบเทียบวิธี ดู notebook 03 ในโฟลเดอร์ notebooks; แผนที่นี้ยังใช้วิธีจุดอ้างอิงเดิม</p>
  <p class="note warning">สีเทา = ไม่มีระเบียน ไม่ใช่ศูนย์ · ค่าผลผลิตของทั้งจังหวัดไม่ใช่ผลผลิตของแต่ละชุดดิน · ความสัมพันธ์ของอากาศกับผลผลิตยังไม่พิสูจน์เหตุและผล · ยังไม่ใช่โมเดลคาดการณ์หรือระบบสั่งให้น้ำ</p>
 </aside>
 {% endmacro %}
@@ -73,10 +73,11 @@ function detail(code) {
  for (const [key,metric] of Object.entries(metrics)) html+='<tr><td>'+esc(metric.label)+'</td><td>'+fmt(r[key],metric.decimals)+'</td></tr>';
  html+='<tr><td>เนื้อที่ให้ผล (ไร่)</td><td>'+fmt(r.bearing_rai)+'</td></tr></tbody></table>';
  html+='<p class="note">อากาศปี '+(+r.year_ce+543)+' ครบ '+fmt(r.complete_weather_months)+'/12 เดือน<br>จุดอ้างอิง '+fmt(r.weather_latitude,5)+', '+fmt(r.weather_longitude,5)+' ไม่ใช่พิกัดสวน</p>';
- if(code==='22') {
+ if(soil[code]) {
+  const evidence=soil[code];
   html+='<h3>หน่วยดินที่พบใต้พื้นที่ A403 มากที่สุด</h3><table><tr><th>ชื่อ / รหัส</th><th>พื้นที่ (ไร่)</th></tr>';
-  for(const s of soil.top) html+='<tr><td>'+esc(s.name)+' ('+esc(s.code)+')</td><td>'+fmt(s.rai)+'</td></tr>';
-  html+='</table><p class="note">A403 ตรงตัว '+fmt(soil.total)+' ไร่; แยกพื้นที่ปลูกผสมออก ไม่ใช่เนื้อที่ให้ผล สศก. ไม่ใช่อันดับความเหมาะสม<br>ดินเป็นข้อมูลคงที่ 2561 × 2568 ไม่เปลี่ยนตามปุ่มปีผลผลิต</p>';
+  for(const s of evidence.top) html+='<tr><td>'+esc(s.name)+' ('+esc(s.code)+')</td><td>'+fmt(s.rai)+'</td></tr>';
+  html+='</table><p class="note">A403 ตรงตัว '+fmt(evidence.total)+' ไร่; รหัสผสมทั้ง polygon '+fmt(evidence.mixed)+' ไร่ (ไม่ใช่พื้นที่ทุเรียนล้วน)<br>ไม่ใช่เนื้อที่ให้ผล สศก. หรืออันดับความเหมาะสม · SC เป็นพื้นที่ลาดชันเชิงซ้อน ไม่ใช่ชุดดินเฉพาะ<br>ดินปีผลิต '+evidence.soil_year+' × การใช้ที่ดิน '+evidence.lu_year+' คงที่ ไม่เปลี่ยนตามปุ่มปีผลผลิต</p>';
  } else html+='<p class="warning">ชุดดินใต้พื้นที่ทุเรียน: ยังไม่ประมวลผลจังหวัดนี้ ไม่ได้หมายความว่าไม่มีดินหรือไม่มีสวน</p>';
  el('details').innerHTML=html;
 }

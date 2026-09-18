@@ -202,11 +202,14 @@ def main():
     panel = grid.merge(prod[cols], on=['province_code', 'year_ce'], how='left', validate='one_to_one')
     panel = panel.merge(annual, on=['province_code', 'year_ce'], how='left', validate='one_to_one')
     panel['production_record_available'] = panel.production_tonnes.notna()
-    panel['soil_overlay_available'] = panel.province_name.eq('จันทบุรี')
+    regional_soil = ROOT / 'research_data/regional_orchards/overlay_summaries.json'
+    soil_names = [s['province_name'] for s in json.loads(regional_soil.read_text(encoding='utf-8'))] if regional_soil.exists() else ['จันทบุรี']
+    # Availability of a fixed map snapshot, NOT time-varying soil observations.
+    panel['soil_overlay_available'] = panel.province_name.isin(soil_names)
     panel.to_csv(OUT / 'province_year_panel.csv', index=False, encoding='utf-8-sig')
     save_json(OUT / 'coverage.json', {'boundary_provinces': len(provinces), 'weather_provinces': monthly.province_code.nunique(),
                                     'weather_failures': failures, 'production_provinces_all_years': prod.province_code.nunique(),
-                                    'analysis_years': list(YEARS), 'soil_overlay_provinces': ['จันทบุรี']})
+                                    'analysis_years': list(YEARS), 'soil_overlay_provinces': soil_names})
     print('Saved joined panel:', len(panel), 'rows; weather failures:', len(failures), flush=True)
 
 

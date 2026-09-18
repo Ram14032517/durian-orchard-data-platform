@@ -40,8 +40,8 @@ class NationalComparisonTests(unittest.TestCase):
             expected = source.loc[source.year_ce.eq(year),'province_code'].nunique()
             self.assertEqual(group.production_tonnes.notna().sum(), expected)
             self.assertEqual(group.production_tonnes.isna().sum(), 77-expected)
-            self.assertEqual(group.soil_overlay_available.sum(), 1)
-        self.assertEqual(self.panel.loc[self.panel.soil_overlay_available,'province_name'].unique().tolist(), ['จันทบุรี'])
+            self.assertEqual(group.soil_overlay_available.sum(), 4)
+        self.assertEqual(set(self.panel.loc[self.panel.soil_overlay_available,'province_name'].unique()), {'จันทบุรี','ชุมพร','ศรีสะเกษ','อุตรดิตถ์'})
 
     def test_weather_units_and_annual_math(self):
         self.assertEqual(len(self.monthly), 77*5*12)

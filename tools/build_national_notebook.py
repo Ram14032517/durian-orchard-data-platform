@@ -56,8 +56,16 @@ def build_map(panel, provinces, soil_result):
     controls.metrics = metrics
     controls.map_name, controls.geo_name = map_obj.get_name(), geo.get_name()
     ranked = sorted(soil_result['soil_stats'], key=lambda x: -x['pure_rai'])[:5]
-    controls.soil = {'top': [{'code': s['code'], 'name': ' / '.join(s['names']), 'rai': s['pure_rai']} for s in ranked],
-                     'total': soil_result['summary']['pure']['rai']}
+    controls.soil = {'22': {'top': [{'code': s['code'], 'name': ' / '.join(s['names']), 'rai': s['pure_rai']} for s in ranked],
+                     'total': soil_result['summary']['pure']['rai'], 'mixed':soil_result['summary']['mixed']['rai'], 'soil_year':2561,'lu_year':2568}}
+    regional = ROOT/'research_data/regional_orchards'
+    if (regional/'soil_series_comparison.csv').exists() and (regional/'overlay_summaries.json').exists():
+        soil_table = pd.read_csv(regional/'soil_series_comparison.csv',dtype={'province_code':str})
+        for s in json.loads((regional/'overlay_summaries.json').read_text(encoding='utf-8')):
+            g=soil_table.loc[soil_table.province_code.eq(s['province_code'])].nlargest(5,'pure_rai')
+            controls.soil[s['province_code']]={'top':[{'code':r.soil_code,'name':r.soil_name,'rai':r.pure_rai} for r in g.itertuples()],
+                'total':s['summary']['pure']['rai'],'mixed':s['summary']['mixed']['rai'],'soil_year':s['soil_year_be'],'lu_year':s['landuse_year_be']}
+    controls.soil_count = len(controls.soil)
     map_obj.add_child(controls)
     rendered = map_obj.get_root().render()
     # Keep library notices. Inline these two versioned public assets; no map tiles,
@@ -96,7 +104,8 @@ def main():
     ดูประเทศไทยรวม → 6 ภาค → จังหวัด บนแผนที่กดได้ และเลือกเทียบสองจังหวัด
     - ขอบเขตแผนที่ **77 จังหวัด** จากบริการ GISTDA; ผลผลิต สศก. **67 จังหวัด** ในไฟล์ปี 2540–2568
     - อากาศ NASA POWER ปี **2564–2568** ที่จุดอ้างอิงหนึ่งจุดต่อจังหวัด ไม่ใช่สถานีสวน
-    - **ดินใต้พื้นที่ทุเรียนยังมีเพียงจันทบุรี**: ดินปีผลิต 2561 × การใช้ที่ดินปีไฟล์ 2568
+    - **ดินใต้พื้นที่ทุเรียนดูสถานะ coverage ด้านล่าง**: เพิ่ม 4 จังหวัดใน notebook 03 แล้ว; แผนที่ใช้ที่ดินแต่ละจังหวัดต่างปี
+    - notebook 03 เพิ่มอากาศ 20 ปี ณ จุดใน A403; **อากาศในแผนที่นี้ยังเป็นจุดอ้างอิงจังหวัดเดิม** เพื่อไม่ปนวิธีคำนวณ
     - จังหวัดที่ไม่มีระเบียนไม่ถูกแทนเป็นศูนย์ ผลผลิตไม่แยกพันธุ์หมอนทอง
 
     ใช้ศึกษา/แสดงอาจารย์ในเครื่องก่อน ยังไม่ได้เผยแพร่ชุดข้อมูลหรือส่งขึ้น GitHub
@@ -124,7 +133,7 @@ def main():
     | ขอบเขตจังหวัด | [GISTDA / DOPA](https://gistdaportal.gistda.or.th/arcgis/rest/services/ข้อมูลเขตการปกครอง/MapServer/2) | source date ใน attribute 2013-12-30; ใช้ทำแผนที่ ไม่ใช่รังวัด |
     | การแบ่งภาค | [DPM REGION_6](https://gis-portal.disaster.go.th/arcgis/rest/services/MapDX/DPM_TH_Boundary/FeatureServer/1) | แหล่งนี้ขาดสตูล จึงใช้เพียงตารางภาคและเติมสตูลเป็นภาคใต้; ไม่ใช่กลุ่มภาคในตาราง สศก. |
     | อากาศ | [NASA POWER monthly](https://power.larc.nasa.gov/docs/services/api/temporal/monthly/) | อุณหภูมิ/ความชื้น/ฝนเป็น reanalysis กริด; 1 จุดอ้างอิงที่อยู่ภายในขอบเขตจังหวัด |
-    | ดิน × การใช้ที่ดิน | [LDD ดิน](https://lddcatalog.ldd.go.th/dataset/ldd_11_01), [LDD การใช้ที่ดิน](https://lddcatalog.ldd.go.th/dataset/ldd_21_01) | คำนวณ spatial intersection จริงเฉพาะจันทบุรี; ไม่สมมติว่าจังหวัดมีดินชนิดเดียว |
+    | ดิน × การใช้ที่ดิน | [LDD ดิน](https://lddcatalog.ldd.go.th/dataset/ldd_11_01), [LDD การใช้ที่ดิน](https://lddcatalog.ldd.go.th/dataset/ldd_21_01) | คำนวณ spatial intersection; เพิ่มจันทบุรี ชุมพร ศรีสะเกษ อุตรดิตถ์ใน notebook 03; ไม่สมมติว่าจังหวัดมีดินชนิดเดียว |
 
     อากาศ: MERRA-2 โดยทั่วไปกริด 0.5° × 0.625°, รังสีอาทิตย์มาจาก SYN1DEG;
     [รายละเอียดวิธี NASA](https://power.larc.nasa.gov/docs/methodology/meteorology/)
@@ -173,7 +182,8 @@ def main():
     display(coverage)
     print('จังหวัดที่ไม่มีระเบียนผลผลิตในปีเลือก:', ', '.join(current.loc[current.production_tonnes.isna(),'province_name']))
     print('จำนวนจังหวัดที่รายงานต่างกันตามปี: อย่าตีความระเบียนที่เพิ่งปรากฏว่าเพิ่งเริ่มปลูก')
-    print('ดินไม่มีทั้งประเทศ — มีเฉพาะจันทบุรี; สถานะนี้ไม่เปลี่ยนตามปีผลผลิต')
+    print('จังหวัดที่ซ้อนดินแล้ว:', ', '.join(current.loc[current.soil_overlay_available,'province_name']))
+    print('สถานะดินคือ snapshot ไม่ใช่ชุดข้อมูลดินที่เปลี่ยนตามปีผลผลิต; รายละเอียดข้ามภาคดู notebook 03')
     ''')
     md('''
     ## ผลเปรียบเทียบ
@@ -287,7 +297,7 @@ def main():
     plt.show()
     ''')
     md('''
-    ### 5. ดินที่นำมาเปรียบเทียบได้จริงตอนนี้
+    ### 5. ตัวอย่างวิธีอ่านดิน: จันทบุรี
     พื้นที่ทุเรียนรหัส A403 ตรงตัวซ้อนกับแผนที่ดินจันทบุรี ไม่รวมรหัสปลูกผสม
     ตัวหารสัดส่วนคือ A403 ทั้งหมดรวมส่วนที่เชื่อมดินไม่ได้
     **นี่ไม่ใช่ผลผลิตรายชุดดิน** และไม่ใช่ค่าความชื้นดินปัจจุบัน
@@ -304,8 +314,8 @@ def main():
     md('''
     ## ข้อสรุป / การทำต่อ
     1. ใช้เปรียบเทียบปริมาณ ผลผลิตต่อไร่ และบริบทอากาศข้ามจังหวัด/ภาค พร้อมเปิดแหล่งที่มาได้แล้ว
-    2. ยังเปรียบเทียบดินทั้งประเทศไม่ได้ ต้องทำ LDD soil × A403 จังหวัดอื่นเพิ่มเติม และตรวจปี/ใบอนุญาต
-    3. ก่อนฝึกโมเดล: เพิ่มอากาศย้อนหลังให้ยาวกว่า 5 ปี จับช่วงฤดูออกดอก/ติดผล และข้อมูลผลผลิตที่ระดับสอดคล้องกัน
+    2. ยังเปรียบเทียบดินทั้งประเทศไม่ได้; notebook 03 เพิ่ม 4 จังหวัดข้ามภาคแล้ว แต่ต้องตรวจต่างปี/สวนผสม/ใบอนุญาต
+    3. notebook 03 เพิ่มอากาศย้อนหลัง 20 ปีบนพื้นที่ A403 อ้างอิงคงที่แล้ว; ยังต้องจับฤดูออกดอก/ติดผลและแก้ความเสี่ยงใช้พื้นที่อนาคต
     4. โมเดลแรกควรทำนายผลผลิตต่อไร่จังหวัดปีถัดไป เทียบ baseline “เท่าปีก่อน”; แบ่ง train/test ตามเวลาและกันจังหวัดไว้ทดสอบ ไม่สุ่มแถวปนปี
     5. อุณหภูมิ ±1°C ยังไม่ใช่เหตุผลให้คำนวณผลผลิตแบบ causal; ต้องออกแบบสมมติฐาน/ปัจจัยกวนและแสดง uncertainty
     6. ข้อมูลสวน 15 นาทีเป็นงานตรวจเทียบสถานีอีกระดับหนึ่ง: ใช้ outdoor fields และตัดช่วง gateway ค้างจาก weather features โดยเก็บ raw เดิม
