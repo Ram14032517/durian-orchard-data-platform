@@ -2,7 +2,7 @@
 
 ## ผลตรวจที่ทำแล้ว
 
-- `tools/test_regional_orchards.py`: 7 tests ผ่าน; `tools/test_national_comparison.py`: 6 tests ผ่าน
+- การตรวจรอบแรก `tools/test_regional_orchards.py`: 7 tests ผ่าน; `tools/test_national_comparison.py`: 6 tests ผ่าน
 - รัน notebook 03 ผ่าน kernel Jupyter จริงครบทุก code cell ไม่มี error output; notebook 02 สร้างใหม่หลังเพิ่มดิน 4 จังหวัด
 - ตรวจ SHA-256 แหล่ง SHP/DBF/PRJ/readme และ response/archives ที่ดาวน์โหลด
 - เปิด land-use SHP ซ้ำตรวจพิกัด API ที่ปัดทศนิยมแล้วทั้ง 59 จุดว่าอยู่ใน polygon A403 ตรงตัวจริง
@@ -34,3 +34,11 @@ baseline ใช้สถิติฉบับปัจจุบันไม่�
 ยังไม่ทดสอบ weather model/ฤดูผลิต/causal effect/สุขภาพต้น/ลิตรน้ำ และยังไม่ยืนยันสิทธิ์เผยแพร่ derived data
 
 การทดสอบผ่านหมายถึง pipeline ทำตามข้อกำหนดข้างต้น ไม่ใช่ยืนยันว่าแหล่งข้อมูลถูกทุกแปลงหรือโมเดลพร้อมใช้งานจริง
+
+## เพิ่มรอบตรวจความพร้อม
+
+- ผลล่าสุด: regional9tests + national6tests ผ่านรวม15tests; notebook03รันใหม่ครบหลังเพิ่มหัวข้อ
+- เพิ่ม2 tests: matched-year OAE/planted-vs-bearing/formula/area-attribute และ soil-resolution tags/ผลรวมสัดส่วน/64ปีfootprint
+- พบ3จังหวัดที่สมการpure+f×mixed=OAEplantedไม่มีคำตอบfใน[0,1]; เก็บค่าติดลบ/เกิน1จริง ไม่clipให้ดูถูกต้อง
+- ตรวจdescriptorA403=ทุเรียนทั้ง4จังหวัด; sourceareaattributeกับgeometryต่างไม่เกิน0.036%; ความต่างขนาดใหญ่กับOAEยังไม่ทราบสาเหตุ
+- ป้ายsoilresolutionเป็นderivedreviewlabels ไม่อ้างว่าแหล่งข้อมูลรับรองความละเอียดนั้นโดยตรง

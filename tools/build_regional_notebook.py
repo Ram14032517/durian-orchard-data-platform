@@ -13,6 +13,8 @@ NOTEBOOK = ROOT/'notebooks/03_regional_orchards_soil_weather.ipynb'
 
 
 def main():
+    from audit_regional_readiness import main as audit_readiness
+    audit_readiness()
     cells = []
     def md(s): cells.append(nbformat.v4.new_markdown_cell(textwrap.dedent(s).strip()))
     def code(s): cells.append(nbformat.v4.new_code_cell(textwrap.dedent(s).strip()))
@@ -49,6 +51,7 @@ def main():
     panel = read('regional_province_year_panel.csv')
     comparison = read('reference_point_comparison_2021_2025.csv')
     signatures = read('sample_response_signatures.csv')
+    readiness = read('model_readiness.csv')
     order = ['22','86','33','53']
     names = {s['province_code']:s['province_name'] for s in summaries}
     years = {s['province_code']:s['landuse_year_be'] for s in summaries}
@@ -76,6 +79,8 @@ def main():
     - จุดดึงอากาศ **{len(points)} จุดแบ่งชั้นพื้นที่** ไม่ใช่ {len(points)} สถานีตรวจอากาศอิสระ
     - อุตรดิตถ์: **{mixed_share:.1f}%** ของพื้นที่รหัสที่มี A403 เป็นรหัสปลูกผสม
       (คิดจากขนาด polygon ไม่ใช่สัดส่วนต้นทุเรียน); โปรไฟล์อากาศชุดนี้ใช้เฉพาะ A403 ตรงตัว จึงมีข้อจำกัดการเป็นตัวแทน
+    - **{(~readiness.match_possible_with_fraction_0_to_1).sum()}/4 จังหวัด**: พื้นที่ LDD กับ สศก. ปีเดียวกัน
+      ยังอธิบายให้ตรงกันไม่ได้ด้วยการแบ่งสัดส่วนสวนผสมเพียงอย่างเดียว — ดูหัวข้อ 2.1
     - มี baseline ผลผลิตต่อไร่แบบใช้ปีก่อน/ค่าเฉลี่ย 5 ปีก่อนสำหรับเปรียบเทียบต่อไป
       แต่ **ยังไม่มีผลประเมินโมเดลที่ใช้อากาศ หรือค่าผลกระทบจากอุณหภูมิ ±1°C**
     """))
@@ -162,6 +167,75 @@ def main():
     fig.supxlabel('แหล่ง: LDD · ดินปีผลิต 2561 × การใช้ที่ดินต่างปี · ไม่ใช่อันดับดินที่ให้ผลผลิตดีที่สุด',fontsize=10,color='#5e6462')
     save(fig,'soil_units_four_provinces')
     plt.show()
+    ''')
+    md('''
+    ### 2.1 ตรวจพื้นที่คนละแหล่งในปีเดียวกัน ก่อนนำไปเป็นโมเดล
+    เทียบ **เนื้อที่ยืนต้น** สศก. ไม่ใช่เนื้อที่ให้ผล เพื่อไม่เอาพื้นที่ที่ยังไม่ให้ผลออกจากด้านเดียว
+    LDD คือขนาด polygon ตามการจำแนกการใช้ที่ดิน; สศก. คือสถิติเกษตร จึงยังไม่ถือว่านิยาม/การสำรวจเหมือนกัน
+    ปีในชื่อไฟล์ LDD ไม่ได้ยืนยันวันสำรวจตรงกับรอบสถิติ สศก. ทุกแปลง
+
+    ตารางนี้เป็นการหาความต่าง ไม่ใช่ตัดสินว่าแหล่งใดผิด และ **อัตราส่วนเกิน 100% ไม่ใช่ความแม่นยำหรือ coverage จริง**
+
+    ทดลองสมการ `เนื้อที่ยืนต้น สศก. = พื้นที่ A403 ตรงตัว + f × พื้นที่ polygon ผสม`
+    โดยสมมติชั่วคราวว่า f อยู่ระหว่าง 0–1 แล้วดูว่าสมการเป็นไปได้หรือไม่
+    ถ้า f ติดลบหรือเกิน 1 แปลว่าแบ่งสัดส่วนสวนผสมอย่างเดียวไม่พออธิบายความต่าง
+    **f เป็นเครื่องมือตรวจทางคณิตศาสตร์ ไม่ใช่สัดส่วนทุเรียนที่ประมาณจากข้อมูลจริง**
+    ''')
+    code('''
+    a = readiness.set_index('province_code').loc[order]
+    columns={'province_name':'จังหวัด','landuse_year_be':'ปี พ.ศ.',
+             'ldd_A403_rai':'LDD ทุเรียนตรงตัว (ไร่)',
+             'ldd_all_A403_codes_rai':'LDD รวม polygon ผสม (ไร่)',
+             'oae_planted_rai':'สศก. เนื้อที่ยืนต้น (ไร่)',
+             'oae_bearing_rai':'สศก. เนื้อที่ให้ผล (ไร่)'}
+    display(a[list(columns)].rename(columns=columns).reset_index(drop=True))
+    # Diagnostic identity only: OAE = pure + f * mixed.
+    # f is NOT a fitted/calibrated durian share; actual within-polygon fraction is unknown.
+    diagnostics = a[['province_name','algebraic_mixed_fraction_to_match','match_possible_with_fraction_0_to_1',
+                     'geometry_minus_source_area_rai']].copy()
+    diagnostics['geometry_difference_pct'] = a.geometry_minus_source_area_rai/a.source_attribute_pure_rai*100
+    shown = diagnostics[['province_name','algebraic_mixed_fraction_to_match',
+                         'match_possible_with_fraction_0_to_1','geometry_difference_pct']].copy()
+    shown['match_possible_with_fraction_0_to_1']=shown.match_possible_with_fraction_0_to_1.map({True:'ใช่',False:'ไม่ใช่'})
+    shown['geometry_difference_pct']=shown.geometry_difference_pct.where(shown.geometry_difference_pct.abs().gt(1e-6),0)
+    display(shown.rename(columns={'province_name':'จังหวัด',
+        'algebraic_mixed_fraction_to_match':'f เชิงคณิตศาสตร์',
+        'match_possible_with_fraction_0_to_1':'f อยู่ในช่วง 0–1',
+        'geometry_difference_pct':'พื้นที่คำนวณต่างจาก attribute (%)'}).reset_index(drop=True))
+    cpn=a.loc['86'];cti=a.loc['22'];ssk=a.loc['33']
+    display(Markdown(f"""
+    **สิ่งที่พบจริง**
+    - จันทบุรี: A403 ตรงตัวมากกว่าเนื้อที่ยืนต้น สศก. **{cti.pure_to_oae_planted_pct-100:.1f}%**;
+      ศรีสะเกษมากกว่า **{ssk.pure_to_oae_planted_pct-100:.1f}%** แม้ยังไม่รวมสวนผสม
+    - ชุมพร: แม้นับ polygon ผสมทั้งหมดเป็นทุเรียน จะได้ **{cpn.all_codes_to_oae_planted_pct:.1f}%**
+      ของเนื้อที่ยืนต้น สศก. เท่านั้น จึงแก้ความต่างด้วยสัดส่วนสวนผสมอย่างเดียวไม่ได้
+    - อุตรดิตถ์: f อยู่ในช่วง 0–1 ได้ในทางคณิตศาสตร์ แต่ **ไม่ใช่หลักฐานว่า f นี้คือสัดส่วนทุเรียนจริง**
+    - คำอธิบาย A403 ในต้นฉบับทั้งสี่จังหวัดตรงกับ “ทุเรียน”; พื้นที่ geometry ต่างจาก attribute ต้นทาง
+      ไม่เกิน **{diagnostics.geometry_difference_pct.abs().max():.3f}%** จึงยังไม่พบหลักฐานว่าแปลงหน่วยพื้นที่ผิดจนทำให้เกิดช่องว่างขนาดนี้
+
+    **ผลต่อการใช้งาน:** ใช้สองแหล่งทำคำบรรยายเปรียบเทียบได้ แต่ห้าม scale แผนที่ให้ตรง สศก.
+    หรือแจกผลผลิตจังหวัดลง polygon เพื่อสร้าง label ปลอม สาเหตุของความต่างยังต้องตรวจนิยาม รอบสำรวจ และวิธีจำแนกกับแหล่งข้อมูล
+    """))
+    ''')
+    md('''
+    ### 2.2 “มีหน่วยดิน” ไม่เท่ากับ “รู้ชุดดินละเอียด”
+    จัดกลุ่มเพื่อสอบทานจากรหัส/คำอธิบายต้นฉบับ ไม่ใช่คอลัมน์ที่ LDD ประกาศ และยังไม่ใช่การรับรองชื่อชุดดินทุกระเบียน
+    กลุ่มชื่อชุดดินเดี่ยวใช้คำว่า candidate; หน่วยเชิงซ้อน/สัมพันธ์เก็บเป็นกลุ่ม ไม่แบ่งสัดส่วนชุดดินเอง
+    หน่วยภูมิประเทศ/อื่น ๆ ได้แก่ SC, ES, RL, RC, AC; แยก W พื้นที่น้ำออก
+    ''')
+    code('''
+    soil_columns={'province_name':'จังหวัด','named_single_unit_candidate_pct':'ชื่อชุดดินเดี่ยว candidate (%)',
+                  'complex_or_association_pct':'หน่วยเชิงซ้อน/สัมพันธ์ (%)','terrain_misc_unit_pct':'ภูมิประเทศ/หน่วยอื่น (%)',
+                  'water_pct':'พื้นที่น้ำ (%)','soil_unmapped_pct':'ซ้อนดินไม่ได้ (%)'}
+    display(a[list(soil_columns)].rename(columns=soil_columns).reset_index(drop=True))
+    total_before=int(a.historical_years_before_landuse_snapshot.sum())
+    display(Markdown(f"""
+    **ข้อจำกัดก่อนพยากรณ์:** **{total_before}/{int(a.total_weather_years.sum())} จังหวัด–ปี**
+    มีปีอากาศก่อนปีแผนที่ใช้ที่ดินที่นำมากำหนดพื้นที่อ้างอิง
+    ส่วนที่เหลือก็ยังไม่ถือว่าผ่านการตรวจข้อมูลพร้อมใช้ ณ วันพยากรณ์ เพราะยังไม่รู้วันเผยแพร่/ข้อมูลย้อนหลังแต่ละฉบับ
+    ในอุตรดิตถ์ A403 ตรงตัวมีหน่วยที่ดูเป็นชื่อชุดดินเดี่ยวเพียง **{a.loc['53','named_single_unit_candidate_pct']:.1f}%**
+    จึงไม่ควรใช้ชื่อชุดดินหนึ่งชื่อแทนพื้นที่ปลูกทั้งจังหวัด
+    """))
     ''')
     md('''
     ## 3. ตำแหน่งดึงข้อมูลเปลี่ยน ผลอากาศเปลี่ยนเท่าไร
@@ -272,7 +346,8 @@ def main():
 
     ลำดับทำต่อให้ตรงโจทย์อาจารย์:
     1. ขอความเห็นเรื่องหน่วยเป้าหมาย “จังหวัด–ปี / ผลผลิตต่อไร่” และช่วงออกดอก–ติดผลแต่ละภูมิภาค
-    2. เพิ่มจังหวัดตัวอย่างและข้อมูลพื้นที่ปลูกที่เทียบปีได้; ทดสอบความไวเมื่อรวมรหัสผสมโดยไม่ถือทั้งหมดเป็นพื้นที่ทุเรียน
+    2. ตรวจความต่างพื้นที่ LDD–สศก. ในหัวข้อ 2.1 กับนิยาม/รอบสำรวจของแหล่งก่อน; เพิ่มจังหวัดและพื้นที่ปลูกที่เทียบปีได้
+       ทดสอบความไวเมื่อรวมรหัสผสมโดยไม่ถือทั้งหมดเป็นพื้นที่ทุเรียน
     3. เพิ่มฝนช่วงวิกฤต/วันแห้งต่อเนื่อง/อุณหภูมิสุดขั้วจากข้อมูลรายวัน ไม่สร้างขึ้นจากค่าเฉลี่ยรายเดือน
     4. ตรวจเทียบสถานีสวนกับแหล่งภายนอกในช่วงที่ข้อมูลสด ใช้ outdoor_temp/outdoor_humidity;
        ช่วง gateway ค้างไม่นำ weather features มาเป็นค่าจริง และไม่ลบ raw
@@ -282,6 +357,12 @@ def main():
        เพราะปัจจัยพันธุ์ อายุสวน การจัดการ ฤดูผลิต และพื้นที่ให้ผลยังเป็นตัวแปรกวน
     7. ก่อนตีพิมพ์ dataset ต้องยืนยันสิทธิ์เผยแพร่ผลดัดแปลง LDD และเงื่อนไขแต่ละแหล่ง
        ขณะนี้เก็บ raw/derived/notebook ที่มีผลข้อมูลไว้ในเครื่อง ไม่ push หรือเผยแพร่
+
+    ### คำถามสั้น ๆ ที่ใช้คุยกับอาจารย์
+    “ผมเชื่อม 4 จังหวัดกับอากาศย้อนหลัง 20 ปีได้แล้ว แต่พื้นที่ทุเรียนในแผนที่ LDD กับเนื้อที่ยืนต้น สศก.
+    ปีเดียวกันต่างกันค่อนข้างมากครับ ควรใช้ผลผลิตต่อไร่ระดับจังหวัดเป็นเป้าหมายก่อน
+    และใช้แผนที่เป็นเพียงบริบทพื้นที่ พร้อมตรวจนิยาม/รอบสำรวจก่อนใช้อากาศถ่วงพื้นที่ในโมเดลดีไหมครับ
+    ส่วนช่วงอากาศที่นำมาวิเคราะห์ควรอิงช่วงออกดอกหรือติดผลของแต่ละภาคอย่างไรครับ”
 
     ## เปิดใน VS Code โดยไม่ล็อกอิน
     เปิด `notebooks/03_regional_orchards_soil_weather.ipynb` → Select Kernel →

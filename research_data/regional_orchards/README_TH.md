@@ -9,6 +9,19 @@
 3. [แผนที่ประเทศไทย](../thailand_comparison/THAILAND_MAP.html) — กดจังหวัดดูดินได้ 4 จังหวัด; อากาศแผนที่ยังใช้จุดอ้างอิงจังหวัดเดิม
 4. [regional_province_year_panel.csv](regional_province_year_panel.csv) — ตารางอากาศ/ผลผลิต 80 จังหวัด–ปี สำหรับศึกษาโมเดลต่อ
 5. [SOURCE_TH.md](SOURCE_TH.md), [DATA_DICTIONARY_TH.md](DATA_DICTIONARY_TH.md), [VALIDATION_TH.md](VALIDATION_TH.md) — หลักฐานและข้อควรระวัง
+6. [model_readiness.csv](model_readiness.csv) — เทียบพื้นที่ LDD–สศก. ในปีเดียวกัน, ระดับรายละเอียดดิน และจำนวนปีที่ใช้ footprint อนาคต
+
+## เพิ่มล่าสุด: ควรอ่านหัวข้อ 2.1–2.2 ก่อนเริ่มโมเดล
+
+3/4 จังหวัดยังปรับสัดส่วนสวนผสมอย่างเดียวให้พื้นที่เท่าเนื้อที่ยืนต้น สศก. ไม่ได้:
+จันทบุรี A403 ตรงตัวสูงกว่า15.0%, ศรีสะเกษสูงกว่า9.2%, ชุมพรแม้นับ polygon ผสมทั้งก้อนได้เพียง56.8%ของ สศก.
+ไม่แปลว่าแหล่งใดผิด เพราะนิยามและรอบสำรวจอาจต่างกัน และปีในชื่อไฟล์ไม่ยืนยันวันสำรวจตรงกัน
+ตรวจรหัส A403 กับคำอธิบายไทยจริงทั้ง4จังหวัดแล้ว; geometry ต่างจาก attribute พื้นที่ในไฟล์เดิมไม่เกิน0.036%
+จึงยังไม่มีหลักฐานว่าช่องว่างนี้เกิดจากการแปลงหน่วยพื้นที่ของ pipeline
+
+64/80 จังหวัด–ปีมีปีอากาศก่อนปีแผนที่ใช้ที่ดินที่เลือกพื้นที่อ้างอิง; อีก16แถวก็ไม่ถือว่าผ่านas-ofavailabilityโดยอัตโนมัติ
+ข้อมูลเหมาะสำหรับอธิบายเปรียบเทียบ แต่ยังไม่ควรอ้างการพยากรณ์ย้อนหลังที่ไม่ใช้ข้อมูลอนาคต หรือ label ผลผลิตรายชุดดิน
+หัวข้อท้าย notebook มีข้อความสั้นสำหรับคุยเรื่องนิยาม/หน่วยเป้าหมาย/ฤดูผลิตกับอาจารย์
 
 ## สิ่งที่เพิ่มจริง
 
@@ -37,6 +50,7 @@ $env:PYTHONUTF8='1'
 & .\.build\national-analysis-venv\Scripts\python.exe tools/fetch_regional_ldd.py
 & .\.build\national-analysis-venv\Scripts\python.exe tools/prepare_regional_orchards.py
 & .\.build\national-analysis-venv\Scripts\python.exe tools/fetch_orchard_weather.py
+& .\.build\national-analysis-venv\Scripts\python.exe tools/audit_regional_readiness.py
 & .\.build\national-analysis-venv\Scripts\python.exe tools/build_regional_notebook.py
 & .\.build\national-analysis-venv\Scripts\python.exe tools/test_regional_orchards.py
 ```

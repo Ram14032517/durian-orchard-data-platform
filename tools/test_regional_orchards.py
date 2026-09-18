@@ -14,6 +14,7 @@ from pyproj import CRS, Transformer
 from fetch_orchard_weather import spatial_aggregate
 from prepare_national_comparison import aggregate_weather, PARAMS
 from prepare_regional_orchards import CONFIG, polygonal
+from audit_regional_readiness import soil_resolution
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'research_data/regional_orchards'
@@ -128,6 +129,39 @@ class RegionalTests(unittest.TestCase):
             for ext in ['png','svg']:
                 self.assertGreater((OUT/(name+'.'+ext)).stat().st_size,5000)
         self.assertTrue((OUT/'ANALYSIS_NOTEBOOK.html').exists())
+
+    def test_same_year_area_reconciliation(self):
+        readiness=pd.read_csv(OUT/'model_readiness.csv',dtype={'province_code':str})
+        production=pd.read_csv(ROOT/'research_data/thailand_comparison/production_province_year.csv',dtype={'province_code':str})
+        self.assertEqual(len(readiness),4)
+        self.assertTrue(readiness.province_code.is_unique)
+        self.assertEqual((~readiness.match_possible_with_fraction_0_to_1).sum(),3)
+        for r in readiness.itertuples():
+            self.assertEqual(r.matched_oae_year_ce,r.landuse_year_be-543)
+            source=production.loc[production.province_code.eq(r.province_code)&production.year_ce.eq(r.matched_oae_year_ce)].iloc[0]
+            self.assertEqual(r.oae_planted_rai,source.planted_rai)
+            self.assertEqual(r.oae_bearing_rai,source.bearing_rai)
+            f=(r.oae_planted_rai-r.ldd_A403_rai)/r.ldd_mixed_polygon_rai
+            self.assertAlmostEqual(r.algebraic_mixed_fraction_to_match,f)
+            self.assertAlmostEqual(r.ldd_A403_rai+f*r.ldd_mixed_polygon_rai,r.oae_planted_rai)
+            self.assertLess(abs(r.geometry_minus_source_area_rai/r.source_attribute_pure_rai),.001)
+            self.assertEqual(r.A403_description_in_source,'ทุเรียน')
+
+    def test_soil_resolution_and_future_footprint_counts(self):
+        self.assertEqual(soil_resolution('SC','พื้นที่ลาดชันเชิงซ้อน'),'terrain_misc_unit')
+        self.assertEqual(soil_resolution('W','พื้นที่น้ำ'),'water')
+        self.assertEqual(soil_resolution('Ho-Klt','หน่วยเชิงซ้อน'),'complex_or_association')
+        self.assertEqual(soil_resolution('Chp/Ka','หน่วยดินสัมพันธ์'),'complex_or_association')
+        self.assertEqual(soil_resolution('Te','ท่าแซะ'),'named_single_unit_candidate')
+        self.assertEqual(soil_resolution('(ไม่ระบุ)',''),'unidentified')
+        readiness=pd.read_csv(OUT/'model_readiness.csv',dtype={'province_code':str})
+        columns=['named_single_unit_candidate_pct','complex_or_association_pct','terrain_misc_unit_pct',
+                 'water_pct','unidentified_pct','soil_unmapped_pct']
+        np.testing.assert_allclose(readiness[columns].sum(axis=1),100,atol=1e-6)
+        for r in readiness.itertuples():
+            expected=((self.panel.province_code.eq(r.province_code))&(self.panel.year_ce.lt(r.landuse_year_be-543))).sum()
+            self.assertEqual(r.historical_years_before_landuse_snapshot,expected)
+        self.assertEqual(readiness.historical_years_before_landuse_snapshot.sum(),64)
 
 
 if __name__=='__main__': unittest.main(verbosity=2)

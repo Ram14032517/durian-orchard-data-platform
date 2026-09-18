@@ -38,3 +38,13 @@ repoตรวจremoteแล้วคือ Ram14032517/durian-orchard-data-plat
 เก็บraw/derived/กราฟ/executednotebookไว้ในเครื่องและignoreGit; commitเฉพาะโค้ดและเอกสารรอบนี้
 คงdirtyเดิม .gitignore, google-apps-script/Code.gs, ml/train_statistical_baseline.py, models/statistical_baseline.json และuntrackedเดิม
 ล่าสุดก่อนcheckpoint:5ชั่วโมงใช้85%,รายสัปดาห์68%; ไม่ใช้resetcredit
+
+## รอบต่อ: ตรวจความพร้อมก่อนโมเดล
+
+- เพิ่มtools/audit_regional_readiness.pyและหัวข้อ2.1–2.2ในnotebook03
+- model_readiness.csv,landuse_code_inventory.csv,soil_resolution_review.csvอยู่localignored
+- 3/4จังหวัดพื้นที่คนละแหล่งปีเดียวกันแก้ด้วยmixedfractionอย่างเดียวไม่ได้; ไม่scaleแผนที่/ไม่สร้างlabelปลอม
+- พบ64/80จังหวัด–ปีก่อนปีfootprint; พื้นที่candidateชุดดินเดี่ยวอุตรดิตถ์12.8%
+- เพิ่ม2testsรวมregional9tests; งานถัดไปต้องตรวจนิยาม/รอบสำรวจLDD–OAEและฤดูผลิตก่อนweatherforecastvalidation
+- อ่านผลเวอร์ชันล่าสุดที่HTMLเดิม หัวข้อ2.1–2.2; codeทั้งหมดอยู่notebookเดิม
+- quotaตรวจหลังผู้ใช้สั่งต่อ:5ชั่วโมงใช้4%,รายสัปดาห์71%; หน้าต่าง5ชั่วโมงเปลี่ยนแล้ว ไม่ได้ใช้resetcredit
