@@ -150,6 +150,7 @@ def build_map(selected: pd.DataFrame, season: pd.DataFrame, region_season: pd.Da
     geo.add_to(map_obj)
 
     feature_by_code = {str(f["properties"]["province_code"]): f for f in selected_features}
+    soil_map_codes = {p.stem for p in (OUT / 'soil_layers').glob('*.geojson')}
     for row in selected.itertuples():
         feature = feature_by_code[str(row.province_code)]
         # Existing weather reference is reproducible and inside the province, not an orchard coordinate.
@@ -172,6 +173,8 @@ def build_map(selected: pd.DataFrame, season: pd.DataFrame, region_season: pd.Da
         popup = f"""
         <div style='font-family:Tahoma,Arial;width:390px;line-height:1.45'>
         <h3 style='margin:0'>{row.province_name} · {row.region}</h3>
+        {f'<p><a href="../five_province_history/HISTORY.html?province={row.province_code}">ดูย้อนหลังรายวัน / นับย้อนช่วงดอก / ผลผลิตแต่ละปี</a></p>' if str(row.province_code) in {'22','86','33','53','84'} else ''}
+        {f'<button onclick="showSoil(\'{row.province_code}\')">ซูมดูขอบเขตชุดดิน</button>' if str(row.province_code) in soil_map_codes else ''}
         <p><b>ผลผลิต พ.ศ. {year_ce+543}:</b> {row.production_tonnes:,.0f} ตัน<br>
         อันดับประเทศ {row.national_rank} · อันดับภาค {row.regional_rank}<br>{row.selection_reason}</p>
         <p><b>ฤดูกาลจากสัดส่วนผลผลิตรายเดือน สศก.</b><br>
@@ -204,6 +207,58 @@ def build_map(selected: pd.DataFrame, season: pd.DataFrame, region_season: pd.Da
     คำนวณจากทุกจังหวัดที่มีระเบียน สศก. ในภาค ไม่ใช่เฉพาะจังหวัดที่คัด</small></div>"""
     map_obj.get_root().html.add_child(Element(region_box))
     folium.LayerControl(collapsed=False).add_to(map_obj)
+    choices = ''.join(f'<option value="{r.province_code}">{r.province_name}</option>'
+                      for r in selected.itertuples() if str(r.province_code) in soil_map_codes)
+    map_obj.get_root().html.add_child(Element('''
+    <div style="position:fixed;top:110px;left:10px;z-index:10000;background:white;padding:10px;max-width:290px;font-family:Tahoma">
+    <label for="soil-choice">ซูมดูชุดดิน</label>
+    <select id="soil-choice" onchange="showSoil(this.value)"><option value="">เลือกจังหวัด</option>''' + choices + '''</select>
+    <button onclick="hideSoil()">ปิดชั้นดิน</button>
+    <div id="soil-status" style="font-size:12px">เลือกจังหวัด แล้วคลิกพื้นที่สีเพื่ออ่านชื่อชุดดิน</div></div>'''))
+    script = r'''
+    const soilCache = {}; let activeSoil = null; let soilRequest = 0;
+    function hideSoil() {
+      const soilMap = MAP_NAME;
+      soilRequest++; if(activeSoil) soilMap.removeLayer(activeSoil); activeSoil=null;
+      document.getElementById('soil-status').textContent='ปิดชั้นชุดดินแล้ว';
+    }
+    async function showSoil(code) {
+      const soilMap = MAP_NAME;
+      if(!code) return; const request = ++soilRequest;
+      const status = document.getElementById('soil-status');
+      status.textContent='กำลังโหลดขอบเขตชุดดิน…';
+      soilMap.closePopup();
+      try {
+        if(!soilCache[code]) {
+          const response = await fetch('soil_layers/'+code+'.geojson');
+          if(!response.ok) throw new Error('HTTP '+response.status);
+          const data = await response.json();
+          const palette=['#d8b365','#5ab4ac','#b2abd2','#a6dba0','#f4a582','#92c5de'];
+          soilCache[code] = L.geoJSON(data, {
+            style: f => {let h=0; for(const c of f.properties.soil_code) h=(h+c.charCodeAt(0))%palette.length;
+              return {color:'#555',weight:0.7,fillColor:palette[h],fillOpacity:0.55};},
+            onEachFeature: (f,l) => {
+              const p=f.properties; const box=document.createElement('div');
+              for(const value of [p.province+' '+(p.district||''),p.soil_code+' — '+p.soil_name,
+                'ความอุดมสมบูรณ์ดิน: '+(p.fertility||'ไม่ระบุ'), 'เนื้อดินบน: '+(p.topsoil_texture||'ไม่ระบุ'),
+                'ปฏิกิริยาดินบน: '+(p.topsoil_ph||'ไม่ระบุ'),p.source,p.display_note,
+                'ชั้นชุดดินทั้งจังหวัด; พื้นที่สีไม่ได้หมายถึงปลูกทุเรียนทุกแห่ง']) {
+                const line=document.createElement('p');line.textContent=value;box.appendChild(line);
+              }
+              l.bindPopup(box); l.bindTooltip(document.createTextNode(p.soil_code+' — '+p.soil_name));
+            }
+          });
+        }
+        if(request!==soilRequest) return;
+        if(activeSoil) soilMap.removeLayer(activeSoil);
+        activeSoil=soilCache[code];activeSoil.addTo(soilMap);
+        soilMap.fitBounds(activeSoil.getBounds(),{paddingTopLeft:[25,170],paddingBottomRight:[25,130]});
+        document.getElementById('soil-choice').value=code;
+        status.textContent='คลิกพื้นที่สีเพื่ออ่านชุดดิน · ข้อมูล LDD ปี 2561 · สีแยกหน่วยดิน ไม่ใช่ความเหมาะสม';
+      } catch(e) {if(request===soilRequest) status.textContent='โหลดชั้นดินไม่สำเร็จ กรุณาเปิดผ่านเว็บ localhost และตรวจไฟล์ soil_layers';}
+    }
+    '''.replace('MAP_NAME', map_obj.get_name())
+    map_obj.get_root().script.add_child(Element(script))
     path = OUT / "PRIORITY_DURIAN_MAP.html"
     map_obj.save(path)
     return path
