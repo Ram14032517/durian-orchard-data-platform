@@ -28,6 +28,8 @@ class TrainingTests(unittest.TestCase):
                 self.assertNotEqual(row['target_production_tonnes'], '')
                 self.assertFalse(row['exclusion_reason'])
                 self.assertEqual(int(row['lag1_rain_days']), row['lag1_expected_days'])
+                self.assertEqual(row['lag1_humidity_days'], row['lag1_expected_days'])
+                self.assertEqual(row['lag1_solar_days'], row['lag1_expected_days'])
 
     def test_features_and_time_split(self):
         self.assertNotIn('target_production_tonnes', prepare.FEATURES)

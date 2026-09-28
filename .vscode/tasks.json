@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Durian: เปิดเซิร์ฟเวอร์แผนที่",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["${workspaceFolder}/tools/serve_orchard_analysis.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"reveal": "always", "panel": "dedicated"}
+    }
+  ]
+}

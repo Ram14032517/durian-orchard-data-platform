@@ -137,10 +137,78 @@ md('''## ข้อสรุปที่ใช้ได้และสิ่ง�
 ข้อมูลต้นทางยังอยู่ใน `research_data/five_province_history/` ไม่ต้องเปิดไฟล์ HTML ใน `tools/`
 คู่มือแหล่งอ้างอิง: `research_data/five_province_history/PHENOLOGY_SOURCES_TH.md`
 คู่มือเทรน: `research_data/five_province_history/training/README_TH.md`''')])
+# Keep editable plotting/table code, but expose one live report instead of many stale outputs.
+import textwrap
+intro, params, setup_title, setup = nb.cells[:4]
+intro.source = intro.source.replace('หากต้องการเปลี่ยนช่วงเวลา: แก้ `PROVINCE`, `YEAR`, `MONTH` ในเซลล์แรก แล้วกด **Run All**',
+    'หากต้องการเปลี่ยนช่วงเวลา: กด **Run All** ครั้งเดียว แล้วเลือกจังหวัด ปี เดือนจากเมนู รายงานด้านล่างจะเปลี่ยนพร้อมกัน')
+intro.source = intro.source.replace('## สรุปและขอบเขต','## สรุปและขอบเขต\nเพิ่มการตรวจข้อมูลและผลทดลองโมเดล 28 ก.ย. 2569 แล้ว ดูหัวข้อ 8 ในรายงาน')
+setup.source = '\n'.join(line for line in setup.source.splitlines() if not line.startswith("display(Markdown(f'### พื้นที่เลือก"))
+report_cells = nb.cells[4:-1]
+report_cells += [md('## 8. ผลทดลองโมเดลและการตรวจข้อมูล\nแยก train ถึง 2021, validation 2022–2023, test 2024–2025 โมเดลเลือกจาก validation เท่านั้น MAE เป็นตันต่อจังหวัด–เดือน ไม่ใช่เปอร์เซ็นต์ความแม่นยำ'),
+code('''metrics = pd.read_csv(base / 'training/model_metrics.csv', dtype={'province_code':str})
+model_info = json.loads((base / 'training/model_baseline.json').read_text(encoding='utf-8'))
+table(metrics[metrics.province_code.eq('ALL')][['model','split','n','mae_tonnes']].rename(columns={'model':'โมเดล','split':'ชุดประเมิน','n':'จำนวนเดือน–จังหวัด','mae_tonnes':'MAE ตัน'}))
+display(Markdown('**โมเดลที่เลือกจาก validation:** ' + model_info['selected_by_validation']))
+display(Markdown('ทดลองรอบนี้การเพิ่มอากาศเดือนก่อนยังไม่ดีกว่าโมเดลจังหวัด–เดือนอย่างเดียว ไม่ใช่หลักฐานว่าอากาศไม่มีผลต่อทุเรียน และไม่ใช้สั่งให้น้ำ/วินิจฉัยโรค'))
+display(Markdown('QC: ตรวจคีย์ไม่ซ้ำ ค่าที่ขาด ช่วงค่า RH/ฝน/แสง และคำนวณอุณหภูมิ ฝน RH แสงรายเดือนกลับจากรายวัน เทรนเฉพาะแถวที่อากาศเดือนก่อนครบทั้ง 4 ตัวแปร ข้อมูลผลผลิตที่ไม่มีแถวไม่เติมศูนย์'))
+display(Markdown('ข้อจำกัด: ประเมินเฉพาะเดือนที่มีผลผลิตรายงาน มีเพียง 5 จังหวัด ไม่ใช่ backtest ตามข้อมูลที่ทราบจริงในวันนั้น เพราะวันเผยแพร่และการปรับปรุงย้อนหลังยังไม่ครบ'))'''), nb.cells[-1]]
+function_source = 'def render_report(PROVINCE, YEAR, MONTH):\n'
+function_source += "    assert PROVINCE in set(points.province_code) and 1 <= MONTH <= 12\n"
+function_source += "    name = points.set_index('province_code').loc[PROVINCE, 'province_name']\n"
+function_source += "    display(Markdown(f'# {name} · เดือน {MONTH} ปี {YEAR + 543}'))\n"
+for cell in report_cells:
+    part = 'display(Markdown(' + repr(cell.source) + '))' if cell.cell_type == 'markdown' else cell.source
+    function_source += textwrap.indent(part, '    ') + '\n\n'
+function_source = function_source.replace('ชุดนี้ยังไม่ได้ฝึกโมเดล', 'ชุดนี้ใช้ทดลอง baseline แล้ว ยังไม่ใช่โมเดลใช้งานจริง')
+report_code = code(function_source)
+report_code.metadata['jupyter'] = {'source_hidden': True}
+controls = code('''import ipywidgets as widgets
+from IPython.utils.capture import capture_output
+from IPython.display import HTML
+from nbconvert.filters.markdown import markdown2html
+from html import escape
+
+province_control = widgets.Dropdown(options=[(r.province_name, r.province_code) for r in points.itertuples()], value=PROVINCE, description='จังหวัด')
+year_control = widgets.Dropdown(options=[(str(y+543), y) for y in range(2026,1980,-1)], value=YEAR, description='ปี พ.ศ.')
+month_control = widgets.Dropdown(options=list(range(1,13)), value=MONTH, description='เดือน')
+def report_html():
+    with capture_output(display=True) as captured:
+        render_report(province_control.value, year_control.value, month_control.value)
+    parts = []
+    for item in captured.outputs:
+        data = item.data
+        if 'text/html' in data: parts.append(data['text/html'])
+        elif 'image/png' in data: parts.append('<img style="max-width:100%;height:auto" alt="กราฟอากาศและผลผลิตรายเดือน" src="data:image/png;base64,' + data['image/png'] + '">')
+        elif 'text/markdown' in data: parts.append(markdown2html(data['text/markdown']))
+        elif 'text/plain' in data: parts.append('<pre>' + escape(data['text/plain']) + '</pre>')
+    if captured.stdout: parts.append('<pre>' + escape(captured.stdout) + '</pre>')
+    return ''.join(parts)
+display(widgets.HBox([province_control, year_control, month_control], layout=widgets.Layout(flex_flow='row wrap')))
+live_report = display(HTML(report_html()), display_id=True)
+def update_report(change):
+    live_report.update(HTML(report_html()))
+for control in [province_control, year_control, month_control]:
+    control.observe(update_report, names='value')''')
+nb.cells = [intro, params, setup_title, setup,
+    md('## โค้ดรายงาน (พับไว้ได้)\nตารางและกราฟใช้ข้อมูลชุดเดียวกับรายงานเดิม ไม่ดาวน์โหลดใหม่เมื่อเปลี่ยนเดือน'),
+    report_code, md('## เลือกพื้นที่และเวลา\nเมนูทำงานหลัง Run All และต้องมี kernel เชื่อมอยู่ ถ้ายังไม่รัน อ่านผลตัวอย่างที่บันทึกด้านล่างได้'), controls]
 nb.metadata['kernelspec'] = {'display_name':'Python (durian analysis)', 'language':'python','name':'python3'}
 km = KernelManager(kernel_name='python3')
 km.kernel_spec.argv = [sys.executable, '-m', 'ipykernel_launcher', '-f', '{connection_file}']
+qa_cell = code('''for value in ['22','33','53','84','86']:
+    province_control.value = value
+    assert points.set_index('province_code').loc[value,'province_name'] in report_html()
+year_control.value = 2026
+month_control.value = 10
+assert 'ยังไม่มีรายงานที่ตรวจยืนยัน' in report_html()
+province_control.value = PROVINCE
+year_control.value = YEAR
+month_control.value = MONTH
+assert province_control.value == PROVINCE and year_control.value == YEAR and month_control.value == MONTH''')
+nb.cells.append(qa_cell)
 NotebookClient(nb, km=km, timeout=120, resources={'metadata':{'path':str(ROOT)}}).execute()
+nb.cells.pop()
 nbformat.validate(nb)
 nbformat.write(nb, ROOT / '00_OPEN_ME.ipynb')
 preview = ROOT / '.build/monthly_notebook_preview.html'
@@ -148,8 +216,13 @@ body, _ = HTMLExporter().from_notebook_node(nb)
 preview.write_text(body, encoding='utf-8')
 # QA previews stay out of the user's top-level folder.
 import base64
+import re
 for cell in nb.cells:
     for output in cell.get('outputs', []):
         if 'image/png' in output.get('data', {}):
             (ROOT / '.build/monthly_notebook_chart.png').write_bytes(base64.b64decode(output['data']['image/png']))
+        html = output.get('data', {}).get('text/html', '')
+        match = re.search(r'src="data:image/png;base64,([^"]+)"', html)
+        if match:
+            (ROOT / '.build/monthly_notebook_chart.png').write_bytes(base64.b64decode(match.group(1)))
 print('Saved executed notebook:', ROOT / '00_OPEN_ME.ipynb')

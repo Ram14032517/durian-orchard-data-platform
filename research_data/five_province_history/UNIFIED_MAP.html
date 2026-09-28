@@ -127,6 +127,16 @@ document.querySelectorAll('aside > section:not(.monthly-report)').forEach(sectio
   while(section.firstChild)details.append(section.firstChild);
   section.append(details);
 });
+// Surface existing controls instead of duplicating selection state.
+for(const id of ['district','soil']){
+  const label=$(id).closest('label');
+  if(label)document.querySelector('.report-controls').append(label);
+}
+document.querySelector('.report-controls').append($('overview'));
+const scope=document.createElement('p');scope.className='scope-note';
+scope.textContent='เลือกจังหวัดบนแผนที่ หรือเลือกอำเภอ/ชุดดินด้านบน: ดินเปลี่ยนตามพื้นที่ แต่ตารางอากาศรายเดือนใช้จุดอ้างอิงจังหวัด และผลผลิตยังเป็นทั้งจังหวัด';
+document.querySelector('.report-controls').after(scope);
+scope.after($('selected'));
 
 DATA.provinces.forEach(p=>$('province').add(new Option(p.province_name,p.province_code)));$('province').value='84';provinceChange();
 selectReportMonth(reportMonth);
