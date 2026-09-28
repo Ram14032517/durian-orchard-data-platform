@@ -26,9 +26,15 @@ def main():
     def records(path):return json.loads(pd.read_csv(path,dtype={'province_code':str}).to_json(orient='records',force_ascii=False))
     payload=dict(provinces=records(OUT/'reference_points.csv'),districts=districts,boundaries=bounds,
                  annual=records(OUT/'production_weather_annual.csv'),harvest=records(OUT/'harvest_monthly.csv'))
+    payload['monthly_weather']=records(OUT/'weather_monthly.csv')
+    payload['phenology']=json.loads((OUT/'phenology_evidence.json').read_text(encoding='utf-8'))
     template=(ROOT/'tools/unified_orchard_map.html').read_text(encoding='utf-8')
-    (OUT/'UNIFIED_MAP.html').write_text(template.replace('__DATA__',json.dumps(payload,ensure_ascii=False)),encoding='utf-8')
+    monthly_js=(ROOT/'tools/orchard_monthly_report.js').read_text(encoding='utf-8')
+    monthly_css=(ROOT/'tools/orchard_monthly_report.css').read_text(encoding='utf-8')
+    rendered=template.replace('__DATA__',json.dumps(payload,ensure_ascii=False)).replace('__MONTHLY_CODE__',monthly_js).replace('__MONTHLY_STYLE__',monthly_css)
+    (OUT/'UNIFIED_MAP.html').write_text(rendered,encoding='utf-8')
     season_template=(ROOT/'tools/five_province_seasons.html').read_text(encoding='utf-8')
-    (OUT/'SEASONS_MAP.html').write_text(season_template.replace('__DATA__',json.dumps(payload,ensure_ascii=False)),encoding='utf-8')
+    season_payload={k:v for k,v in payload.items() if k not in ('monthly_weather','phenology')}
+    (OUT/'SEASONS_MAP.html').write_text(season_template.replace('__DATA__',json.dumps(season_payload,ensure_ascii=False)),encoding='utf-8')
     print('District reference points:',len(districts))
 if __name__=='__main__':main()

@@ -141,17 +141,17 @@
       "usable": false
     },
     "light_lux": {
-      "median": 7750.0,
-      "mad": 7750.0,
+      "median": 7780.0,
+      "mad": 7780.0,
       "q1": 0.0,
-      "q3": 37070.0,
+      "q3": 37180.0,
       "usable": true
     }
   },
-  "training_rows": 2621,
+  "training_rows": 2624,
   "excluded_weather_missing": 82,
   "excluded_weather_stale": 1890,
   "excluded_invalid_range": 0,
-  "flagged_anomalies": 413,
+  "flagged_anomalies": 414,
   "wet_environment_alerts": 360
 }

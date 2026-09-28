@@ -220,3 +220,249 @@ function jsonResponse_(value) {
   return ContentService.createTextOutput(JSON.stringify(value))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+// Preview retention without changing the spreadsheet. Run this first and
+// inspect Executions > Logs before calling applySheetRetention().
+function previewSheetRetention() {
+  const book = SpreadsheetApp.openById(
+    PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')
+  );
+  const plan = retentionPlan_(book, new Date());
+  console.log(JSON.stringify(plan, null, 2));
+  return plan;
+}
+
+// Destructive: delete old rows only after a verified local backup exists.
+// Keep NDVI history because it is small and valuable for model evaluation.
+function applySheetRetention() {
+  const book = SpreadsheetApp.openById(
+    PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')
+  );
+  // Preserve lightweight daily statistics before raw rows are removed.
+  rebuildEnvironmentRiskDaily_(book);
+  const now = new Date();
+  const rules = [
+    { sheet: 'readings_15min', dateColumn: 2, days: 30 },
+    { sheet: 'forecast_hourly', dateColumn: 2, days: 7 },
+    { sheet: 'forecast_daily', dateColumn: 2, days: 30 }
+  ];
+  const result = rules.map(rule => {
+    const cutoff = new Date(now.getTime() - rule.days * 24 * 60 * 60 * 1000);
+    return deleteRowsOlderThan_(book.getSheetByName(rule.sheet), rule.dateColumn, cutoff, rule.days);
+  });
+  console.log(JSON.stringify(result, null, 2));
+  return result;
+}
+
+// Run daily (or manually) to build a compact long-term summary from readings.
+// This is an environmental screening score, not NDVI or a disease diagnosis.
+function rebuildEnvironmentRiskDaily() {
+  const book = SpreadsheetApp.openById(
+    PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')
+  );
+  return rebuildEnvironmentRiskDaily_(book);
+}
+
+function rebuildEnvironmentRiskDaily_(book) {
+  const input = book.getSheetByName('readings_15min');
+  if (!input || input.getLastRow() <= 1) return [];
+
+  const headers = input.getRange(1, 1, 1, input.getLastColumn()).getValues()[0];
+  const index = {};
+  headers.forEach((header, column) => index[header] = column);
+  const required = [
+    'recorded_at_th', 'soil_moisture_percent', 'humidity_percent',
+    'rain_1h_mm', 'air_temperature_c', 'outdoor_temperature_c',
+    'outdoor_humidity_percent', 'pressure_hpa', 'light_lux', 'uv_index'
+  ];
+  required.forEach(header => {
+    if (index[header] === undefined) throw new Error(`Missing readings header: ${header}`);
+  });
+
+  const rows = input.getRange(2, 1, input.getLastRow() - 1, input.getLastColumn()).getValues();
+  const daily = {};
+  let previousWeather = null;
+  let unchangedSince = null;
+
+  rows.forEach(row => {
+    const observed = row[index.recorded_at_th] instanceof Date
+      ? row[index.recorded_at_th]
+      : new Date(row[index.recorded_at_th]);
+    if (isNaN(observed.getTime())) return;
+    const day = Utilities.formatDate(observed, 'Asia/Bangkok', 'yyyy-MM-dd');
+    if (!daily[day]) {
+      daily[day] = {
+        date: day, rows: 0, usableWeather: 0, staleWeather: 0,
+        soilMoistureSum: 0, soilMoistureCount: 0,
+        humiditySum: 0, humidityCount: 0, rainSum: 0, wetAlerts: 0,
+        lightSum: 0, lightCount: 0, lightMax: 0, lightExposureKluxHours: 0,
+        uvSum: 0, uvCount: 0, uvMax: 0
+      };
+    }
+    const item = daily[day];
+    item.rows++;
+
+    const soilMoisture = Number(row[index.soil_moisture_percent]);
+    const humidity = Number(row[index.outdoor_humidity_percent]);
+    const rain = Number(row[index.rain_1h_mm]);
+    const light = Number(row[index.light_lux]);
+    const uv = Number(row[index.uv_index]);
+    if (Number.isFinite(soilMoisture)) {
+      item.soilMoistureSum += soilMoisture;
+      item.soilMoistureCount++;
+    }
+    const weather = [
+      row[index.outdoor_temperature_c], row[index.outdoor_humidity_percent],
+      row[index.pressure_hpa]
+    ];
+    const weatherValid = weather.every(value => value !== '' && Number.isFinite(Number(value)));
+
+    const weatherKey = weatherValid ? weather.join('|') : null;
+    let weatherStale = false;
+    if (weatherKey && weatherKey === previousWeather) {
+      if (unchangedSince === null) unchangedSince = observed.getTime() - 15 * 60 * 1000;
+      weatherStale = observed.getTime() - unchangedSince >= 60 * 60 * 1000;
+      if (weatherStale) item.staleWeather++;
+    } else {
+      unchangedSince = observed.getTime();
+    }
+    previousWeather = weatherKey;
+
+    const weatherUsable = weatherValid && !weatherStale;
+    if (weatherUsable) {
+      item.usableWeather++;
+      if (Number.isFinite(humidity)) {
+        item.humiditySum += humidity;
+        item.humidityCount++;
+      }
+      if (Number.isFinite(rain)) item.rainSum += Math.max(0, rain);
+      if (Number.isFinite(light)) {
+        item.lightSum += light;
+        item.lightCount++;
+        item.lightMax = Math.max(item.lightMax, light);
+        // Sampling interval is 15 minutes. This is a lux exposure proxy,
+        // not PAR/DLI because the sensor does not measure photon spectrum.
+        item.lightExposureKluxHours += light * 0.25 / 1000;
+      }
+      if (Number.isFinite(uv)) {
+        item.uvSum += uv;
+        item.uvCount++;
+        item.uvMax = Math.max(item.uvMax, uv);
+      }
+    }
+
+    // Thresholds come from the current dataset's Q3 values, not disease labels.
+    const wetPoints = (soilMoisture >= 43.5 ? 1 : 0)
+      + (humidity >= 75 ? 1 : 0)
+      + (rain > 0 ? 1 : 0);
+    if (weatherUsable && wetPoints >= 2) item.wetAlerts++;
+  });
+
+  const outputHeaders = [
+    'date', 'reading_count', 'usable_weather_count', 'stale_weather_count',
+    'avg_soil_moisture_percent', 'avg_humidity_percent', 'rain_1h_sum_mm',
+    'avg_light_lux', 'max_light_lux', 'light_exposure_klux_hours',
+    'avg_uv_index', 'max_uv_index',
+    'wet_environment_alert_count', 'wet_environment_alert_rate', 'risk_level',
+    'method'
+  ];
+  const outputRows = Object.keys(daily).sort().map(day => {
+    const item = daily[day];
+    const alertRate = item.usableWeather ? item.wetAlerts / item.usableWeather : 0;
+    const riskLevel = alertRate >= 0.5 ? 'high' : alertRate >= 0.2 ? 'medium' : 'low';
+    return [
+      item.date, item.rows, item.usableWeather, item.staleWeather,
+      item.soilMoistureCount ? item.soilMoistureSum / item.soilMoistureCount : '',
+      item.humidityCount ? item.humiditySum / item.humidityCount : '',
+      item.rainSum,
+      item.lightCount ? item.lightSum / item.lightCount : '',
+      item.lightMax, item.lightExposureKluxHours,
+      item.uvCount ? item.uvSum / item.uvCount : '', item.uvMax,
+      item.wetAlerts, alertRate, riskLevel,
+      'environment proxy; not NDVI or disease diagnosis'
+    ];
+  });
+
+  const output = getSheet_(book, 'environment_risk_daily', outputHeaders);
+  output.clearContents();
+  output.getRange(1, 1, 1, outputHeaders.length).setValues([outputHeaders]);
+  if (outputRows.length) {
+    output.getRange(2, 1, outputRows.length, outputHeaders.length).setValues(outputRows);
+    output.getRange(2, 14, outputRows.length, 1).setNumberFormat('0.0%');
+  }
+  output.setFrozenRows(1);
+  return outputRows;
+}
+
+function retentionPlan_(book, now) {
+  const rules = [
+    { sheet: 'readings_15min', dateColumn: 2, days: 30 },
+    { sheet: 'forecast_hourly', dateColumn: 2, days: 7 },
+    { sheet: 'forecast_daily', dateColumn: 2, days: 30 }
+  ];
+  return rules.map(rule => {
+    const cutoff = new Date(now.getTime() - rule.days * 24 * 60 * 60 * 1000);
+    const sheet = book.getSheetByName(rule.sheet);
+    const count = countRowsOlderThan_(sheet, rule.dateColumn, cutoff);
+    return {
+      sheet: rule.sheet,
+      retention_days: rule.days,
+      cutoff: cutoff.toISOString(),
+      rows_to_delete: count,
+      rows_to_keep: Math.max(0, sheet.getLastRow() - 1 - count)
+    };
+  });
+}
+
+function countRowsOlderThan_(sheet, dateColumn, cutoff) {
+  if (!sheet || sheet.getLastRow() <= 1) return 0;
+  const values = sheet.getRange(2, dateColumn, sheet.getLastRow() - 1, 1).getValues();
+  return values.reduce((count, row) => {
+    const date = row[0] instanceof Date ? row[0] : new Date(row[0]);
+    return count + (!isNaN(date.getTime()) && date < cutoff ? 1 : 0);
+  }, 0);
+}
+
+function deleteRowsOlderThan_(sheet, dateColumn, cutoff, retentionDays) {
+  if (!sheet || sheet.getLastRow() <= 1) {
+    return { sheet: sheet ? sheet.getName() : '', deleted: 0 };
+  }
+
+  const values = sheet.getRange(2, dateColumn, sheet.getLastRow() - 1, 1).getValues();
+  const rows = [];
+  values.forEach((row, index) => {
+    const date = row[0] instanceof Date ? row[0] : new Date(row[0]);
+    if (!isNaN(date.getTime()) && date < cutoff) rows.push(index + 2);
+  });
+
+  // Delete bottom-up in contiguous blocks to reduce Spreadsheet API calls.
+  let blockEnd = null;
+  let blockStart = null;
+  let deleted = 0;
+  for (let index = rows.length - 1; index >= 0; index--) {
+    const rowNumber = rows[index];
+    if (blockEnd === null) {
+      blockStart = rowNumber;
+      blockEnd = rowNumber;
+    } else if (rowNumber === blockStart - 1) {
+      blockStart = rowNumber;
+    } else {
+      sheet.deleteRows(blockStart, blockEnd - blockStart + 1);
+      deleted += blockEnd - blockStart + 1;
+      blockStart = rowNumber;
+      blockEnd = rowNumber;
+    }
+  }
+  if (blockEnd !== null) {
+    sheet.deleteRows(blockStart, blockEnd - blockStart + 1);
+    deleted += blockEnd - blockStart + 1;
+  }
+
+  return {
+    sheet: sheet.getName(),
+    retention_days: retentionDays,
+    cutoff: cutoff.toISOString(),
+    deleted: deleted,
+    remaining: Math.max(0, sheet.getLastRow() - 1)
+  };
+}

@@ -18,4 +18,12 @@ wifi_range_test/wifi_range_test.private-backup.ino
 sensor_docs/*.HEIC
 sensor_docs/*.png
 data/export_*/
+data/backups/
 data/processed/
+research_data/*.csv
+research_data/external/
+*.rar
+# Local research downloads and reproducible caches/bundles
+research_data/five_province_history/evidence/
+research_data/five_province_history/point_weather_cache/
+research_data/five_province_history/training/training_bundle.zip

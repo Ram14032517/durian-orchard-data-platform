@@ -1,0 +1,36 @@
+{
+  "rows": 2409,
+  "columns_source": 26,
+  "first_th": "2026-08-14T10:45:00+07:00",
+  "last_th": "2026-09-19T13:15:00+07:00",
+  "expected_15min_slots": 3467,
+  "missing_15min_slots": 1058,
+  "off_grid_rows": 0,
+  "gaps_over_30min": 40,
+  "largest_gap_hours": 11.0,
+  "original_weather_signature_missing": 44,
+  "additional_weather_flatline_rows": 1365,
+  "additional_weather_flatline_runs": 44,
+  "weather_signature_usable_rows": 1000,
+  "soil_min": 22.1,
+  "soil_max": 85.8,
+  "soil_latest": 31.3,
+  "timestamp_th_max_error_seconds": 2.14e-07,
+  "snapshot_sha256": "1dd33b80c50222f88366d4c73a87a9d43c24231ba8b2ab2a78d0467a8dc0505d",
+  "source": {
+    "spreadsheet_id": "1-CDRERyx20UNCy5Oq3a8wt4lv3SmBx9nH2Kf2IQZvVE",
+    "sheet": "readings_15min",
+    "sheet_id": 1874414600,
+    "ranges": [
+      "readings_15min!A1:Z500",
+      "readings_15min!A501:Z1000",
+      "readings_15min!A1001:Z1500",
+      "readings_15min!A1501:Z2000",
+      "readings_15min!A2001:Z2410"
+    ],
+    "time_zone": "Asia/Bangkok",
+    "captured_at_utc": "2026-09-19 06:24:05 UTC",
+    "known_modified_at_utc": "2026-09-19T06:15:18.180Z",
+    "row_count": 2409
+  }
+}

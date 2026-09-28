@@ -16,8 +16,6 @@ import pandas as pd
 
 
 WEATHER_COLUMNS = [
-    "air_temperature_c",
-    "humidity_percent",
     "outdoor_temperature_c",
     "outdoor_humidity_percent",
     "pressure_hpa",
@@ -28,8 +26,6 @@ MODEL_FEATURES = [
     "soil_temperature_c",
     "soil_ec",
     "soil_ph",
-    "air_temperature_c",
-    "humidity_percent",
     "outdoor_temperature_c",
     "outdoor_humidity_percent",
     "pressure_hpa",
@@ -43,8 +39,6 @@ VALID_RANGES = {
     "soil_temperature_c": (-10.0, 60.0),
     "soil_ec": (0.0, None),
     "soil_ph": (0.0, 14.0),
-    "air_temperature_c": (-10.0, 60.0),
-    "humidity_percent": (0.0, 100.0),
     "outdoor_temperature_c": (-10.0, 60.0),
     "outdoor_humidity_percent": (0.0, 100.0),
     "pressure_hpa": (850.0, 1100.0),
@@ -143,7 +137,7 @@ def add_environment_risk_flags(frame: pd.DataFrame, stats: dict[str, dict[str, f
     """Add data-relative flags; these are inspection priorities, not diagnoses."""
     output = frame.copy()
     soil_high = output["soil_moisture_percent"] >= stats["soil_moisture_percent"]["q3"]
-    humidity_high = output["humidity_percent"] >= stats["humidity_percent"]["q3"]
+    humidity_high = output["outdoor_humidity_percent"] >= stats["outdoor_humidity_percent"]["q3"]
     recent_rain = output["rain_1h_mm"].fillna(0) > 0
     output["wet_environment_score"] = soil_high.astype(int) + humidity_high.astype(int) + recent_rain.astype(int)
     output["wet_environment_alert"] = output["model_eligible"] & (output["wet_environment_score"] >= 2)
