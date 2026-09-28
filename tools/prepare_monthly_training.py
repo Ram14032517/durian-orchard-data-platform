@@ -146,7 +146,9 @@ def main():
             archive.write(BASE / name, 'sources/' + name)
         for name in ['monthly_model_panel.csv', 'manifest.json', 'README_TH.md']:
             archive.write(OUT / name, name)
-        for name in ['model_metrics.csv','model_predictions.csv','model_validation.csv','model_baseline.json']:
+        for name in ['model_metrics.csv','model_predictions.csv','model_validation.csv','model_baseline.json',
+                     'annual_yield_windows_panel.csv','annual_yield_windows_metrics.csv',
+                     'annual_yield_windows_predictions.csv','annual_yield_windows_tuning.csv','annual_yield_windows_info.json']:
             if (OUT / name).exists(): archive.write(OUT / name, name)
     print(json.dumps({k: manifest[k] for k in ['rows', 'eligible_rows', 'eligible_by_split']}, indent=2))
 

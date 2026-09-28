@@ -153,6 +153,19 @@ display(Markdown('**โมเดลที่เลือกจาก validation:
 display(Markdown('ทดลองรอบนี้การเพิ่มอากาศเดือนก่อนยังไม่ดีกว่าโมเดลจังหวัด–เดือนอย่างเดียว ไม่ใช่หลักฐานว่าอากาศไม่มีผลต่อทุเรียน และไม่ใช้สั่งให้น้ำ/วินิจฉัยโรค'))
 display(Markdown('QC: ตรวจคีย์ไม่ซ้ำ ค่าที่ขาด ช่วงค่า RH/ฝน/แสง และคำนวณอุณหภูมิ ฝน RH แสงรายเดือนกลับจากรายวัน เทรนเฉพาะแถวที่อากาศเดือนก่อนครบทั้ง 4 ตัวแปร ข้อมูลผลผลิตที่ไม่มีแถวไม่เติมศูนย์'))
 display(Markdown('ข้อจำกัด: ประเมินเฉพาะเดือนที่มีผลผลิตรายงาน มีเพียง 5 จังหวัด ไม่ใช่ backtest ตามข้อมูลที่ทราบจริงในวันนั้น เพราะวันเผยแพร่และการปรับปรุงย้อนหลังยังไม่ครบ'))'''), nb.cells[-1]]
+report_cells[-1:-1] = [md('''## 9. ทดลองอากาศย้อนหลัง 1–6 เดือนกับผลผลิตต่อไร่รายปี
+ผลผลิตต่อไร่ = ผลผลิตตัน × 1,000 ÷ พื้นที่ให้ผล (ไร่) ไม่ใช่พื้นที่ปลูกทั้งหมด
+หนึ่งแถวต่อจังหวัด–ปี ไม่ทำซ้ำเป็น 12 เดือน เดือนอ้างอิงเลือกจากเดือนที่มียอดผลผลิตรวมสูงสุดในข้อมูลฝึกถึงปี 2021 แล้วตรึงไว้ทุกปี ไม่ใช่วันเก็บเกี่ยวจริง
+อากาศเฉลี่ยถ่วงตามจำนวนวัน ฝนเป็นยอดรวม ก่อนเดือนอ้างอิง 1–6 เดือน ผลด้านล่างรวมทั้ง 5 จังหวัด ไม่เปลี่ยนตามตัวเลือกเดือน'''),
+code('''annual_scores = pd.read_csv(base / 'training/annual_yield_windows_metrics.csv')
+annual_info = json.loads((base / 'training/annual_yield_windows_info.json').read_text(encoding='utf-8'))
+table(annual_scores.pivot(index='window_months',columns='split',values='mae_kg_rai').reset_index().rename(columns={'window_months':'ย้อนหลังสะสม (0 = ไม่เพิ่มอากาศ)','validation':'MAE validation กก./ไร่','test':'MAE test กก./ไร่'}))
+chosen = annual_info['selected_window_by_validation']
+baseline_mae = annual_scores.query("window_months == 0 and split == 'test'").mae_kg_rai.iloc[0]
+chosen_mae = annual_scores[(annual_scores.window_months == chosen) & (annual_scores.split == 'test')].mae_kg_rai.iloc[0]
+display(Markdown(f'Validation เลือกย้อนหลัง **{chosen} เดือน** แต่ MAE test = **{chosen_mae:,.1f} กก./ไร่** เทียบฐานจังหวัด+แนวโน้มปี **{baseline_mae:,.1f} กก./ไร่** (ต่ำกว่าดีกว่า)'))
+display(Markdown('ข้อมูล 145 จังหวัด–ปี: ฝึก 125, validation 10, test 10 แถว ชุดทดสอบเล็กมาก รอบนี้ยังไม่แสดงว่าการเพิ่มอากาศช่วยทำนายข้อมูลช่วงทดสอบ ไม่ใช่ข้อสรุปว่าอากาศไม่มีผล และไม่ยืนยันสาเหตุ/ระยะพืชจริง'))
+display(Markdown('เดือนอ้างอิงจากข้อมูลฝึก: จันทบุรี พ.ค.; ศรีสะเกษ มิ.ย.; อุตรดิตถ์ ก.ค.; สุราษฎร์ธานีและชุมพร ส.ค. ข้อมูลรายเดือนที่รายงานไม่ครบอาจทำให้เดือนอ้างอิงคลาดเคลื่อน'))''')]
 function_source = 'def render_report(PROVINCE, YEAR, MONTH):\n'
 function_source += "    assert PROVINCE in set(points.province_code) and 1 <= MONTH <= 12\n"
 function_source += "    name = points.set_index('province_code').loc[PROVINCE, 'province_name']\n"
