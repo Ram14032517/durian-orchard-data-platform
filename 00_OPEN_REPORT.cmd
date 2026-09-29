@@ -1,5 +1,14 @@
 @echo off
 cd /d "%~dp0"
+if /i "%~1"=="notebook" goto notebook
+if not exist "%~dp0.build\national-analysis-venv\Scripts\python.exe" (
+  echo Analysis Python was not found. Opening the saved notebook instead.
+  goto notebook
+)
+"%~dp0.build\national-analysis-venv\Scripts\python.exe" "%~dp0tools\open_orchard_report.py"
+if errorlevel 1 pause
+exit /b
+:notebook
 if not exist "%~dp000_OPEN_ME.ipynb" (
   echo Missing 00_OPEN_ME.ipynb. Keep this launcher in the project folder.
   pause
