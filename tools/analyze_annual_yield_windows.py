@@ -11,11 +11,30 @@ from train_monthly_production import fit_ridge, predict, mae
 BASE = Path(__file__).resolve().parents[1] / 'research_data/five_province_history'
 
 def months_before(year, month, count):
+    if not 1 <= month <= 12 or not 1 <= count <= 6:
+        raise ValueError('Month must be 1..12 and window 1..6')
     result = []
     for _ in range(count):
         year, month = previous_month(year, month)
         result.append((year, month))
     return result
+
+def aggregate_window(daily, province, year, month, count):
+    values = {f: [] for f in WEATHER}
+    for y, m in months_before(year, month, count):
+        group = daily.get((province, y, m), {})
+        for field in WEATHER:
+            v = group.get(field, [])
+            if len(v) != calendar.monthrange(y, m)[1] or not np.isfinite(v).all():
+                return {f: np.nan for f in WEATHER}
+            values[field].extend(v)
+    return {f: sum(v) if f == 'rain_mm' else float(np.mean(v)) for f, v in values.items()}
+
+def annual_yield(production_tonnes, bearing_rai):
+    if not (np.isfinite(production_tonnes) and production_tonnes >= 0
+            and np.isfinite(bearing_rai) and bearing_rai > 0):
+        return np.nan
+    return production_tonnes * 1000 / bearing_rai
 
 def main():
     annual = pd.read_csv(BASE/'production_annual.csv', dtype={'province_code':str})
@@ -27,21 +46,14 @@ def main():
     daily = daily_profile()
     rows = []
     for r in annual.itertuples():
-        if not (r.bearing_rai > 0 and np.isfinite(r.production_tonnes) and r.production_tonnes >= 0):
+        target = annual_yield(r.production_tonnes, r.bearing_rai)
+        if not np.isfinite(target):
             continue
         row = dict(province_code=r.province_code,province_name=r.province_name,year_ce=r.year_ce,
-                   anchor_month=anchors[r.province_code],yield_kg_rai=r.production_tonnes*1000/r.bearing_rai)
+                   anchor_month=anchors[r.province_code],yield_kg_rai=target)
         for window in range(1,7):
-            values = {f:[] for f in WEATHER}
-            complete = True
-            for y,m in months_before(r.year_ce,row['anchor_month'],window):
-                group = daily.get((r.province_code,y,m),{})
-                for f in WEATHER:
-                    v = group.get(f,[])
-                    complete &= len(v) == calendar.monthrange(y,m)[1]
-                    values[f].extend(v)
-            for f in WEATHER:
-                row[f'w{window}_{f}'] = (sum(values[f]) if f == 'rain_mm' else np.mean(values[f])) if complete else np.nan
+            values = aggregate_window(daily,r.province_code,r.year_ce,row['anchor_month'],window)
+            row.update({f'w{window}_{f}': value for f,value in values.items()})
         rows.append(row)
     panel = pd.DataFrame(rows)
     features = [c for c in panel if c.startswith('w') and c[1].isdigit()]
