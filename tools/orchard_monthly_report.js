@@ -65,6 +65,7 @@ for(const id of ['district','soil']){
 }
 document.querySelector('.report-controls').append($('overview'));
 const scope=document.createElement('p');scope.className='scope-note';
-scope.textContent='เลือกจังหวัดบนแผนที่ หรือเลือกอำเภอ/ชุดดินด้านบน: ดินเปลี่ยนตามพื้นที่ แต่ตารางอากาศรายเดือนใช้จุดอ้างอิงจังหวัด และผลผลิตยังเป็นทั้งจังหวัด';
+scope.className='warn';
+scope.textContent='รายงานรายเดือน = อากาศจุดอ้างอิงจังหวัด + ผลผลิตทั้งจังหวัด • เลือกอำเภอ/ชุดดินเปลี่ยนเฉพาะพื้นที่ดินและจุด A ไม่เปลี่ยนอากาศรายเดือน หากต้องการอากาศจุด A ให้เปิด “2. วันที่และอากาศ”';
 document.querySelector('.report-controls').after(scope);
 scope.after($('selected'));

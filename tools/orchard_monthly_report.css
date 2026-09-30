@@ -1,4 +1,5 @@
 main{grid-template-columns:minmax(340px,42%) minmax(500px,1fr)}
+#map{position:relative;overflow:hidden;min-width:0}
 aside{padding:20px}section{border-radius:12px;padding:20px}h2{line-height:1.4}
 .monthly-report{border-top:5px solid #176d56}.report-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .month-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:16px 0}
