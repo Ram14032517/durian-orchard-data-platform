@@ -1,4 +1,5 @@
 .venv/
+.venv-portfolio/
 .build/
 .secrets/
 snapshot.json
