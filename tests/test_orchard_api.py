@@ -22,7 +22,7 @@ class WeatherTests(unittest.TestCase):
     def test_cache_expiry_and_integrity(self):
         now=datetime(2026,9,26,tzinfo=timezone.utc)
         with TemporaryDirectory() as d:
-            p=Path(d)/'cache.json';raw=b'{}';p.write_bytes(raw)
+            p=Path(d)/'cache.json';raw=b'{"properties":{"parameter":{"T2M":{"20240401":30}}}}';p.write_bytes(raw)
             meta={'retrieved_utc':now.isoformat(),'sha256':hashlib.sha256(raw).hexdigest()}
             p.with_suffix('.source.json').write_text(json.dumps(meta))
             self.assertTrue(api.cache_is_fresh(p,date(2026,9,25),now.date(),now))
@@ -70,5 +70,19 @@ class HTTPTests(unittest.TestCase):
             with self.assertRaises(HTTPError) as cm:
                 urlopen(self.base+'/api/weather?lat=9&lon=99&start=2024-04-01&end=2024-04-03')
             self.assertEqual(cm.exception.code,502)
+
+    def test_stale_verified_point_cache_survives_upstream_403(self):
+        data={'properties':{'parameter':{'T2M':{'20240401':30},'PRECTOTCORR':{'20240401':0}}}}
+        response=Mock();response.json.return_value=data;response.content=json.dumps(data).encode();response.url='https://power.larc.nasa.gov/api/test'
+        query='/api/weather?lat=9&lon=99&start=2024-04-01&end=2024-04-01'
+        with TemporaryDirectory() as d,patch.object(api,'CACHE',Path(d)):
+            with patch.object(api.requests,'get',return_value=response):
+                with urlopen(self.base+query) as r:first=json.load(r)
+            self.assertFalse(first['stale_cache'])
+            with patch.object(api,'cache_is_fresh',return_value=False),patch.object(api.requests,'get',side_effect=api.requests.HTTPError('403')):
+                with urlopen(self.base+query) as r:second=json.load(r)
+            self.assertTrue(second['stale_cache'])
+            self.assertEqual(first['rows'],second['rows'])
+            self.assertEqual(first['provenance'],second['provenance'])
 
 if __name__=='__main__':unittest.main()

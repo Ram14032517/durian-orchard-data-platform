@@ -26,6 +26,19 @@ class MapUIContractTests(unittest.TestCase):
         self.assertIn('scrollWheelZoom:false', html)
         self.assertIn('ResizeObserver', html)
 
+    def test_weather_chart_switch_and_annual_model_present(self):
+        for name in ['tools/unified_orchard_map.html', 'research_data/five_province_history/UNIFIED_MAP.html']:
+            html = (ROOT / name).read_text(encoding='utf-8')
+            for metric in ['T2M', 'T2M_MAX', 'T2M_MIN', 'PRECTOTCORR',
+                           'RH2M', 'ALLSKY_SFC_SW_DWN', 'WS2M']:
+                self.assertIn(f'<option value="{metric}">', html)
+            self.assertIn("$('chart-metric').onchange", html)
+            self.assertIn('annual_yield_feature_comparison.json', html)
+            self.assertIn('id="annual-year-context"', html)
+            self.assertIn('id="weather-warning"', html)
+            self.assertIn('ไฟล์สำรองจุดจังหวัด (ไม่ใช่พิกัด A/B)', html)
+            self.assertIn('data.stale_cache', html)
+
 
 if __name__ == '__main__':
     unittest.main()

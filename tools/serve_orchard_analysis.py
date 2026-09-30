@@ -10,15 +10,29 @@ CACHE=ROOT/'research_data/five_province_history/point_weather_cache'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
 
+def verified_cache(path):
+    """Read a cache entry only if the recorded bytes and structure still agree."""
+    try:
+        raw=path.read_bytes()
+        meta=json.loads(path.with_suffix('.source.json').read_text(encoding='utf-8'))
+        if hashlib.sha256(raw).hexdigest()!=meta['sha256']:return None
+        data=json.loads(raw)
+        if not data.get('properties',{}).get('parameter'):return None
+        return data,meta
+    except (OSError,ValueError,KeyError,TypeError,AttributeError):
+        return None
+
 def cache_is_fresh(path, end, today=None, now=None):
     """Refresh recent periods every 6h; older periods every 30d for revisions."""
     today=today or date.today()
     now=now or datetime.now(timezone.utc)
     ttl=21600 if end>=today-timedelta(days=31) else 30*86400
     try:
-        meta=json.loads(path.with_suffix('.source.json').read_text(encoding='utf-8'))
+        cached=verified_cache(path)
+        if cached is None:return False
+        _,meta=cached
         age=(now-datetime.fromisoformat(meta['retrieved_utc'])).total_seconds()
-        return 0<=age<ttl and hashlib.sha256(path.read_bytes()).hexdigest()==meta['sha256']
+        return 0<=age<ttl
     except (OSError,ValueError,KeyError,TypeError):
         return False
 
@@ -58,16 +72,24 @@ class Handler(SimpleHTTPRequestHandler):
             key=hashlib.sha256(json.dumps(args,sort_keys=True).encode()).hexdigest()
             CACHE.mkdir(parents=True,exist_ok=True);path=CACHE/f'{key}.json'
             with LOCK:
-                if cache_is_fresh(path,end):data=json.loads(path.read_text(encoding='utf-8'))
+                cached=verified_cache(path)
+                stale=False
+                if cached and cache_is_fresh(path,end):data,provenance=cached
                 else:
-                    r=requests.get('https://power.larc.nasa.gov/api/temporal/daily/point',params=args,timeout=120);r.raise_for_status();data=r.json()
-                    if not data.get('properties',{}).get('parameter'):raise RuntimeError('NASA response has no daily data')
-                    path.write_bytes(r.content)
-                    path.with_suffix('.source.json').write_text(json.dumps(dict(url=r.url,retrieved_utc=datetime.now(timezone.utc).isoformat(),sha256=hashlib.sha256(r.content).hexdigest()),indent=2),encoding='utf-8')
+                    try:
+                        r=requests.get('https://power.larc.nasa.gov/api/temporal/daily/point',params=args,timeout=120);r.raise_for_status();data=r.json()
+                        if not data.get('properties',{}).get('parameter'):raise RuntimeError('NASA response has no daily data')
+                        provenance=dict(url=r.url,retrieved_utc=datetime.now(timezone.utc).isoformat(),sha256=hashlib.sha256(r.content).hexdigest())
+                        path.write_bytes(r.content)
+                        path.with_suffix('.source.json').write_text(json.dumps(provenance,indent=2),encoding='utf-8')
+                    except (requests.RequestException,ValueError,RuntimeError):
+                        if not cached:raise
+                        data,provenance=cached
+                        stale=True
             rows=daily_rows(data,start,end)
-            payload=dict(rows=rows,latitude=lat,longitude=lon,time_standard='LST',source='NASA POWER daily point; grid-based, not orchard sensor',cache_key=key)
+            payload=dict(rows=rows,latitude=lat,longitude=lon,time_standard='LST',source='NASA POWER daily point; grid-based, not orchard sensor',cache_key=key,stale_cache=stale)
             payload['coverage']={k:{'valid_days':sum(r[k] is not None for r in rows),'requested_days':len(rows)} for k in PARAMS.split(',')}
-            payload['provenance']=json.loads(path.with_suffix('.source.json').read_text(encoding='utf-8'))
+            payload['provenance']=provenance
             self.send_json(200,payload)
         except (ValueError,KeyError) as e:self.send_json(400,{'error':str(e)})
         except Exception as e:self.send_json(502,{'error':str(e)})

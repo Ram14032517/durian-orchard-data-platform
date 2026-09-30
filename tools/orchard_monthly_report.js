@@ -58,14 +58,13 @@ document.querySelectorAll('aside > section:not(.monthly-report)').forEach(sectio
   while(section.firstChild)details.append(section.firstChild);
   section.append(details);
 });
-// Surface existing controls instead of duplicating selection state.
-for(const id of ['district','soil']){
-  const label=$(id).closest('label');
-  if(label)document.querySelector('.report-controls').append(label);
-}
+// Keep the province → district → soil sequence together in section 1.
 document.querySelector('.report-controls').append($('overview'));
+const areaButton=document.createElement('button');
+areaButton.type='button';areaButton.textContent='เลือกอำเภอ / ชุดดิน';
+areaButton.onclick=()=>{const details=$('district').closest('details');details.open=true;details.scrollIntoView({behavior:'smooth',block:'start'});$('district').focus();};
+document.querySelector('.report-controls').append(areaButton);
 const scope=document.createElement('p');scope.className='scope-note';
 scope.className='warn';
-scope.textContent='รายงานรายเดือน = อากาศจุดอ้างอิงจังหวัด + ผลผลิตทั้งจังหวัด • เลือกอำเภอ/ชุดดินเปลี่ยนเฉพาะพื้นที่ดินและจุด A ไม่เปลี่ยนอากาศรายเดือน หากต้องการอากาศจุด A ให้เปิด “2. วันที่และอากาศ”';
+scope.textContent='รายงานรายเดือน = อากาศจุดอ้างอิงจังหวัด + ผลผลิตทั้งจังหวัด • เลือกอำเภอ/ชุดดินในส่วน 1 เพื่อเปลี่ยนพื้นที่ดินและจุด A; อากาศรายเดือนไม่เปลี่ยน หากต้องการอากาศจุด A ให้เปิด “2. วันที่และอากาศ”';
 document.querySelector('.report-controls').after(scope);
-scope.after($('selected'));
