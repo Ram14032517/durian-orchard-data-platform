@@ -3,13 +3,26 @@ from datetime import date,datetime,timedelta,timezone
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from urllib.request import urlopen
+from urllib.request import urlopen,Request
 from urllib.error import HTTPError
 from unittest.mock import Mock,patch
 import hashlib,json,threading,unittest
 from tools import serve_orchard_analysis as api
 
 class WeatherTests(unittest.TestCase):
+    def test_export_saves_snapshot_under_controlled_filename(self):
+        text='\ufeffarea,province_code,date,selected_latitude,selected_longitude,data_latitude,data_longitude,source_basis,time_standard,T2M,PRECTOTCORR\r\nA,84,2025-07-01,9.1,99.2,9.01557,99.113,province_proxy,LST,,0\r\n'
+        payload={'csv':text,'start':'2025-07-01','end':'2025-07-01','filename':'../../escape.csv'}
+        with TemporaryDirectory() as folder,patch.object(api,'EXPORTS',Path(folder)):
+            result=api.save_weather_export(payload)
+            path=Path(folder)/result['filename']
+            self.assertEqual(path.read_bytes(),text.encode('utf-8'))
+            self.assertEqual(result['rows'],1)
+            self.assertEqual(result['sha256'],hashlib.sha256(path.read_bytes()).hexdigest())
+            self.assertNotIn('escape',result['filename'])
+            self.assertEqual(api.save_weather_export(payload),result)
+            with self.assertRaises(ValueError):api.save_weather_export({**payload,'start':'2025-07-02'})
+
     def test_missing_days_parameters_and_zero_rain(self):
         data={'properties':{'parameter':{'T2M':{'20240401':30,'20240402':-999},'PRECTOTCORR':{'20240401':0}}}}
         rows=api.daily_rows(data,date(2024,4,1),date(2024,4,3))
@@ -44,6 +57,11 @@ class HTTPTests(unittest.TestCase):
     def test_public_page(self):
         with urlopen(self.base+'/research_data/five_province_history/SEASONS_MAP.html') as r:
             self.assertEqual(r.status,200)
+    def test_export_rejects_cross_origin_and_bad_payload(self):
+        for headers,expected in [({'Origin':'https://unrelated.example','Content-Type':'application/json'},403),({'Content-Type':'application/json'},400)]:
+            request=Request(self.base+'/api/weather-export',data=b'{}',headers=headers,method='POST')
+            with self.assertRaises(HTTPError) as cm:urlopen(request)
+            self.assertEqual(cm.exception.code,expected)
     def test_private_files_listing_traversal(self):
         for path in ['/.git/config','/.secrets/','/tools/serve_orchard_analysis.py','/research_data/','/research_data/five_province_history/../../.git/config']:
             with self.subTest(path=path),self.assertRaises(HTTPError) as cm:

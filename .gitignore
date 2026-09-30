@@ -26,4 +26,5 @@ research_data/external/
 # Local research downloads and reproducible caches/bundles
 research_data/five_province_history/evidence/
 research_data/five_province_history/point_weather_cache/
+research_data/five_province_history/exports/
 research_data/five_province_history/training/training_bundle.zip

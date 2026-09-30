@@ -3,10 +3,11 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse,parse_qs
 from pathlib import Path
 from datetime import date,datetime,timezone,timedelta
-import json,hashlib,threading
+import json,hashlib,threading,csv,io
 import requests
 ROOT=Path(__file__).resolve().parents[1]
 CACHE=ROOT/'research_data/five_province_history/point_weather_cache'
+EXPORTS=ROOT/'research_data/five_province_history/exports'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
 
@@ -48,6 +49,34 @@ def daily_rows(data,start,end):
             row[k]=None if v is None or v in (fill,-999) else v
         rows.append(row)
     return rows
+
+def save_weather_export(payload):
+    """Save the displayed snapshot locally, with a server-controlled filename."""
+    start=date.fromisoformat(payload['start']);end=date.fromisoformat(payload['end'])
+    if not date(1981,1,1)<=start<=end<=date.today() or (end-start).days>731:
+        raise ValueError('ช่วงวันที่ส่งออกไม่ถูกต้อง')
+    text=payload['csv']
+    if not isinstance(text,str) or len(text.encode('utf-8'))>2_000_000:
+        raise ValueError('ไฟล์ส่งออกต้องไม่เกิน 2 MB')
+    reader=csv.DictReader(io.StringIO(text.lstrip('\ufeff')))
+    required={'area','province_code','date','selected_latitude','selected_longitude','data_latitude','data_longitude','source_basis','time_standard'}
+    if not required.issubset(reader.fieldnames or []):raise ValueError('คอลัมน์ส่งออกไม่ครบ')
+    count=0
+    for row in reader:
+        if row['area'] not in ('A','B') or not start<=date.fromisoformat(row['date'])<=end:
+            raise ValueError('แถวส่งออกอยู่นอกพื้นที่หรือวันที่เลือก')
+        count+=1
+    if not 1<=count<=1464:raise ValueError('จำนวนแถวส่งออกไม่ถูกต้อง')
+    raw=text.encode('utf-8');digest=hashlib.sha256(raw).hexdigest()
+    filename=f'weather_AB_{start}_{end}_{digest[:12]}.csv'
+    EXPORTS.mkdir(parents=True,exist_ok=True);path=EXPORTS/filename
+    try:
+        with path.open('xb') as f:f.write(raw)
+    except FileExistsError:
+        if path.read_bytes()!=raw:raise ValueError('ชื่อไฟล์ซ้ำกับข้อมูลอื่น')
+    return {'url':f'/research_data/five_province_history/exports/{filename}',
+            'filename':filename,'rows':count,'sha256':digest,
+            'folder':'research_data/five_province_history/exports'}
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
@@ -93,6 +122,21 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(200,payload)
         except (ValueError,KeyError) as e:self.send_json(400,{'error':str(e)})
         except Exception as e:self.send_json(502,{'error':str(e)})
+    def do_POST(self):
+        if urlparse(self.path).path!='/api/weather-export':self.send_error(404);return
+        origin=self.headers.get('Origin')
+        port=self.server.server_port
+        if origin and origin not in (f'http://127.0.0.1:{port}',f'http://localhost:{port}'):
+            self.send_json(403,{'error':'บันทึกได้จากหน้าโครงการในเครื่องเท่านั้น'});return
+        try:
+            size=int(self.headers.get('Content-Length','0'))
+            if not 0<size<=2_100_000:raise ValueError('ขนาดคำขอไม่ถูกต้อง')
+            if 'application/json' not in self.headers.get('Content-Type',''):
+                raise ValueError('ต้องส่งข้อมูล JSON')
+            payload=json.loads(self.rfile.read(size))
+            self.send_json(200,save_weather_export(payload))
+        except (ValueError,KeyError,TypeError) as e:self.send_json(400,{'error':str(e)})
+        except OSError:self.send_json(500,{'error':'บันทึกไฟล์ในเครื่องไม่สำเร็จ ตรวจสิทธิ์โฟลเดอร์ exports'})
     def send_json(self,status,payload):
         body=json.dumps(payload,ensure_ascii=False,allow_nan=False).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
