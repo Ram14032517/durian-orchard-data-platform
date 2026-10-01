@@ -3,13 +3,18 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse,parse_qs
 from pathlib import Path
 from datetime import date,datetime,timezone,timedelta
-import json,hashlib,threading,csv,io
+import argparse,json,hashlib,threading,csv,io
 import requests
 ROOT=Path(__file__).resolve().parents[1]
 CACHE=ROOT/'research_data/five_province_history/point_weather_cache'
 EXPORTS=ROOT/'research_data/five_province_history/exports'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
+
+def project_identity():
+    # Identify the checkout without returning its private absolute path.
+    return {'application':'orchard-analysis','protocol':1,
+            'workspace_id':hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest()}
 
 def verified_cache(path):
     """Read a cache entry only if the recorded bytes and structure still agree."""
@@ -85,12 +90,15 @@ class Handler(SimpleHTTPRequestHandler):
         path=Path(self.translate_path(self.path)).resolve()
         roots=[ROOT/'research_data'/p for p in ('five_province_history','priority_provinces','thailand_comparison','regional_orchards')]
         if (not any(path.is_relative_to(p.resolve()) for p in roots) or not path.is_file()
-            or any(p.startswith('.') for p in path.parts) or 'point_weather_cache' in path.parts
-            or path.suffix.lower() not in {'.html','.js','.css','.json','.geojson','.csv','.md','.ipynb','.png','.svg','.jpg'}):
+            or any(p.startswith('.') for p in path.relative_to(ROOT.resolve()).parts)
+            or 'point_weather_cache' in path.relative_to(ROOT.resolve()).parts
+            or (path.suffix.lower() not in {'.html','.js','.css','.json','.geojson','.csv','.md','.ipynb','.png','.svg','.jpg'}
+                and path != (ROOT/'research_data/five_province_history/training/training_bundle.zip').resolve())):
             self.send_error(404);return None
         return super().send_head()
     def do_GET(self):
         parsed=urlparse(self.path)
+        if parsed.path=='/api/project':return self.send_json(200,project_identity())
         if parsed.path!='/api/weather':return super().do_GET()
         try:
             q=parse_qs(parsed.query);lat=round(float(q['lat'][0]),5);lon=round(float(q['lon'][0]),5)
@@ -141,5 +149,9 @@ class Handler(SimpleHTTPRequestHandler):
         body=json.dumps(payload,ensure_ascii=False,allow_nan=False).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
 if __name__=='__main__':
-    print('http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html',flush=True)
-    ThreadingHTTPServer(('127.0.0.1',8871),Handler).serve_forever()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--port',type=int,default=8871)
+    args=parser.parse_args()
+    if not 1024<=args.port<=65535:parser.error('Port must be between 1024 and 65535')
+    print(f'http://127.0.0.1:{args.port}/research_data/five_province_history/UNIFIED_MAP.html',flush=True)
+    ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()

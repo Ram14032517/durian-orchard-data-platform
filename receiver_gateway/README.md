@@ -24,3 +24,11 @@
 - Serial baud rate: `115200`
 
 อย่าเผยแพร่ไฟล์โค้ดต่อสาธารณะจนกว่าจะย้าย Wi-Fi password และ API tokens ออกจาก source code
+
+## ค่ารับข้อมูลส่วนตัว
+
+`SUPABASE_INGEST_URL`, `GOOGLE_SHEETS_URL` และ `DEVICE_INGEST_KEY` อยู่ใน `farm_secret.h` บนเครื่องเท่านั้น ไฟล์นี้ถูก `.gitignore` และห้ามใช้ `git add -f` กับไฟล์ส่วนตัว คน clone ต้องคัดลอก `farm_secret.example.h` เป็น `farm_secret.h` แล้วกรอกค่าของตนเองก่อนคอมไพล์ firmware ส่วนการเปิดแผนที่และวิเคราะห์ข้อมูลไม่ต้องใช้คีย์อุปกรณ์
+
+การย้ายค่าที่เคยอยู่ใน source ใช้ `tools/move_gateway_ingest_secrets.ps1` ซึ่งตรวจไฟล์ซ้ำ/ค่าขัดกันก่อนย้าย เก็บค่าเดิม และสำรองไว้ใต้ `.build/private-config-backup/` ที่ถูก ignore ไม่ใช่การเปลี่ยนคีย์บนบริการจริง
+
+**การแยกไฟล์ไม่ได้ลบค่าลับจากประวัติ Git** ต้องเปลี่ยนหรือยกเลิกคีย์เดิมที่อาจเคยใช้งานและจัดการประวัติก่อนเปิด Public

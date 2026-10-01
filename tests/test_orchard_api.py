@@ -57,6 +57,29 @@ class HTTPTests(unittest.TestCase):
     def test_public_page(self):
         with urlopen(self.base+'/research_data/five_province_history/SEASONS_MAP.html') as r:
             self.assertEqual(r.status,200)
+    def test_checkout_identity(self):
+        with urlopen(self.base+'/api/project') as response:
+            identity=json.load(response)
+        self.assertEqual(identity,api.project_identity())
+        self.assertNotIn(str(api.ROOT),json.dumps(identity))
+
+    def test_exact_training_zip_only_and_hidden_parent_directory(self):
+        # A clone may be located inside .build; hidden ancestors are not private files.
+        with TemporaryDirectory() as d:
+            root=Path(d)/'.hidden-parent'/'checkout'
+            folder=root/'research_data/five_province_history/training'
+            folder.mkdir(parents=True)
+            content=b'test archive bytes'
+            (folder/'training_bundle.zip').write_bytes(content)
+            (folder/'other.zip').write_bytes(content)
+            (folder/'.private.json').write_text('{}')
+            with patch.object(api,'ROOT',root):
+                with urlopen(self.base+'/research_data/five_province_history/training/training_bundle.zip') as response:
+                    self.assertEqual(response.read(),content)
+                for path in ('other.zip','.private.json'):
+                    with self.subTest(path=path),self.assertRaises(HTTPError) as cm:
+                        urlopen(self.base+'/research_data/five_province_history/training/'+path)
+                    self.assertEqual(cm.exception.code,404)
     def test_export_rejects_cross_origin_and_bad_payload(self):
         for headers,expected in [({'Origin':'https://unrelated.example','Content-Type':'application/json'},403),({'Content-Type':'application/json'},400)]:
             request=Request(self.base+'/api/weather-export',data=b'{}',headers=headers,method='POST')

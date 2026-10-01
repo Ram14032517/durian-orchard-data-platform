@@ -2,7 +2,9 @@
 cd /d "%~dp0"
 if /i "%~1"=="notebook" goto notebook
 if not exist "%~dp0.build\national-analysis-venv\Scripts\python.exe" (
-  echo Analysis Python was not found. Opening the saved notebook instead.
+  echo Analysis Python was not found. See README.md / Start here for setup.
+  echo Expected: .build\national-analysis-venv\Scripts\python.exe
+  echo Opening the saved notebook instead.
   goto notebook
 )
 "%~dp0.build\national-analysis-venv\Scripts\python.exe" "%~dp0tools\open_orchard_report.py"

@@ -16,12 +16,12 @@
 
 ```powershell
 Get-Location
-& 'C:\Users\support\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' --version
+& .\.build\national-analysis-venv\Scripts\python.exe --version
 ```
 
-ตำแหน่งควรเป็น `C:\project` ตรวจพบว่า `.venv` เดิมชี้ไป Python ของผู้ใช้ Admin ที่ไม่มีในเครื่องนี้ จึงยังใช้ไม่ได้ คำสั่งนี้ใช้ Python ที่มากับเครื่องมือในเครื่องเพื่อฝึกก่อน เส้นทางนี้เฉพาะเครื่องนี้และอาจเปลี่ยนเมื่ออัปเดต ภายหลังค่อยตั้ง environment ของโปรเจกต์ด้วย Python หรือ Anaconda ที่คุณติดตั้ง
+ตำแหน่งควรเป็นรากโปรเจกต์ เช่น `C:\project` ใช้ environment `.build/national-analysis-venv` ที่สร้างบนเครื่องนี้ ดูขั้นตอนติดตั้งใน README.md หากยังไม่มี ไม่ใช้ `.venv` เก่าที่คัดลอกมาจากเครื่องอื่น และไม่ต้อง activate ผ่าน PowerShell
 
-หากใช้ส่วนขยาย Python ของ Microsoft ให้เปิด Command Palette ด้วย Ctrl+Shift+P เลือก Python: Select Interpreter แล้วเลือก Enter interpreter path และใช้เส้นทาง Python จากคำสั่งด้านบน ส่วน Jupyter ของ Microsoft ใช้เมื่อเริ่ม Notebook ภายหลัง
+หากใช้ส่วนขยาย Python ของ Microsoft ให้กด Ctrl+Shift+P → Python: Select Interpreter → Enter interpreter path เลือก `.build/national-analysis-venv/Scripts/python.exe` ภายในโปรเจกต์ ส่วน Notebook เลือก environment เดียวกันผ่าน Select Kernel
 
 ## 2. รู้จักแฟ้มงานของตัวเอง
 
@@ -43,7 +43,7 @@ Get-Location
 เปิด `learning/01_inspect_soil.py` อ่านทีละส่วน แล้วรันจาก Terminal:
 
 ```powershell
-& 'C:\Users\support\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' learning/01_inspect_soil.py
+& .\.build\national-analysis-venv\Scripts\python.exe learning/01_inspect_soil.py
 ```
 
 โปรแกรมอ่าน CSV สำรองและพิมพ์ผล ไม่เขียนทับข้อมูล ลองตอบคำถามก่อนแก้โค้ด:

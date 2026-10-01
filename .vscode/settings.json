@@ -1,4 +1,23 @@
 {
   "python.defaultInterpreterPath": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
-  "python.terminal.activateEnvironment": false
+  "python.terminal.activateEnvironment": false,
+  "explorer.sortOrder": "filesFirst",
+  "files.exclude": {
+    "**/__pycache__": true,
+    ".build": true,
+    ".venv": true,
+    ".venv-portfolio": true,
+    ".secrets": true,
+    "snapshot.json": true,
+    "tmp": true,
+    "**/point_weather_cache": true
+  },
+  "search.exclude": {
+    ".build/**": true,
+    ".venv/**": true,
+    ".venv-portfolio/**": true,
+    ".secrets/**": true,
+    "tmp/**": true,
+    "**/point_weather_cache/**": true
+  }
 }

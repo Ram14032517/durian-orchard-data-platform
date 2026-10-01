@@ -70,7 +70,7 @@ python tools/serve_orchard_analysis.py
 
 เซิร์ฟเวอร์อากาศปรับ cache: ช่วงสิ้นสุดภายใน 31 วันล่าสุดดึงใหม่หลัง 6 ชั่วโมง ช่วงเก่าหลัง 30 วัน แต่ละคำตอบมี coverage แยกตัวแปรและ provenance ค่าหายคงเป็น null; ตารางอากาศบน UI ยังไม่ได้แสดง metadata ทุกตัว
 
-ผลทดสอบล่าสุดอยู่ใน `docs/MAP_QA_2026-09-26_TH.md` ที่รากโปรเจกต์ หน้ารวมมีตารางฤดู 5 จังหวัดและปุ่มกลับภาพรวมประเทศแล้ว
+ผลทดสอบรอบ 26 ก.ย. อยู่ใน `docs/archive/MAP_QA_2026-09-26_TH.md` ที่รากโปรเจกต์ หน้ารวมมีตารางฤดู 5 จังหวัดและปุ่มกลับภาพรวมประเทศแล้ว ดูสถานะปัจจุบันใน `docs/FIVE_PROVINCE_HANDOFF_TH.md`
 
 ใช้ Python พร้อม pandas numpy openpyxl requests; รัน tools/prepare_five_province_history.py แล้ว tools/build_five_province_history.py จากรากโปรเจกต์
 

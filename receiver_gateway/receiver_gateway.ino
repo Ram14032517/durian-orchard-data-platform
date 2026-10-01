@@ -44,10 +44,7 @@ const unsigned long AGRO_LOOKBACK_SEC = 30UL * 24UL * 60UL * 60UL;
 // Fill these after deploying the Supabase Edge Function and Google Apps Script.
 // DEVICE_INGEST_KEY must be a new random value used only for this gateway.
 const bool ENABLE_SUPABASE = true;
-const char* SUPABASE_INGEST_URL = "https://pbsdyodlbdblzhksomba.supabase.co/functions/v1/farm-ingest";
 const bool ENABLE_GOOGLE_SHEETS = true;
-const char* GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwlkxW3XjC7qtkn44FduE6DM5k8Fu2KAElSjwVObBp8tWCjPJUoAUkHoYux3EWSq2KI/exec";
-const char* DEVICE_INGEST_KEY = "0242d80eda73a589798e7951b8ba9b3e20bc71c87e345e50";
 
 // =====================
 // SOIL SENSOR RS485 / MODBUS RTU

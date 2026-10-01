@@ -2,7 +2,49 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Durian: เปิดเซิร์ฟเวอร์แผนที่",
+      "label": "Durian: 01 เปิดแผนที่ (เริ่มตรงนี้)",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["${workspaceFolder}/tools/open_orchard_report.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "presentation": {"reveal": "always", "panel": "shared"}
+    },
+    {
+      "label": "Durian: 02 อ่านรายงานรายเดือน",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["${workspaceFolder}/tools/read_monthly_report.py", "--province", "${input:province}", "--year", "${input:year}", "--month", "${input:month}"],
+      "options": {"cwd": "${workspaceFolder}", "env": {"PYTHONUTF8": "1"}},
+      "problemMatcher": [],
+      "presentation": {"reveal": "always", "panel": "shared"}
+    },
+    {
+      "label": "Durian: 03 เตรียม ZIP ข้อมูลเทรน (รักษา snapshot เดิม)",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["${workspaceFolder}/tools/package_training_bundle.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Durian: 04 ทดสอบ Python",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["-m", "unittest", "discover", "-s", "tests", "-v"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Durian: 05 รันโมเดล baseline (เขียนผลทดลองใหม่)",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["${workspaceFolder}/tools/train_monthly_production.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Durian: 90 เปิดเซิร์ฟเวอร์แผนที่ (ขั้นสูง)",
       "type": "process",
       "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
       "args": ["${workspaceFolder}/tools/serve_orchard_analysis.py"],
@@ -10,5 +52,10 @@
       "problemMatcher": [],
       "presentation": {"reveal": "always", "panel": "dedicated"}
     }
+  ],
+  "inputs": [
+    {"id": "province", "type": "pickString", "description": "จังหวัด: 22 จันทบุรี / 33 ศรีสะเกษ / 53 อุตรดิตถ์ / 84 สุราษฎร์ธานี / 86 ชุมพร", "options": ["22", "33", "53", "84", "86"], "default": "84"},
+    {"id": "year", "type": "promptString", "description": "ปี ค.ศ.", "default": "2025"},
+    {"id": "month", "type": "pickString", "description": "เดือน", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], "default": "7"}
   ]
 }
