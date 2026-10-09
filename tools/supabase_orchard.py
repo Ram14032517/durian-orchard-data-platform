@@ -31,6 +31,60 @@ def read_table(table,params):
     return rows
 
 
+def orchard_history(period='day', now=None, reader=read_table, end=None):
+    """Hourly means first, then daily means; never sum rolling rain readings."""
+    if period not in ('day', 'week', 'month'):
+        raise ValueError('ช่วงข้อมูลต้องเป็น day, week หรือ month')
+    now=pd.Timestamp(now or datetime.now(timezone.utc))
+    if end:
+        from datetime import date
+        selected=date.fromisoformat(end)
+        if selected>now.tz_convert('Asia/Bangkok').date():raise ValueError('ไม่เลือกวันอนาคต')
+        now=min(now,pd.Timestamp(selected,tz='Asia/Bangkok')+pd.Timedelta(days=1)-pd.Timedelta(microseconds=1))
+    device=os.environ.get('ORCHARD_DEVICE_ID','')
+    if not re.fullmatch(r'[A-Za-z0-9_-]{1,128}',device):
+        raise RuntimeError('ต้องตั้ง ORCHARD_DEVICE_ID เพื่อเลือกสวน')
+    days={'day':1,'week':7,'month':30}[period]
+    start=now-pd.Timedelta(days=days)
+    values=['soil_moisture_percent','soil_temperature_c','outdoor_temperature_c','outdoor_humidity_percent']
+    fields=['event_id','recorded_at',*values,'soil_valid','weather_valid','soil_age_sec','weather_age_sec']
+    rows=[]
+    truncated=False
+    for offset in range(0,30000,1000):
+        page=reader('sensor_readings',dict(select=','.join(fields),device_id='eq.'+device,
+            recorded_at='gte.'+start.isoformat(),order='recorded_at.desc,event_id.desc',limit='1000',offset=str(offset)))
+        rows.extend(page)
+        if len(page)<1000:break
+    else:truncated=True
+    if not rows:
+        return dict(period=period,source='Supabase',rows=[],raw_count=0,truncated=False,
+                    start=start.isoformat(),end=now.isoformat(),message='ไม่มีข้อมูลสวนในช่วงที่เลือก')
+    frame=pd.DataFrame(rows).drop_duplicates('event_id')
+    frame['time']=pd.to_datetime(frame.recorded_at,utc=True,format='mixed',errors='coerce')
+    frame=frame.loc[frame.time.between(start,now)].copy()
+    for col in values:
+        frame[col]=pd.to_numeric(frame[col],errors='coerce').replace([np.inf,-np.inf],np.nan)
+    for prefix,cols in [('soil',values[:2]),('weather',values[2:])]:
+        bad=frame[prefix+'_valid'].eq(False) | pd.to_numeric(frame[prefix+'_age_sec'],errors='coerce').gt(3600)
+        frame.loc[bad,cols]=np.nan
+    frame.loc[~frame.soil_moisture_percent.between(0,100),'soil_moisture_percent']=np.nan
+    frame.loc[~frame.outdoor_humidity_percent.between(0,100),'outdoor_humidity_percent']=np.nan
+    frame=frame.set_index('time').sort_index().tz_convert('Asia/Bangkok')
+    hourly=frame[values].resample('h').mean()
+    frequency='h' if period=='day' else 'D'
+    means=hourly if period=='day' else hourly.resample('D').mean()
+    counts=frame[values].resample(frequency).count()
+    full=pd.date_range(start.tz_convert('Asia/Bangkok').floor(frequency),now.tz_convert('Asia/Bangkok').floor(frequency),freq=frequency)
+    means=means.reindex(full)
+    records=[]
+    for stamp,row in means.iterrows():
+        records.append(dict(time=stamp.isoformat(),**{col:float(row[col]) if pd.notna(row[col]) else None for col in values},
+            valid_counts={col:int(counts.loc[stamp,col]) if stamp in counts.index else 0 for col in values}))
+    return dict(period=period,source='Supabase',rows=records,raw_count=len(frame),truncated=truncated,
+        start=start.isoformat(),end=now.isoformat(),aggregation='ค่าเฉลี่ยรายชั่วโมง' if period=='day' else 'ค่าเฉลี่ยรายวันจากค่าเฉลี่ยรายชั่วโมง',
+        message='ข้อมูลจุดเซนเซอร์ ไม่ใช่ค่าเฉลี่ยทั้งสวน; ช่องว่างไม่ใช่ศูนย์')
+
+
 def live_status(now=None,reader=read_table):
     now=pd.Timestamp(now or datetime.now(timezone.utc))
     device=os.environ.get('ORCHARD_DEVICE_ID','')

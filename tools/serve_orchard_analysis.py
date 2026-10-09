@@ -123,6 +123,13 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed=urlparse(self.path)
         if parsed.path=='/api/project':return self.send_json(200,project_identity())
+        if parsed.path=='/api/orchard-history':
+            try:
+                from supabase_orchard import orchard_history
+                q=parse_qs(parsed.query)
+                return self.send_json(200,orchard_history(q.get('period',['day'])[0],end=q.get('end',[None])[0]))
+            except ValueError as e:return self.send_json(400,{'error':str(e)})
+            except Exception as e:return self.send_json(503,{'error':str(e)})
         if parsed.path in ('/api/orchard-status','/api/province-estimate'):
             try:
                 from orchard_current_context import orchard_snapshot, province_estimate

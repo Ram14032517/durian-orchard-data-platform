@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from serve_orchard_analysis import fetch_weather, project_identity, save_weather_export
 from orchard_current_context import province_estimate
-from supabase_orchard import live_status
+from supabase_orchard import live_status, orchard_history
 
 LOGIN_PAGE='''<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ title }} — ข้อมูลสวนทุเรียน</title><style>
@@ -108,6 +108,9 @@ def create_app():
 
     @app.get('/api/orchard-status')
     def orchard():return jsonify(live_status())
+
+    @app.get('/api/orchard-history')
+    def history():return jsonify(orchard_history(request.args.get('period','day'),end=request.args.get('end')))
 
     @app.get('/api/province-estimate')
     def province():
