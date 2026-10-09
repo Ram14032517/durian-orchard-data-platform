@@ -1,0 +1,119 @@
+{
+  "reviewed_date": "2026-10-08",
+  "method": "ตรวจวันที่และพื้นที่จากเนื้อหารายงาน ปภ. ไม่ใช้วันที่เผยแพร่แทนวันเกิดเหตุ ไม่อนุมานความเสียหายทุเรียนจากความเสียหายบ้านเรือน",
+  "completeness": "ตัวอย่างรายงานที่ตรวจแล้ว ไม่ใช่ทะเบียนเหตุการณ์ครบถ้วน ข่าวหลายรายการอาจเป็นการติดตามเหตุเดียวกัน",
+  "events": [
+    {
+      "news_id": 6411,
+      "province_code": "22",
+      "observed_event_date": "2024-05-31",
+      "hazard_type": "flood",
+      "districts": ["อ.เมืองจันทบุรี"],
+      "subdistricts": ["คมบาง", "พลับพลานารายณ์", "คลองนารายณ์", "หนองบัว"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6411",
+      "event_end_date": null,
+      "crop_damage_status": "durian_damage_not_reported",
+      "crop_damage": [],
+      "summary": "รายงานน้ำป่าไหลหลากเวลา 03.30 น. จากฝนต่อเนื่องบนเขาสระบาป ผลกระทบบ้านเรือนยังอยู่ระหว่างสำรวจ"
+    },
+    {
+      "news_id": 6557,
+      "province_code": "22",
+      "observed_event_date": "2024-07-27",
+      "hazard_type": "flood",
+      "districts": ["อ.มะขาม", "อ.ขลุง", "อ.โป่งน้ำร้อน"],
+      "subdistricts": ["ปัถวี", "บ่อเวฬุ", "ตกพรม", "โป่งน้ำร้อน"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6557",
+      "event_end_date": null,
+      "crop_damage_status": "durian_damage_not_reported",
+      "crop_damage": [],
+      "summary": "รายงานน้ำป่าไหลหลากช่วง 09.00–10.00 น. รวม 3 อำเภอ ไม่ยืนยันว่าทุกสวนในอำเภอถูกน้ำท่วม"
+    },
+    {
+      "news_id": 3435,
+      "province_code": "33",
+      "observed_event_date": "2022-07-26",
+      "hazard_type": "windstorm",
+      "districts": ["อ.ขุนหาญ", "อ.พยุห์"],
+      "subdistricts": ["สิ", "ตำแย"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/3435",
+      "event_end_date": null,
+      "crop_damage_status": "durian_damage_not_reported",
+      "crop_damage": [],
+      "summary": "ฝนหนักและลมกระโชกช่วง 09.30–11.00 น. รายงานเสาไฟฟ้าและต้นไม้ล้มขวางทาง ไม่ใช่รายงานผลร่วงทุเรียน"
+    },
+    {
+      "news_id": 6261,
+      "province_code": "53",
+      "observed_event_date": "2024-05-03",
+      "hazard_type": "windstorm",
+      "districts": ["อ.เมืองอุตรดิตถ์", "อ.ลับแล", "อ.น้ำปาด", "อ.ตรอน", "อ.พิชัย", "อ.บ้านโคก", "อ.ฟากท่า", "อ.ท่าปลา", "อ.ทองแสนขัน"],
+      "subdistricts": [],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6261",
+      "event_end_date": "2024-05-03",
+      "crop_damage_status": "durian_damage_reported_by_supplementary_agriculture_source",
+      "crop_damage": [
+        {
+          "source_url": "https://region4.prd.go.th/th/content/category/detail/id/57/iid/285609",
+          "source_agency": "สำนักงานประชาสัมพันธ์ที่ 4 รายงานการตรวจของสำนักงานเกษตรจังหวัดอุตรดิตถ์ ไม่ใช่ตัวเลขจาก ปภ.",
+          "district": "อ.ท่าปลา",
+          "subdistrict": "นางพญา",
+          "cultivar": "หมอนทอง",
+          "quantity": 135,
+          "unit": "tonnes_fallen_fruit",
+          "approximate": true,
+          "stage_evidence": "รายงานผลใกล้เก็บเกี่ยว คาดเก็บปลายพฤษภาคม 2567",
+          "limit": "บางส่วนขายแปรรูปได้ ไม่เท่ากับผลผลิตทั้งจังหวัดสูญเสีย 135 ตัน และไม่ใช่ผลอ่อนทั้งหมด"
+        }
+      ],
+      "summary": "ปภ. รายงานลมกระโชกและลูกเห็บ 9 อำเภอ เริ่มประมาณ 16.30 น. สิ้นสุดประมาณ 18.30 น.; หลักฐานความเสียหายทุเรียนเฉพาะนางพญามาจากหน่วยงานเกษตรอีกแหล่ง"
+    },
+    {
+      "news_id": 7428,
+      "province_code": "84",
+      "observed_event_date": "2025-02-24",
+      "hazard_type": "flood",
+      "districts": ["อ.ดอนสัก", "อ.เกาะพะงัน", "อ.เกาะสมุย", "อ.บ้านนาสาร"],
+      "subdistricts": ["ปากแพรก", "บ้านใต้", "แม่น้ำ", "บ่อผุด", "ลำพูน"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/7428",
+      "event_end_date": null,
+      "crop_damage_status": "durian_damage_not_reported",
+      "crop_damage": [],
+      "summary": "รายงานสถานการณ์เวลา 15.00 น. บ้านนาสารมีน้ำล้นคลองลำพูนและถนนขาด; ไม่เอาน้ำท่วมเกาะสมุย/เกาะพะงันไปเหมารวมสวนทุเรียนทั้งจังหวัด"
+    },
+    {
+      "news_id": 6753,
+      "province_code": "86",
+      "observed_event_date": "2024-09-16",
+      "hazard_type": "flood",
+      "districts": ["อ.พะโต๊ะ"],
+      "subdistricts": ["ปากทรง"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6753",
+      "event_end_date": null,
+      "crop_damage_status": "durian_damage_not_reported",
+      "crop_damage": [],
+      "summary": "น้ำป่าไหลหลากท่วมทางหลวงสาย 4006 บ้านปากทรงเวลา 06.00 น. เปิดเส้นทางได้ภายหลังในช่วงเช้า แต่ไม่ระบุเวลาสิ้นสุดและความเสียหายทุเรียน"
+    },
+    {
+      "news_id": 6250,
+      "province_code": "86",
+      "observed_event_date": "2024-05-04",
+      "hazard_type": "windstorm",
+      "districts": ["อ.ละแม"],
+      "subdistricts": ["ละแม"],
+      "url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6250",
+      "event_end_date": null,
+      "crop_damage_status": "durian_orchard_affected_area_reported",
+      "crop_damage": [
+        {
+          "source_url": "https://dpmreporter.disaster.go.th/portal/disaster-news/6250",
+          "quantity": 8,
+          "unit": "rai_affected_durian_orchard",
+          "approximate": true,
+          "limit": "พื้นที่สวนที่ได้รับผลกระทบ ไม่ใช่พื้นที่เสียหายสิ้นเชิง และไม่มีผลผลิตสูญเสียเป็นตัน"
+        }
+      ],
+      "summary": "รายงานวาตภัยเวลา 17.30 น. ในหมู่ 13 และ 18 ต.ละแม มีสวนทุเรียนได้รับผลกระทบประมาณ 8 ไร่"
+    }
+  ]
+}

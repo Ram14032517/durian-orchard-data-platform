@@ -1,0 +1,362 @@
+{
+  "retrieved_at_utc": "2026-10-08T17:21:35.272670+00:00",
+  "provinces": {
+    "22": "จันทบุรี",
+    "33": "ศรีสะเกษ",
+    "53": "อุตรดิตถ์",
+    "84": "สุราษฎร์ธานี",
+    "86": "ชุมพร"
+  },
+  "sources": [
+    {
+      "dataset_id": "dpm-gd015",
+      "title": "สถิติอุทกภัยรายหมู่บ้าน",
+      "hazard_type": "flood",
+      "url": "https://catalog.disaster.go.th/dataset/dpm-gd015",
+      "metadata": {
+        "url": "https://catalog.disaster.go.th/api/3/action/package_show?id=dpm-gd015",
+        "sha256": "78a5f3ee0bf51d68c1ed5328a317481c2f7c12bf76cb6d0272116b5785b0229e",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd015.json_78a5f3ee0bf5"
+      },
+      "resources": [
+        {
+          "id": "5ee190e3-e031-4e1c-807d-95dacd40d822",
+          "url": "https://catalog.disaster.go.th/dataset/26674dbc-d656-4f4f-8afd-5a62c5b5e5b0/resource/5ee190e3-e031-4e1c-807d-95dacd40d822/download/dpm-gd015__1.csv",
+          "sha256": "a39fbf45d8c5efe5fee5eb7ed27cc97754f83b4893a1d76d871afb1e55f8d7fb",
+          "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd015_5ee190e3-e031-4e1c-807d-95dacd40d822.csv_a39fbf45d8c5",
+          "selected_rows": 1942,
+          "description": "จำนวนสถิติข้อมูลอุทกภัยรายหมู่บ้านจำแนกตามจำนวนครั้งที่เกิดในรอบปี ตั้งแต่ปี 2562 - 2567",
+          "last_modified": "2024-08-09T03:06:21.472065"
+        },
+        {
+          "id": "60267cd1-6cdb-43f4-a457-04d5409d1733",
+          "url": "https://catalog.disaster.go.th/dataset/26674dbc-d656-4f4f-8afd-5a62c5b5e5b0/resource/60267cd1-6cdb-43f4-a457-04d5409d1733/download/dpm-gd015__2.csv",
+          "sha256": "254b4eaddd8d955031cb1ad6abc773c51af7aff6961ac477c542a25939db52f1",
+          "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd015_60267cd1-6cdb-43f4-a457-04d5409d1733.csv_254b4eaddd8d",
+          "selected_rows": 2258,
+          "description": "จำนวนสถิติข้อมูลอุทกภัยรายหมู่บ้านจำแนกตามจำนวนครั้งที่เกิดในรอบปี ตั้งแต่ปี 2562 - 2567",
+          "last_modified": "2024-08-09T03:13:38.728592"
+        }
+      ]
+    },
+    {
+      "dataset_id": "dpm-gd013",
+      "title": "สถิติวาตภัยรายหมู่บ้าน",
+      "hazard_type": "windstorm",
+      "url": "https://catalog.disaster.go.th/dataset/dpm-gd013",
+      "metadata": {
+        "url": "https://catalog.disaster.go.th/api/3/action/package_show?id=dpm-gd013",
+        "sha256": "3877f8439cf7d2aea6b5c8dbf1ec1665ea132e44d1438c7cac3bec3183a71c83",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd013.json_3877f8439cf7"
+      },
+      "resources": [
+        {
+          "id": "74478b32-5f6b-4377-880a-20f418766fdf",
+          "url": "https://catalog.disaster.go.th/dataset/38e45b0c-fdf5-4e5b-b91a-5808aec5d98a/resource/74478b32-5f6b-4377-880a-20f418766fdf/download/dpm-gd013__1.csv",
+          "sha256": "944349caee5bc830dd04ee94a47553a7b88cd81cffdf134cb5e5c8336407238d",
+          "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd013_74478b32-5f6b-4377-880a-20f418766fdf.csv_944349caee5b",
+          "selected_rows": 2238,
+          "description": "ชุดข้อมูลนี้ประกอบด้วยรายละเอียดเกี่ยวกับหมู่บ้านที่ได้รับผลกระทบจากวาตภัย (เช่น พายุ) ในประเทศไทย รวมถึงข้อมูลด้านประชากรที่ได้รับผลกระทบ ความเสียหายต่อชีวิตและทรัพย์สิน และการให้ความช่วยเหลือ",
+          "last_modified": "2024-08-20T08:22:08.754554"
+        },
+        {
+          "id": "a4e68b03-6a80-4e74-866c-b168c8838bd8",
+          "url": "https://catalog.disaster.go.th/dataset/38e45b0c-fdf5-4e5b-b91a-5808aec5d98a/resource/a4e68b03-6a80-4e74-866c-b168c8838bd8/download/dpm-gd013__2.csv",
+          "sha256": "350e5f5cd7df3d9bbdc906daccb7c764fc62a94eab9127521778564bddb6da72",
+          "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd013_a4e68b03-6a80-4e74-866c-b168c8838bd8.csv_350e5f5cd7df",
+          "selected_rows": 1925,
+          "description": "ชุดข้อมูลนี้ประกอบด้วยรายละเอียดเกี่ยวกับหมู่บ้านที่ได้รับผลกระทบจากวาตภัย (เช่น พายุ) ในประเทศไทย รวมถึงข้อมูลด้านประชากรที่ได้รับผลกระทบ ความเสียหายต่อชีวิตและทรัพย์สิน และการให้ความช่วยเหลือ",
+          "last_modified": "2024-08-20T08:23:12.893427"
+        }
+      ]
+    }
+  ],
+  "province_plan_catalog": {
+    "url": "https://catalog.disaster.go.th/api/3/action/package_show?id=e11a5fcd-2350-41c8-b951-2e64f140c131",
+    "sha256": "8d565c2e40f3c433ba45601405e3253545dcc357296002f1288a32e0b4dc8e32",
+    "snapshot": "research_data\\five_province_history\\evidence\\ddpm_e11a5fcd-2350-41c8-b951-2e64f140c131.json_8d565c2e40f3"
+  },
+  "province_plans": [
+    {
+      "province_code": "22",
+      "province_name": "จันทบุรี",
+      "title": "71_จันทบุรี_1",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/4801fa52-96c6-4730-b59d-c0be82c0015a/download/71__1.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    },
+    {
+      "province_code": "22",
+      "province_name": "จันทบุรี",
+      "title": "71_จันทบุรี_2",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/37b7a13a-62d3-45d2-8a4a-b93de3c72f4b/download/71__2.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    },
+    {
+      "province_code": "33",
+      "province_name": "ศรีสะเกษ",
+      "title": "22_ศรีสะเกษ",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/caebfeb1-7f4c-4aa5-aca2-7373920c3ccc/download/22_.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    },
+    {
+      "province_code": "53",
+      "province_name": "อุตรดิตถ์",
+      "title": "03_อุตรดิตถ์",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/ff3ecca9-1da9-4c18-8d48-db6e5784a5f6/download/03__compressed.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    },
+    {
+      "province_code": "84",
+      "province_name": "สุราษฎร์ธานี",
+      "title": "10_สุราษฎร์ธานี",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/be9b86e7-0cad-4d3c-b6c7-f1033b36c6b1/download/10__compressed.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    },
+    {
+      "province_code": "86",
+      "province_name": "ชุมพร",
+      "title": "66_ชุมพร",
+      "url": "https://catalog.disaster.go.th/dataset/e11a5fcd-2350-41c8-b951-2e64f140c131/resource/813c1820-8723-40fa-8f10-ee5042c1283a/download/66_.pdf",
+      "evidence_status": "document_link_only_not_dated_event"
+    }
+  ],
+  "news_sources": {
+    "endpoint": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php",
+    "discovery_url": "https://dpmreporter.disaster.go.th/portal/assets/js/modules/disaster_news.js",
+    "requested_date_range": [
+      "2020-01-01",
+      "2025-12-31"
+    ],
+    "requested_type_ids": "1,2,3,5,8,16,17",
+    "queries": [
+      {
+        "province_code": "22",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=22&page_size=50&page_number=1",
+        "sha256": "85047c7e094d0b11eb8cf4a7719b8ceff8616633660f095e6c35737383692dc1",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_22_1.json_85047c7e094d",
+        "found_rows": 23,
+        "page_number": 1,
+        "page_count": 1
+      },
+      {
+        "province_code": "33",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=33&page_size=50&page_number=1",
+        "sha256": "d5e3312e0824a970c41c7d33a02bf891765f95ce1fb5c7bb4774176a9d4bdc3c",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_33_1.json_d5e3312e0824",
+        "found_rows": 16,
+        "page_number": 1,
+        "page_count": 1
+      },
+      {
+        "province_code": "53",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=53&page_size=50&page_number=1",
+        "sha256": "648d3b0062f3de191ef6538abef5ec90ed11e3856488ea1d82610630cda746e8",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_53_1.json_648d3b0062f3",
+        "found_rows": 26,
+        "page_number": 1,
+        "page_count": 1
+      },
+      {
+        "province_code": "84",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=84&page_size=50&page_number=1",
+        "sha256": "44d966ec6ba095c63e094bc0ff31d524c9a04b2324623a3d3ac31fc52cbaf221",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_84_1.json_44d966ec6ba0",
+        "found_rows": 56,
+        "page_number": 1,
+        "page_count": 2
+      },
+      {
+        "province_code": "84",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=84&page_size=50&page_number=2",
+        "sha256": "c624de25ecf19023fb11ddeadfa3337c93cb253bdb004c7fa85921aebbc62c57",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_84_2.json_c624de25ecf1",
+        "found_rows": 56,
+        "page_number": 2,
+        "page_count": 2
+      },
+      {
+        "province_code": "86",
+        "url": "https://dpmreporter.disaster.go.th/portal/services/disaster_news/get_news_list.php?type=1%2C2%2C3%2C5%2C8%2C16%2C17&type_date=1&date_start=2020-01-01&date_end=2025-12-31&province=86&page_size=50&page_number=1",
+        "sha256": "ff20afee59c0879892907b8357f1218e6ac93f5e52a2e0c0a6e260d9540bc623",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_news_86_1.json_ff20afee59c0",
+        "found_rows": 22,
+        "page_number": 1,
+        "page_count": 1
+      }
+    ],
+    "index_rows": 143
+  },
+  "event_review": {
+    "path": "research_data\\five_province_history\\disaster_events_reviewed.json",
+    "sha256": "777c884140db781fef30b68dc08912010da9edd176a2bcf35c440c05a5b5eac8",
+    "reviewed_reports": 7,
+    "overlap_rows": 237,
+    "harvest_source_sha256": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739"
+  },
+  "drought_statistics": {
+    "dataset_id": "dpm-gd028",
+    "title": "สถิติรายปีการเกิดภัยแล้ง",
+    "url": "https://catalog.disaster.go.th/dataset/dpm-gd028",
+    "metadata": {
+      "url": "https://catalog.disaster.go.th/api/3/action/package_show?id=dpm-gd028",
+      "sha256": "74ca75db7bbf210dd6cfe903620f56495851dad0da395215ded355f599222b87",
+      "snapshot": "research_data\\five_province_history\\evidence\\ddpm_dpm-gd028.json_74ca75db7bbf"
+    },
+    "resources": [
+      {
+        "source_year_be": 2562,
+        "id": "93c92257-617c-4996-b65c-8d9afb08519e",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/93c92257-617c-4996-b65c-8d9afb08519e/download/gd028_2562_final.csv",
+        "sha256": "33e67b64a13dfc145cebd22374454b4324b65d79edcc6562a564c15607243f88",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_93c92257-617c-4996-b65c-8d9afb08519e_33e67b64a13d",
+        "selected_rows": 141,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2563,
+        "id": "5b8f6f67-2c20-47dd-a40a-dc647fc2ac05",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/5b8f6f67-2c20-47dd-a40a-dc647fc2ac05/download/gd028_2563_final.csv",
+        "sha256": "dfa54404b98daacd913f8a0950203e162604e8eaa35f9d7edca60f607c030ba0",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_5b8f6f67-2c20-47dd-a40a-dc647fc2ac05_dfa54404b98d",
+        "selected_rows": 756,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2564,
+        "id": "141c64ff-34be-4980-bde3-0ae3278b16b0",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/141c64ff-34be-4980-bde3-0ae3278b16b0/download/gd028_2564_final.csv",
+        "sha256": "426b4eadda540ad874531566738db20a32b6466e477f30bd855191665a29d611",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_141c64ff-34be-4980-bde3-0ae3278b16b0_426b4eadda54",
+        "selected_rows": 0,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2565,
+        "id": "439912f0-9cfa-4df4-a6a9-55391775e99b",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/439912f0-9cfa-4df4-a6a9-55391775e99b/download/gd028_2565_final.csv",
+        "sha256": "38ee247ad5a2f06bf799e4949a68c0383f14fb785d8077f037eefed27bd288e6",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_439912f0-9cfa-4df4-a6a9-55391775e99b_38ee247ad5a2",
+        "selected_rows": 0,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2566,
+        "id": "2a62f017-7583-40c2-98cd-f7bac1947b99",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/2a62f017-7583-40c2-98cd-f7bac1947b99/download/gd028_2566_final.csv",
+        "sha256": "51fbe9767bb9751d6e57d1a6f6cd7a62069ea25b081d549957b935c7b5a8d76f",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_2a62f017-7583-40c2-98cd-f7bac1947b99_51fbe9767bb9",
+        "selected_rows": 779,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2567,
+        "id": "b400841d-e9d9-4a36-8896-13bdf5dfbd50",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/b400841d-e9d9-4a36-8896-13bdf5dfbd50/download/2567__final.xlsx",
+        "sha256": "f5c8089d10eb14bc5a461f612c9b5f9fb70b905b72e4aac75c87694109a5ecb7",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_b400841d-e9d9-4a36-8896-13bdf5dfbd50_f5c8089d10eb",
+        "selected_rows": 978,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      },
+      {
+        "source_year_be": 2568,
+        "id": "63659906-6786-4e19-86d6-ea6ed1a7d724",
+        "url": "https://catalog.disaster.go.th/dataset/7bdbedaf-f9cd-4c42-893a-0c88ad65b2f5/resource/63659906-6786-4e19-86d6-ea6ed1a7d724/download/untitled.xlsx",
+        "sha256": "6c08affaecccda778b898233ad1e3b2917db4c7603efed5a11ba835aa4a123dc",
+        "snapshot": "research_data\\five_province_history\\evidence\\ddpm_drought_63659906-6786-4e19-86d6-ea6ed1a7d724_6c08affaeccc",
+        "selected_rows": 1,
+        "evidence_status": "actual_statistics_not_risk_map_absence_not_zero"
+      }
+    ],
+    "selected_rows": 2655,
+    "limits": [
+      "Source reporting year may include incidents starting in the preceding calendar year.",
+      "2019-2024 local records and 2025 province aggregates have different units; do not sum them.",
+      "Administrative closure dates are not an observed end of meteorological or orchard drought.",
+      "Agricultural damage is all-crop rai, not durian rai or tonnes; blank is not zero.",
+      "Absent province records do not prove absence of drought; no synthetic zero province-years are created."
+    ]
+  },
+  "additional_pending_sources": [
+    {
+      "province_code": "33",
+      "url": "https://data.go.th/dataset/dis_2568_56",
+      "title": "สถิติการเกิดอุทกภัยรายตำบลและหมู่บ้าน",
+      "agency": "สำนักงานป้องกันและบรรเทาสาธารณภัยจังหวัดศรีสะเกษ",
+      "status": "catalog_metadata_reviewed_resource_not_downloaded",
+      "note": "Metadata describes fiscal-year counts 2562-2567; do not merge with calendar-year statistics without checking the resource."
+    }
+  ],
+  "selected_source_rows": 8363,
+  "summary_rows": 60,
+  "ambiguous_records": [
+    {
+      "PROVINCE_CODE": "22",
+      "PROVINCE_NAME": "จันทบุรี",
+      "AMPHUR_CODE": "2201",
+      "AMPHUR_NAME": "เมืองจันทบุรี",
+      "DISTRICT_CODE": "220,906",
+      "DISTRICT_NAME": "วังใหม่",
+      "MOO_NO": "5",
+      "ORG_CODE": "",
+      "ORG_NAME": "",
+      "COMMUNITY_NAME": "",
+      "MOO_ID": "22,090,605",
+      "DIS_TYPE_NAME": "วาตภัย",
+      "Y2562": "",
+      "Y2563": "",
+      "Y2564": "",
+      "Y2565": "",
+      "Y2566": "1",
+      "Y2567": "",
+      "MOO_ID_NORMALIZED": "22090605",
+      "dataset_id": "dpm-gd013",
+      "hazard_type": "windstorm",
+      "source_resource_id": "74478b32-5f6b-4377-880a-20f418766fdf",
+      "source_csv_line": "4810",
+      "quality_status": "ambiguous_village_id"
+    },
+    {
+      "PROVINCE_CODE": "22",
+      "PROVINCE_NAME": "จันทบุรี",
+      "AMPHUR_CODE": "2209",
+      "AMPHUR_NAME": "นายายอาม",
+      "DISTRICT_CODE": "220,906",
+      "DISTRICT_NAME": "วังใหม่",
+      "MOO_NO": "5",
+      "ORG_CODE": "",
+      "ORG_NAME": "",
+      "COMMUNITY_NAME": "",
+      "MOO_ID": "22,090,605",
+      "DIS_TYPE_NAME": "วาตภัย",
+      "Y2562": "",
+      "Y2563": "",
+      "Y2564": "",
+      "Y2565": "2",
+      "Y2566": "1",
+      "Y2567": "",
+      "MOO_ID_NORMALIZED": "22090605",
+      "dataset_id": "dpm-gd013",
+      "hazard_type": "windstorm",
+      "source_resource_id": "74478b32-5f6b-4377-880a-20f418766fdf",
+      "source_csv_line": "4811",
+      "quality_status": "ambiguous_village_id"
+    }
+  ],
+  "code_sha256": "46e4fa8f2df103aab04bf7b3566ef233f16daba5cb6a266c42499d2a144a7cac",
+  "interpretation_limits": [
+    "Counts are village-events, not unique province-wide disasters, flooded rai, or durian loss.",
+    "Blank source cells remain blank. Neither missing cells nor absent villages establish zero disasters.",
+    "Annual completeness is unverified, especially the sparse 2024 column; do not use as closed-year targets.",
+    "Annual columns have no event dates; these cannot identify shocks in a fruit-development window.",
+    "Duplicate village IDs are retained for audit but excluded from every summary until corrected by source.",
+    "Province plans include historical statistics and prospective risk; a plan is not an observed disaster.",
+    "Statistics are not bearing-orchard-area weighted and are not automatically merged into ML training.",
+    "News items are sparse reports, sometimes warnings or aid updates; news_datetime is not automatically an event onset.",
+    "An empty province-year news search means no retrieved report, not proof that no disaster happened.",
+    "The public website search endpoint is discovered from its own JavaScript, not a guaranteed stable API contract.",
+    "Only report metadata are exported; raw responses with public personal details/coordinates remain in ignored evidence/.",
+    "Harvest overlap uses actual reported monthly cohorts and uniform possible dates with ages 120/130/140/150 days; retrospective only.",
+    "Candidate-date percentages are not probabilities of damage, damaged orchard area, observed phenology, or causal effect.",
+    "Next-year cohorts can overlap late-year events; post-harvest events cannot explain losses of already harvested cohorts."
+  ]
+}
