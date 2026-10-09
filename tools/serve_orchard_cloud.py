@@ -18,14 +18,16 @@ from supabase_orchard import live_status
 
 LOGIN_PAGE='''<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ title }} — ข้อมูลสวนทุเรียน</title><style>
-:root{font-family:"Helvetica Neue",Arial,sans-serif;color:#171717;background:#F7F7F8;--accent:#002FA7}
-*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:10vh auto;padding:24px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
-header{border-top:6px solid var(--accent);padding-top:24px}h1{font-size:clamp(26px,4vw,40px);line-height:1.4;margin:0 0 20px}p{font-size:17px;line-height:1.8;color:#454545}
-section{background:#fff;border:1px solid #d5d5d8;padding:28px}h2{font-size:24px;margin:0 0 24px}label{display:block;font-size:17px;font-weight:600;margin:18px 0 8px}
-input{font:inherit;width:100%;padding:13px;border:1px solid #777;min-height:48px}button{font:inherit;width:100%;min-height:48px;padding:12px;border:0;background:var(--accent);color:#fff;cursor:pointer;margin-top:24px}
-input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}a{color:var(--accent)}.error{border-left:3px solid var(--accent);padding:10px;background:#F7F7F8}
-@media(max-width:640px){main{grid-template-columns:1fr;margin:24px auto;gap:24px;padding:20px}section{padding:24px}}
-</style><main><header><h1>ข้อมูลสวนทุเรียน<br>และผลผลิต 5 จังหวัด</h1><p>ดูข้อมูลสวน สภาพอากาศ ดิน และผลประมาณการระดับจังหวัดในหน้าเดียว</p><p>เว็บส่วนตัวสำหรับเจ้าของสวนและผู้ร่วมดูที่ได้รับรหัสผ่าน</p></header>
+:root{font-family:"Epilogue",Tahoma,Arial,sans-serif;color:#303b23;background:#8B9D83;--accent:#606C38}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 10% 90%,#606C38 0,transparent 55%)}main{max-width:1080px;min-height:100dvh;margin:auto;padding:48px 32px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:64px}
+header{color:#E8DCC7}h1{font-size:clamp(28px,4vw,44px);line-height:1.4;margin:16px 0 20px;letter-spacing:-.6px}p{font-size:16px;line-height:1.85}header p{max-width:450px}header p:last-child{font-size:14px}
+.durian-art{width:220px;height:170px;display:block;filter:drop-shadow(0 16px 14px #303b2333)}
+section{background:#E8DCC7;border:1px solid #D4B895;border-radius:28px;padding:36px;box-shadow:0 20px 60px #303b2326}h2{font-size:26px;margin:0 0 12px}label{display:block;font-size:15px;font-weight:600;margin:22px 0 8px}
+input{font:inherit;width:100%;padding:14px;border:1px solid #B08B6E;border-radius:16px;background:#E8DCC7;color:#303b23;min-height:50px}button{font:inherit;font-weight:700;width:100%;min-height:50px;padding:14px;border:0;border-radius:16px;background:var(--accent);color:#E8DCC7;cursor:pointer;margin-top:26px;transition:background .3s ease}button:hover{background:#303b23}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #C08E3A;outline-offset:3px}a{color:var(--accent)}.error{border-left:3px solid #C66B3D;padding:10px;background:#D4B895;border-radius:16px}section>p:last-child{font-size:13px;color:#5b6048;margin-top:24px;overflow-wrap:anywhere}
+@media(max-width:640px){main{grid-template-columns:1fr;gap:28px;padding:28px 20px;align-content:center}section{padding:24px}.durian-art{width:140px;height:105px}header h1{font-size:28px;margin:8px 0}header p{margin:8px 0}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style><main><header><svg class="durian-art" viewBox="0 0 220 170" aria-hidden="true"><path d="M110 36Q109 9 130 8" fill="none" stroke="#303b23" stroke-width="9" stroke-linecap="round"/><path d="M121 24Q160 0 184 28Q147 48 121 24" fill="#606C38" stroke="#E8DCC7" stroke-width="2"/><path d="M103 35L118 31 129 40 145 37 151 52 168 55 170 72 181 85 172 100 176 119 159 127 152 145 133 145 119 155 102 148 83 153 72 139 54 133 54 114 42 101 51 85 48 67 66 59 74 42 92 45Z" fill="#606C38" stroke="#D4B895" stroke-width="3"/><path d="M109 46Q172 92 116 143Q57 101 109 46Z" fill="#C08E3A" stroke="#E8DCC7" stroke-width="5"/><path d="M109 56Q126 76 111 91Q94 74 109 56M111 92Q138 109 117 132Q92 120 111 92" fill="#D4B895"/><path d="M64 73L71 80M59 100L68 99M75 124L83 117M146 67L140 76M159 99L150 97M142 131L135 121" stroke="#8B9D83" stroke-width="5" stroke-linecap="round"/></svg><h1>ข้อมูลสวนทุเรียน<br>และผลผลิต 5 จังหวัด</h1><p>ดูข้อมูลสวน สภาพอากาศ ดิน และผลประมาณการระดับจังหวัดในหน้าเดียว</p><p>เว็บส่วนตัวสำหรับเจ้าของสวนและผู้ร่วมดูที่ได้รับรหัสผ่าน</p></header>
 <section aria-labelledby="login-title"><h2 id="login-title">{{ title }}</h2>{% if error %}<p role="alert" class="error">{{ error }}</p>{% endif %}
 <form method="post"><input type="hidden" name="csrf" value="{{ csrf }}">
 {% if not logout %}<label for="username">ชื่อผู้ใช้</label><input id="username" name="username" autocomplete="username" required maxlength="128" value="{{ username }}">
