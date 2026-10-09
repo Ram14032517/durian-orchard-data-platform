@@ -60,7 +60,7 @@
   "tools/orchard_current_context.py": "c6190dff3e0b3abed1e61afa997c4c3cfbabad84cfd6551c836a3522a8394281",
   "tools/requirements-cloud.txt": "9c359397845243185e81858982dfbceb83abc9f7d060c6b6a9ffb35e98c10cda",
   "tools/serve_orchard_analysis.py": "6eb1dde055daf04b1398c5707a5dc2f413ecd1fcd255df5488ddaa4a89f34a59",
-  "tools/serve_orchard_cloud.py": "d0cb9b85aa25fa8b6eccb934aae77be6fb85cc7f50ac66620091b27880a355d7",
+  "tools/serve_orchard_cloud.py": "8bcf820c6560d84e8aff066aeb6ae2aad029bd2b3547b52098ffed96158cc320",
   "tools/supabase_orchard.py": "a09d4e546442167e9c649ae4dc15ddfa259a9acea42f684e154594473d91b880",
   "tools/train_monthly_production.py": "e89dce24fff6e2e8bd98c807aef650869fa13597e408897567257b98ba6ef1ca"
 }

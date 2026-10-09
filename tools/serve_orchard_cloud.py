@@ -37,7 +37,8 @@ def create_app():
         response.headers['Cache-Control']='private, no-store'
         response.headers['X-Content-Type-Options']='nosniff'
         response.headers['X-Frame-Options']='DENY'
-        response.headers['Referrer-Policy']='same-origin'
+        # OSM needs an identifying Referer; cross-origin requests expose only our public origin.
+        response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
         if os.environ.get('RENDER')=='true':response.headers['Strict-Transport-Security']='max-age=31536000'
         return response
 
