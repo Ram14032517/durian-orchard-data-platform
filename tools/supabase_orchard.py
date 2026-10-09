@@ -52,7 +52,8 @@ def orchard_history(period='day', now=None, reader=read_table, end=None):
     truncated=False
     for offset in range(0,30000,1000):
         page=reader('sensor_readings',dict(select=','.join(fields),device_id='eq.'+device,
-            recorded_at='gte.'+start.isoformat(),order='recorded_at.desc,event_id.desc',limit='1000',offset=str(offset)))
+            recorded_at='gte.'+start.isoformat(),order='recorded_at.desc,event_id.desc',limit='1000',offset=str(offset),
+            **{'and':'(recorded_at.lte.'+now.isoformat()+')'}))
         rows.extend(page)
         if len(page)<1000:break
     else:truncated=True

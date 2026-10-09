@@ -63,6 +63,6 @@
   "tools/requirements-cloud.txt": "9c359397845243185e81858982dfbceb83abc9f7d060c6b6a9ffb35e98c10cda",
   "tools/serve_orchard_analysis.py": "82e811774e19fb61303065f6cfda2c624e1518429508e8acdd0af3750530cba5",
   "tools/serve_orchard_cloud.py": "87d32a8707c5d7349a219adbfd3fe66015b8cfa5dd4fb6ef1c23c248ad9c4df9",
-  "tools/supabase_orchard.py": "152770de0de0b2bdacc2b717b6c0f3788d070c37b51a7515734362b79d7aa873",
+  "tools/supabase_orchard.py": "ffcd55c64a273dcfa6a42535eeef8cd67e7f55ca71ab7422be0fb4a6c693d56e",
   "tools/train_monthly_production.py": "e89dce24fff6e2e8bd98c807aef650869fa13597e408897567257b98ba6ef1ca"
 }
