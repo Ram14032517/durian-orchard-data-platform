@@ -613,5 +613,5 @@ selectReportMonth(reportMonth);
 DATA.provinces.forEach(p=>{for(const which of ['A','B'])areaControl('province',which).add(new Option(p.province_name,p.province_code));});$('province').value='84';provinceChange();
 requestAnimationFrame(()=>fitProvince($('province').value));
 if(location.protocol==='file:')$('server-notice').hidden=false;
-else fetch('/api/project').then(r=>{if(!r.ok)throw Error('server');return r.json();}).then(p=>{if(p.application!=='orchard-analysis')$('server-notice').hidden=false;}).catch(()=>$('server-notice').hidden=false);
+else fetch('/api/project').then(r=>{if(!r.ok)throw Error('server');return r.json();}).then(p=>{if(p.application!=='orchard-analysis')$('server-notice').hidden=false;if(p.mode==='cloud'){const logout=document.createElement('a');logout.href='/logout';logout.textContent='ออกจากระบบ';logout.style.cssText='display:inline-block;padding:8px 16px;border:1px solid #002FA7;margin-top:8px;color:#002FA7';document.querySelector('header').append(logout);}}).catch(()=>$('server-notice').hidden=false);
 </script></body></html>

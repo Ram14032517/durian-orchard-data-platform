@@ -1,18 +1,39 @@
 """Authenticated cloud wrapper; same provincial ML, live Supabase, no training on request."""
 import hmac
+import hashlib
 import os
+import secrets
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from flask import Flask, Response, abort, jsonify, redirect, request, send_file
+from flask import Flask, abort, jsonify, redirect, request, send_file, session, render_template_string
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from serve_orchard_analysis import fetch_weather, project_identity, save_weather_export
 from orchard_current_context import province_estimate
 from supabase_orchard import live_status
+
+LOGIN_PAGE='''<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }} — ข้อมูลสวนทุเรียน</title><style>
+:root{font-family:"Helvetica Neue",Arial,sans-serif;color:#171717;background:#F7F7F8;--accent:#002FA7}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:10vh auto;padding:24px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+header{border-top:6px solid var(--accent);padding-top:24px}h1{font-size:clamp(26px,4vw,40px);line-height:1.4;margin:0 0 20px}p{font-size:17px;line-height:1.8;color:#454545}
+section{background:#fff;border:1px solid #d5d5d8;padding:28px}h2{font-size:24px;margin:0 0 24px}label{display:block;font-size:17px;font-weight:600;margin:18px 0 8px}
+input{font:inherit;width:100%;padding:13px;border:1px solid #777;min-height:48px}button{font:inherit;width:100%;min-height:48px;padding:12px;border:0;background:var(--accent);color:#fff;cursor:pointer;margin-top:24px}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}a{color:var(--accent)}.error{border-left:3px solid var(--accent);padding:10px;background:#F7F7F8}
+@media(max-width:640px){main{grid-template-columns:1fr;margin:24px auto;gap:24px;padding:20px}section{padding:24px}}
+</style><main><header><h1>ข้อมูลสวนทุเรียน<br>และผลผลิต 5 จังหวัด</h1><p>ดูข้อมูลสวน สภาพอากาศ ดิน และผลประมาณการระดับจังหวัดในหน้าเดียว</p><p>เว็บส่วนตัวสำหรับเจ้าของสวนและผู้ร่วมดูที่ได้รับรหัสผ่าน</p></header>
+<section aria-labelledby="login-title"><h2 id="login-title">{{ title }}</h2>{% if error %}<p role="alert" class="error">{{ error }}</p>{% endif %}
+<form method="post"><input type="hidden" name="csrf" value="{{ csrf }}">
+{% if not logout %}<label for="username">ชื่อผู้ใช้</label><input id="username" name="username" autocomplete="username" required maxlength="128" value="{{ username }}">
+<label for="password">รหัสผ่าน</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="512">
+{% else %}<p>ต้องการออกจากระบบบนเบราว์เซอร์นี้หรือไม่?</p>{% endif %}
+<button type="submit">{{ title }}</button></form>
+{% if logout %}<p><a href="/">กลับไปแดชบอร์ด</a></p>{% else %}<p>ใช้รหัสที่ตั้งไว้ใน Render หากลืมรหัส เจ้าของตรวจได้ที่ DASHBOARD_PASSWORD ใน Environment</p>{% endif %}
+</section></main></html>'''
 
 
 def create_app():
@@ -21,16 +42,29 @@ def create_app():
     if len(password)<16:raise RuntimeError('ตั้ง DASHBOARD_PASSWORD อย่างน้อย 16 ตัวอักษรก่อนเปิดเว็บ')
     app=Flask(__name__,static_folder=None)
     app.config['MAX_CONTENT_LENGTH']=2_100_000
+    app.config.update(SECRET_KEY=hashlib.sha256(('orchard-session-v1:'+password).encode()).digest(),
+        SESSION_COOKIE_HTTPONLY=True,SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SECURE=os.environ.get('RENDER')=='true',
+        PERMANENT_SESSION_LIFETIME=timedelta(hours=8),SESSION_REFRESH_EACH_REQUEST=False)
+
+    def csrf_valid():
+        token=session.get('csrf')
+        return bool(token) and hmac.compare_digest(request.form.get('csrf','').encode(),token.encode())
+
+    def auth_page(logout=False,error=None,status=200):
+        if 'csrf' not in session:session['csrf']=secrets.token_urlsafe(32)
+        return render_template_string(LOGIN_PAGE,title='ออกจากระบบ' if logout else 'เข้าสู่ระบบ',
+            logout=logout,error=error,csrf=session['csrf'],username=username),status
 
     @app.before_request
     def authenticate():
         if request.path=='/healthz':return None
         if os.environ.get('RENDER')=='true' and request.headers.get('X-Forwarded-Proto')!='https':
             return jsonify(error='HTTPS required'),400
-        auth=request.authorization
-        if not (auth and auth.type.lower()=='basic' and hmac.compare_digest((auth.username or '').encode(),username.encode())
-                and hmac.compare_digest((auth.password or '').encode(),password.encode())):
-            return Response('กรุณาเข้าสู่ระบบ',401,{'WWW-Authenticate':'Basic realm="Orchard", charset="UTF-8"'})
+        if request.path=='/login':return None
+        if session.get('authenticated') is not True:
+            if request.path.startswith('/api/'):return jsonify(error='กรุณาเข้าสู่ระบบ',login_url='/login'),401
+            return redirect('/login')
 
     @app.after_request
     def security_headers(response):
@@ -44,6 +78,25 @@ def create_app():
 
     @app.get('/healthz')
     def health():return jsonify(status='ok')
+
+    @app.route('/login',methods=['GET','POST'])
+    def login():
+        if request.method=='POST':
+            if not csrf_valid():return auth_page(error='หน้าเข้าสู่ระบบหมดอายุ กรุณาโหลดหน้าใหม่',status=403)
+            if not (hmac.compare_digest(request.form.get('username','').encode(),username.encode()) and
+                    hmac.compare_digest(request.form.get('password','').encode(),password.encode())):
+                return auth_page(error='ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',status=401)
+            session.clear();session['authenticated']=True;session.permanent=True
+            session['csrf']=secrets.token_urlsafe(32)
+            return redirect('/')
+        return redirect('/') if session.get('authenticated') else auth_page()
+
+    @app.route('/logout',methods=['GET','POST'])
+    def logout():
+        if request.method=='POST':
+            if not csrf_valid():abort(403)
+            session.clear();return redirect('/login')
+        return auth_page(logout=True)
 
     @app.get('/')
     def home():return redirect('/research_data/five_province_history/UNIFIED_MAP.html')
