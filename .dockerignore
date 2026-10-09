@@ -20,6 +20,8 @@
 !research_data/
 !research_data/five_province_history/
 !research_data/five_province_history/*.html
+!research_data/five_province_history/orchard_lumen.js
+!research_data/five_province_history/orchard_lumen.css
 !research_data/five_province_history/*.csv
 !research_data/five_province_history/*.json
 !research_data/five_province_history/*.md
