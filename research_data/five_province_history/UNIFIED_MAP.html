@@ -175,12 +175,15 @@ aside,body.orchard-home aside{min-height:0;overflow:hidden;padding:0;max-height:
 .area-strip-labels{display:flex;flex-wrap:wrap;gap:8px}.area-strip-labels p{margin:0;padding:4px 8px;font-size:13px}
 #map-target,#view-summary{display:none!important}
 #workspace-tabs>section,.orchard-home #current-section{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;margin:0;border-radius:0;width:100%;max-width:none;padding:24px 32px;box-sizing:border-box}
-body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr) minmax(360px,1fr)}
-body.editing-area .map-pane,body[data-workspace="soil-analysis"] .map-pane{display:flex}
+body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr)}
+#workspace-tabs>.map-pane{flex:1;min-height:0;overflow:hidden}
+body[data-workspace="map-section"] .map-pane{display:flex}
+body.editing-area .map-pane{display:none!important}
 body.editing-area #workspace-tabs>section:not(#area-section){display:none!important}
 body.editing-area #area-section{display:block!important}
 body.orchard-home.editing-area #area-strip{display:flex!important}
-@media(max-width:800px){body,body.orchard-home{height:100dvh;overflow:hidden}.orchard-header{padding:8px 12px}.orchard-header h1{font-size:17px}.logout-link{margin:0;padding:8px;font-size:12px}.workspace-top{padding:4px 8px 0}.quick-nav a{padding:12px;font-size:14px}#workspace-tabs>section,.orchard-home #current-section{padding:16px}.area-strip-labels p{font-size:12px}body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(140px,30%) minmax(0,1fr)}.map-selection{display:none}.map-pane{min-height:0}aside,body.orchard-home aside{padding:0;overflow:hidden}}
+.scope-note,.muted,.header-description,.telemetry-panel small,.telemetry-panel p{color:#334155;font-size:15px;line-height:1.65}.quick-nav a{color:#334155;font-weight:600}label{color:#172b4d;font-weight:500}h2{font-size:22px;font-weight:700}h3{font-weight:650}
+@media(max-width:800px){body,body.orchard-home{height:100dvh;overflow:hidden}.orchard-header{padding:8px 12px}.orchard-header h1{font-size:17px}.logout-link{margin:0;padding:8px;font-size:12px}.workspace-top{padding:4px 8px 0}.quick-nav a{padding:12px;font-size:14px}#workspace-tabs>section,.orchard-home #current-section{padding:16px}.area-strip-labels p{font-size:13px}body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}.map-pane{min-height:0}aside,body.orchard-home aside{padding:0;overflow:hidden}}
 </style>
 <div id="area-strip" class="area-strip"><div class="area-strip-labels" role="status"><p id="area-summary-a">A: ยังไม่เลือก</p><p id="area-summary-b">B: ยังไม่เลือก</p></div><button id="toggle-area-editor" type="button" aria-expanded="true" aria-controls="area-section">ย่อพื้นที่</button><p id="map-target" role="status">ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ A</p></div>
 <section id="area-section" class="workspace-controls"><div class="area-heading"><h2>เลือกตำแหน่งอ้างอิง A/B</h2><lumen-tooltip><button type="button" data-ui-trigger aria-label="คำแนะนำการเลือกพื้นที่">คำแนะนำ</button><span role="tooltip">เลือกตำแหน่งที่นี่ ดูคุณสมบัติดินในแท็บ “ข้อมูลดิน” พิกัดอ้างอิงไม่ใช่พิกัดสวน</span></lumen-tooltip></div><div class="area-pair">
@@ -577,17 +580,20 @@ function showWorkspaceView(id,reveal=true){
   document.body.dataset.workspace=id;
   setAreaEditor(false);
   if(id!=='current-section')requestAnimationFrame(()=>map.invalidateSize());
-  const core=['area-section','report-section','weather-section','soil-analysis','yield-section','training-section','current-section'];
-  document.querySelectorAll('aside > section, #workspace-tabs > section').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
+  const core=['area-section','map-section','report-section','weather-section','soil-analysis','yield-section','training-section','current-section'];
+  document.querySelectorAll('aside > section, #workspace-tabs > section, .map-pane').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
   document.querySelectorAll('.quick-nav a').forEach(link=>{if(link.getAttribute('href')==='#'+id)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
   if(id==='current-section')$('view-summary').textContent='ข้อมูลจังหวัดเป็นบริบท · ระยะสวนใช้สิ่งที่สังเกตจริง · เวลาของเซนเซอร์กำกับแยกกัน';
   const detail=$(id).querySelector(':scope > details');if(detail)detail.open=true;
   if(reveal)$(id).scrollIntoView({behavior:'auto',block:'start'});else document.querySelector('aside').scrollTop=0;
 }
 const workspaceTop=document.createElement('div');workspaceTop.className='workspace-top';document.querySelector('aside').prepend(workspaceTop);workspaceTop.append(document.querySelector('.quick-nav'),$('area-strip'));
-const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ A/B','soil-analysis':'ข้อมูลดิน','yield-section':'ผลผลิตจังหวัด','report-section':'ฤดู / รายเดือน','training-section':'ดาวน์โหลด / หลักฐาน'};
+const mapPanel=document.querySelector('.map-pane');mapPanel.id='map-section';document.querySelector('aside').append(mapPanel);
+const mapLink=document.createElement('a');mapLink.href='#map-section';document.querySelector('.quick-nav').append(mapLink);
+const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ A/B','soil-analysis':'ข้อมูลดิน','yield-section':'ผลผลิตจังหวัด','report-section':'ฤดู / รายเดือน','training-section':'ดาวน์โหลด / หลักฐาน','map-section':'แผนที่'};
 document.querySelectorAll('.quick-nav a').forEach(link=>{const id=link.getAttribute('href').slice(1);link.textContent=viewLabels[id];link.onclick=event=>{event.preventDefault();showWorkspaceView(id);};});
 showWorkspaceView('current-section',false);
+for(const id of ['focus-a','focus-b'])$(id).addEventListener('click',()=>showWorkspaceView('map-section'));
 const soilLegend=document.createElement('details');soilLegend.id='soil-legend';soilLegend.className='soil-legend';soilLegend.hidden=true;soilLegend.open=true;document.querySelector('.map-pane').append(soilLegend);
 $('soil-analysis-properties').previousElementSibling.remove();
 $('district-yield-bars').previousElementSibling.after($('soil-analysis').querySelector('.warn'));
