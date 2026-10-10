@@ -183,7 +183,52 @@ body.editing-area #workspace-tabs>section:not(#area-section){display:none!import
 body.editing-area #area-section{display:block!important}
 body.orchard-home.editing-area #area-strip{display:flex!important}
 .scope-note,.muted,.header-description,.telemetry-panel small,.telemetry-panel p{color:#334155;font-size:15px;line-height:1.65}.quick-nav a{color:#334155;font-weight:600}label{color:#172b4d;font-weight:500}h2{font-size:22px;font-weight:700}h3{font-weight:650}
+/* Field Signal: the approved brand, not synthetic sensor data. */
+:root{--field-ink:#132d38;--field-canvas:#f4f7f7;--field-teal:#087f8c;--ink:198 49% 15%;--ink-soft:200 19% 31%;--surface-muted:180 16% 96%;--line:190 17% 85%}
+body{background:var(--field-canvas);color:var(--field-ink);font-family:'Noto Sans Thai',Inter,Tahoma,Arial,sans-serif;font-size:16px}
+.orchard-header{background:var(--field-ink);color:#fff;border:0;padding:12px 24px}
+.orchard-header h1{color:#fff;font-size:22px;font-weight:700}.orchard-header .usage-guide summary{color:#d9e9ed}.usage-guide[open]{background:var(--field-ink);color:#fff}
+.orchard-mark path:nth-child(1){fill:#087f8c;stroke:#d9e9ed}.orchard-mark path:nth-child(2){fill:none;stroke:#fff}.orchard-mark path:nth-child(3){fill:#50b5a1}.orchard-mark path:nth-child(4){stroke:#fff}
+.logout-link{color:#fff;background:transparent;border-color:#75909c}.logout-link:hover{background:#284753;color:#fff}
+.workspace-top{background:var(--field-ink);padding:0 24px 8px;border:0}
+.quick-nav{gap:8px}.quick-nav a{background:transparent!important;color:#d9e9ed!important;border-radius:0;font-size:16px;box-shadow:none;padding:12px 16px}
+.quick-nav a:hover{color:#fff!important;background:#203f4a!important}.quick-nav a[aria-selected=true],.quick-nav a[aria-current=page]{background:transparent!important;color:#72cef5!important;box-shadow:inset 0 -3px #72cef5}
+.quick-nav a:focus-visible{outline-color:#72cef5}.area-strip{padding-top:8px}.area-strip-labels p{font-size:14px;border-radius:4px}.area-strip button{color:#fff;background:transparent;border-color:#75909c;font-size:14px}
+#workspace-tabs>section,.orchard-home #current-section{background:var(--field-canvas);padding:28px 32px}
+h2{font-size:28px;font-weight:700;letter-spacing:-.4px;margin-bottom:16px}h3{font-size:18px;font-weight:650}
+.scope-note,.muted,.telemetry-panel small,.telemetry-panel p,#orchard-history-note{color:#40545e;font-size:15px;line-height:1.65}
+button,select,input{border-radius:6px;border-color:#b9cbd1;min-height:44px;font-size:16px;color:var(--field-ink)}button{padding:9px 16px;font-weight:600}
+.report-stat{border:0;border-radius:0;background:#fff;border-left:3px solid #087f8c;padding:16px 20px}.report-stat strong{color:var(--field-ink);font-size:34px}.report-stat small{color:#40545e;font-size:14px}
+.weather-filters{display:flex;gap:12px;flex-wrap:wrap;align-items:end;padding:16px 0}.weather-filters label{display:grid;gap:6px;margin:0}.weather-filters button{margin:0}
+.weather-plot{background:#fff;border-radius:10px;padding:20px 24px;margin:20px 0;min-width:0}.plot-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.plot-toolbar label{font-weight:600}.plot-toolbar button{color:#2563eb;border-color:#2563eb;background:#fff}
+.weather-plot #chart{height:clamp(260px,42vh,440px);background:#fff}.weather-plot #chart:empty{display:none}.weather-plot:has(#chart:empty){border:1px dashed #b9cbd1}.weather-plot:has(#chart:empty)::after{content:'ยังไม่มีกราฟ เลือกช่วงวันที่แล้วกดดูอากาศ';display:block;padding:24px 0;color:#40545e;font-size:16px}
+.telemetry-toolbar{margin:24px 0 12px}.telemetry-toolbar h3{font-size:24px}.telemetry-toolbar p{font-size:15px;color:#40545e}.telemetry-grid{gap:20px}.telemetry-panel{background:#fff;border:0;border-radius:10px;padding:20px}.telemetry-panel h3{font-size:18px}.telemetry-panel-heading span{font-weight:650;font-variant-numeric:tabular-nums}.telemetry-panel-heading button{font-size:14px;padding:6px 12px;min-height:44px;color:#2563eb;border-color:#2563eb}.telemetry-panel svg text{fill:#40545e}.telemetry-panel .empty-series{min-height:96px;place-items:start;align-content:center;font-size:16px}
+.period-switch{display:flex;border:1px solid #b9cbd1;border-radius:6px;overflow:hidden;background:#fff}.period-switch button{margin:0;border:0;border-radius:0;min-width:72px;background:#fff}.period-switch button[aria-pressed=true]{background:#2563eb;color:#fff}
+.weather-plot:fullscreen,.telemetry-panel:fullscreen{background:#fff;color:var(--field-ink);padding:24px;display:flex;flex-direction:column;overflow:auto}.weather-plot:fullscreen #chart,.telemetry-panel:fullscreen>svg{flex:1;width:100%;height:auto;min-height:0}.weather-plot:fullscreen .plot-toolbar,.telemetry-panel:fullscreen .telemetry-panel-heading{flex:none}
+table{font-size:15px}th{background:#edf3f4;color:#132d38}td,th{padding:12px;border-bottom:1px solid #d5e0e4}.telemetry-table,.province-context{background:#fff;border-radius:8px;padding:16px}
+fieldset,.area-pair fieldset,#area-a,#area-b{background:#fff;border:1px solid #c7d5da;border-radius:8px}legend{font-weight:650;color:#132d38}.point{background:#edf3f4;color:#132d38}.warn{color:#7b3909;background:#fff3e5}
+@media(max-width:800px){.orchard-header{padding:10px 16px}.orchard-header h1{font-size:19px}.workspace-top{padding:0 8px 6px}.quick-nav a{font-size:15px;padding:12px}.weather-plot{padding:16px 12px}.plot-toolbar{align-items:start}.plot-toolbar label{display:grid;gap:8px}.weather-filters label{flex:1 1 140px}.telemetry-actions{gap:12px}.telemetry-toolbar h3{font-size:21px}.period-switch button{min-width:64px}.telemetry-panel{padding:16px 12px}.telemetry-panel h3{font-size:17px}h2{font-size:24px}table{font-size:14px}}
 @media(max-width:800px){body,body.orchard-home{height:100dvh;overflow:hidden}.orchard-header{padding:8px 12px}.orchard-header h1{font-size:17px}.logout-link{margin:0;padding:8px;font-size:12px}.workspace-top{padding:4px 8px 0}.quick-nav a{padding:12px;font-size:14px}#workspace-tabs>section,.orchard-home #current-section{padding:16px}.area-strip-labels p{font-size:13px}body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}.map-pane{min-height:0}aside,body.orchard-home aside{padding:0;overflow:hidden}}
+.workspace-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 24px;align-items:center;padding:8px 24px}
+.workspace-top .orchard-header{padding:0;min-width:0}.workspace-top .orchard-header h1{font-size:20px;white-space:nowrap}.workspace-top .usage-guide summary{font-size:12px}.workspace-top .quick-nav{grid-column:2;min-width:0}.workspace-top>.logout-link{grid-column:3;margin:0;font-size:14px}.workspace-top .area-strip{grid-column:1/-1}
+#workspace-tabs>section>h2,.orchard-home #current-section>h2{font-size:28px;line-height:1.4;font-weight:700;margin:0 0 16px}.weather-filters+br{display:none}
+.weather-filters{padding:0 0 8px}.custom-dates{margin:0;align-self:center;min-width:180px}.custom-dates summary{font-size:15px;color:#40545e;padding:10px 0}.custom-dates[open]{display:grid;gap:8px}.weather-source{margin:4px 0 12px}.weather-source summary{font-size:14px;color:#40545e;font-weight:500}#status{padding:8px 12px;font-size:14px;line-height:1.5;margin:8px 0}.weather-plot{margin:12px 0}.weather-plot #chart{height:clamp(260px,38vh,400px)}.plot-toolbar label{font-size:16px}.weather-plot #chart-note{font-size:14px;margin:6px 0}
+@media(max-width:900px){.workspace-top{grid-template-columns:minmax(0,1fr) auto;padding:8px 12px;gap:0 8px}.workspace-top .orchard-header{grid-column:1}.workspace-top .orchard-header h1{font-size:19px}.workspace-top>.logout-link{grid-column:2;grid-row:1}.workspace-top .quick-nav{grid-column:1/-1;grid-row:2}.workspace-top .area-strip{grid-row:3}#workspace-tabs>section>h2,.orchard-home #current-section>h2{font-size:24px}}
+/* One soil workspace: collapse selection without losing A/B or the map. */
+#soil-picker{margin:0 0 20px;background:#f4f7f7;border:1px solid #c7d5da;border-radius:8px;overflow:hidden}
+#soil-picker>summary{padding:12px 16px;color:#132d38;font-size:16px;font-weight:600;cursor:pointer}
+#soil-picker[open]{display:flex;flex-direction:column}
+#soil-picker .map-pane{display:flex;order:1;min-height:0}
+#soil-picker #area-section{order:2;flex:none;padding:16px;margin:0;border:0;border-radius:0;background:#fff}
+#soil-picker #map{flex:none;height:300px;min-height:220px}
+#soil-picker .map-selection{padding:6px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#soil-picker .map-selection lumen-radio-group{padding:0;gap:4px;border:0;background:transparent}
+#soil-picker .map-selection label{padding:6px 12px;min-height:40px;font-size:15px}
+#soil-picker #province-shortcuts{padding:4px 12px;gap:6px}
+#soil-picker #province-shortcuts button{padding:6px 12px;min-height:40px;font-size:14px}
+#soil-picker #area-section>h2{font-size:18px;margin:0 0 12px}
+.workspace-top .area-strip{padding-top:2px}.workspace-top .area-strip button{min-height:36px;padding:6px 10px}
+@media(max-width:800px){#soil-picker #map{height:250px}#soil-picker #area-section{padding:12px}#soil-picker .map-selection{gap:4px}.workspace-top .orchard-header h1{font-size:17px}.workspace-top .quick-nav a{padding:10px;min-height:42px}}
 </style>
 <div id="area-strip" class="area-strip"><div class="area-strip-labels" role="status"><p id="area-summary-a">A: ยังไม่เลือก</p><p id="area-summary-b">B: ยังไม่เลือก</p></div><button id="toggle-area-editor" type="button" aria-expanded="true" aria-controls="area-section">ย่อพื้นที่</button><p id="map-target" role="status">ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ A</p></div>
 <section id="area-section" class="workspace-controls"><div class="area-heading"><h2>เลือกตำแหน่งอ้างอิง A/B</h2><lumen-tooltip><button type="button" data-ui-trigger aria-label="คำแนะนำการเลือกพื้นที่">คำแนะนำ</button><span role="tooltip">เลือกตำแหน่งที่นี่ ดูคุณสมบัติดินในแท็บ “ข้อมูลดิน” พิกัดอ้างอิงไม่ใช่พิกัดสวน</span></lumen-tooltip></div><div class="area-pair">
@@ -249,7 +294,7 @@ function areaName(point){
 }
 function renderAreaStrip(){for(const [which,point] of [['A',A],['B',B]])$('area-summary-'+which.toLowerCase()).textContent=which+': '+areaName(point);}
 function setAreaEditor(expanded){
-  document.body.classList.toggle('editing-area',expanded);
+  const picker=$('soil-picker');if(picker)picker.open=expanded;
   requestAnimationFrame(()=>map.invalidateSize());
   $('area-section').hidden=!expanded;$('toggle-area-editor').textContent=expanded?'ย่อพื้นที่':'แก้ไขพื้นที่';
   $('toggle-area-editor').setAttribute('aria-expanded',String(expanded));
@@ -573,24 +618,30 @@ DATA.provinces.forEach(p=>{
   button.onclick=()=>{areaControl('province').value=p.province_code;provinceChange(activeArea);};$('province-shortcuts').append(button);
 });
 function showWorkspaceView(id,reveal=true){
-  if(id==='area-section'){setAreaEditor(true);$('area-section').scrollIntoView({behavior:'auto',block:'start'});return;}
+  if(id==='map-section'||id==='area-section'){showWorkspaceView('soil-analysis',false);setAreaEditor(true);$('soil-picker').scrollIntoView({behavior:'auto',block:'start'});return;}
   const tab=document.querySelector(`.quick-nav [role="tab"][data-value="${id}"]`);
   if(tab&&tab.getAttribute('aria-selected')!=='true'){tab.click();return;}
   document.body.classList.toggle('orchard-home',id==='current-section');
   document.body.dataset.workspace=id;
-  setAreaEditor(false);
   if(id!=='current-section')requestAnimationFrame(()=>map.invalidateSize());
   const core=['area-section','map-section','report-section','weather-section','soil-analysis','yield-section','training-section','current-section'];
-  document.querySelectorAll('aside > section, #workspace-tabs > section, .map-pane').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
+  document.querySelectorAll('aside > section, #workspace-tabs > section').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
   document.querySelectorAll('.quick-nav a').forEach(link=>{if(link.getAttribute('href')==='#'+id)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
   if(id==='current-section')$('view-summary').textContent='ข้อมูลจังหวัดเป็นบริบท · ระยะสวนใช้สิ่งที่สังเกตจริง · เวลาของเซนเซอร์กำกับแยกกัน';
-  const detail=$(id).querySelector(':scope > details');if(detail)detail.open=true;
+  if(id==='training-section'){const detail=$(id).querySelector(':scope > details');if(detail)detail.open=true;}
   if(reveal)$(id).scrollIntoView({behavior:'auto',block:'start'});else document.querySelector('aside').scrollTop=0;
 }
 const workspaceTop=document.createElement('div');workspaceTop.className='workspace-top';document.querySelector('aside').prepend(workspaceTop);workspaceTop.append(document.querySelector('.quick-nav'),$('area-strip'));
-const mapPanel=document.querySelector('.map-pane');mapPanel.id='map-section';document.querySelector('aside').append(mapPanel);
-const mapLink=document.createElement('a');mapLink.href='#map-section';document.querySelector('.quick-nav').append(mapLink);
-const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ A/B','soil-analysis':'ข้อมูลดิน','yield-section':'ผลผลิตจังหวัด','report-section':'ฤดู / รายเดือน','training-section':'ดาวน์โหลด / หลักฐาน','map-section':'แผนที่'};
+const appHeader=document.querySelector('.orchard-header'),logoutLink=appHeader.querySelector('.logout-link');
+workspaceTop.prepend(appHeader);if(logoutLink)workspaceTop.insertBefore(logoutLink,$('area-strip'));
+const mapPanel=document.querySelector('.map-pane');mapPanel.id='map-section';
+const soilPicker=document.createElement('details');soilPicker.id='soil-picker';soilPicker.open=true;
+const soilPickerSummary=document.createElement('summary');soilPickerSummary.textContent='เลือกพื้นที่และชุดดิน · กดย่อเพื่ออ่านรายละเอียด';
+soilPicker.append(soilPickerSummary,mapPanel,$('area-section'));$('soil-analysis-title').after(soilPicker);
+soilPicker.addEventListener('toggle',()=>setAreaEditor(soilPicker.open));
+$('toggle-area-editor').onclick=()=>{showWorkspaceView('soil-analysis',false);setAreaEditor(!soilPicker.open);};
+$('apply-areas').textContent='ดูรายละเอียดดิน';$('apply-areas').onclick=()=>{setAreaEditor(false);$('soil-analysis-scope').scrollIntoView({block:'start'});};
+const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ','soil-analysis':'ดิน','yield-section':'ผลผลิต','report-section':'ฤดูกาล','training-section':'ดาวน์โหลด','map-section':'แผนที่'};
 document.querySelectorAll('.quick-nav a').forEach(link=>{const id=link.getAttribute('href').slice(1);link.textContent=viewLabels[id];link.onclick=event=>{event.preventDefault();showWorkspaceView(id);};});
 showWorkspaceView('current-section',false);
 for(const id of ['focus-a','focus-b'])$(id).addEventListener('click',()=>showWorkspaceView('map-section'));
@@ -617,6 +668,26 @@ const downloadWeather=document.createElement('button');downloadWeather.id='downl
 $('chart').after(downloadWeather);
 $('weather').before($('chart-metric').closest('label'),$('chart-note'),$('chart'),downloadWeather);
 const exportMessage=document.createElement('p');exportMessage.id='export-message';exportMessage.className='scope-note';exportMessage.setAttribute('role','status');downloadWeather.after(exportMessage);
+const weatherFilters=document.createElement('div');weatherFilters.className='weather-filters';
+$('load').before(weatherFilters);
+for(const id of ['month','start','end'])weatherFilters.append($(id).closest('label'));
+weatherFilters.append($('load'));
+const customDates=document.createElement('details');customDates.className='custom-dates';
+const dateSummary=document.createElement('summary');dateSummary.textContent='กำหนดช่วงวันที่เอง';customDates.append(dateSummary,$('start').closest('label'),$('end').closest('label'));weatherFilters.insertBefore(customDates,$('load'));
+$('weather-section').querySelectorAll(':scope > br').forEach(node=>node.remove());
+const weatherInfo=$('weather-section').querySelector(':scope > p.muted');
+const sourceDetails=document.createElement('details');sourceDetails.className='weather-source';const sourceSummary=document.createElement('summary');sourceSummary.textContent='แหล่งข้อมูลและข้อจำกัดของอากาศกริด';weatherInfo.before(sourceDetails);sourceDetails.append(sourceSummary,weatherInfo);
+const weatherPlot=document.createElement('div');weatherPlot.className='weather-plot';
+const plotToolbar=document.createElement('div');plotToolbar.className='plot-toolbar';
+const expandWeather=document.createElement('button');expandWeather.type='button';expandWeather.dataset.expandPlot='';expandWeather.textContent='ขยายกราฟ';expandWeather.setAttribute('aria-label','ขยายกราฟอากาศ A/B');
+$('chart-metric').closest('label').before(weatherPlot);plotToolbar.append($('chart-metric').closest('label'),expandWeather);weatherPlot.append(plotToolbar,$('chart-note'),$('chart'));
+document.addEventListener('click',async event=>{
+  const button=event.target.closest('[data-expand-plot]');if(!button)return;
+  const panel=button.closest('.weather-plot,.telemetry-panel');
+  try{if(document.fullscreenElement===panel)await document.exitFullscreen();else if(panel.requestFullscreen)await panel.requestFullscreen();else throw new Error('เบราว์เซอร์นี้ไม่รองรับการขยายเต็มจอ');}
+  catch(error){const note=panel.querySelector('.plot-message')||$('chart-note');note.textContent='ขยายกราฟไม่ได้: '+error.message;}
+});
+document.addEventListener('fullscreenchange',()=>document.querySelectorAll('[data-expand-plot]').forEach(button=>{button.textContent=document.fullscreenElement===button.closest('.weather-plot,.telemetry-panel')?'กลับหน้าปกติ':'ขยายกราฟ';}));
 function weatherCsv(snapshot){
   const metrics=Object.keys(chartMetrics),headers=['area','province_code','location_label','selected_latitude','selected_longitude','data_latitude','data_longitude','date',...metrics,'time_standard','source_basis','source_label','source_url','retrieved_utc','warning'];
   const quote=value=>'"'+String(value??'').replace(/"/g,'""')+'"';
@@ -739,7 +810,7 @@ const provinceDetails=document.createElement('details');provinceDetails.classNam
 const provinceSummary=document.createElement('summary');provinceSummary.textContent='ประมาณการผลผลิตจังหวัด · ไม่ใช่ผลผลิตสวน';provinceDetails.append(provinceSummary);
 provinceDetails.append($('current-year').closest('.report-controls'),$('current-province').previousElementSibling,$('current-province'));
 $('current-section').append(provinceDetails);
-const telemetryFields=[['soil_moisture_percent','ความชื้นดิน','%','#0f766e'],['soil_temperature_c','อุณหภูมิดิน','°C','#b45309'],['outdoor_temperature_c','อุณหภูมิอากาศภายนอก','°C','#7c3aed'],['outdoor_humidity_percent','ความชื้นอากาศภายนอก','%','#2563eb']];
+const telemetryFields=[['soil_moisture_percent','ความชื้นดิน','%','#087f8c'],['soil_temperature_c','อุณหภูมิดิน','°C','#b45309'],['outdoor_temperature_c','อุณหภูมิอากาศภายนอก','°C','#2563eb'],['outdoor_humidity_percent','ความชื้นอากาศภายนอก','%','#087f8c']];
 function telemetryChart(rows,field,label,unit,color){
   const valid=rows.map(r=>r[field]).filter(v=>Number.isFinite(v));
   if(!valid.length)return `<article class="telemetry-panel"><h3>${label} <small>${unit}</small></h3><p class="empty-series">ไม่มีค่าที่ใช้ได้ในช่วงนี้</p></article>`;
@@ -754,7 +825,7 @@ function telemetryChart(rows,field,label,unit,color){
   }).join('');
   const grid=[0,1,2,3].map(i=>{const v=low+(high-low)*i/3;return `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#dce5f0"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${fmt(v,1)}</text>`;}).join('');
   const ticks=[0,Math.floor((rows.length-1)/2),rows.length-1].map(i=>`<text x="${x(i)}" y="${H-10}" text-anchor="${i===0?'start':i===rows.length-1?'end':'middle'}">${esc(new Date(rows[i].time).toLocaleString('th-TH',{month:'short',day:'numeric',...(rows.length<=25?{hour:'2-digit',minute:'2-digit'}:{})}))}</text>`).join('');
-  return `<article class="telemetry-panel"><div class="telemetry-panel-heading"><h3>${label} <small>${unit}</small></h3><span style="color:${color}">เฉลี่ย ${fmt(valid.reduce((a,b)=>a+b,0)/valid.length,1)}</span></div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} ตามเวลา หน่วย ${unit}">${grid}<path d="${path}" stroke="${color}" stroke-width="2" fill="none"/>${dots}${ticks}</svg><p>ต่ำสุด ${fmt(Math.min(...valid),1)} · สูงสุด ${fmt(Math.max(...valid),1)} · มีค่า ${valid.length}/${rows.length} ช่วง</p></article>`;
+  return `<article class="telemetry-panel"><div class="telemetry-panel-heading"><h3>${label} <small>${unit}</small></h3><span style="color:${color}">เฉลี่ย ${fmt(valid.reduce((a,b)=>a+b,0)/valid.length,1)}</span><button type="button" data-expand-plot aria-label="ขยายกราฟ${label}">ขยายกราฟ</button></div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} ตามเวลา หน่วย ${unit}">${grid}<path d="${path}" stroke="${color}" stroke-width="2" fill="none"/>${dots}${ticks}</svg><p class="plot-message" role="status">ต่ำสุด ${fmt(Math.min(...valid),1)} · สูงสุด ${fmt(Math.max(...valid),1)} · มีค่า ${valid.length}/${rows.length} ช่วง</p></article>`;
 }
 let historyRequest=0;
 async function refreshOrchardHistory(){
@@ -774,6 +845,13 @@ const historyEnd=document.createElement('input');historyEnd.type='date';historyE
 historyEnd.value=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok'}).format(new Date());historyEnd.max=historyEnd.value;
 historyEndLabel.append(historyEnd);document.querySelector('.telemetry-actions').prepend(historyEndLabel);
 $('orchard-period').onchange=refreshOrchardHistory;historyEnd.onchange=refreshOrchardHistory;
+const periodButtons=document.createElement('div');periodButtons.className='period-switch';periodButtons.setAttribute('role','group');periodButtons.setAttribute('aria-label','ช่วงเวลาข้อมูลสวน');
+for(const [value,label] of [['day','วัน'],['week','สัปดาห์'],['month','เดือน']]){
+  const button=document.createElement('button');button.type='button';button.textContent=label;button.dataset.period=value;button.setAttribute('aria-pressed',String(value===$('orchard-period').value));
+  button.onclick=()=>{$('orchard-period').value=value;periodButtons.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));refreshOrchardHistory();};periodButtons.append(button);
+}
+$('orchard-period').closest('label').hidden=true;document.querySelector('.telemetry-actions').append(periodButtons);
+$('current-orchard').nextElementSibling.textContent='แสดงแหล่งข้อมูลและเวลาวัดจริง ตรวจอัปเดตทุก 5 นาที และแจ้งเมื่อข้อมูลเก่าเกิน 1 ชั่วโมง';
 $('refresh-history').onclick=()=>{refreshOrchardHistory();refreshCurrent();};
 refreshOrchardHistory();
 setInterval(()=>{if(!document.hidden&&!$('current-section').hidden)refreshOrchardHistory();},300000);
