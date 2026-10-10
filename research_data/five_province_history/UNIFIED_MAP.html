@@ -623,6 +623,7 @@ function showWorkspaceView(id,reveal=true){
   if(tab&&tab.getAttribute('aria-selected')!=='true'){tab.click();return;}
   document.body.classList.toggle('orchard-home',id==='current-section');
   document.body.dataset.workspace=id;
+  $('toggle-area-editor').textContent=id==='soil-analysis'&&$('soil-picker')?.open?'ย่อพื้นที่':'แก้ไขพื้นที่';
   if(id!=='current-section')requestAnimationFrame(()=>map.invalidateSize());
   const core=['area-section','map-section','report-section','weather-section','soil-analysis','yield-section','training-section','current-section'];
   document.querySelectorAll('aside > section, #workspace-tabs > section').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
@@ -639,7 +640,7 @@ const soilPicker=document.createElement('details');soilPicker.id='soil-picker';s
 const soilPickerSummary=document.createElement('summary');soilPickerSummary.textContent='เลือกพื้นที่และชุดดิน · กดย่อเพื่ออ่านรายละเอียด';
 soilPicker.append(soilPickerSummary,mapPanel,$('area-section'));$('soil-analysis-title').after(soilPicker);
 soilPicker.addEventListener('toggle',()=>setAreaEditor(soilPicker.open));
-$('toggle-area-editor').onclick=()=>{showWorkspaceView('soil-analysis',false);setAreaEditor(!soilPicker.open);};
+$('toggle-area-editor').onclick=()=>{const expanded=document.body.dataset.workspace!=='soil-analysis'||!soilPicker.open;showWorkspaceView('soil-analysis',false);setAreaEditor(expanded);};
 $('apply-areas').textContent='ดูรายละเอียดดิน';$('apply-areas').onclick=()=>{setAreaEditor(false);$('soil-analysis-scope').scrollIntoView({block:'start'});};
 const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ','soil-analysis':'ดิน','yield-section':'ผลผลิต','report-section':'ฤดูกาล','training-section':'ดาวน์โหลด','map-section':'แผนที่'};
 document.querySelectorAll('.quick-nav a').forEach(link=>{const id=link.getAttribute('href').slice(1);link.textContent=viewLabels[id];link.onclick=event=>{event.preventDefault();showWorkspaceView(id);};});
