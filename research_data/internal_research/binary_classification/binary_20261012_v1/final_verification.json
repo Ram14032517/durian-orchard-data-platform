@@ -1,0 +1,39 @@
+{
+  "passed": 21,
+  "checks": [
+    "independent_real_OAE_binary_labels_and_pct_target",
+    "all_76_OAE_pairs_and_exact_ties_accounted_for",
+    "target_and_unavailable_lag1_not_predictors",
+    "unique_predictions_and_no_new_year_forecast",
+    "identical_keys_all_arms_and_year_group_integrity",
+    "independent_accuracy_macroF1_BA_and_confusion_recalculation",
+    "signed_regression_to_binary_without_lag1_denominator",
+    "last_known_direction_uses_Yminus2_and_Yminus3_only",
+    "inner_metrics_and_selection_label_cutoff",
+    "all_selections_rebuilt_from_own_inner_only_and_family_frozen",
+    "fit_cache_source_features_parameters_cutoff_and_inner_role_isolation",
+    "train_only_class_weights_every_actual_fit",
+    "actual_feature_values_and_reference_means_reconstructed_every_fit",
+    "all_observation_dates_before_issue",
+    "historical_map_hindsight_excluded",
+    "training_code_not_changed_after_outer_results",
+    "input_and_prior_artifact_hashes_unchanged",
+    "1288_protected_files_and_all_prior_seals_unchanged",
+    "cache_target_mutation_excluded_but_input_mutation_detected",
+    "insufficient_training_fail_fast",
+    "repository_state_unchanged_outside_new_version_folder"
+  ],
+  "protected_count": 1288,
+  "sealed_release_counts": {
+    "research_data\\internal_research\\four_provinces\\phase9d_20261012_v1": 23,
+    "research_data\\internal_research\\automl\\automl_20261012_v1": 38,
+    "research_data\\internal_research\\integrated_ndvi_vpd\\integrated_20261012_v1": 4494,
+    "research_data\\internal_research\\optimized_classification\\optimized_20261012_v1": 76
+  },
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "no_network": true,
+  "no_new_forecast": true,
+  "public_release": "HOLD",
+  "historical_pit": "not_certified",
+  "completed_utc": "2026-10-12T15:34:47.090132+00:00"
+}

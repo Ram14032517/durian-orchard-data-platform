@@ -1,0 +1,40 @@
+{
+  "candidate_family": "Logistic",
+  "candidate_group": "N",
+  "initial_config": {
+    "id": "N__Logistic__0",
+    "group": "N",
+    "family": "Logistic",
+    "variant": 0,
+    "balanced": false,
+    "features": [
+      "province_code",
+      "year_offset",
+      "yield_lag2",
+      "last_known_pct_change",
+      "yield_trend_2yr_pct",
+      "ndvi_median",
+      "ndvi_std",
+      "ndvi_monthly_slope",
+      "ndvi_anomaly"
+    ]
+  },
+  "inner_score": {
+    "study": "ndvi_common",
+    "outer_selection_year": 2022,
+    "config_id": "N__Logistic__0",
+    "accuracy": 0.875,
+    "macro_f1": 0.873015873015873,
+    "balanced_accuracy": 0.875,
+    "increase_recall": 0.75,
+    "year_f1_sd": 0.1333333333333333,
+    "validation_rows": 8,
+    "validation_years": [
+      2019,
+      2020
+    ]
+  },
+  "outer_year": 2022,
+  "code_sha256": "9ef46cc2d03f5084f9dc60dd04ea3469f756908de974ca4d05187d55c325d377",
+  "role": "family/features frozen before any own outer"
+}

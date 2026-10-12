@@ -1,0 +1,2 @@
+# Sealed hashes require identical bytes on checkout, including on Windows.
+binary_classification/binary_20261012_v1/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

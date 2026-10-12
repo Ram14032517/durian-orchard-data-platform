@@ -1,0 +1,19 @@
+{
+  "passed": 14,
+  "checks": [
+    "exact_OAE_binary_label_and_equal_exclusion",
+    "fixed_zero_regression_and_last_direction_fallback",
+    "no_old_stable_class_used",
+    "target_and_lag1_predictor_isolation",
+    "outer_target_mutation_does_not_change_features",
+    "training_and_observation_cutoffs",
+    "training_only_anomaly_reference",
+    "training_only_imputation",
+    "cache_ignores_own_outer_targets",
+    "cache_checks_actual_evaluation_features",
+    "cache_config_and_cutoff_isolation",
+    "cache_training_label_isolation",
+    "all_source_hashes_unchanged",
+    "binary_metric_definitions"
+  ]
+}

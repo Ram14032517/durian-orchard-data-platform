@@ -1,0 +1,16 @@
+{
+  "numeric_checks_passed": 21,
+  "pretraining_tests_passed": 14,
+  "visual_review": "All10 rendered pages inspected via contact sheets; dense results page reviewed at full size; no clipping or unreadable fonts",
+  "pdf_pages": 10,
+  "model_retraining_after_scores": false,
+  "protected_count": 1288,
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "public_release": "HOLD",
+  "historical_pit": "not_certified",
+  "downloads_in_this_run": 0,
+  "external_uploads": 0,
+  "forecast_2026_issued": false,
+  "source_files_changed": false,
+  "report_draft1": "Prior presentation draft retained, not a separate experiment"
+}

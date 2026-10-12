@@ -1,0 +1,248 @@
+{
+  "tables_reviewed": {
+    "research_data\\internal_research\\optimized_classification\\optimized_20261012_v1\\model_comparison.csv": {
+      "rows": 71,
+      "columns": [
+        "study",
+        "case",
+        "macro_f1",
+        "balanced_accuracy",
+        "stable_recall",
+        "n",
+        "families",
+        "configurations_used"
+      ]
+    },
+    "research_data\\internal_research\\optimized_classification\\optimized_20261012_v1\\predictions_vs_actual.csv": {
+      "rows": 1392,
+      "columns": [
+        "study",
+        "case",
+        "config_id",
+        "family",
+        "feature_group",
+        "balanced",
+        "province_code",
+        "province_name",
+        "year_ce",
+        "issue_date",
+        "actual_label",
+        "predicted_label",
+        "actual_yoy_pct",
+        "predicted_yoy_pct",
+        "actual_yield_kg_per_rai",
+        "fit_label_max_year",
+        "max_feature_date",
+        "availability",
+        "model_cache_key"
+      ]
+    },
+    "research_data\\internal_research\\optimized_classification\\optimized_20261012_v1\\inner_model_comparison.csv": {
+      "rows": 636,
+      "columns": [
+        "study",
+        "outer_selection_year",
+        "config_id",
+        "macro_f1",
+        "balanced_accuracy",
+        "stable_recall",
+        "year_f1_sd",
+        "validation_rows",
+        "validation_years"
+      ]
+    },
+    "research_data\\internal_research\\integrated_ndvi_vpd\\integrated_20261012_v1\\results\\model_comparison.csv": {
+      "rows": 128,
+      "columns": [
+        "study",
+        "phase",
+        "feature_set",
+        "family",
+        "variant",
+        "macro_f1",
+        "balanced_accuracy",
+        "n"
+      ]
+    },
+    "research_data\\internal_research\\integrated_ndvi_vpd\\integrated_20261012_v1\\results\\model_predictions.csv": {
+      "rows": 1768,
+      "columns": [
+        "study",
+        "phase",
+        "feature_set",
+        "family",
+        "variant",
+        "province_code",
+        "province_name",
+        "year_ce",
+        "actual_label",
+        "predicted_label",
+        "actual_yoy_pct"
+      ]
+    }
+  },
+  "previous_three_class": {
+    "candidate_family": "XGBoost",
+    "candidate_group": "H",
+    "full_history_candidate": {
+      "study": "full_history",
+      "case": "candidate",
+      "macro_f1": 0.4666666666666666,
+      "balanced_accuracy": 0.4777777777777778,
+      "stable_recall": 0.4,
+      "n": 24,
+      "families": "XGBoost",
+      "configurations_used": "H__XGBoost__0|H__XGBoost__1"
+    },
+    "majority": {
+      "study": "full_history",
+      "case": "Majority",
+      "macro_f1": 0.196078431372549,
+      "balanced_accuracy": 0.3333333333333333,
+      "stable_recall": 0.0,
+      "n": 24,
+      "families": "Majority",
+      "configurations_used": "H__Majority__0"
+    },
+    "previous_known_direction": {
+      "study": "full_history",
+      "case": "PreviousKnownDirection",
+      "macro_f1": 0.2996434937611408,
+      "balanced_accuracy": 0.3074074074074074,
+      "stable_recall": 0.4,
+      "n": 24,
+      "families": "PreviousKnownDirection",
+      "configurations_used": "H__PreviousKnownDirection__0"
+    },
+    "ndvi_candidate_family": "LightGBM",
+    "ndvi_candidate_group": "H",
+    "ndvi_candidate_score": {
+      "study": "ndvi_common",
+      "case": "candidate",
+      "macro_f1": 0.2407407407407407,
+      "balanced_accuracy": 0.238095238095238,
+      "stable_recall": 0.0,
+      "n": 16,
+      "families": "LightGBM",
+      "configurations_used": "H__LightGBM__0|H__LightGBM__1"
+    },
+    "full_history_stable_recall": 0.4,
+    "no_outer_based_reselection": true,
+    "readiness": "not_ready_actual_forecast",
+    "forecast_2026": false,
+    "historical_pit": "not_certified",
+    "public_release": "HOLD"
+  },
+  "previous_regression": {
+    "preselected_candidate": "ridge__with_weather__1",
+    "selected_system": "ridge__with_weather__1",
+    "evidence_gate": {
+      "inner_better_than_lag2": true,
+      "outer_mae_gain_min_5pct": false,
+      "outer_rmse_not_worse": true,
+      "province_wins_min_3": true,
+      "province_wins": 3,
+      "outer_mae_gain_pct": -1.8257157175399996,
+      "passed": false
+    },
+    "wins": 11,
+    "ties": 0,
+    "losses": 13,
+    "best_outer_descriptive_only": "lightgbm__no_weather__0",
+    "no_changes_after_outer": true,
+    "negative_prediction_rows": 0,
+    "worst_cases": [
+      {
+        "model_id": "ridge__with_weather__1",
+        "family": "ridge",
+        "feature_set": "with_weather",
+        "phase": "outer",
+        "year_ce": 2022,
+        "province_code": "22",
+        "province_name": "จันทบุรี",
+        "actual_kg_rai": 2194.0,
+        "predicted_kg_rai": 1723.7030360997423,
+        "error_kg_rai": -470.29696390025765,
+        "issue_date": "2022-03-01",
+        "feature_weather_end": "2021-12-31",
+        "fit_label_year_max": 2020,
+        "n_train": 52,
+        "availability": "unverified_publication_vintage"
+      },
+      {
+        "model_id": "ridge__with_weather__1",
+        "family": "ridge",
+        "feature_set": "with_weather",
+        "phase": "outer",
+        "year_ce": 2024,
+        "province_code": "86",
+        "province_name": "ชุมพร",
+        "actual_kg_rai": 991.0,
+        "predicted_kg_rai": 1403.075635482583,
+        "error_kg_rai": 412.07563548258304,
+        "issue_date": "2024-03-01",
+        "feature_weather_end": "2023-12-31",
+        "fit_label_year_max": 2022,
+        "n_train": 60,
+        "availability": "unverified_publication_vintage"
+      },
+      {
+        "model_id": "ridge__with_weather__1",
+        "family": "ridge",
+        "feature_set": "with_weather",
+        "phase": "outer",
+        "year_ce": 2024,
+        "province_code": "22",
+        "province_name": "จันทบุรี",
+        "actual_kg_rai": 1520.0,
+        "predicted_kg_rai": 1900.8110425162874,
+        "error_kg_rai": 380.81104251628744,
+        "issue_date": "2024-03-01",
+        "feature_weather_end": "2023-12-31",
+        "fit_label_year_max": 2022,
+        "n_train": 60,
+        "availability": "unverified_publication_vintage"
+      },
+      {
+        "model_id": "ridge__with_weather__1",
+        "family": "ridge",
+        "feature_set": "with_weather",
+        "phase": "outer",
+        "year_ce": 2023,
+        "province_code": "33",
+        "province_name": "ศรีสะเกษ",
+        "actual_kg_rai": 1269.0,
+        "predicted_kg_rai": 1640.5723271965762,
+        "error_kg_rai": 371.5723271965762,
+        "issue_date": "2023-03-01",
+        "feature_weather_end": "2022-12-31",
+        "fit_label_year_max": 2021,
+        "n_train": 56,
+        "availability": "unverified_publication_vintage"
+      },
+      {
+        "model_id": "ridge__with_weather__1",
+        "family": "ridge",
+        "feature_set": "with_weather",
+        "phase": "outer",
+        "year_ce": 2023,
+        "province_code": "86",
+        "province_name": "ชุมพร",
+        "actual_kg_rai": 1224.0,
+        "predicted_kg_rai": 1591.9282247792487,
+        "error_kg_rai": 367.9282247792487,
+        "issue_date": "2023-03-01",
+        "feature_weather_end": "2022-12-31",
+        "fit_label_year_max": 2021,
+        "n_train": 56,
+        "availability": "unverified_publication_vintage"
+      }
+    ],
+    "fit_count": 180,
+    "synthetic_smoke_fits": 5,
+    "elapsed_seconds": 36.45299999974668,
+    "publication_vintage": "not verified",
+    "release": "HOLD"
+  },
+  "use": "Protocol/source/error limitations only; no old test score selects binary family/features"
+}

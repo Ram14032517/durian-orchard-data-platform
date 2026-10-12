@@ -1,0 +1,120 @@
+{
+  "candidate_family": "RandomForest",
+  "candidate_group": "H",
+  "candidate_score": {
+    "study": "full_history",
+    "case": "candidate",
+    "accuracy": 0.5416666666666666,
+    "macro_f1": 0.5343915343915344,
+    "balanced_accuracy": 0.5357142857142857,
+    "correct": 13,
+    "n": 24,
+    "families": "RandomForest",
+    "configurations_used": "H__RandomForest__0|H__RandomForest__1"
+  },
+  "majority_score": {
+    "study": "full_history",
+    "case": "Majority",
+    "accuracy": 0.5833333333333334,
+    "macro_f1": 0.3684210526315789,
+    "balanced_accuracy": 0.5,
+    "correct": 14,
+    "n": 24,
+    "families": "Majority",
+    "configurations_used": "H__Majority__0"
+  },
+  "previous_known_direction_score": {
+    "study": "full_history",
+    "case": "PreviousKnownDirection",
+    "accuracy": 0.4583333333333333,
+    "macro_f1": 0.4337568058076225,
+    "balanced_accuracy": 0.4357142857142857,
+    "correct": 11,
+    "n": 24,
+    "families": "PreviousKnownDirection",
+    "configurations_used": "H__PreviousKnownDirection__0"
+  },
+  "class_metrics": {
+    "accuracy": 0.5416666666666666,
+    "balanced_accuracy": 0.5357142857142857,
+    "macro_f1": 0.5343915343915344,
+    "correct": 13,
+    "n": 24,
+    "precision": [
+      0.45454545454545453,
+      0.6153846153846154
+    ],
+    "recall": [
+      0.5,
+      0.5714285714285714
+    ],
+    "class_f1": [
+      0.47619047619047616,
+      0.5925925925925926
+    ],
+    "support": [
+      10,
+      14
+    ],
+    "confusion_matrix": [
+      [
+        5,
+        5
+      ],
+      [
+        6,
+        8
+      ]
+    ]
+  },
+  "beats_both_baselines_aggregate": false,
+  "consistency_gate": {
+    "passed": false,
+    "province_F1_wins": 3,
+    "year_accuracy_wins": 4,
+    "criterion": ">=3 of4 provinces, >=4 of6 years vs last direction; aggregate Accuracy and MacroF1 beat both baselines"
+  },
+  "ndvi_candidate_family": "Logistic",
+  "ndvi_candidate_group": "N",
+  "ndvi_candidate_score": {
+    "study": "ndvi_common",
+    "case": "candidate",
+    "accuracy": 0.4375,
+    "macro_f1": 0.3043478260869565,
+    "balanced_accuracy": 0.3888888888888889,
+    "correct": 7,
+    "n": 16,
+    "families": "Logistic",
+    "configurations_used": "N__Logistic__0|N__Logistic__1"
+  },
+  "ndvi_baselines": [
+    {
+      "study": "ndvi_common",
+      "case": "Majority",
+      "accuracy": 0.4375,
+      "macro_f1": 0.3043478260869565,
+      "balanced_accuracy": 0.5,
+      "correct": 7,
+      "n": 16,
+      "families": "Majority",
+      "configurations_used": "H__Majority__0"
+    },
+    {
+      "study": "ndvi_common",
+      "case": "PreviousKnownDirection",
+      "accuracy": 0.5625,
+      "macro_f1": 0.5465587044534412,
+      "balanced_accuracy": 0.5476190476190476,
+      "correct": 9,
+      "n": 16,
+      "families": "PreviousKnownDirection",
+      "configurations_used": "H__PreviousKnownDirection__0"
+    }
+  ],
+  "exact_equal_excluded": 0,
+  "operational_readiness": "not_ready; test years already used, publication vintages unverified, no prospective validation",
+  "forecast_2026": false,
+  "no_outer_reselection": true,
+  "public_release": "HOLD",
+  "historical_pit": "not_certified"
+}

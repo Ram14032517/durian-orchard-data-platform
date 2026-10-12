@@ -1,0 +1,37 @@
+{
+  "candidate_family": "RandomForest",
+  "candidate_group": "H",
+  "initial_config": {
+    "id": "H__RandomForest__1",
+    "group": "H",
+    "family": "RandomForest",
+    "variant": 1,
+    "balanced": true,
+    "features": [
+      "province_code",
+      "year_offset",
+      "yield_lag2",
+      "last_known_pct_change",
+      "yield_trend_2yr_pct"
+    ]
+  },
+  "inner_score": {
+    "study": "full_history",
+    "outer_selection_year": 2020,
+    "config_id": "H__RandomForest__1",
+    "accuracy": 0.6666666666666666,
+    "macro_f1": 0.6666666666666666,
+    "balanced_accuracy": 0.6857142857142857,
+    "increase_recall": 0.5714285714285714,
+    "year_f1_sd": 0.10999438818457409,
+    "validation_rows": 12,
+    "validation_years": [
+      2016,
+      2017,
+      2018
+    ]
+  },
+  "outer_year": 2020,
+  "code_sha256": "9ef46cc2d03f5084f9dc60dd04ea3469f756908de974ca4d05187d55c325d377",
+  "role": "family/features frozen before any own outer"
+}

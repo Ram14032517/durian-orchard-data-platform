@@ -29,3 +29,9 @@ research_data/five_province_history/evidence/
 research_data/five_province_history/point_weather_cache/
 research_data/five_province_history/exports/
 research_data/five_province_history/training/training_bundle.zip
+
+# Internal research is local by default (Public HOLD).
+# Only explicitly reviewed snapshots may be force-added for a LOCAL commit.
+research_data/internal_research/*
+!research_data/internal_research/README_TH.md
+!research_data/internal_research/.gitattributes
