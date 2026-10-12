@@ -1,0 +1,13 @@
+{
+  "training_runs": 1,
+  "python_preflight": 266,
+  "python_postflight": 266,
+  "javascript_preflight": 30,
+  "javascript_postflight": 30,
+  "before_task_protected": 747,
+  "run_protected": 749,
+  "all_protected_unchanged": true,
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "report_sha256": "b867fd9aca4c4a44fad247478020bf4de7313cfd4f899ac9bb66ba1b4c448d53",
+  "pit_certified": false
+}

@@ -1,0 +1,28 @@
+﻿outer_year,arm,parameter,inner_mae,fit_cutoff
+2017,last_year,null,132.44800307568678,2017-01-31T00:00:00+07:00
+2017,catboost_no_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",142.41913838032298,2017-01-31T00:00:00+07:00
+2017,catboost_with_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",159.46581394543963,2017-01-31T00:00:00+07:00
+2018,last_year,null,240.76085099586058,2018-01-31T00:00:00+07:00
+2018,catboost_no_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",220.81121274178972,2018-01-31T00:00:00+07:00
+2018,catboost_with_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",214.5595875388667,2018-01-31T00:00:00+07:00
+2019,last_year,null,260.63421282080816,2019-01-31T00:00:00+07:00
+2019,catboost_no_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",246.1664897513591,2019-01-31T00:00:00+07:00
+2019,catboost_with_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",261.81054782629445,2019-01-31T00:00:00+07:00
+2020,last_year,null,310.400866684252,2020-02-01T00:00:00+07:00
+2020,catboost_no_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",271.85572971271563,2020-02-01T00:00:00+07:00
+2020,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",280.67539060505413,2020-02-01T00:00:00+07:00
+2021,last_year,null,221.97225324069095,2021-01-31T00:00:00+07:00
+2021,catboost_no_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",253.484585679704,2021-01-31T00:00:00+07:00
+2021,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",257.849211684036,2021-01-31T00:00:00+07:00
+2022,last_year,null,204.2819407333295,2022-01-31T00:00:00+07:00
+2022,catboost_no_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",228.38791534257533,2022-01-31T00:00:00+07:00
+2022,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",226.1450517307261,2022-01-31T00:00:00+07:00
+2023,last_year,null,159.09489132320923,2023-01-31T00:00:00+07:00
+2023,catboost_no_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",210.84056942763968,2023-01-31T00:00:00+07:00
+2023,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",193.7371865500746,2023-01-31T00:00:00+07:00
+2024,last_year,null,159.41531121478343,2024-02-01T00:00:00+07:00
+2024,catboost_no_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",144.91583631715818,2024-02-01T00:00:00+07:00
+2024,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",133.12873738031027,2024-02-01T00:00:00+07:00
+2025,last_year,null,200.00933443067132,2025-01-31T00:00:00+07:00
+2025,catboost_no_weather,"{""depth"": 3, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",187.61573355606546,2025-01-31T00:00:00+07:00
+2025,catboost_with_weather,"{""depth"": 2, ""l2_leaf_reg"": 10, ""learning_rate"": 0.03}",166.91460056411304,2025-01-31T00:00:00+07:00

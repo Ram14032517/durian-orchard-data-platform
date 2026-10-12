@@ -20,10 +20,10 @@ def staged_names() -> list[str]:
 def private_values() -> list[str]:
     values: list[str] = []
     for relative in (
-        "receiver_gateway/tuya_cloud_secret.h",
-        "receiver_gateway/tuya_local_secret.h",
-        "receiver_gateway/farm_secret.h",
-        "wifi_range_test/wifi_secret.h",
+        "iot/receiver_gateway/tuya_cloud_secret.h",
+        "iot/receiver_gateway/tuya_local_secret.h",
+        "iot/receiver_gateway/farm_secret.h",
+        "iot/wifi_range_test/wifi_secret.h",
     ):
         path = ROOT / relative
         if not path.exists():

@@ -71,7 +71,7 @@
 
 - ทำงานใน `C:\project` ซึ่งชี้ไป repo `Ram14032517/durian-orchard-data-platform` เท่านั้น ห้ามยุ่ง repo อื่น
 - ไม่ล็อกอิน ไม่ push และไม่แก้/ลบ Google Sheets จากการสั่งสรุปครั้งนี้
-- รักษางานที่แก้ค้างของผู้ใช้ โดยเฉพาะ `.gitignore`, `google-apps-script/Code.gs`, `ml/train_statistical_baseline.py`, `models/statistical_baseline.json` และไฟล์ untracked อื่น ห้าม `git add .`
+- รักษางานที่แก้ค้างของผู้ใช้ โดยเฉพาะ `.gitignore`, `api/google-apps-script/Code.gs`, `ml/train_statistical_baseline.py`, `models/statistical_baseline.json` และไฟล์ untracked อื่น ห้าม `git add .`
 - ผู้ใช้ขอให้ตรวจโควตาและบันทึกงานก่อนติดลิมิต ตรวจล่าสุด 19 กันยายน: weekly เหลือ 2% เป็นสถานะขณะเขียน ไม่ใช่ค่าที่รับประกันในวันถัดไป ไม่ใช้เครดิตรีเซ็ตโดยไม่ขออนุญาต
 - การบันทึกนี้ไม่ได้นัดหมายหรือเริ่มทำงานพรุ่งนี้เอง ผู้ใช้จะกลับมาสั่งต่อ
 

@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "mode": "exploratory",
+  "preparation_only": true,
+  "training_performed": false,
+  "score_label": "Exploratory retrospective; not PIT-certified",
+  "pit_certified": false,
+  "created_utc": "2026-10-11T13:10:08.188833+00:00",
+  "seed": 42,
+  "lead_days": 60,
+  "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "outer_years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "inner_years": 3,
+  "provinces": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86"
+  ],
+  "features": [
+    "previous_yield_kg_rai",
+    "pre_bloom_90d_rain_mm",
+    "fruit_0_29d_rain_mm",
+    "fruit_30_59d_rain_mm",
+    "fruit_60_89d_solar_mj_m2_day",
+    "fruit_90_to_harvest_temperature_c",
+    "vpd_pre_bloom_mean_kpa",
+    "vpd_early_fruit_p90_kpa"
+  ],
+  "target": "yield_kg_per_rai_calculated",
+  "age_days": 140,
+  "weather_lag_days": 7,
+  "schedule": {
+    "kind": "fixed_calendar",
+    "anchors": {
+      "22": "04-01",
+      "33": "05-01",
+      "53": "06-01",
+      "84": "07-01",
+      "86": "07-01"
+    },
+    "note": "New experimental scenario, not a historically published schedule or verified actual season"
+  },
+  "schedule_sha256": "51eca525b6cc2f6d7dfe3401613253d202ea3a254712c0526229b6d0b46405ae",
+  "manifest_sha256": "4d6e3b77d0f2561a5ce3dbb14ca322a21a03e7e4005d0153314c80b5cbbde827",
+  "data_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "code_sha256": {
+    "tools/durian_model/experiment_rebaseline.py": "bfb3a582518433ebd989ba8c9dad02bbf23b29926cf4edd97db29a9d60c82d45",
+    "tools/durian_model/experiment_issue_date.py": "8ae0530e05198e6215d073e0469fe0dc699c39623d86d1b9bf7a1ed1e68b660b",
+    "tools/durian_model/availability_guard.py": "2655afe2a48f44ea9a4e98d0875cd30c8a53ebd706039e6687d84c84fed12d03",
+    "tools/durian_model/common.py": "77279dd59829558116106e3f5282494938080edbbec77c0efe09c4ba9499abaf",
+    "tools/compare_harvest_stage_yield.py": "645123ec02023e04aaa0964fb541b72482ab269944551d6b718ee16f1c750ac8",
+    "tools/train_monthly_production.py": "e89dce24fff6e2e8bd98c807aef650869fa13597e408897567257b98ba6ef1ca",
+    "tools/analyze_harvest_backcast.py": "81be74dedd7c255b3d6c527d2df89242289b3b42f91b7ac5a834381e65779c2c",
+    "tools/durian_model/step5_evaluate_result.py": "75121b6ca330f86d42bac4514a63a13b52860c1b5d4470a94b26523abb641211",
+    "tools/durian_model/experiment_weather_ablation.py": "84dcf64fed8a564314ff18e79b6775ce9090d23946032b58765df7d3840d55e3",
+    "tools/durian_model/experiment_enso_state.py": "fbc370effe5e2f42d62914dca7df5f1e385a790520837d65b42cf97bdc3acae8",
+    "tools/audit_enso_outlook_archive.py": "7074e170a61842fa15c2687da458af539fa2f26d429074fb84bd6f965943298a"
+  },
+  "git_head": "ae99d3bfe4304e182dd98f614115d30859e2e9a5",
+  "git_status": "M .gitignore\n M .vscode/tasks.json\n M 00_START_HERE_TH.md\n M README.md\n M README_TH.md\n M data/README_TH.md\n M docs/FIVE_PROVINCE_HANDOFF_TH.md\n M docs/LEARNING_PATH_TH.md\n M docs/NEXT_SESSION_TH.md\n M docs/ORCHARD_CONTEXT_TH.md\n M docs/README_TH.md\n M docs/SOIL_SENSOR_INSTALLATION_TH.md\n D google-apps-script/Code.gs\n D receiver_gateway/README.md\n D receiver_gateway/TuyaLocal34.cpp\n D receiver_gateway/TuyaLocal34.h\n D receiver_gateway/farm_secret.example.h\n D receiver_gateway/receiver_gateway.ino\n D receiver_gateway/tuya_cloud_secret.example.h\n D receiver_gateway/tuya_local_secret.example.h\n M research_data/five_province_history/PHENOLOGY_SOURCES_TH.md\n M research_data/five_province_history/UNIFIED_MAP.html\n M research_data/five_province_history/training/README_TH.md\n D sender_1/sender_1.ino\n D sensor_docs/ZTS-3002-TR-N01_manual_reference.pdf\n D sensor_docs/contact_sheet.jpg\n D sensor_docs/jc_esp32_p4_m3_checklist_th.html\n D soil_only/soil_only.ino\n D soil_rs485_diag/soil_rs485_diag.ino\n D supabase/functions/farm-ingest/index.ts\n D supabase/migrations/001_iot_schema.sql\n D supabase/migrations/002_remove_lora_rssi.sql\n D supabase/migrations/003_data_quality_and_hourly_forecast.sql\n M tests/test_map_ui_contract.py\n M tests/test_repository_navigation.py\n M tools/README_TH.md\n M tools/audit_staged_secrets.py\n M tools/build_unified_orchard_map.py\n M tools/move_gateway_ingest_secrets.ps1\n M tools/orchard_monthly_report.css\n M tools/orchard_monthly_report.js\n M tools/requirements-national-analysis.txt\n M tools/sanitize_firmware_secrets.ps1\n M tools/serve_orchard_analysis.py\n M tools/unified_orchard_map.html\n D wifi_range_test/wifi_range_test.ino\n D wifi_range_test/wifi_secret.example.h\n?? .dockerignore\n?? Dockerfile\n?? api/\n?? docs/ACCOUNT_HANDOFF_TH.md\n?? docs/DISTRICT_DATA_SOURCE_REVIEW_TH.md\n?? docs/DURIAN_AVAILABILITY_GUARD_TH.md\n?? docs/DURIAN_CLIMATE_SIGNAL_FEASIBILITY_AUDIT_TH.md\n?? docs/DURIAN_DATA_AVAILABILITY.csv\n?? docs/DURIAN_ENSO_OUTLOOK_ARCHIVE_AUDIT_TH.md\n?? docs/DURIAN_EXPANSION_AUDIT_TH.md\n?? docs/DURIAN_POINT_IN_TIME_AUDIT_TH.md\n?? docs/DURIAN_PROVINCE_EXPANSION_PLAN_TH.md\n?? docs/DURIAN_REBASELINE_PLAN_TH.md\n?? docs/DURIAN_REBASELINE_PREFLIGHT_TH.md\n?? docs/DURIAN_REBASELINE_RESULT_TH.md\n?? docs/DURIAN_RIDGE_VPD_REPORT_TH.md\n?? docs/DURIAN_WEATHER_ABLATION_PLAN_TH.md\n?? docs/DURIAN_WEATHER_ABLATION_RESULT_TH.md\n?? docs/ML_ISSUE_DATE_EXPERIMENT_TH.md\n?? docs/ORCHARD_NEO_DASHBOARD_TH.md\n?? docs/RESEARCH_PLAN_SPATIAL_SOIL_WEATHER_YIELD_TH.md\n?? docs/VISUAL_BRAND_DIRECTION_TH.md\n?? iot/\n?? ml/orchard_live_model.py\n?? models/orchard_soil_6h.json\n?? notebooks/DURIAN_RIDGE_VPD_STEPS.ipynb\n?? output/\n?? render.yaml\n?? research_data/enso_outlook_archive_audit/\n?? research_data/five_province_history/disaster_events_reviewed.json\n?? research_data/five_province_history/disaster_harvest_overlap.csv\n?? research_data/five_province_history/disaster_news_index.csv\n?? research_data/five_province_history/disaster_province_annual.csv\n?? research_data/five_province_history/disaster_source_review.json\n?? research_data/five_province_history/disaster_village_annual.csv\n?? research_data/five_province_history/district_soil_exploration.csv\n?? research_data/five_province_history/drought_area_records.csv\n?? research_data/five_province_history/enso_context.json\n?? research_data/five_province_history/ndvi_reference_composites.csv\n?? research_data/five_province_history/ndvi_source_review.json\n?? research_data/five_province_history/orchard_lumen.css\n?? research_data/five_province_history/orchard_lumen.js\n?? research_data/five_province_history/production_source_review.json\n?? research_data/five_province_history/terrain_selected_points.csv\n?? research_data/five_province_history/terrain_srtm30_samples.json\n?? research_data/five_province_history/training/climate_age_comparison.png\n?? research_data/five_province_history/training/climate_age_context.csv\n?? research_data/five_province_history/training/climate_age_predictions.csv\n?? research_data/five_province_history/training/climate_age_results.json\n?? research_data/five_province_history/training/climate_age_tuning.csv\n?? research_data/five_province_history/training/critical_window_context.csv\n?? research_data/five_province_history/training/critical_window_predictions.csv\n?? research_data/five_province_history/training/critical_window_results.json\n?? research_data/five_province_history/training/critical_window_tuning.csv\n?? research_data/five_province_history/training/dry_trigger_context.csv\n?? research_data/five_province_history/training/dry_trigger_predictions.csv\n?? research_data/five_province_history/training/dry_trigger_results.json\n?? research_data/five_province_history/training/dry_trigger_tuning.csv\n?? research_data/five_province_history/training/enso_state_preparation_exploratory/\n?? research_data/five_province_history/training/expansion_audit.json\n?? research_data/five_province_history/training/expansion_coverage.csv\n?? research_data/five_province_history/training/expansion_errors_by_province_code.csv\n?? research_data/five_province_history/training/expansion_errors_by_year_ce.csv\n?? research_data/five_province_history/training/expansion_paired_errors.csv\n?? research_data/five_province_history/training/harvest_backcast_annual.csv\n?? research_data/five_province_history/training/harvest_backcast_info.json\n?? research_data/five_province_history/training/harvest_backcast_monthly.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_combined_advanced_recent2010_comparison.png\n?? research_data/five_province_history/training/harvest_stage_rolling_combined_advanced_recent2010_predictions.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_combined_advanced_recent2010_results.json\n?? research_data/five_province_history/training/harvest_stage_rolling_comparison.png\n?? research_data/five_province_history/training/harvest_stage_rolling_ndvi_comparison.png\n?? research_data/five_province_history/training/harvest_stage_rolling_ndvi_predictions.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_ndvi_results.json\n?? research_data/five_province_history/training/harvest_stage_rolling_predictions.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_results.json\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_comparison.png\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_predictions.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_recent2010_comparison.png\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_recent2010_predictions.csv\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_recent2010_results.json\n?? research_data/five_province_history/training/harvest_stage_rolling_vpd_results.json\n?? research_data/five_province_history/training/harvest_stage_yield_experiment.json\n?? research_data/five_province_history/training/issue_date_choices.csv\n?? research_data/five_province_history/training/issue_date_comparison.png\n?? research_data/five_province_history/training/issue_date_guarded/\n?? research_data/five_province_history/training/issue_date_intervals.csv\n?? research_data/five_province_history/training/issue_date_plan.json\n?? research_data/five_province_history/training/issue_date_predictions.csv\n?? research_data/five_province_history/training/issue_date_results.json\n?? research_data/five_province_history/training/issue_date_summary.csv\n?? research_data/five_province_history/training/issue_date_tuning.csv\n?? research_data/five_province_history/training/issue_date_weather_context.csv\n?? research_data/five_province_history/training/ndvi_annual_context.csv\n?? research_data/five_province_history/training/rebaseline_exploratory/\n?? research_data/five_province_history/training/ridge_vpd_audit.json\n?? research_data/five_province_history/training/ridge_vpd_coefficients.csv\n?? research_data/five_province_history/training/ridge_vpd_coefficients.png\n?? research_data/five_province_history/training/ridge_vpd_comparison_models.csv\n?? research_data/five_province_history/training/ridge_vpd_demo_2025_inputs.csv\n?? research_data/five_province_history/training/ridge_vpd_demo_2025_predictions.csv\n?? research_data/five_province_history/training/ridge_vpd_evaluation.json\n?? research_data/five_province_history/training/ridge_vpd_evaluation.png\n?? research_data/five_province_history/training/ridge_vpd_features.csv\n?? research_data/five_province_history/training/ridge_vpd_final_model.json\n?? research_data/five_province_history/training/ridge_vpd_future_input_template.csv\n?? research_data/five_province_history/training/ridge_vpd_metrics_by_province_code.csv\n?? research_data/five_province_history/training/ridge_vpd_metrics_by_year_ce.csv\n?? research_data/five_province_history/training/ridge_vpd_models.json\n?? research_data/five_province_history/training/ridge_vpd_paired_year_errors.csv\n?? research_data/five_province_history/training/ridge_vpd_panel.csv\n?? research_data/five_province_history/training/ridge_vpd_prediction_contract.json\n?? research_data/five_province_history/training/ridge_vpd_predictions.csv\n?? research_data/five_province_history/training/ridge_vpd_seasons.json\n?? research_data/five_province_history/training/ridge_vpd_splits.json\n?? research_data/five_province_history/training/ridge_vpd_tuning.csv\n?? research_data/five_province_history/training/ridge_vpd_workflow_state.json\n?? research_data/five_province_history/training/terrain_candidate_model.json\n?? research_data/five_province_history/training/terrain_future_input_template.csv\n?? research_data/five_province_history/training/terrain_predictions.csv\n?? research_data/five_province_history/training/terrain_results.json\n?? research_data/five_province_history/training/terrain_summary.csv\n?? research_data/five_province_history/training/terrain_tuning.csv\n?? research_data/five_province_history/training/vpd_annual_context.csv\n?? research_data/five_province_history/training/weather_ablation_exploratory/\n?? research_data/five_province_history/training/weather_shock_comparison.png\n?? research_data/five_province_history/training/weather_shock_context.csv\n?? research_data/five_province_history/training/weather_shock_predictions.csv\n?? research_data/five_province_history/training/weather_shock_results.json\n?? research_data/five_province_history/training/weather_shock_tuning.csv\n?? tests/test_area_comparison.js\n?? tests/test_availability_guard.py\n?? tests/test_climate_age.py\n?? tests/test_cloud_dashboard.py\n?? tests/test_critical_window.py\n?? tests/test_daily_table.js\n?? tests/test_ddpm_disasters.py\n?? tests/test_district_soil_exploration.py\n?? tests/test_dry_trigger.py\n?? tests/test_durian_steps.py\n?? tests/test_enso_context.py\n?? tests/test_enso_outlook_archive_audit.py\n?? tests/test_enso_state_preparation.py\n?? tests/test_expansion_audit.py\n?? tests/test_harvest_stage_yield.py\n?? tests/test_issue_date_experiment.py\n?? tests/test_ndvi_yield.py\n?? tests/test_orchard_current_context.py\n?? tests/test_orchard_history.py\n?? tests/test_orchard_live_model.py\n?? tests/test_orchard_physiology.js\n?? tests/test_orchard_telemetry.js\n?? tests/test_project_organization.py\n?? tests/test_rebaseline.py\n?? tests/test_terrain_interaction.py\n?? tests/test_vpd_yield.py\n?? tests/test_weather_ablation.py\n?? tests/test_weather_shocks.py\n?? tools/analyze_harvest_backcast.py\n?? tools/audit_enso_outlook_archive.py\n?? tools/audit_orchard_forecast.py\n?? tools/build_orchard_lumen.mjs\n?? tools/build_orchard_tailwind.ps1\n?? tools/compare_harvest_stage_yield.py\n?? tools/durian_model/\n?? tools/fetch_enso_context.py\n?? tools/fetch_modis_ndvi.py\n?? tools/orchard_current_context.py\n?? tools/orchard_lumen.js\n?? tools/orchard_physiology.js\n?? tools/orchard_soil_exploration.js\n?? tools/orchard_tailwind.css\n?? tools/orchard_tailwind.generated.css\n?? tools/prepare_cloud_deploy.py\n?? tools/prepare_ddpm_disasters.py\n?? tools/requirements-cloud.txt\n?? tools/serve_orchard_cloud.py\n?? tools/supabase_orchard.py",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "catboost": "1.2.10"
+  },
+  "candidates": [
+    {
+      "kind": "previous_year",
+      "parameter": null,
+      "features": [],
+      "group": "last_year"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 1.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 10.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 100.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "ridge"
+    },
+    {
+      "kind": "catboost",
+      "parameter": {
+        "depth": 2,
+        "l2_leaf_reg": 10,
+        "learning_rate": 0.03
+      },
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "catboost"
+    },
+    {
+      "kind": "catboost",
+      "parameter": {
+        "depth": 3,
+        "l2_leaf_reg": 10,
+        "learning_rate": 0.03
+      },
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "catboost"
+    }
+  ],
+  "catboost_fixed": {
+    "iterations": 400,
+    "loss_function": "RMSE",
+    "boosting_type": "Ordered",
+    "random_seed": 42,
+    "thread_count": 1,
+    "allow_writing_files": false
+  },
+  "selection": "Within-family inner MAE only; deterministic candidate-order tie break; no outer target access",
+  "output_tables": [
+    "overall",
+    "by_year",
+    "by_province",
+    "paired_errors",
+    "wins",
+    "worst_errors"
+  ],
+  "limitations": [
+    "OAE/POWER revised values and publication vintages remain unverified",
+    "Calendar created in 2026; not a historically predeclared rule",
+    "Future weather is climatology, not historical forecast or future observations",
+    "Seven-day POWER latency is assumed",
+    "All-cultivar annual yield; not Monthong-only",
+    "2017-2025 previously inspected; not an independent confirmation set"
+  ],
+  "protocol": {
+    "mode": "exploratory",
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "outer_years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "inner_years": 3,
+    "lead_days": 60,
+    "seed": 42,
+    "anchors": {
+      "22": "04-01",
+      "33": "05-01",
+      "53": "06-01",
+      "84": "07-01",
+      "86": "07-01"
+    },
+    "age_days": 140,
+    "weather_lag_days": 7,
+    "normals": "preceding ten years; >=8 valid cells/day; Feb29=mean(Feb28,Mar01)",
+    "shared_fit_cutoff": "earliest provincial issue midnight +07:00",
+    "selection_labels_cutoff": "outer shared fit cutoff",
+    "training_start": 2010,
+    "design": "five province indicators, year_ce, ordered features; no other inputs",
+    "candidates": [
+      {
+        "kind": "catboost",
+        "parameter": {
+          "depth": 2,
+          "l2_leaf_reg": 10,
+          "learning_rate": 0.03
+        },
+        "features": [
+          "previous_yield_kg_rai",
+          "pre_bloom_90d_rain_mm",
+          "fruit_0_29d_rain_mm",
+          "fruit_30_59d_rain_mm",
+          "fruit_60_89d_solar_mj_m2_day",
+          "fruit_90_to_harvest_temperature_c",
+          "vpd_pre_bloom_mean_kpa",
+          "vpd_early_fruit_p90_kpa"
+        ],
+        "group": "catboost_with_weather"
+      },
+      {
+        "kind": "catboost",
+        "parameter": {
+          "depth": 3,
+          "l2_leaf_reg": 10,
+          "learning_rate": 0.03
+        },
+        "features": [
+          "previous_yield_kg_rai",
+          "pre_bloom_90d_rain_mm",
+          "fruit_0_29d_rain_mm",
+          "fruit_30_59d_rain_mm",
+          "fruit_60_89d_solar_mj_m2_day",
+          "fruit_90_to_harvest_temperature_c",
+          "vpd_pre_bloom_mean_kpa",
+          "vpd_early_fruit_p90_kpa"
+        ],
+        "group": "catboost_with_weather"
+      },
+      {
+        "kind": "catboost",
+        "parameter": {
+          "depth": 2,
+          "l2_leaf_reg": 10,
+          "learning_rate": 0.03
+        },
+        "features": [
+          "previous_yield_kg_rai",
+          "pre_bloom_90d_rain_mm",
+          "fruit_0_29d_rain_mm",
+          "fruit_30_59d_rain_mm",
+          "fruit_60_89d_solar_mj_m2_day",
+          "fruit_90_to_harvest_temperature_c",
+          "vpd_pre_bloom_mean_kpa",
+          "vpd_early_fruit_p90_kpa",
+          "enso_el_nino",
+          "enso_neutral",
+          "enso_la_nina"
+        ],
+        "group": "catboost_with_weather_enso_state"
+      },
+      {
+        "kind": "catboost",
+        "parameter": {
+          "depth": 3,
+          "l2_leaf_reg": 10,
+          "learning_rate": 0.03
+        },
+        "features": [
+          "previous_yield_kg_rai",
+          "pre_bloom_90d_rain_mm",
+          "fruit_0_29d_rain_mm",
+          "fruit_30_59d_rain_mm",
+          "fruit_60_89d_solar_mj_m2_day",
+          "fruit_90_to_harvest_temperature_c",
+          "vpd_pre_bloom_mean_kpa",
+          "vpd_early_fruit_p90_kpa",
+          "enso_el_nino",
+          "enso_neutral",
+          "enso_la_nina"
+        ],
+        "group": "catboost_with_weather_enso_state"
+      }
+    ],
+    "fixed_catboost": {
+      "iterations": 400,
+      "loss_function": "RMSE",
+      "boosting_type": "Ordered",
+      "random_seed": 42,
+      "thread_count": 1,
+      "allow_writing_files": false
+    },
+    "selection": "independent within-arm inner MAE; depth2 wins exact ties; no outer targets",
+    "enso_encoding": {
+      "states": [
+        "El Niño",
+        "Neutral",
+        "La Niña"
+      ],
+      "columns": [
+        "enso_el_nino",
+        "enso_neutral",
+        "enso_la_nina"
+      ],
+      "method": "fixed one-hot; no target-derived mapping"
+    },
+    "enso_selection": "latest bulletin strictly before min(row issue, role cutoff); max age 45 days",
+    "enso_content_authentication": "unverified; exploratory only",
+    "forecast_probability": false,
+    "revised_oni": false
+  },
+  "protocol_sha256": "abffd1925cbdc8bdbd0d96e1c8a975d2f42ca0c19900a6820b3b810020f27b70",
+  "archive_root": "research_data\\enso_outlook_archive_audit\\phase4b_20261011_noaa_reviewed",
+  "archive_hashes": {
+    "summary.json": "facc1bd97f12a6d1095849a687e33d79c7b1b5738ebf6f1423a0a48d12b9c5c7",
+    "sources/archive_index.html": "e281bbabb9671c1e50435580b068e4a91d4d294c0d4a20d8feb4f4d0f195f464",
+    "documents.csv": "9698e9abfbf3a2626d810119c5b316a0d34c620821651bd236da90abf3b97182",
+    "availability.csv": "882198e7685ef385061629f1c4a81ab02411a3a59113a4e3bdea2b7e1ed8c6d9",
+    "fold_availability.csv": "b79b74157729ea93fd413f545b726eae65c13d5327a3f1445aee28a74bed1bcf",
+    "sources/2017_01.html": "b4f77346da8cc29ce06eee9a0cc035721075696c683ed624e648825ac5a2e40c",
+    "sources/2017_02.html": "bb42b6bdd5e3a1ccaf7c5f7d2d397adaf7d416fb252f71c9fcc77ac7031e9910",
+    "sources/2017_03.html": "543205c1b294e3b1679600fbbc56a2eadf8f5a7db7c764e1ad131b5dc077075d",
+    "sources/2017_04.html": "fc7ed119328ff8c5ee422eb5a67e35e82a8ccec4aada86411ec4c51cd13513f7",
+    "sources/2017_05.html": "a107bec54a0b4626488aa563c7d140a6c317df162858389a2923a4c4d02ce7e7",
+    "sources/2020_01.html": "b356a27ea32f5c396db710770e2e2e339d94e2890951c8f2afa54d5670909d02",
+    "sources/2020_02.pdf": "23696e5cc0a5fcf5c459060b7ab9534a4bf0c2a7beccffeb8977f7080b547008",
+    "sources/2020_03.pdf": "f84d74a27ca610156d4c2a960817f90ac79a7b388f3de8bd56aca700e155e500",
+    "sources/2020_04.html": "e9d086a41464c9ff519f4cf55937f1451ee819a9b1eeb7c0a7f3cf126bad25a3",
+    "sources/2020_05.pdf": "48378f33c4f384d0bf99b6cf9c4f7a710a557fdfcc7cec5e5f67b07e4096fae9",
+    "sources/2023_01.html": "221b8a7cc1391126807f120732ada54e1eb60ec33a36591b9b0570d9b0ebc3a7",
+    "sources/2023_02.html": "2745bab77299752c9c928dd6c5bb27396b98b2a0cb4516bce142b312b3048127",
+    "sources/2023_03.html": "883447e04c4a7528b9880180979beed8c7d5623c075bd7bd451afae986f0b502",
+    "sources/2023_04.html": "1421a517ac019c4396fcb817c06a05209cf7e2671ee12fc46d3d75a5379e529f",
+    "sources/2023_05.html": "76ad6a4182fee4af55a57099d4e0c44262a9e56293a7060ef79a4305b3bd89d8",
+    "sources/2025_01.html": "8a0d2fffeb3c57c3ac2aa20d0a9b3b9dbead0402a09a5ac160a5879d954ae9f2",
+    "sources/2025_02.html": "dd2a58ad14c13db056ea1f1757b728d211fd623a6bc0d553046071af5409d9d7",
+    "sources/2025_03.html": "6c7afb77b0f1e65965b09e036c32fe85e2157edfd1925c47e4e76d79751963ed",
+    "sources/2025_04.html": "60da9f94841b606388689ead727d25bb2f4e5782694d67aa48f4dfedc06f9df9",
+    "sources/2025_05.html": "3ae57c2b3932a4a04fc9296979b1880e4afac605e182eb8f8f0131054b7c4235",
+    "sources/2010_01.pdf": "34f6f77b828ea27c06e4843b3c1a19c19852fd2ef20a5e425fee84129c14576a",
+    "sources/2010_02.pdf": "8203d994d8e7aa81b602337c307a86f73ba458a750edc4e59f9cc88da0cc35b3",
+    "sources/2010_03.pdf": "82251f59a4dbb213ca9aaab4d082c1313a84a1d6abe527a5d1b5cc4715e1a024",
+    "sources/2010_04.pdf": "b9333a2bea7ae5297e21f99132d2b9a07df91f2e46b6d025a508a01aeecea043",
+    "sources/2010_05.pdf": "084f9b61500d41f05af144ff08e195d8c612c6b7b2d1bd8797c02b1085c0c4d1",
+    "sources/2011_01.pdf": "931e92c02de4b48f33ec422682384a841c69290d756a6d7651fc42b1374fc5a0",
+    "sources/2011_02.pdf": "bbba03a0fbd3d3debcb8fcf824e4e8329727dc649fe666b0c2e87d34fdb6bae0",
+    "sources/2011_03.pdf": "dd5c5cb20351477b92c9b2d4bae3439e76c588576c0a111b7cba1d87051b74c6",
+    "sources/2011_04.pdf": "43411103d3eee6e03df3ff342c033be72e0e0312b7d9064fd16bc7b70a0d3495",
+    "sources/2011_05.pdf": "8e9d145c1d99cade64c12d89aaa8383924919253c3872d76006498a8ae15391d",
+    "sources/2012_01.pdf": "0a79c08b0735ed0501f8a6d4d0609ee9ea9a78d98e98f23cea0b5666d6a34ee2",
+    "sources/2012_02.pdf": "5d868ea5ef210fc7dfcdfa1ce1aaa61ebec531af87dbf698959502325029f3f8",
+    "sources/2012_03.pdf": "7dd2a9f8cd85060afc078caf81ca2913b2f410c86d53b0a007437afa03b7ac2e",
+    "sources/2012_04.pdf": "a60c2c2543d4fe88bfc995e7d137308e02c71f6f6271bd928935f2f646bb06a6",
+    "sources/2012_05.pdf": "feb1206817336a78f97fc3ed3ea73f3c96ef1386833a6db572567070ae44a468",
+    "sources/2013_01.pdf": "8a1e85393119e3e610f1994dadb70f083ca4fd5696f1db0dc7980aead3c15a01",
+    "sources/2013_02.pdf": "86cc18d13fd9b1108dfad169a91e60ad418c77970e2a298d2d8327640f0172a8",
+    "sources/2013_03.pdf": "26afddaf1f78cc079c7df87c4990e42912f50ab6054344a410cf63c7912b905c",
+    "sources/2013_04.pdf": "3eb60a779135203af9d3db4bcfd41e608cfa3f4f1957f17c9c66987b3e6ddc46",
+    "sources/2013_05.pdf": "b1af7eec91e9f6018fba7e20fe19ace204b20b33320ffa6d5f17ef2d255b48f4",
+    "sources/2014_01.pdf": "559f764977a82038884e4fda0fb1fd9e105055351d80ca41ce70459bc4848719",
+    "sources/2014_02.pdf": "b27e035cab4af6f8e54fbf45eadb8e4daf0028a9d59fc1f0d8cb41e8a2bcd184",
+    "sources/2014_03.pdf": "beae0c1e00150ee4c45b104823aded455824361b0ec6b616451fb3efb355d584",
+    "sources/2014_04.pdf": "149b306a56827def1f96c7ad0c0262026c7f15b9c605b2e07732b86a0dfa8a0d",
+    "sources/2014_05.pdf": "5994271ec478daf1c7b8c227e7c27eb0b8d5431d44b8e00afb4811d75ed94116",
+    "sources/2015_01.pdf": "dc76729d926ebc395d0c5f4ab98868949ed327ca9affe2591cf6d33529603cab",
+    "sources/2015_02.pdf": "9d9a238b04df9c7e697a95eef54a8d5adaa3315bdcb495c4c74445685e86f444",
+    "sources/2015_03.pdf": "326e7ca057675ee2a0db35f884070f4b24f5b0a2b2cd6ae956153e8655cc1ea6",
+    "sources/2015_04.pdf": "978df2ea6d8b3837bf1a7117a39d4ea6a4767cc07d1c4cf47abe46144b18c1e0",
+    "sources/2015_05.pdf": "2f0e440d1d28e4a9fa64f1c10eafcefd4b67e9619bfad9a9da13344fa561e239",
+    "sources/2016_01.pdf": "ede959feb1e2ccf7e4d1fe51e1797a3969a82bedd050673a05c34869b16edeab",
+    "sources/2016_02.pdf": "72736aa71723a218e86cd1e4bc9e9cf7722f7e88b406e283a0f8d95db6f76507",
+    "sources/2016_03.pdf": "eac8682b7531a37919c3d3ff25a16b204b9249ae7414eedeb30b8b2fc43eef21",
+    "sources/2016_04.pdf": "2cf1fac49090833026cf9f58213579ce8183825ca82abf16f5cf211345859739",
+    "sources/2016_05.pdf": "88489c0bbdda66203ee11a9a123022f1b49c7c84554d50585cb631d23cbd621c",
+    "sources/2018_01.html": "8806c5a34ca75bb95d4c465359d0a9727ca37ba32aa3df64bcb65cd8cd413bb5",
+    "sources/2018_02.html": "e914825740fd08b8bec858c357e50f023a70f0651dbe1689400dd3dd6e4865b1",
+    "sources/2018_03.html": "b3f6badd7b517ead60ce4f2cb0f78b88f03999f6ff985c1dd10961fc4cc9d2f1",
+    "sources/2018_04.html": "43d0f0ee11f0c305f21312ef194c6dfbf50c1ed687c5cf6c6601b5ca9b7a675f",
+    "sources/2018_05.html": "6ed640e377d40d3a33a78cc989308a561cdf8408f459b6de77b67f0bf0e94bb9",
+    "sources/2019_01.html": "e21873f98552bc9de3077c5ac3a02e8309f8ace4731756d132eaab49c16fbb3d",
+    "sources/2019_02.html": "c728cafaf2c0e557f68902da63fc252c727948d1754030bb8d948c73b8d0673b",
+    "sources/2019_03.html": "384426ba1605386ed49980f6d56c0776321b1964fe23ad23c82bf7d59d566683",
+    "sources/2019_04.html": "16727fbc8069ec93e4a5df5b4df9ab4b93ea5f60f4fabdb7bae1547a2d747c90",
+    "sources/2019_05.html": "28074c73747bd0f71e6415580942508f613f702697ebe81f61a83ed19ea6637d",
+    "sources/2021_01.html": "17c6c61f32850880e4d467b39039c242aef2e22842ce2b134a03c4440c1b419b",
+    "sources/2021_02.html": "af66e47733a8b4d1b37bd2b7040fee77b90c60d9c8a7ea59473e4f3c43cb93e2",
+    "sources/2021_03.html": "c8a4e26da61449ceb2833e2a46e92e82c33f3b83d31fdb6569c384589732d084",
+    "sources/2021_04.html": "7662ddae91c0888dc848367bfde8c6aa0a186de8881add27a6b98d326a94313d",
+    "sources/2021_05.html": "62b8d61dce3858e48ed8c2a29cb18193cbe107cea89cf7d6b505d3e0e81d3344",
+    "sources/2022_01.html": "42c69e598cdd04671563a3e8c2267894c1cab135a7c3c08199155033a3c631e2",
+    "sources/2022_02.html": "a691452f88f0e52a361acc508f52873c7dfec4a03467b850f8ec52c2dee8bd03",
+    "sources/2022_03.html": "f1fd7cf0349ac1275d497b89d99426766dbea1fe2c10cb7343ef9ff862157e2e",
+    "sources/2022_04.html": "1b1198c8830f967e0cdd09657eac7d770b58e6e03349d2053434f84583e54b6e",
+    "sources/2022_05.html": "cce30eaccf8b8704434a57d7c6ea18fbc4ff22657b08075c62ec52010a31a7b6",
+    "sources/2024_01.html": "ceffc3918ee71002917a0f44f75726ff2a25c7b3b3b76651d463083a19a92122",
+    "sources/2024_02.html": "88d8d952ca49ffbc11866d032cf0875ee8bce326db76b08e9aee3332bdef4b38",
+    "sources/2024_03.html": "be1df2b9f2ff58cb2ca4193684c3cfc0930777db798a14aba39d2640d099dcd2",
+    "sources/2024_04.html": "6dff1888e0adaf2ab9a704fc427693e690d4cc414f00352f8b56b744a7577988",
+    "sources/2024_05.html": "cf7af548c52609f49afc2aeb279a2d4e1500e67720482e648ecb27bb0b52d506"
+  },
+  "training_requested": false
+}

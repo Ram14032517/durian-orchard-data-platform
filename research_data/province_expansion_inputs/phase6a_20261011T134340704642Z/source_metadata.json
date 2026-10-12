@@ -1,0 +1,1057 @@
+[
+  {
+    "province_code": "21",
+    "point": [
+      12.87429,
+      101.44464
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=12.87429&longitude=101.44464&start=20000101&end=20091231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 12.87429,
+      "longitude": 101.44464,
+      "start": "20000101",
+      "end": "20091231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:44.568550+00:00",
+    "sha256": "aad7a9f3a1ebb03fa03689411d9b95117aed2ee029806da9ca017b2c4ad56009",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SRB",
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "21",
+    "point": [
+      12.87429,
+      101.44464
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=12.87429&longitude=101.44464&start=20100101&end=20191231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 12.87429,
+      "longitude": 101.44464,
+      "start": "20100101",
+      "end": "20191231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:44.418670+00:00",
+    "sha256": "7c0dcc90afc7a2b51207187d1fc95243b2f18496a48f2d66db47c5cfbe2b9318",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "21",
+    "point": [
+      12.87429,
+      101.44464
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=12.87429&longitude=101.44464&start=20200101&end=20251231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 12.87429,
+      "longitude": 101.44464,
+      "start": "20200101",
+      "end": "20251231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:46.518708+00:00",
+    "sha256": "6575ad9aed3dd60f154910995be2ab12dfb2ae42d992b1e9b7f1dd85a9e3bd8f",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "30",
+    "point": [
+      14.96614,
+      102.07023
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=14.96614&longitude=102.07023&start=20000101&end=20091231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 14.96614,
+      "longitude": 102.07023,
+      "start": "20000101",
+      "end": "20091231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:45.791632+00:00",
+    "sha256": "f651ea374da007a601c375e804e0dfa0117679d94cf71995260e0039da1aa8ea",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "SRB",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "30",
+    "point": [
+      14.96614,
+      102.07023
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=14.96614&longitude=102.07023&start=20100101&end=20191231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 14.96614,
+      "longitude": 102.07023,
+      "start": "20100101",
+      "end": "20191231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:47.617438+00:00",
+    "sha256": "0ef1d37d5f1e8eeb75419c3721f8ad7bf9121dd7b22c6b4c7a9b62a0a8ce779a",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "30",
+    "point": [
+      14.96614,
+      102.07023
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=14.96614&longitude=102.07023&start=20200101&end=20251231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 14.96614,
+      "longitude": 102.07023,
+      "start": "20200101",
+      "end": "20251231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:47.436584+00:00",
+    "sha256": "1a9b7c5e0feee036939eaf5170dc600f6f9e42d6cb33dab85d8de59892294fa0",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "77",
+    "point": [
+      11.80445,
+      99.72466
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=11.80445&longitude=99.72466&start=20000101&end=20091231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 11.80445,
+      "longitude": 99.72466,
+      "start": "20000101",
+      "end": "20091231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:50.024379+00:00",
+    "sha256": "78b16dc9674781b42ca0c93953754d5c8f8be376bf59d76036651029f3d36315",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "SRB",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "77",
+    "point": [
+      11.80445,
+      99.72466
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=11.80445&longitude=99.72466&start=20100101&end=20191231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 11.80445,
+      "longitude": 99.72466,
+      "start": "20100101",
+      "end": "20191231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:50.044422+00:00",
+    "sha256": "ec6e6a80e7becb457e7748e35c2dafdd992ca54f5667fe09b2cfd2f206aa2430",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "77",
+    "point": [
+      11.80445,
+      99.72466
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=11.80445&longitude=99.72466&start=20200101&end=20251231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 11.80445,
+      "longitude": 99.72466,
+      "start": "20200101",
+      "end": "20251231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:51.257479+00:00",
+    "sha256": "bdff3b2be1dc1cd1da2f82dfb731c5ae18cad0411faf88f2aaa64ee34b638e6d",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "80",
+    "point": [
+      8.57693,
+      99.70082
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=8.57693&longitude=99.70082&start=20000101&end=20091231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 8.57693,
+      "longitude": 99.70082,
+      "start": "20000101",
+      "end": "20091231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:51.994609+00:00",
+    "sha256": "c145bc0d41a5290f93a02a2c6dde10ace549960175a7a25d28c0ea2989f42798",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "SRB",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "80",
+    "point": [
+      8.57693,
+      99.70082
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=8.57693&longitude=99.70082&start=20100101&end=20191231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 8.57693,
+      "longitude": 99.70082,
+      "start": "20100101",
+      "end": "20191231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:53.454333+00:00",
+    "sha256": "2484a11a437979cfd65d2f447866ae1b584e601609888da6c2a0150e06813fea",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "80",
+    "point": [
+      8.57693,
+      99.70082
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=8.57693&longitude=99.70082&start=20200101&end=20251231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 8.57693,
+      "longitude": 99.70082,
+      "start": "20200101",
+      "end": "20251231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:53.669396+00:00",
+    "sha256": "05759420269c1c9f7e570579e4778019b31139cd7688e5a3c8e0f5d7774c7149",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "85",
+    "point": [
+      10.04423,
+      98.76673
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=10.04423&longitude=98.76673&start=20000101&end=20091231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 10.04423,
+      "longitude": 98.76673,
+      "start": "20000101",
+      "end": "20091231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:54.588077+00:00",
+    "sha256": "3aaed75fe2341811163bd2f067d97e7dbb8fe978990507602470264548b37ed4",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "SRB",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "85",
+    "point": [
+      10.04423,
+      98.76673
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=10.04423&longitude=98.76673&start=20100101&end=20191231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 10.04423,
+      "longitude": 98.76673,
+      "start": "20100101",
+      "end": "20191231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:54.991815+00:00",
+    "sha256": "bd530c6c50f371c122753c67b12af5cc3d5a3b245d16f95c585f705427bdb8f1",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  },
+  {
+    "province_code": "85",
+    "point": [
+      10.04423,
+      98.76673
+    ],
+    "point_status": "province reference proxy, not orchard",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CRH2M%2CPRECTOTCORR%2CALLSKY_SFC_SW_DWN%2CWS2M&community=AG&latitude=10.04423&longitude=98.76673&start=20200101&end=20251231&format=JSON&time-standard=LST",
+    "request": {
+      "parameters": "T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M",
+      "community": "AG",
+      "latitude": 10.04423,
+      "longitude": 98.76673,
+      "start": "20200101",
+      "end": "20251231",
+      "format": "JSON",
+      "time-standard": "LST"
+    },
+    "retrieved_utc": "2026-10-11T13:43:55.904560+00:00",
+    "sha256": "dfc73cd71f3c63c504cbebeeb1d0d9e8e4e5b846d3d61c98e368ba42333ceb34",
+    "header": {
+      "title": "NASA/POWER Source Native Resolution Daily Data",
+      "api": {
+        "version": "v2.10.0",
+        "name": "POWER Daily API"
+      },
+      "sources": [
+        "SYN1DEG",
+        "MERRA2",
+        "POWER"
+      ],
+      "fill_value": -999.0,
+      "time_standard": "LST",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    "parameters": {
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "T2M_MAX": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Maximum"
+      },
+      "T2M_MIN": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters Minimum"
+      },
+      "RH2M": {
+        "units": "%",
+        "longname": "Relative Humidity at 2 Meters"
+      },
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      },
+      "WS2M": {
+        "units": "m/s",
+        "longname": "Wind Speed at 2 Meters"
+      }
+    },
+    "publication_date": null,
+    "availability_status": "unverified",
+    "historical_vintage_verified": false
+  }
+]

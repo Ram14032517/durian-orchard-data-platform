@@ -1,9 +1,9 @@
 param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
 
 # Mechanical migration: preserve existing values without printing credentials.
-$gatewayPath = Join-Path $ProjectRoot 'receiver_gateway\receiver_gateway.ino'
-$privatePath = Join-Path $ProjectRoot 'receiver_gateway\farm_secret.h'
-$examplePath = Join-Path $ProjectRoot 'receiver_gateway\farm_secret.example.h'
+$gatewayPath = Join-Path $ProjectRoot 'iot\receiver_gateway\receiver_gateway.ino'
+$privatePath = Join-Path $ProjectRoot 'iot\receiver_gateway\farm_secret.h'
+$examplePath = Join-Path $ProjectRoot 'iot\receiver_gateway\farm_secret.example.h'
 $names = @('SUPABASE_INGEST_URL', 'GOOGLE_SHEETS_URL', 'DEVICE_INGEST_KEY')
 $source = [IO.File]::ReadAllText($gatewayPath)
 if (-not $source.Contains('#include "farm_secret.h"')) {
@@ -46,9 +46,9 @@ foreach ($name in $names) {
 # Reject a tracked or non-ignored private header before any writes.
 Push-Location $ProjectRoot
 try {
-    $tracked = & git ls-files -- 'receiver_gateway/farm_secret.h'
+    $tracked = & git ls-files -- 'iot/receiver_gateway/farm_secret.h'
     if ($tracked) { throw 'farm_secret.h is tracked. No files changed.' }
-    & git check-ignore -q -- 'receiver_gateway/farm_secret.h'
+    & git check-ignore -q -- 'iot/receiver_gateway/farm_secret.h'
     if ($LASTEXITCODE -ne 0) { throw 'farm_secret.h is not ignored. No files changed.' }
 } finally { Pop-Location }
 

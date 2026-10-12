@@ -1,0 +1,1272 @@
+{
+  "2017": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2013.0,
+        949.2885140191564,
+        215.39086192068797,
+        69.13497481400589,
+        109.03532369804111,
+        19.19661845835324,
+        27.170805732714488,
+        0.8406745266405782,
+        1.8804009674725177
+      ],
+      "scale": [
+        0.4,
+        0.4000000000000001,
+        0.4,
+        0.4000000000000001,
+        0.40000000000000013,
+        2.0,
+        308.86268591815104,
+        179.1370996628094,
+        76.81284034402792,
+        87.895581974028,
+        1.0652058468911738,
+        1.3535304531900252,
+        0.2925605839901551,
+        0.7990092289198915
+      ],
+      "coef": [
+        35.15554575259201,
+        6.384949743948004,
+        -75.35037475984727,
+        23.79110333953364,
+        10.018775923773465,
+        22.14299002387239,
+        71.35348133905732,
+        7.308208288942887,
+        -69.31195669191604,
+        26.318753638723905,
+        -44.924009763569444,
+        26.688628042601614,
+        -55.33481189349828,
+        -32.270758414864254
+      ],
+      "intercept": 935.9934419933405,
+      "alpha": 10.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 140,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2016,
+    "training_rows": 35,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 154.51158540634566
+  },
+  "2018": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2013.5,
+        933.304020875361,
+        209.11275447921645,
+        85.57748596512184,
+        125.92848199354994,
+        18.99725534022138,
+        27.003187265587677,
+        0.8854724533945542,
+        1.8551785376795429
+      ],
+      "scale": [
+        0.4000000000000001,
+        0.4000000000000001,
+        0.4000000000000001,
+        0.40000000000000013,
+        0.40000000000000013,
+        2.29128784747792,
+        313.0808122591578,
+        186.33965680121685,
+        83.81942206458304,
+        89.6718346138954,
+        1.1531144263783606,
+        1.2896620683027449,
+        0.32408196492158253,
+        0.8274769949275502
+      ],
+      "coef": [
+        34.40257382269454,
+        -0.3120584729178091,
+        -37.97415586350994,
+        6.177183226119247,
+        -2.2935427123860284,
+        15.721859267263728,
+        38.12061366870259,
+        4.299276476168427,
+        -14.348708888996121,
+        0.6512604913496574,
+        -17.2246518646042,
+        14.613058279676899,
+        -32.24464601298302,
+        -21.637691338849738
+      ],
+      "intercept": 952.5951354971621,
+      "alpha": 100.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 130,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2017,
+    "training_rows": 40,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 201.80581693070016
+  },
+  "2019": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2014.0,
+        948.3599063363115,
+        194.02727708764667,
+        102.49123031799121,
+        144.86728324573977,
+        18.698817783263433,
+        26.842995925572016,
+        0.9375548046657318,
+        1.8207792950102388
+      ],
+      "scale": [
+        0.4000000000000001,
+        0.40000000000000013,
+        0.4000000000000001,
+        0.40000000000000013,
+        0.40000000000000013,
+        2.581988897471611,
+        314.3647315607942,
+        173.65501109327164,
+        87.30767952905035,
+        96.926054117252,
+        1.1984725147353108,
+        1.229817536592039,
+        0.35514941517368304,
+        0.8262863915365298
+      ],
+      "coef": [
+        36.00008034192917,
+        4.508910203692741,
+        -39.15571887325818,
+        2.015641281117409,
+        -3.3689129534810895,
+        22.793156471287336,
+        44.936254607740715,
+        -3.5152766008348344,
+        -11.807211224048423,
+        0.30747587907647533,
+        -13.648088323846117,
+        16.52672842661889,
+        -33.147775957513716,
+        -21.48723868402244
+      ],
+      "intercept": 977.3937512867701,
+      "alpha": 100.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 120,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2018,
+    "training_rows": 45,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 224.02165396288612
+  },
+  "2020": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2014.5,
+        971.1021834630435,
+        187.62269980888684,
+        99.77040238891544,
+        142.9824472766364,
+        18.74303912247173,
+        26.875925437967837,
+        0.9462642785175776,
+        1.8468843671881858
+      ],
+      "scale": [
+        0.4000000000000001,
+        0.4000000000000001,
+        0.40000000000000013,
+        0.40000000000000013,
+        0.40000000000000013,
+        2.8722813232690143,
+        316.5062540678515,
+        167.62973712561737,
+        85.7911460563412,
+        95.3483012304046,
+        1.18374322438148,
+        1.217179836657495,
+        0.3547795818381544,
+        0.8291552982161872
+      ],
+      "coef": [
+        152.4774917785516,
+        40.884245970673916,
+        -165.84238539628825,
+        -1.9963167134045319,
+        -25.523035639529827,
+        88.57923953209072,
+        68.89042700628622,
+        -134.78794460735907,
+        28.695202970855387,
+        84.0614822208,
+        68.05810329952837,
+        -76.92300358174974,
+        -115.75691849988932,
+        4.587984857092338
+      ],
+      "intercept": 1008.427514147895,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 120,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2019,
+    "training_rows": 50,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 207.03222511832087
+  },
+  "2021": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2015.0,
+        999.8866558662231,
+        257.65335088824224,
+        56.6284614515919,
+        99.59178193545584,
+        19.32725864859778,
+        27.202889578537402,
+        0.747126163947904,
+        1.8006886985577848
+      ],
+      "scale": [
+        0.3999999999999997,
+        0.3999999999999997,
+        0.39999999999999974,
+        0.3999999999999999,
+        0.40000000000000013,
+        3.1622776601683795,
+        339.9781196370374,
+        204.4852328482391,
+        61.90637621600158,
+        85.00670558550215,
+        0.9478115373003768,
+        1.2788223519163264,
+        0.24963930420667715,
+        0.7460937562480874
+      ],
+      "coef": [
+        135.43838973263692,
+        52.241274073258516,
+        -171.3973453253779,
+        -15.315228900672215,
+        -0.9670895798377974,
+        88.4552533133306,
+        106.20645644600525,
+        -67.96929051255297,
+        -93.57008236892571,
+        81.89193484793249,
+        46.79366725869342,
+        -94.72080023559117,
+        -106.5626279405496,
+        4.505700115288674
+      ],
+      "intercept": 1029.7785563259206,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 150,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2020,
+    "training_rows": 55,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 197.147086360854
+  },
+  "2022": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2015.5,
+        1020.1701827195523,
+        223.3136887243191,
+        69.76459567606305,
+        114.52802743271221,
+        19.17466560758083,
+        27.08293698996655,
+        0.8066420611523777,
+        1.8326853283483169
+      ],
+      "scale": [
+        0.39999999999999936,
+        0.39999999999999947,
+        0.3999999999999997,
+        0.3999999999999999,
+        0.40000000000000013,
+        3.452052529534663,
+        360.227125997205,
+        185.13609064271583,
+        69.07454266540967,
+        86.21156091076472,
+        1.008193530125246,
+        1.2356208386004344,
+        0.2778988188195656,
+        0.7692423417477656
+      ],
+      "coef": [
+        126.63529720392442,
+        71.53751024965099,
+        -165.5629702011841,
+        -26.426304059948954,
+        -6.1835331924330115,
+        79.94584112344923,
+        142.9805597551753,
+        -56.69859522942667,
+        -108.72861675741197,
+        123.86247472463812,
+        72.06821098590635,
+        -107.74309272453219,
+        -88.06424003797353,
+        -20.0307129599333
+      ],
+      "intercept": 1052.9684547285644,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 140,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2021,
+    "training_rows": 60,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 187.94481071003102
+  },
+  "2023": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2016.0,
+        1042.31534844556,
+        274.37793167701864,
+        64.23418028961007,
+        105.9686764489691,
+        19.272714285714283,
+        27.12319506750218,
+        0.7230597475213083,
+        1.7431470355633727
+      ],
+      "scale": [
+        0.3999999999999992,
+        0.39999999999999947,
+        0.3999999999999997,
+        0.3999999999999999,
+        0.40000000000000013,
+        3.7416573867739413,
+        373.0802269048358,
+        215.15884509785786,
+        71.33271342111716,
+        87.70979190662678,
+        0.9245724529985848,
+        1.2322083529439944,
+        0.24222996242993539,
+        0.7383476226063596
+      ],
+      "coef": [
+        132.64665299415879,
+        54.47375672101173,
+        -164.42524362367178,
+        -23.475550043363157,
+        0.7803839518711774,
+        87.47772072168797,
+        145.41205376669234,
+        -36.461595298959246,
+        -154.76071772480168,
+        107.68983762127107,
+        51.97531881543774,
+        -104.55921324778157,
+        -83.53296483325602,
+        1.0462744914982982
+      ],
+      "intercept": 1068.4152118100576,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 150,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2022,
+    "training_rows": 65,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 182.48686646223132
+  },
+  "2024": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2016.5,
+        1057.4197018985892,
+        236.40023348235616,
+        73.82212929151595,
+        116.21031777694355,
+        19.15210614008145,
+        27.08368124291857,
+        0.7831886085214484,
+        1.7879051190813717
+      ],
+      "scale": [
+        0.39999999999999925,
+        0.39999999999999947,
+        0.3999999999999997,
+        0.3999999999999999,
+        0.40000000000000013,
+        4.031128874149275,
+        389.93136776870153,
+        193.26268650643559,
+        75.68213368917928,
+        87.80080396994407,
+        1.004237744213941,
+        1.2215969159009825,
+        0.27067613450202915,
+        0.759091971585145
+      ],
+      "coef": [
+        132.2207436227673,
+        74.81756190053032,
+        -167.70204135842934,
+        -27.003502428240342,
+        -12.33276173661544,
+        79.55110119166388,
+        166.23575261790302,
+        -28.398228484099963,
+        -164.67945409563808,
+        142.72575552907173,
+        78.43036724546606,
+        -129.79121553705824,
+        -68.90241910834538,
+        -21.597608962865735
+      ],
+      "intercept": 1082.7316426556863,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 140,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2023,
+    "training_rows": 70,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 122.38955318810054
+  },
+  "2025": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2017.0,
+        1071.5147380152741,
+        232.11541826723993,
+        70.87291057493233,
+        113.45603451186493,
+        19.130780627488456,
+        27.157460069437807,
+        0.7894677825086448,
+        1.8188832937410677
+      ],
+      "scale": [
+        0.39999999999999925,
+        0.39999999999999947,
+        0.3999999999999997,
+        0.3999999999999999,
+        0.40000000000000013,
+        4.320493798938574,
+        392.82270645960887,
+        191.3739746544109,
+        74.13160327204876,
+        86.32441375910794,
+        1.0030812872693182,
+        1.274691411373,
+        0.26991029474188777,
+        0.7620012803840379
+      ],
+      "coef": [
+        139.49827472715765,
+        95.16232175783907,
+        -175.2725266105239,
+        -35.05281107861663,
+        -24.3352587958454,
+        73.63216699001062,
+        174.3210742579354,
+        -28.27450718479721,
+        -165.65547377410834,
+        161.4050395214012,
+        104.4120834189207,
+        -160.4849683265942,
+        -59.548474493193645,
+        -38.55416314182809
+      ],
+      "intercept": 1080.4164143241658,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 140,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        7,
+        8,
+        9
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2024,
+    "training_rows": 75,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 129.32128067800267
+  },
+  "2026": {
+    "schema_version": 1,
+    "model": "stage_ridge_vpd",
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2017.5,
+        1070.0452679944992,
+        265.6761245968705,
+        61.9472315008361,
+        104.4247822055662,
+        19.311559650222968,
+        27.257521980112273,
+        0.7660086367907367,
+        1.796101738603554
+      ],
+      "scale": [
+        0.39999999999999925,
+        0.39999999999999947,
+        0.3999999999999997,
+        0.3999999999999999,
+        0.40000000000000013,
+        4.6097722286464435,
+        385.6391628618132,
+        220.3530941313465,
+        67.99743134806178,
+        85.88252199708768,
+        0.9837111964142201,
+        1.2538136362134493,
+        0.27921599912039924,
+        0.7671865761793425
+      ],
+      "coef": [
+        126.1320092987078,
+        104.35117261561665,
+        -157.88727907967203,
+        -55.67981643304937,
+        -16.91608640155946,
+        79.94707806332863,
+        168.27888099423419,
+        -29.56265107508223,
+        -196.33707981898806,
+        169.66833091432198,
+        68.73621010108378,
+        -145.10596385106862,
+        -55.883312828250574,
+        -52.477748457756896
+      ],
+      "intercept": 1089.2090837391734,
+      "alpha": 1.0
+    },
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "features": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "provinces": [
+      "22",
+      "33",
+      "53",
+      "84",
+      "86"
+    ],
+    "age_days": 140,
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        6,
+        7,
+        8
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_start": 2010,
+    "train_end": 2025,
+    "training_rows": 80,
+    "input_sha256": {
+      "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+      "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+      "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+    },
+    "mode": "conditional on complete observed/scenario stage weather",
+    "inner_mae_kg_rai": 93.70520223353172
+  }
+}

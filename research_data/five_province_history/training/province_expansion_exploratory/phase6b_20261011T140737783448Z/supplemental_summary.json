@@ -1,0 +1,71 @@
+{
+  "training_runs": 1,
+  "source_availability": {
+    "unverified": 62
+  },
+  "availability_warnings": {
+    "availability_status=unverified": 130347,
+    "Missing publication date for the exact source version": 130347,
+    "Missing or mismatched version-specific publication evidence": 130347,
+    "Issue rule created after historical issue date": 72,
+    "Later evaluation reference; finality must be checked separately": 540
+  },
+  "availability_checks": 130887,
+  "availability_checks_path": "C:\\project\\research_data\\province_expansion_inputs\\phase6a_20261011T134340704642Z\\availability_checks.json",
+  "availability_checks_sha256": "caa09732905dbfbb0bf918926c88a9692c1969f76995f44c8de3a1471438b781",
+  "fit_requests": 252,
+  "actual_fits": 92,
+  "cache_reuses": 160,
+  "cache_isolation_passed": true,
+  "selection_boundary_passed": true,
+  "secondary_weather_gain": {
+    "n": 45,
+    "mean_gain": 7.022190444657122,
+    "median_gain": 2.5207748796390206,
+    "wins": 24,
+    "ties": 0,
+    "losses": 21
+  },
+  "depth_counts": [
+    {
+      "arm": "A",
+      "depth": 2,
+      "count": 5
+    },
+    {
+      "arm": "A",
+      "depth": 3,
+      "count": 4
+    },
+    {
+      "arm": "B",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "arm": "B",
+      "depth": 3,
+      "count": 3
+    },
+    {
+      "arm": "C",
+      "depth": 2,
+      "count": 2
+    },
+    {
+      "arm": "C",
+      "depth": 3,
+      "count": 7
+    },
+    {
+      "arm": "D",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "arm": "D",
+      "depth": 3,
+      "count": 8
+    }
+  ]
+}

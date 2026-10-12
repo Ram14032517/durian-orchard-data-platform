@@ -1,0 +1,92 @@
+[
+  {
+    "test_year": 2017,
+    "train_start": 2010,
+    "train_end": 2016,
+    "inner_validation_years": [
+      2014,
+      2015,
+      2016
+    ]
+  },
+  {
+    "test_year": 2018,
+    "train_start": 2010,
+    "train_end": 2017,
+    "inner_validation_years": [
+      2015,
+      2016,
+      2017
+    ]
+  },
+  {
+    "test_year": 2019,
+    "train_start": 2010,
+    "train_end": 2018,
+    "inner_validation_years": [
+      2016,
+      2017,
+      2018
+    ]
+  },
+  {
+    "test_year": 2020,
+    "train_start": 2010,
+    "train_end": 2019,
+    "inner_validation_years": [
+      2017,
+      2018,
+      2019
+    ]
+  },
+  {
+    "test_year": 2021,
+    "train_start": 2010,
+    "train_end": 2020,
+    "inner_validation_years": [
+      2018,
+      2019,
+      2020
+    ]
+  },
+  {
+    "test_year": 2022,
+    "train_start": 2010,
+    "train_end": 2021,
+    "inner_validation_years": [
+      2019,
+      2020,
+      2021
+    ]
+  },
+  {
+    "test_year": 2023,
+    "train_start": 2010,
+    "train_end": 2022,
+    "inner_validation_years": [
+      2020,
+      2021,
+      2022
+    ]
+  },
+  {
+    "test_year": 2024,
+    "train_start": 2010,
+    "train_end": 2023,
+    "inner_validation_years": [
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "test_year": 2025,
+    "train_start": 2010,
+    "train_end": 2024,
+    "inner_validation_years": [
+      2022,
+      2023,
+      2024
+    ]
+  }
+]

@@ -1,25 +1,221 @@
-main{grid-template-columns:minmax(340px,42%) minmax(500px,1fr)}
-#map{position:relative;overflow:hidden;min-width:0}
-aside{padding:20px}section{border-radius:12px;padding:20px}h2{line-height:1.4}
-.quick-nav{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;z-index:500;background:#f2f5f1;padding:5px 0 9px}
-.quick-nav a,.training-links a{display:inline-block;padding:8px 10px;border-radius:7px;background:#e2eee6;color:#164e40;font-weight:bold;text-decoration:none}
-.quick-nav a:hover,.training-links a:hover{background:#cbe4d4;text-decoration:underline}
-.view-summary{margin:0 0 12px;padding:10px 12px;border-left:4px solid #176d56;background:#e9f3ec;font-size:13px}
-.training-section{border-top:4px solid #176d56}.training-links{display:flex;gap:8px;flex-wrap:wrap}.training-links a{border:1px solid #b9d4c2}
-#download-weather:disabled{opacity:.55;cursor:not-allowed}
-#chart{display:block}section[id]{scroll-margin-top:60px}
-.monthly-report{border-top:5px solid #176d56}.report-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.month-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:16px 0}
-.month-card{background:#f5f8f5;color:#29473c;border:1px solid #cfdbd1;min-height:100px;text-align:left;padding:10px;margin:0}
-.month-card[aria-pressed=true]{background:#e1f0e6;border:2px solid #165f45;box-shadow:inset 0 -4px #165f45}
-.month-card strong{display:block;font-size:17px;margin-bottom:7px}.month-card small{display:block;font-size:11px;line-height:1.6}
-.stage-chip{display:inline-block;padding:3px 7px;border-radius:4px;margin:3px 3px 3px 0;font-size:12px;color:#233e32;background:#e5ece7}
-.stage-leaf{background:#e1eed6}.stage-flower{background:#eee3f0}.stage-fruit{background:#dce9f0}.stage-harvest{background:#faeac8}
-.report-heading{font-size:22px;margin:18px 0 8px}.report-subhead{font-size:16px;margin:18px 0 8px}.report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.report-stat{padding:12px;background:#f4f7f3;border:1px solid #dce3da;border-radius:7px}.report-stat strong{display:block;font-size:21px;margin:5px 0}.report-stat small{font-size:11px;color:#52665a}
-.evidence-item{border-left:3px solid #929fa0;padding:5px 12px;margin:12px 0}.evidence-item p{font-size:13px}.evidence-item a{font-weight:bold}.scope-note{font-size:12px;color:#536258;line-height:1.6}
-.report-comparison{overflow:auto}.report-comparison table{min-width:550px}.report-comparison th{background:#f0f4ef;position:sticky;top:0}
-.report-comparison button{background:transparent;color:#16624e;border:0;padding:2px;text-decoration:underline;text-align:left}
-button:focus-visible,select:focus-visible{outline:3px solid #ca8421;outline-offset:2px}
-@media(max-width:1000px){main{grid-template-columns:minmax(280px,38%) minmax(0,1fr)}.month-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:800px){main{display:block}#map{height:36vh;min-height:260px;position:relative}aside{padding:12px}.quick-nav{top:0}.month-grid{grid-template-columns:repeat(3,minmax(0,1fr))}section{padding:15px}.report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}section[id]{scroll-margin-top:100px}}
+:root{color-scheme:light;--canvas:217 54% 96%;--surface:0 0% 100%;--surface-muted:215 55% 97%;--surface-strong:214 45% 93%;--line:215 32% 87%;--ink:218 54% 20%;--ink-soft:216 21% 40%;--ink-muted:216 21% 40%;--brand:221 83% 53%;--brand-solid:221 83% 53%;--brand-soft:214 100% 96%;--on-brand:0 0% 100%;--accent:334 100% 50%;--success:153 71% 65%;--warning:41 100% 50%;--danger:0 85% 67%;--on-danger:0 0% 100%;--area-a:#2563eb;--area-a-soft:#eaf2ff;--area-b:#b45309;--area-b-soft:#fff3e4}
+[hidden]{display:none!important}
+/* Neo Dark: graph-led orchard view; map research stays a separate workspace. */
+body.orchard-home main{grid-template-columns:minmax(0,1fr)}
+body.orchard-home .map-pane,body.orchard-home #area-section,body.orchard-home #area-strip,body.orchard-home #view-summary{display:none!important}
+body{font:14px 'Helvetica Neue',Tahoma,Arial,sans-serif;color:hsl(var(--ink));background:hsl(var(--surface-muted));height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+header{background:#FFFFFF;color:hsl(var(--ink));border-bottom:1px solid hsl(var(--line));padding:10px 18px;flex:none}header h1{font-size:20px}.header-description{font-size:14px;color:#454545;margin:4px 0}.usage-guide{margin:6px 0 0;font-size:13px}.usage-guide summary{font-weight:400;color:hsl(var(--brand))}.usage-guide ol{margin:8px 0;padding-left:22px;line-height:1.7}
+main{display:grid;grid-template-columns:minmax(340px,55%) minmax(0,1fr);height:auto;flex:1;min-height:0}
+section{background:#FFFFFF;border:1px solid hsl(var(--line));border-radius:0;padding:16px;margin-bottom:12px}
+h2{font-size:17px;line-height:1.4}h3{font-size:15px}a{color:hsl(var(--brand))}
+button,select,input{min-height:36px;border-radius:3px;border:1px solid #bcbcc6;font:inherit}
+button{background:#FFFFFF;border-color:#bcbcc6;color:hsl(var(--ink));padding:7px 10px}button:hover:not(:disabled){border-color:hsl(var(--brand));color:hsl(var(--brand))}button:disabled{opacity:.5;cursor:not-allowed}#load{background:hsl(var(--brand));border-color:hsl(var(--brand));color:#FFFFFF;font-weight:700}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid hsl(var(--brand));outline-offset:3px}
+.workspace-controls{margin:0 0 14px;padding:12px;border:1px solid hsl(var(--line))}
+.area-heading{display:block}.area-heading h2,.area-heading p{margin:0 0 8px}.area-heading p{font-size:13px;color:#454545;overflow-wrap:anywhere}
+.area-pair{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}.area-pair fieldset{min-width:0;margin:0;padding:8px 10px;border:1px solid hsl(var(--line))}
+#comparison-controls{margin:0;min-width:0}#comparison-controls summary{padding:9px 0;font-size:13px;overflow-wrap:anywhere}#comparison-controls[open] summary{padding-top:0}
+.area-pair legend{font-weight:700;padding:0 5px}.area-pair fieldset:has(button[aria-pressed=true]){border-color:hsl(var(--brand))}
+.area-inputs{display:flex;flex-wrap:wrap;align-items:end;gap:7px}.area-inputs label{display:flex;flex:1 1 140px;min-width:0;flex-direction:column;font-size:13px;margin:0;gap:3px}.area-inputs select{width:100%;min-width:0;font-size:14px}
+.area-inputs button{flex:1 1 180px;font-size:13px;background:#FFFFFF;color:hsl(var(--ink));margin:0}.area-inputs button[aria-pressed=true]{border-color:hsl(var(--brand));color:hsl(var(--brand));box-shadow:inset 0 -2px hsl(var(--brand))}
+.point{background:hsl(var(--surface-muted));border-left:3px solid hsl(var(--brand));font-size:13px;line-height:1.6;margin-top:8px;padding:8px;overflow-wrap:anywhere;white-space:pre-line}.point.b{border-color:hsl(var(--ink))}
+.area-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:8px}.area-actions button{font-size:13px;background:#FFFFFF;color:hsl(var(--ink));border-color:hsl(var(--line));margin:0;min-height:36px}.area-actions small{flex-basis:100%;color:#454545;font-size:13px;line-height:1.6}
+#server-notice{flex:none;background:#FFFFFF;border:2px solid hsl(var(--brand));padding:10px 18px;color:hsl(var(--ink))}
+.map-pane{display:flex;flex-direction:column;min-height:0;min-width:0}.map-pane #map{position:relative;overflow:hidden;flex:1;height:auto;min-height:180px;min-width:0}
+#province-shortcuts{display:flex;flex-wrap:wrap;gap:5px;padding:8px;background:#FFFFFF;border-bottom:1px solid hsl(var(--line))}
+#province-shortcuts button{background:#FFFFFF;color:hsl(var(--ink));margin:0;border-color:hsl(var(--line));font-size:13px}
+#province-shortcuts button{border-radius:18px;padding:6px 11px}#province-shortcuts button[aria-pressed=true]{background:#FFFFFF;color:hsl(var(--brand));border-color:hsl(var(--brand));box-shadow:inset 0 -2px hsl(var(--brand));font-weight:700}
+aside{padding:12px;overflow:auto;min-height:0;min-width:0;scroll-padding-top:12px}.workspace-top{position:relative;background:hsl(var(--surface-muted));padding-bottom:10px}.quick-nav{display:flex;gap:5px;flex-wrap:wrap;background:#FFFFFF;padding:0;border-bottom:1px solid hsl(var(--line))}
+.area-strip{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:10px;background:#FFFFFF;border:1px solid hsl(var(--line));border-bottom:0}.area-strip-labels{flex:1 1 240px;min-width:0}.area-strip-labels p{margin:0;font-size:13px;font-weight:700;overflow-wrap:anywhere}.area-strip button{font-size:13px;margin:0;flex:none}.area-strip #map-target{flex-basis:100%;margin:0;font-size:13px;color:#454545}.area-actions #apply-areas{font-weight:700;border-color:hsl(var(--brand));color:hsl(var(--brand))}
+.quick-nav a,.training-links a{display:inline-block;padding:8px;border:1px solid hsl(var(--line));border-radius:3px;background:#FFFFFF;color:hsl(var(--ink));font-weight:700;text-decoration:none;font-size:12px}
+.quick-nav a{border:0;border-bottom:2px solid transparent;border-radius:0;font-size:13px;font-weight:400}.quick-nav a[aria-current=page]{background:#FFFFFF;color:hsl(var(--brand));border-bottom-color:hsl(var(--brand));font-weight:700}.quick-nav a:hover,.training-links a:hover{text-decoration:underline}
+.view-summary{margin:0 0 10px;padding:8px 10px;border-left:3px solid hsl(var(--brand));background:#FFFFFF;font-size:13px;overflow-wrap:anywhere}
+.scope-note,.muted{font-size:13px;color:#454545;line-height:1.6}.warn{padding:9px;border-left:3px solid hsl(var(--brand));background:hsl(var(--surface-muted));color:hsl(var(--ink))}
+table{font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid hsl(var(--line))}.scroll{max-height:260px;overflow:auto}
+.daily-controls,.soil-selection-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.daily-controls label{display:flex;align-items:center;gap:8px}.daily-controls button{margin:0}.daily-controls [role=status]{font-size:13px;flex-basis:100%}#daily{max-height:420px}#daily table{min-width:520px;font-size:13px}#daily thead th{position:sticky;top:0;background:#FFFFFF;z-index:1}#daily th button{border:0;background:transparent;color:hsl(var(--ink));padding:4px;text-align:right;font-weight:700;margin:0;font-size:13px;min-height:30px}#daily th:first-child button{text-align:left}#daily th[aria-sort=ascending] button,#daily th[aria-sort=descending] button{color:hsl(var(--brand));text-decoration:underline}
+.training-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.training-links a{display:flex;align-items:center;min-height:60px;overflow-wrap:anywhere}.report-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.report-controls label:has(#report-province){display:none}
+#chart{display:block;width:100%;height:210px}section[id]{scroll-margin-top:0}
+.month-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:14px 0}.month-card{background:#FFFFFF;color:hsl(var(--ink));border-color:hsl(var(--line));min-height:85px;text-align:left;padding:8px;margin:0}
+.month-card[aria-pressed=true]{background:hsl(var(--surface-muted));border:2px solid hsl(var(--brand))}.month-card strong{display:block;font-size:16px;margin-bottom:5px}.month-card small{display:block;font-size:11px;line-height:1.6}
+.stage-chip{display:inline-block;padding:3px 6px;border:1px solid hsl(var(--line));border-radius:3px;margin:3px;font-size:12px;color:hsl(var(--ink));background:hsl(var(--surface-muted))}
+.report-heading{font-size:20px;margin:15px 0 8px}.report-subhead{font-size:15px;margin:16px 0 8px}.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.report-stat{padding:10px;background:hsl(var(--surface-muted));border:1px solid hsl(var(--line));border-radius:0}.report-stat strong{display:block;font-size:20px;margin:5px 0;overflow-wrap:anywhere}.report-stat small{font-size:11px;color:#555}
+.evidence-item{border-left:3px solid hsl(var(--line));padding:5px 12px;margin:12px 0}.evidence-item p{font-size:13px}.evidence-item a{font-weight:bold}
+.report-comparison{overflow:auto}.report-comparison table{min-width:550px}.report-comparison th{background:hsl(var(--surface-muted));position:sticky;top:0}.report-comparison button{background:transparent;color:hsl(var(--brand));border:0;padding:2px;text-decoration:underline;text-align:left}
+#soil-analysis h3{border-bottom:1px solid hsl(var(--line));padding-bottom:8px}.soil-yield-bar{display:grid;grid-template-columns:145px minmax(0,1fr) 100px;gap:8px;align-items:center;font-size:12px;padding:7px 0;border-bottom:1px solid hsl(var(--line));font-variant-numeric:tabular-nums}
+#soil-analysis-properties{max-height:none;overflow:visible}#soil-analysis-properties table{font-size:14px;table-layout:fixed}#soil-analysis-properties th,#soil-analysis-properties td{text-align:left;vertical-align:top;overflow-wrap:anywhere;padding:9px 7px}
+.soil-yield-fill{display:block;height:12px;background:hsl(var(--brand))}#district-yield-bars{max-height:300px;overflow:auto}
+.leaflet-control button{background:#FFFFFF;color:hsl(var(--ink));border-color:hsl(var(--line))}
+.leaflet-tooltip{max-width:260px;white-space:normal;font:13px 'Helvetica Neue',Tahoma,Arial,sans-serif;line-height:1.5}
+@media(max-width:1000px){.area-inputs label{flex-basis:120px}}
+@media(max-width:800px){body{height:auto;min-height:100dvh;display:block;overflow:auto}main{display:block}.workspace-controls{padding:10px}.map-pane #map{height:38vh;min-height:240px;flex:auto}aside{overflow:visible;padding:10px}.quick-nav{top:0}.month-grid{grid-template-columns:repeat(3,minmax(0,1fr))}section{padding:12px}.soil-yield-bar{grid-template-columns:100px minmax(0,1fr) 80px}header h1{font-size:17px}}
+@media(max-width:420px){header{padding:10px}.training-links{grid-template-columns:minmax(0,1fr)}.report-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){html{scroll-padding-top:12px}.workspace-top{margin-bottom:10px}}
+
+/* Area colors mean A/B everywhere; warning color never implies measured risk. */
+#area-a{border-left:4px solid var(--area-a);background:var(--area-a-soft)}
+#area-b{border-left:4px dashed var(--area-b);background:var(--area-b-soft)}
+#area-a legend,#focus-a,#edit-soil-a{color:var(--area-a)}
+#area-b legend,#focus-b,#edit-soil-b{color:var(--area-b)}
+.point.b{border-left:3px dashed var(--area-b);background:var(--area-b-soft)}
+#focus-b[aria-pressed=true]{border-color:var(--area-b);box-shadow:inset 0 -2px var(--area-b)}
+.area-strip-labels{display:grid;gap:5px}
+#area-summary-a,#area-summary-b{padding:5px 8px;border-left:3px solid var(--area-a);background:var(--area-a-soft);color:var(--area-a)}
+#area-summary-b{border-left:3px dashed var(--area-b);background:var(--area-b-soft);color:var(--area-b)}
+.warn,#server-notice{background:#fff7df;border-color:#986300;color:#654300;line-height:1.65}
+#weather table th:nth-child(2),#yield-comparison table th:nth-child(2),#soil-analysis-properties th:nth-child(2){background:var(--area-a-soft);color:var(--area-a);border-top:3px solid var(--area-a)}
+#weather table th:nth-child(3),#yield-comparison table th:nth-child(3),#soil-analysis-properties th:nth-child(3){background:var(--area-b-soft);color:var(--area-b);border-top:3px dashed var(--area-b)}
+#daily th:nth-child(n+2):nth-child(-n+4){border-top:3px solid var(--area-a);background:var(--area-a-soft)}
+#daily th:nth-child(5){border-top:3px dashed var(--area-b);background:var(--area-b-soft)}
+#daily th:nth-child(5) button{color:var(--area-b)}
+#daily tbody tr:nth-child(even),#weather table tr:nth-child(odd):not(:first-child),#soil-analysis-properties tr:nth-child(odd):not(:first-child){background:#F7F7F8}
+#daily tbody tr:hover,#weather table tr:not(:first-child):hover,#soil-analysis-properties tr:not(:first-child):hover{background:#e8edf4}
+td,th{line-height:1.55}#daily td{padding:9px 7px}
+.soil-legend{background:#FFFFFF;border-top:1px solid hsl(var(--line));padding:7px 10px;font-size:12px;line-height:1.6}
+.soil-legend summary{font-weight:700;cursor:pointer}.soil-legend-items{display:flex;flex-wrap:wrap;gap:6px 12px;max-height:110px;overflow:auto;padding-top:6px}
+.soil-legend-item{display:flex;align-items:center;gap:6px}.soil-swatch{width:14px;height:14px;border:1px solid #555;flex:none}
+
+/* Lumen semantic theme: one surface per group; color is not the only A/B cue. */
+body{font-family:'Epilogue',Tahoma,Arial,sans-serif;background:hsl(var(--canvas));color:hsl(var(--ink))}
+.orchard-header{display:flex;align-items:flex-start;gap:16px;background:hsl(var(--brand));color:hsl(var(--on-brand));border:0;padding:14px 24px}
+.orchard-mark{width:46px;height:52px;flex:none}.orchard-heading{flex:1;min-width:0}
+.orchard-header h1{font-size:22px;line-height:1.5;margin:0;font-weight:700}.header-description{color:hsl(var(--on-brand));font-size:14px;margin:3px 0}
+.usage-guide{font-size:13px;margin:5px 0 0}.usage-guide summary{color:hsl(var(--on-brand));font-weight:600}.usage-guide[open]{max-width:760px}
+.logout-link{color:hsl(var(--on-brand));border:1px solid hsl(var(--on-brand)/.4);border-radius:18px;padding:9px 16px;white-space:nowrap;text-decoration:none;font-size:13px}.logout-link:hover{background:hsl(var(--brand-solid))}
+aside{background:hsl(var(--canvas));padding:16px}.workspace-top{background:transparent;position:relative}
+#workspace-tabs{display:block}
+section,aside>section,#workspace-tabs>section{background:hsl(var(--surface));border:0;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 3px 12px hsl(var(--ink)/.07)}
+#training-section>section{box-shadow:none;padding:12px 0;border-radius:0;border-bottom:1px solid hsl(var(--line))}
+h2{color:hsl(var(--ink));font-size:19px;line-height:1.6}h3{color:hsl(var(--brand-solid));font-size:16px}
+button,select,input,aside select,aside input{background:hsl(var(--surface));color:hsl(var(--ink));border-color:hsl(var(--line));border-radius:12px;min-height:44px}
+button{transition:background .3s ease,border-color .3s ease}button:hover:not(:disabled){background:hsl(var(--brand-soft));color:hsl(var(--brand-solid));border-color:hsl(var(--brand))}
+#load,.area-actions #apply-areas{background:hsl(var(--brand));color:hsl(var(--on-brand));border-color:hsl(var(--brand))}#load:hover,.area-actions #apply-areas:hover{background:hsl(var(--brand-solid));color:hsl(var(--on-brand))}
+.area-heading{position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}.area-heading h2{margin:0}.area-heading lumen-tooltip{position:static}.area-heading lumen-tooltip button{font-size:12px;min-height:32px;padding:4px 10px;border:0;background:hsl(var(--surface-muted))}
+.area-heading [role=tooltip]{left:0;right:auto;top:calc(100% + 8px);transform:none;width:min(280px,100%);white-space:normal;padding:12px;z-index:20}
+.area-pair fieldset,fieldset{border:0;border-radius:16px;padding:16px;min-width:0}.area-pair #area-a{border:0;border-left:3px solid var(--area-a);background:var(--area-a-soft)}.area-pair #area-b{border:0;border-left:3px dashed var(--area-b);background:var(--area-b-soft)}
+.area-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.area-inputs label{font-size:14px;min-width:0}.area-pair .area-inputs label:nth-child(3){grid-column:1/-1}.area-inputs button{background:hsl(var(--surface));font-size:13px;min-height:38px}.area-inputs button[aria-pressed=true]{box-shadow:none}
+.area-strip{background:hsl(var(--surface));border:0;border-radius:20px 20px 0 0;padding:14px}.area-strip-labels p{border-radius:8px;padding:6px 10px}.area-strip button{font-size:12px;min-height:34px;padding:6px 10px}.area-strip #map-target{display:none}
+.quick-nav{background:hsl(var(--surface));border:0;border-radius:0 0 20px 20px;padding:8px;gap:6px;box-shadow:0 4px 10px hsl(var(--ink)/.06);margin-bottom:16px;display:flex;flex-wrap:wrap;overflow:visible}
+.quick-nav a{background:hsl(var(--surface-muted));border:0;border-radius:12px;padding:10px 12px;color:hsl(var(--ink));font-weight:600;font-size:13px;min-height:40px;text-decoration:none}
+.quick-nav a[aria-current=page],.quick-nav a[aria-selected=true]{background:hsl(var(--brand));color:hsl(var(--on-brand));box-shadow:0 2px 5px hsl(var(--brand)/.2)}
+.map-selection{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 14px;background:hsl(var(--surface-muted));color:hsl(var(--ink-soft));font-size:13px}
+.map-selection lumen-radio-group{display:flex;gap:8px}.map-selection label{display:flex;align-items:center;gap:8px;min-height:40px;padding:6px 12px;background:hsl(var(--surface));border-radius:12px;cursor:pointer;margin:0;font-weight:600}
+.map-selection label:has(input:checked){background:hsl(var(--brand-soft));outline:2px solid var(--area-a)}.map-selection label:has(#map-area-b:checked){background:var(--area-b-soft);outline:2px dashed var(--area-b)}
+.map-selection input{width:18px;height:18px;min-height:18px;margin:0;accent-color:var(--area-a)}#map-area-b{accent-color:var(--area-b)}
+#province-shortcuts{background:hsl(var(--surface));padding:10px 14px;gap:8px;border-color:hsl(var(--line))}#province-shortcuts button{background:hsl(var(--surface));border-radius:20px;padding:8px 14px}
+#province-shortcuts button[aria-pressed=true]{background:hsl(var(--brand));color:hsl(var(--on-brand));border-color:hsl(var(--brand));box-shadow:none}
+.view-summary,.point,.report-stat,.month-card,.training-links a,.soil-legend,#daily-controls{background:hsl(var(--surface-muted));color:hsl(var(--ink));border-radius:12px;border:0}
+.point{background:hsl(var(--surface));padding:12px;color:hsl(var(--ink));border-left:3px solid var(--area-a)}.point.b{background:hsl(var(--surface));border-left:3px dashed var(--area-b)}
+.report-stat{background:hsl(var(--surface-muted));padding:16px}.report-stat strong{font-size:26px;color:hsl(var(--ink))}.report-stat small,.scope-note,.muted,.area-heading p,.area-actions small{color:hsl(var(--ink-soft));font-size:13px}
+.month-card[aria-pressed=true],.month-card:hover{background:hsl(var(--brand-soft))}.stage-chip{background:hsl(var(--surface-muted));border-radius:12px}
+.warn,#server-notice{background:var(--area-b-soft);color:hsl(var(--ink));border-color:hsl(var(--warning));border-radius:12px}
+#daily tbody tr:nth-child(even),#weather table tr:nth-child(odd):not(:first-child),#soil-analysis-properties tr:nth-child(odd):not(:first-child){background:hsl(var(--surface-muted))}
+#daily tbody tr:hover,#weather table tr:not(:first-child):hover,#soil-analysis-properties tr:not(:first-child):hover{background:hsl(var(--brand-soft))}
+#daily thead th,.leaflet-control button,.leaflet-control-zoom a,.leaflet-tooltip{background:hsl(var(--surface));color:hsl(var(--ink))}.leaflet-control button{border-radius:12px}
+@media(max-width:800px){.orchard-header{padding:14px 16px;gap:10px}.orchard-header h1{font-size:18px}.orchard-mark{width:38px;height:44px}.header-description{font-size:13px}.logout-link{padding:8px 10px}aside{padding:12px}section,#workspace-tabs>section{padding:16px}.map-selection{padding:8px 12px}}
+@media(max-width:520px){.orchard-header{flex-wrap:wrap}.orchard-heading{flex-basis:calc(100% - 50px)}.logout-link{margin-left:48px}.orchard-header h1{font-size:17px}#province-shortcuts{gap:6px;padding:10px}#province-shortcuts button{padding:6px 10px}.area-inputs{grid-template-columns:minmax(0,1fr)}.area-inputs>*{grid-column:1}.area-pair .area-inputs label:nth-child(3){grid-column:1}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+/* Sky weather workspace: readable plots and calm surfaces. */
+body{background:#f3f7fc;font-size:16px;font-family:'Helvetica Neue',Tahoma,Arial,sans-serif}
+.orchard-header{background:#ffffff;color:#172b4d;border-bottom:1px solid #dce5f0;position:relative}
+.orchard-header h1{font-size:22px}.header-description{color:#52647d}.usage-guide{color:#52647d}
+aside,.workspace-top,#workspace-tabs{background:transparent}aside{padding:18px}
+section,#workspace-tabs>section{background:#ffffff;border:0;border-radius:24px;box-shadow:0 8px 28px #172b4d06}
+.quick-nav{background:#eaf1fa;border:1px solid #dce5f0;border-radius:8px;padding:6px;margin-bottom:16px}
+.quick-nav a{color:#52647d;border-radius:5px;padding:11px 16px}
+.quick-nav a[aria-selected=true],.quick-nav a[aria-current=page]{background:#ffffff;color:#2563eb;box-shadow:inset 0 -2px #2563eb}
+button,select,input{background:#ffffff;color:#172b4d;border-color:#ccd7e5;border-radius:5px}
+button:hover{background:#edf4ff;color:#1d4ed8}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid #2563eb;outline-offset:3px}
+.logout-link{background:#ffffff;color:#172b4d;border-color:#ccd7e5}.report-stat{background:#f7faff;border:1px solid #dce5f0;border-radius:7px}
+.report-stat strong{color:#2563eb;font-variant-numeric:tabular-nums}.scope-note,.muted,.report-stat small{color:#52647d}
+.area-pair fieldset,fieldset,#area-a,#area-b,.point{background:#f7faff;color:#172b4d;border-color:#ccd7e5}
+.orchard-home #current-section{max-width:1600px;margin:0 auto;padding:22px}
+.orchard-home #current-orchard{grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0}
+.orchard-home #current-orchard>.scope-note{grid-column:1/-1}
+.telemetry-toolbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:26px 0 14px}
+.telemetry-toolbar h3{font-size:18px;margin:0}.telemetry-toolbar p{color:#52647d;font-size:12px}
+.telemetry-actions{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.telemetry-actions label{display:grid;gap:6px}
+.telemetry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 24px}
+.telemetry-panel{min-width:0;padding:20px;background:#f9fbfe;border:1px solid #e3ebf5;border-radius:20px}
+.telemetry-panel-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.telemetry-panel h3{font-size:14px;font-weight:600}.telemetry-panel small{color:#52647d}
+.telemetry-panel>svg{display:block;width:100%;height:auto;min-height:160px}.telemetry-panel>svg text{fill:#52647d;font:12px Tahoma,sans-serif}
+.telemetry-panel p,#orchard-history-note{font-size:14px;color:#52647d}.telemetry-panel .empty-series{min-height:150px;display:grid;place-items:center}
+.telemetry-table{padding:14px;background:#f3f7fc;border-radius:7px}.telemetry-table>div{overflow-x:auto}#orchard-history-table table{min-width:650px;font-variant-numeric:tabular-nums}
+#orchard-history-table th{color:#52647d;background:#f7faff}#orchard-history-table td{border-bottom:1px solid #dce5f0}
+.province-context{padding:16px;background:#f3f7fc;border-radius:7px;margin-top:22px}
+.orchard-home #current-section>fieldset{margin-top:24px;border-radius:7px}.orchard-home #current-section>h3{margin-top:18px}
+@media(max-width:800px){body.orchard-home{height:100dvh;overflow:hidden}body.orchard-home main{display:grid;min-height:0}body.orchard-home aside{overflow:auto;max-height:none;padding:10px}.telemetry-toolbar{align-items:start;flex-direction:column}.telemetry-actions{width:100%}.telemetry-actions label{flex:1}.orchard-home #current-section{padding:14px}.quick-nav{flex-wrap:nowrap;overflow-x:auto}.quick-nav a{white-space:nowrap;flex:none}.telemetry-grid{grid-template-columns:minmax(0,1fr)}.orchard-home #current-orchard{grid-template-columns:repeat(2,minmax(0,1fr))}.header-description{font-size:12px}}
+@media(max-width:420px){.orchard-home #current-orchard{grid-template-columns:repeat(2,minmax(0,1fr))}.orchard-home .report-stat{padding:12px;font-size:12px}.orchard-home .report-stat strong{font-size:23px}.orchard-home .report-stat small{font-size:11px}.telemetry-panel{padding:10px}.orchard-header h1{font-size:19px}}
+.orchard-header .usage-guide summary{color:#52647d}
+/* Navigation occupies its own row; only the selected panel scrolls. */
+#chart:empty{display:none}#status{padding:12px 16px;background:#eaf2ff;color:#172b4d;border-radius:8px}
+body{height:100dvh;overflow:hidden}
+.orchard-header{padding:10px 20px;gap:12px;flex-wrap:nowrap}
+.orchard-header h1{font-size:20px;margin:0}.orchard-mark{width:32px;height:38px}
+.header-description{display:none}.usage-guide{margin:0}.usage-guide[open]{max-height:160px;overflow:auto}
+main,body.orchard-home main{grid-template-columns:minmax(0,1fr)}
+.map-pane{display:none}
+aside,body.orchard-home aside{min-height:0;overflow:hidden;padding:0;max-height:none}
+#workspace-tabs{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden}
+.workspace-top{position:relative;flex:none;padding:8px 20px 0;background:#fff;border-bottom:1px solid #dce5f0}
+.quick-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;margin:0;border:0;border-radius:0;background:transparent;padding:0;gap:4px}
+.quick-nav a{white-space:nowrap;flex:none;min-height:44px;padding:12px 16px;box-sizing:border-box}
+.quick-nav a[aria-selected=true],.quick-nav a[aria-current=page]{background:#eaf2ff;color:#1d4ed8;box-shadow:inset 0 -3px #2563eb}
+.area-strip{margin:0;padding:6px 0;background:transparent;border:0;border-radius:0;box-shadow:none;gap:8px;align-items:center}
+.area-strip-labels{display:flex;flex-wrap:wrap;gap:8px}.area-strip-labels p{margin:0;padding:4px 8px;font-size:13px}
+#map-target,#view-summary{display:none!important}
+#workspace-tabs>section,.orchard-home #current-section{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;margin:0;border-radius:0;width:100%;max-width:none;padding:24px 32px;box-sizing:border-box}
+body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr)}
+#workspace-tabs>.map-pane{flex:1;min-height:0;overflow:hidden}
+body[data-workspace="map-section"] .map-pane{display:flex}
+body.editing-area .map-pane{display:none!important}
+body.editing-area #workspace-tabs>section:not(#area-section){display:none!important}
+body.editing-area #area-section{display:block!important}
+body.orchard-home.editing-area #area-strip{display:flex!important}
+.scope-note,.muted,.header-description,.telemetry-panel small,.telemetry-panel p{color:#334155;font-size:15px;line-height:1.65}.quick-nav a{color:#334155;font-weight:600}label{color:#172b4d;font-weight:500}h2{font-size:22px;font-weight:700}h3{font-weight:650}
+/* Field Signal: the approved brand, not synthetic sensor data. */
+:root{--field-ink:#132d38;--field-canvas:#f4f7f7;--field-teal:#087f8c;--ink:198 49% 15%;--ink-soft:200 19% 31%;--surface-muted:180 16% 96%;--line:190 17% 85%}
+body{background:var(--field-canvas);color:var(--field-ink);font-family:'Noto Sans Thai',Inter,Tahoma,Arial,sans-serif;font-size:16px}
+.orchard-header{background:var(--field-ink);color:#fff;border:0;padding:12px 24px}
+.orchard-header h1{color:#fff;font-size:22px;font-weight:700}.orchard-header .usage-guide summary{color:#d9e9ed}.usage-guide[open]{background:var(--field-ink);color:#fff}
+.orchard-mark path:nth-child(1){fill:#087f8c;stroke:#d9e9ed}.orchard-mark path:nth-child(2){fill:none;stroke:#fff}.orchard-mark path:nth-child(3){fill:#50b5a1}.orchard-mark path:nth-child(4){stroke:#fff}
+.logout-link{color:#fff;background:transparent;border-color:#75909c}.logout-link:hover{background:#284753;color:#fff}
+.workspace-top{background:var(--field-ink);padding:0 24px 8px;border:0}
+.quick-nav{gap:8px}.quick-nav a{background:transparent!important;color:#d9e9ed!important;border-radius:0;font-size:16px;box-shadow:none;padding:12px 16px}
+.quick-nav a:hover{color:#fff!important;background:#203f4a!important}.quick-nav a[aria-selected=true],.quick-nav a[aria-current=page]{background:transparent!important;color:#72cef5!important;box-shadow:inset 0 -3px #72cef5}
+.quick-nav a:focus-visible{outline-color:#72cef5}.area-strip{padding-top:8px}.area-strip-labels p{font-size:14px;border-radius:4px}.area-strip button{color:#fff;background:transparent;border-color:#75909c;font-size:14px}
+#workspace-tabs>section,.orchard-home #current-section{background:var(--field-canvas);padding:28px 32px}
+h2{font-size:28px;font-weight:700;letter-spacing:-.4px;margin-bottom:16px}h3{font-size:18px;font-weight:650}
+.scope-note,.muted,.telemetry-panel small,.telemetry-panel p,#orchard-history-note{color:#40545e;font-size:15px;line-height:1.65}
+button,select,input{border-radius:6px;border-color:#b9cbd1;min-height:44px;font-size:16px;color:var(--field-ink)}button{padding:9px 16px;font-weight:600}
+.report-stat{border:0;border-radius:0;background:#fff;border-left:3px solid #087f8c;padding:16px 20px}.report-stat strong{color:var(--field-ink);font-size:34px}.report-stat small{color:#40545e;font-size:14px}
+.weather-filters{display:flex;gap:12px;flex-wrap:wrap;align-items:end;padding:16px 0}.weather-filters label{display:grid;gap:6px;margin:0}.weather-filters button{margin:0}
+.weather-plot{background:#fff;border-radius:10px;padding:20px 24px;margin:20px 0;min-width:0}.plot-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.plot-toolbar label{font-weight:600}.plot-toolbar button{color:#2563eb;border-color:#2563eb;background:#fff}
+.weather-plot #chart{height:clamp(260px,42vh,440px);background:#fff}.weather-plot #chart:empty{display:none}.weather-plot:has(#chart:empty){border:1px dashed #b9cbd1}.weather-plot:has(#chart:empty)::after{content:'ยังไม่มีกราฟ เลือกช่วงวันที่แล้วกดดูอากาศ';display:block;padding:24px 0;color:#40545e;font-size:16px}
+.telemetry-toolbar{margin:24px 0 12px}.telemetry-toolbar h3{font-size:24px}.telemetry-toolbar p{font-size:15px;color:#40545e}.telemetry-grid{gap:20px}.telemetry-panel{background:#fff;border:0;border-radius:10px;padding:20px}.telemetry-panel h3{font-size:18px}.telemetry-panel-heading span{font-weight:650;font-variant-numeric:tabular-nums}.telemetry-panel-heading button{font-size:14px;padding:6px 12px;min-height:44px;color:#2563eb;border-color:#2563eb}.telemetry-panel svg text{fill:#40545e}.telemetry-panel .empty-series{min-height:96px;place-items:start;align-content:center;font-size:16px}
+.period-switch{display:flex;border:1px solid #b9cbd1;border-radius:6px;overflow:hidden;background:#fff}.period-switch button{margin:0;border:0;border-radius:0;min-width:72px;background:#fff}.period-switch button[aria-pressed=true]{background:#2563eb;color:#fff}
+.weather-plot:fullscreen,.telemetry-panel:fullscreen{background:#fff;color:var(--field-ink);padding:24px;display:flex;flex-direction:column;overflow:auto}.weather-plot:fullscreen #chart,.telemetry-panel:fullscreen>svg{flex:1;width:100%;height:auto;min-height:0}.weather-plot:fullscreen .plot-toolbar,.telemetry-panel:fullscreen .telemetry-panel-heading{flex:none}
+table{font-size:15px}th{background:#edf3f4;color:#132d38}td,th{padding:12px;border-bottom:1px solid #d5e0e4}.telemetry-table,.province-context{background:#fff;border-radius:8px;padding:16px}
+fieldset,.area-pair fieldset,#area-a,#area-b{background:#fff;border:1px solid #c7d5da;border-radius:8px}legend{font-weight:650;color:#132d38}.point{background:#edf3f4;color:#132d38}.warn{color:#7b3909;background:#fff3e5}
+@media(max-width:800px){.orchard-header{padding:10px 16px}.orchard-header h1{font-size:19px}.workspace-top{padding:0 8px 6px}.quick-nav a{font-size:15px;padding:12px}.weather-plot{padding:16px 12px}.plot-toolbar{align-items:start}.plot-toolbar label{display:grid;gap:8px}.weather-filters label{flex:1 1 140px}.telemetry-actions{gap:12px}.telemetry-toolbar h3{font-size:21px}.period-switch button{min-width:64px}.telemetry-panel{padding:16px 12px}.telemetry-panel h3{font-size:17px}h2{font-size:24px}table{font-size:14px}}
+@media(max-width:800px){body,body.orchard-home{height:100dvh;overflow:hidden}.orchard-header{padding:8px 12px}.orchard-header h1{font-size:17px}.logout-link{margin:0;padding:8px;font-size:12px}.workspace-top{padding:4px 8px 0}.quick-nav a{padding:12px;font-size:14px}#workspace-tabs>section,.orchard-home #current-section{padding:16px}.area-strip-labels p{font-size:13px}body.editing-area main,body[data-workspace="soil-analysis"] main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}.map-pane{min-height:0}aside,body.orchard-home aside{padding:0;overflow:hidden}}
+.workspace-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 24px;align-items:center;padding:8px 24px}
+.workspace-top .orchard-header{padding:0;min-width:0}.workspace-top .orchard-header h1{font-size:20px;white-space:nowrap}.workspace-top .usage-guide summary{font-size:12px}.workspace-top .quick-nav{grid-column:2;min-width:0}.workspace-top>.logout-link{grid-column:3;margin:0;font-size:14px}.workspace-top .area-strip{grid-column:1/-1}
+#workspace-tabs>section>h2,.orchard-home #current-section>h2{font-size:28px;line-height:1.4;font-weight:700;margin:0 0 16px}.weather-filters+br{display:none}
+.weather-filters{padding:0 0 8px}.custom-dates{margin:0;align-self:center;min-width:180px}.custom-dates summary{font-size:15px;color:#40545e;padding:10px 0}.custom-dates[open]{display:grid;gap:8px}.weather-source{margin:4px 0 12px}.weather-source summary{font-size:14px;color:#40545e;font-weight:500}#status{padding:8px 12px;font-size:14px;line-height:1.5;margin:8px 0}.weather-plot{margin:12px 0}.weather-plot #chart{height:clamp(260px,38vh,400px)}.plot-toolbar label{font-size:16px}.weather-plot #chart-note{font-size:14px;margin:6px 0}
+@media(max-width:900px){.workspace-top{grid-template-columns:minmax(0,1fr) auto;padding:8px 12px;gap:0 8px}.workspace-top .orchard-header{grid-column:1}.workspace-top .orchard-header h1{font-size:19px}.workspace-top>.logout-link{grid-column:2;grid-row:1}.workspace-top .quick-nav{grid-column:1/-1;grid-row:2}.workspace-top .area-strip{grid-row:3}#workspace-tabs>section>h2,.orchard-home #current-section>h2{font-size:24px}}
+/* One soil workspace: collapse selection without losing A/B or the map. */
+#soil-picker{margin:0 0 20px;background:#f4f7f7;border:1px solid #c7d5da;border-radius:8px;overflow:hidden}
+#soil-picker>summary{padding:12px 16px;color:#132d38;font-size:16px;font-weight:600;cursor:pointer}
+#soil-picker[open]{display:flex;flex-direction:column}
+#soil-picker .map-pane{display:flex;order:1;min-height:0}
+#soil-picker #area-section{order:2;flex:none;padding:16px;margin:0;border:0;border-radius:0;background:#fff}
+#soil-picker #map{flex:none;height:300px;min-height:220px}
+#soil-picker .map-selection{padding:6px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#soil-picker .map-selection lumen-radio-group{padding:0;gap:4px;border:0;background:transparent}
+#soil-picker .map-selection label{padding:6px 12px;min-height:40px;font-size:15px}
+#soil-picker #province-shortcuts{padding:4px 12px;gap:6px}
+#soil-picker #province-shortcuts button{padding:6px 12px;min-height:40px;font-size:14px}
+#soil-picker #area-section>h2{font-size:18px;margin:0 0 12px}
+.workspace-top .area-strip{padding-top:2px}.workspace-top .area-strip button{min-height:36px;padding:6px 10px}
+@media(max-width:800px){#soil-picker #map{height:250px}#soil-picker #area-section{padding:12px}#soil-picker .map-selection{gap:4px}.workspace-top .orchard-header h1{font-size:17px}.workspace-top .quick-nav a{padding:10px;min-height:42px}}

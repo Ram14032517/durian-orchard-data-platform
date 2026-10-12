@@ -1,0 +1,6 @@
+{
+  "config": {"group": "persistence", "columns": [], "alpha": null},
+  "parameters": null,
+  "trained_through": "2026-10-09T12:00:00+00:00",
+  "note": "Chosen by chronological validation on the orchard snapshot. Persistence is a reference forecast, not a learned improvement. No raw orchard readings are included."
+}

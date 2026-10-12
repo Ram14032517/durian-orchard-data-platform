@@ -1,0 +1,2 @@
+﻿n,mean_gain,median_gain,relative_mae_reduction_pct,wins,ties,losses,rmse_reduction,no_weather_bias,with_weather_bias
+45,2.597247391623705,11.156572629722177,1.2519808207135763,27,0,18,0.5382780470602029,-60.91848563479073,-59.52827027381144

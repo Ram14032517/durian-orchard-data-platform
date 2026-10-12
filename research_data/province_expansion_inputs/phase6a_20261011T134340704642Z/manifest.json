@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "mode": "exploratory",
+  "schedule": {
+    "kind": "fixed_calendar",
+    "anchors": {
+      "22": "04-01",
+      "33": "05-01",
+      "53": "06-01",
+      "84": "07-01",
+      "86": "07-01",
+      "21": "04-01",
+      "30": "05-01",
+      "77": "06-01",
+      "80": "07-01",
+      "85": "07-01"
+    },
+    "note": "2026 experimental rule; no historical certification"
+  },
+  "records": {
+    "annual_lag:22": {
+      "role": "feature",
+      "province_code": "22",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:22": {
+      "role": "training_label",
+      "province_code": "22",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:22": {
+      "role": "selection_label",
+      "province_code": "22",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:22": {
+      "role": "evaluation_target",
+      "province_code": "22",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:22": {
+      "role": "feature",
+      "province_code": "22",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:22": {
+      "role": "feature",
+      "province_code": "22",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:33": {
+      "role": "feature",
+      "province_code": "33",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:33": {
+      "role": "training_label",
+      "province_code": "33",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:33": {
+      "role": "selection_label",
+      "province_code": "33",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:33": {
+      "role": "evaluation_target",
+      "province_code": "33",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:33": {
+      "role": "feature",
+      "province_code": "33",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:33": {
+      "role": "feature",
+      "province_code": "33",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:53": {
+      "role": "feature",
+      "province_code": "53",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:53": {
+      "role": "training_label",
+      "province_code": "53",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:53": {
+      "role": "selection_label",
+      "province_code": "53",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:53": {
+      "role": "evaluation_target",
+      "province_code": "53",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:53": {
+      "role": "feature",
+      "province_code": "53",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:53": {
+      "role": "feature",
+      "province_code": "53",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:84": {
+      "role": "feature",
+      "province_code": "84",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:84": {
+      "role": "training_label",
+      "province_code": "84",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:84": {
+      "role": "selection_label",
+      "province_code": "84",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:84": {
+      "role": "evaluation_target",
+      "province_code": "84",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:84": {
+      "role": "feature",
+      "province_code": "84",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:84": {
+      "role": "feature",
+      "province_code": "84",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:86": {
+      "role": "feature",
+      "province_code": "86",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:86": {
+      "role": "training_label",
+      "province_code": "86",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:86": {
+      "role": "selection_label",
+      "province_code": "86",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:86": {
+      "role": "evaluation_target",
+      "province_code": "86",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:86": {
+      "role": "feature",
+      "province_code": "86",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:86": {
+      "role": "feature",
+      "province_code": "86",
+      "path": "research_data/five_province_history/weather_daily.csv",
+      "source_version": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:21": {
+      "role": "feature",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:21": {
+      "role": "training_label",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:21": {
+      "role": "selection_label",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:21": {
+      "role": "evaluation_target",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:21": {
+      "role": "feature",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:21": {
+      "role": "feature",
+      "province_code": "21",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:30": {
+      "role": "feature",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:30": {
+      "role": "training_label",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:30": {
+      "role": "selection_label",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:30": {
+      "role": "evaluation_target",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:30": {
+      "role": "feature",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:30": {
+      "role": "feature",
+      "province_code": "30",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:77": {
+      "role": "feature",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:77": {
+      "role": "training_label",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:77": {
+      "role": "selection_label",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:77": {
+      "role": "evaluation_target",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:77": {
+      "role": "feature",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:77": {
+      "role": "feature",
+      "province_code": "77",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:80": {
+      "role": "feature",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:80": {
+      "role": "training_label",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:80": {
+      "role": "selection_label",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:80": {
+      "role": "evaluation_target",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:80": {
+      "role": "feature",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:80": {
+      "role": "feature",
+      "province_code": "80",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "annual_lag:85": {
+      "role": "feature",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "training_labels:85": {
+      "role": "training_label",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "selection_labels:85": {
+      "role": "selection_label",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "evaluation_target:85": {
+      "role": "evaluation_target",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/annual.csv",
+      "source_version": "41cb083c253c95469819c66fe945a56a9ba5c18d6e1885521b2e5cc37a66f7d3",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_observed:85": {
+      "role": "feature",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "power_normals:85": {
+      "role": "feature",
+      "province_code": "85",
+      "path": "research_data/province_expansion_inputs/phase6a_20261011T134340704642Z/new_weather_daily.csv",
+      "source_version": "e49ca4e82d320c9c6ebaee55716197c0fa50a2a2d628baac90ab94efed99094a",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "evidence": {}
+    },
+    "issue_rule": {
+      "role": "issue_rule",
+      "source_version": "3d75faac61b43fdce8ced7380aff4c5a65b3556a795e4b2a9c82f6b813b312c0",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "created_at": "2026-10-11T13:46:42.969084+00:00",
+      "evidence": {}
+    },
+    "issue_rule_feature": {
+      "role": "feature",
+      "source_version": "3d75faac61b43fdce8ced7380aff4c5a65b3556a795e4b2a9c82f6b813b312c0",
+      "publication_date": null,
+      "availability_status": "unverified",
+      "created_at": "2026-10-11T13:46:42.969084+00:00",
+      "evidence": {}
+    }
+  },
+  "arms": {
+    "A": {
+      "cohort": "5",
+      "features": [
+        "previous_yield_kg_rai"
+      ]
+    },
+    "B": {
+      "cohort": "5",
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ]
+    },
+    "C": {
+      "cohort": "10",
+      "features": [
+        "previous_yield_kg_rai"
+      ]
+    },
+    "D": {
+      "cohort": "10",
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ]
+    }
+  },
+  "selection_cohort": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86"
+  ],
+  "enso": false,
+  "grid": {
+    "depths": [
+      2,
+      3
+    ],
+    "seed": 42,
+    "iterations": 400,
+    "learning_rate": 0.03,
+    "l2_leaf_reg": 10,
+    "loss_function": "RMSE",
+    "boosting_type": "Ordered",
+    "thread_count": 1,
+    "allow_writing_files": false
+  }
+}

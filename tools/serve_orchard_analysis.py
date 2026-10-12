@@ -83,6 +83,30 @@ def save_weather_export(payload):
             'filename':filename,'rows':count,'sha256':digest,
             'folder':'research_data/five_province_history/exports'}
 
+def fetch_weather(lat,lon,start,end):
+    args=dict(parameters=PARAMS,community='AG',latitude=round(lat,5),longitude=round(lon,5),start=start.strftime('%Y%m%d'),end=end.strftime('%Y%m%d'),format='JSON',**{'time-standard':'LST'})
+    key=hashlib.sha256(json.dumps(args,sort_keys=True).encode()).hexdigest()
+    CACHE.mkdir(parents=True,exist_ok=True);path=CACHE/f'{key}.json'
+    with LOCK:
+        cached=verified_cache(path);stale=False
+        if cached and cache_is_fresh(path,end):data,provenance=cached
+        else:
+            try:
+                r=requests.get('https://power.larc.nasa.gov/api/temporal/daily/point',params=args,timeout=45);r.raise_for_status();data=r.json()
+                if not data.get('properties',{}).get('parameter'):raise RuntimeError('NASA response has no daily data')
+                provenance=dict(url=r.url,retrieved_utc=datetime.now(timezone.utc).isoformat(),sha256=hashlib.sha256(r.content).hexdigest())
+                path.write_bytes(r.content)
+                path.with_suffix('.source.json').write_text(json.dumps(provenance,indent=2),encoding='utf-8')
+            except (requests.RequestException,ValueError,RuntimeError):
+                if not cached:raise
+                data,provenance=cached;stale=True
+    rows=daily_rows(data,start,end)
+    payload=dict(rows=rows,latitude=lat,longitude=lon,time_standard='LST',source='NASA POWER daily point; grid-based, not orchard sensor',cache_key=key,stale_cache=stale)
+    payload['coverage']={k:{'valid_days':sum(r[k] is not None for r in rows),'requested_days':len(rows)} for k in PARAMS.split(',')}
+    payload['provenance']=provenance
+    return payload
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
     def send_head(self):
@@ -99,35 +123,28 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed=urlparse(self.path)
         if parsed.path=='/api/project':return self.send_json(200,project_identity())
+        if parsed.path=='/api/orchard-history':
+            try:
+                from supabase_orchard import orchard_history
+                q=parse_qs(parsed.query)
+                return self.send_json(200,orchard_history(q.get('period',['day'])[0],end=q.get('end',[None])[0]))
+            except ValueError as e:return self.send_json(400,{'error':str(e)})
+            except Exception as e:return self.send_json(503,{'error':str(e)})
+        if parsed.path in ('/api/orchard-status','/api/province-estimate'):
+            try:
+                from orchard_current_context import orchard_snapshot, province_estimate
+                if parsed.path=='/api/orchard-status':return self.send_json(200,orchard_snapshot())
+                q=parse_qs(parsed.query)
+                return self.send_json(200,province_estimate(q['province'][0],int(q['year'][0]),fetch_weather))
+            except (ValueError,KeyError) as e:return self.send_json(400,{'error':str(e)})
+            except Exception as e:return self.send_json(502,{'error':str(e)})
         if parsed.path!='/api/weather':return super().do_GET()
         try:
             q=parse_qs(parsed.query);lat=round(float(q['lat'][0]),5);lon=round(float(q['lon'][0]),5)
             start=date.fromisoformat(q['start'][0]);end=date.fromisoformat(q['end'][0])
             if not (5<=lat<=21 and 97<=lon<=106 and date(1981,1,1)<=start<=end<=date.today() and (end-start).days<=731):
                 raise ValueError('เลือกพิกัดประเทศไทยและช่วงเวลาไม่เกินสองปี ตั้งแต่ปี 1981 ถึงปัจจุบัน')
-            args=dict(parameters=PARAMS,community='AG',latitude=lat,longitude=lon,start=start.strftime('%Y%m%d'),end=end.strftime('%Y%m%d'),format='JSON',**{'time-standard':'LST'})
-            key=hashlib.sha256(json.dumps(args,sort_keys=True).encode()).hexdigest()
-            CACHE.mkdir(parents=True,exist_ok=True);path=CACHE/f'{key}.json'
-            with LOCK:
-                cached=verified_cache(path)
-                stale=False
-                if cached and cache_is_fresh(path,end):data,provenance=cached
-                else:
-                    try:
-                        r=requests.get('https://power.larc.nasa.gov/api/temporal/daily/point',params=args,timeout=120);r.raise_for_status();data=r.json()
-                        if not data.get('properties',{}).get('parameter'):raise RuntimeError('NASA response has no daily data')
-                        provenance=dict(url=r.url,retrieved_utc=datetime.now(timezone.utc).isoformat(),sha256=hashlib.sha256(r.content).hexdigest())
-                        path.write_bytes(r.content)
-                        path.with_suffix('.source.json').write_text(json.dumps(provenance,indent=2),encoding='utf-8')
-                    except (requests.RequestException,ValueError,RuntimeError):
-                        if not cached:raise
-                        data,provenance=cached
-                        stale=True
-            rows=daily_rows(data,start,end)
-            payload=dict(rows=rows,latitude=lat,longitude=lon,time_standard='LST',source='NASA POWER daily point; grid-based, not orchard sensor',cache_key=key,stale_cache=stale)
-            payload['coverage']={k:{'valid_days':sum(r[k] is not None for r in rows),'requested_days':len(rows)} for k in PARAMS.split(',')}
-            payload['provenance']=provenance
-            self.send_json(200,payload)
+            self.send_json(200,fetch_weather(lat,lon,start,end))
         except (ValueError,KeyError) as e:self.send_json(400,{'error':str(e)})
         except Exception as e:self.send_json(502,{'error':str(e)})
     def do_POST(self):

@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-08",
+  "purpose": "Source audit only; not imported into training panels",
+  "missing_value_policy": "A printed dash is null, not zero. No district target is allocated from province totals.",
+  "cultivar_composition_review": {
+    "reviewed_on": "2026-10-09",
+    "purpose": "Weight stage-weather exposures for an all-cultivar yield target; do not fabricate cultivar yield targets",
+    "weight_basis_preference": "Bearing area by cultivar; harvested area only when its definition is documented",
+    "missing_share_policy": "Unknown is not zero or 100%; no silent normalization of partially known cultivars",
+    "records": [
+      {
+        "province_code": "53",
+        "province_name": "อุตรดิตถ์",
+        "source_url": "https://www.opsmoac.go.th/uttaradit-dwl-files-472891791151",
+        "source_title": "ข้อมูลพื้นฐานจังหวัดอุตรดิตถ์ พฤศจิกายน 2568",
+        "pdf_page_1based": 3,
+        "table": "1.4 พืชเศรษฐกิจที่สำคัญ ปีการผลิต 2568/2569",
+        "row_year_label": "68",
+        "candidate_year_ce": 2025,
+        "data_as_of": "2025-11-18",
+        "year_assignment_verified": false,
+        "transcription_check": "Local PDF text and rendered page checked on 2026-10-09",
+        "weight_basis": "พื้นที่เก็บเกี่ยว (ไร่)",
+        "reported_harvested_area_sum_rai": 44669,
+        "cultivars": [
+          {"cultivar": "หมอนทอง", "harvested_rai": 32414, "harvested_area_share_pct": 72.56486601446193, "age_days": null},
+          {"cultivar": "หลงลับแล", "harvested_rai": 2691, "harvested_area_share_pct": 6.024312162797465, "age_days": null},
+          {"cultivar": "หลินลับแล", "harvested_rai": 587, "harvested_area_share_pct": 1.3141104569164297, "age_days": null},
+          {"cultivar": "พื้นเมือง", "harvested_rai": 8977, "harvested_area_share_pct": 20.096711365824174, "age_days": null}
+        ],
+        "finality": "unknown; publication date and row label do not by themselves establish final actual data",
+        "train_eligible": false,
+        "exclusion_reason": "Year mapping/finality, harvested-versus-bearing area definitions and ages/seasonal timing of all groups require verification; native group is not a single cultivar",
+        "historical_backfill_allowed": false,
+        "same_year_production_used_as_weight": false
+      }
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "uttaradit_durian_2020_2021",
+      "url": "https://www.opsmoac.go.th/uttaradit-dwl-files-441891791379",
+      "publisher": "สำนักงานเกษตรและสหกรณ์จังหวัดอุตรดิตถ์",
+      "title": "ตารางที่ 4.12.3 ทุเรียน ปี 2563 และ ปี 2564 ของจังหวัดอุตรดิตถ์",
+      "pdf_page_1based": 10,
+      "local_download": "evidence/source_review_2026-10-08/uttaradit_durian_2020_2021.pdf",
+      "sha256": "aa82d99a69fd5c7dc96a99e909f79386ca4232eba511c52f201ff06343b281ce",
+      "transcription_check": "PDF text and rendered table visually checked",
+      "finality": "unknown; reporting edition and final versus estimated figures must be confirmed",
+      "train_eligible": false,
+      "reported_province_totals": [
+        {"year_ce": 2020, "planted_rai": 42699, "bearing_rai": 37549, "production_tonnes": 21012, "reported_yield_kg_rai": 560},
+        {"year_ce": 2021, "planted_rai": 42813, "bearing_rai": 39549, "production_tonnes": 27334, "reported_yield_kg_rai": 691}
+      ],
+      "district_columns": ["district_name", "year_ce", "planted_rai", "bearing_rai", "production_tonnes", "reported_yield_kg_rai"],
+      "district_rows": [
+        ["เมืองอุตรดิตถ์", 2020, 2533, 1873, 965, 515],
+        ["เมืองอุตรดิตถ์", 2021, 2546, 1909, 974, 510],
+        ["ตรอน", 2020, null, null, null, null],
+        ["ตรอน", 2021, 4, null, null, null],
+        ["ท่าปลา", 2020, 4931, 4073, 2069, 508],
+        ["ท่าปลา", 2021, 5061, 4097, 2852, 696],
+        ["น้ำปาด", 2020, 55, null, null, null],
+        ["น้ำปาด", 2021, 56, null, null, null],
+        ["ลับแล", 2020, 34775, 31592, 17976, 569],
+        ["ลับแล", 2021, 34901, 33532, 23506, 701],
+        ["บ้านโคก", 2020, 392, null, null, null],
+        ["บ้านโคก", 2021, 215, null, null, null],
+        ["ทองแสนขัน", 2020, 13, 11, 2, 155],
+        ["ทองแสนขัน", 2021, 30, 11, 2, 139]
+      ],
+      "checks": {
+        "district_numeric_bearing_and_production_sum_equals_table_province_totals": true,
+        "complete_numeric_district_year_rows": 8,
+        "district_year_rows_with_dashes": 6,
+        "existing_oae_production_tonnes": {"2020": 21012.0, "2021": 27333.53},
+        "rounding_note": "2021 PDF province production exceeds existing OAE panel by 0.47 tonnes. Thong Saen Khan reports 2 tonnes and 11 rai but yields 155/139 kg/rai; recomputed yields from rounded inputs differ. Preserve all reported values and resolve precision before training."
+      }
+    },
+    {
+      "source_id": "suratthani_agriculture_2024",
+      "url": "https://www.opsmoac.go.th/suratthani-dwl-files-471891791074",
+      "publisher": "สำนักงานเกษตรและสหกรณ์จังหวัดสุราษฎร์ธานี; table credits OAE Region 8",
+      "title": "ข้อมูลพื้นฐานของจังหวัดสุราษฎร์ธานี หัวข้อ 1.4 พืชเศรษฐกิจที่สำคัญ",
+      "pdf_page_1based": 2,
+      "local_download": "evidence/source_review_2026-10-08/suratthani_agriculture_2024.pdf",
+      "sha256": "ed220ce011e5f2fa45f8e9d2fdec203b66c03b56e9ed071a282201568bcfb3b1",
+      "transcription_check": "PDF text and rendered table visually checked",
+      "geographic_level": "province",
+      "year_ce": 2024,
+      "data_as_of": "2024-08-06",
+      "planted_rai": 116216,
+      "bearing_rai": 80186,
+      "production_tonnes": 68611,
+      "reported_yield_kg_rai": 856,
+      "matches_existing_panel_bearing_and_production": true,
+      "train_eligible": false,
+      "exclusion_reason": "Cross-check evidence only; not a district record and not a replacement for the existing OAE panel"
+    },
+    {
+      "source_id": "chanthaburi_april_2026",
+      "url": "https://www.opsmoac.go.th/chanthaburi-dwl-files-481291791849",
+      "publisher": "สำนักงานเกษตรและสหกรณ์จังหวัดจันทบุรี",
+      "title": "ข้อมูลพื้นฐานของจังหวัดจันทบุรี ประจำเดือน เมษายน 2569",
+      "pdf_page_1based": 2,
+      "local_download": "evidence/source_review_2026-10-08/chanthaburi_april_2026.pdf",
+      "sha256": "adf86add8afe57fe412c1c12d8278a46bbde36d5310a07f9d377ee896b978587",
+      "transcription_check": "Web PDF text checked; local PDF downloaded",
+      "report_period": "2026-04",
+      "geographic_level": "province",
+      "year_ce": 2025,
+      "planted_rai": 469721,
+      "bearing_rai": 335883,
+      "production_tonnes": 575611,
+      "matches_existing_panel_bearing_and_production": true,
+      "train_eligible": false,
+      "exclusion_reason": "Document dated 2026 reports 2025 unified production; no district production table identified in this review"
+    },
+    {
+      "source_id": "sisaket_gi_forecast_2024",
+      "url": "https://doaenews.doae.go.th/archives/23944",
+      "publisher": "กรมส่งเสริมการเกษตร",
+      "published_on": "2024-07-03",
+      "geographic_level": "aggregate of Khun Han, Kantharalak and Si Rattana GI production area",
+      "year_ce": 2024,
+      "bearing_rai": 11176,
+      "production_tonnes": 11958.08,
+      "reported_yield_kg_rai": 1069.98,
+      "finality": "forecast explicitly stated by source",
+      "train_eligible": false,
+      "exclusion_reason": "GI-area aggregate forecast, not three observed district targets or comparable province-wide final production"
+    },
+    {
+      "source_id": "chumphon_forecast_2026",
+      "url": "https://doaenews.doae.go.th/archives/32167",
+      "publisher": "กรมส่งเสริมการเกษตร",
+      "published_on": "2026-05-26",
+      "geographic_level": "province",
+      "year_ce": 2026,
+      "bearing_rai": 251567,
+      "production_tonnes": 337675,
+      "finality": "forecast explicitly stated by source",
+      "train_eligible": false,
+      "exclusion_reason": "2026 forecast, not evidence for the user-pasted 2024 district values"
+    }
+  ],
+  "province_review_status": [
+    {"province_code": "22", "province_name": "จันทบุรี", "district_evidence_status": "not_verified_in_this_review", "next_step": "Find district tables with bearing area and actual production for the same year"},
+    {"province_code": "33", "province_name": "ศรีสะเกษ", "district_evidence_status": "aggregate_forecast_only", "next_step": "Request separate district records and distinguish GI area from all provincial durian"},
+    {"province_code": "53", "province_name": "อุตรดิตถ์", "district_evidence_status": "table_transcribed_2020_2021_finality_pending", "next_step": "Confirm reporting edition, finality and unrounded production; then find later years"},
+    {"province_code": "84", "province_name": "สุราษฎร์ธานี", "district_evidence_status": "province_cross_check_only", "next_step": "Find district-year bearing area and production from provincial agriculture office"},
+    {"province_code": "86", "province_name": "ชุมพร", "district_evidence_status": "province_forecast_only", "next_step": "Find district tables and prevent forecast-year versus report-year mismatches"}
+  ]
+}

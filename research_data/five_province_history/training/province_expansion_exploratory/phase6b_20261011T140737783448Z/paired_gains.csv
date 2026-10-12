@@ -1,0 +1,3 @@
+﻿comparison,n,mean_gain,median_gain,wins,ties,losses
+no_weather_expansion_gain,45,-23.13218041200095,-24.75009817952059,17,0,28
+weather_expansion_gain,45,-6.967031308069628,-17.354163531545396,16,0,29

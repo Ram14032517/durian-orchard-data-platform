@@ -1,0 +1,1171 @@
+﻿model,source_model,province_code,province_name,year_ce,actual_kg_rai,predicted_kg_rai,age_days,parameter
+previous_year,previous_year,22,จันทบุรี,2017,1622.4677716390424,1094.3146358986455,,
+previous_year,previous_year,33,ศรีสะเกษ,2017,1130.2681992337166,717.8329571106095,,
+previous_year,previous_year,53,อุตรดิตถ์,2017,923.234129518457,241.5694319784588,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2017,795.3192439351094,978.2416936195236,,
+previous_year,previous_year,86,ชุมพร,2017,872.7456057932488,1075.1041257367388,,
+province_median,province_median,22,จันทบุรี,2017,1622.4677716390424,1328.0017489645068,,
+province_median,province_median,33,ศรีสะเกษ,2017,1130.2681992337166,833.0781010719755,,
+province_median,province_median,53,อุตรดิตถ์,2017,923.234129518457,545.9747323097841,,
+province_median,province_median,84,สุราษฎร์ธานี,2017,795.3192439351094,1167.013295699324,,
+province_median,province_median,86,ชุมพร,2017,872.7456057932488,1017.9957624374312,,
+province_trend,province_trend,22,จันทบุรี,2017,1622.4677716390424,1303.5163867201898,,10.0
+province_trend,province_trend,33,ศรีสะเกษ,2017,1130.2681992337166,938.8346667572195,,10.0
+province_trend,province_trend,53,อุตรดิตถ์,2017,923.234129518457,665.1809111784248,,10.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2017,795.3192439351094,1138.9000781640398,,10.0
+province_trend,province_trend,86,ชุมพร,2017,872.7456057932488,1015.9413361755147,,10.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2017,1622.4677716390424,1219.4232170254884,,10.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2017,1130.2681992337166,863.6946815222489,,10.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2017,923.234129518457,514.8258445981231,,10.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2017,795.3192439351094,1067.9462111165662,,10.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2017,872.7456057932488,1014.6895241379885,,10.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2017,1622.4677716390424,1278.9803830353549,,10.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2017,1130.2681992337166,901.2083214385459,,10.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2017,923.234129518457,559.3342560787462,,10.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2017,795.3192439351094,1146.7395802786402,,10.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2017,872.7456057932488,1107.7430372315885,,10.0
+stage_ridge,stage_ridge,22,จันทบุรี,2017,1622.4677716390424,1198.894693062756,140.0,10.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2017,1130.2681992337166,857.6793739537578,140.0,10.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2017,923.234129518457,534.3978314826918,140.0,10.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2017,795.3192439351094,1145.0264207006544,140.0,10.0
+stage_ridge,stage_ridge,86,ชุมพร,2017,872.7456057932488,1102.6779357612263,140.0,10.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2017,1622.4677716390424,952.1198536752191,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2017,1130.2681992337166,864.9049372166389,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2017,923.234129518457,597.2077072577507,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2017,795.3192439351094,939.570316673254,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2017,872.7456057932488,947.4313133867065,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2017,1622.4677716390424,1050.3601438485637,150.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2017,1130.2681992337166,859.8601996848663,150.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2017,923.234129518457,593.2056759354166,150.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2017,795.3192439351094,1059.5896989920525,150.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2017,872.7456057932488,1100.2161144453792,150.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2017,1622.4677716390424,947.3831871977601,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2017,1130.2681992337166,899.2201374372652,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2017,923.234129518457,542.2020343092495,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2017,795.3192439351094,923.2131553537124,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2017,872.7456057932488,923.2131553537124,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2017,1622.4677716390424,1027.6304505803907,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2017,1130.2681992337166,924.7807924506087,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2017,923.234129518457,537.3627429035913,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2017,795.3192439351094,1092.9473643976573,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2017,872.7456057932488,1094.7087427080526,150.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2017,1622.4677716390424,1285.1823211317983,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2017,1130.2681992337166,913.7052835901226,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2017,923.234129518457,513.560012299404,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2017,795.3192439351094,1148.4499449408552,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2017,872.7456057932488,1104.2896676953867,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2017,1622.4677716390424,1291.1276020667278,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,949.5104214767626,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2017,923.234129518457,591.4200462493073,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1155.0069290749177,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2017,872.7456057932488,1121.3109321608722,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2017,1622.4677716390424,1296.4687240881121,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,953.7325146379981,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2017,923.234129518457,555.0244629330236,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1156.6339558636807,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2017,872.7456057932488,1119.6531461009417,,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2017,1622.4677716390424,1205.7353546713744,150.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2017,1130.2681992337166,893.9866413619548,150.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2017,923.234129518457,568.6353827317735,150.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2017,795.3192439351094,1205.3985286047325,150.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2017,872.7456057932488,1145.63626369057,150.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2017,1622.4677716390424,1233.3186091859375,140.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,921.871075440019,140.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2017,923.234129518457,604.9382308137277,140.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1137.0058166336266,140.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2017,872.7456057932488,1119.0307444899956,140.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2017,1622.4677716390424,1244.6251834389573,150.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,1001.0670490564002,150.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2017,923.234129518457,670.2485362578931,150.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1185.4051238809539,150.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2017,872.7456057932488,1174.5624175214089,150.0,10.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2017,1622.4677716390424,1047.1094091877706,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2017,1130.2681992337166,861.9290518824045,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2017,923.234129518457,593.1370842539823,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2017,795.3192439351094,1060.4706225061225,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2017,872.7456057932488,1100.2161144453794,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2017,1622.4677716390424,1079.2628405552996,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,862.8172579122563,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2017,923.234129518457,598.1510401747189,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1077.3221090322347,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2017,872.7456057932488,1109.8474099879832,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2017,1622.4677716390424,1076.4201953007419,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,859.9900947277963,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2017,923.234129518457,594.5406773341573,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1077.3221090322345,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2017,872.7456057932488,1109.847409987983,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2017,1622.4677716390424,1024.944708429272,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2017,1130.2681992337166,963.901965741849,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2017,923.234129518457,580.2600413299078,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2017,795.3192439351094,1094.972068765902,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2017,872.7456057932488,1094.972068765902,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2017,1622.4677716390424,1036.3278348851195,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,931.8195249536153,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2017,923.234129518457,552.0107051902122,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1096.444900406728,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2017,872.7456057932488,1100.1252237177991,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2017,1622.4677716390424,1036.2879040150885,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2017,1130.2681992337166,970.6559157439939,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2017,923.234129518457,581.7886108573066,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2017,795.3192439351094,1098.0392616496076,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2017,872.7456057932488,1098.0392616496076,150.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2017,1622.4677716390424,1126.0707418165834,150.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2017,1130.2681992337166,880.8100767219269,150.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2017,923.234129518457,493.26766757985195,150.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2017,795.3192439351094,1160.8481693718563,150.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2017,872.7456057932488,1170.5311551568611,150.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2017,1622.4677716390424,1230.562481473434,140.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2017,1130.2681992337166,898.9847089896834,140.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2017,923.234129518457,467.1729554616459,140.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2017,795.3192439351094,1101.8456925095309,140.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2017,872.7456057932488,1096.5616032446942,140.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2017,1622.4677716390424,1196.1583217410553,150.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2017,1130.2681992337166,959.1214047913192,150.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2017,923.234129518457,714.8617702504012,150.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2017,795.3192439351094,1137.5923472526497,150.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2017,872.7456057932488,1155.0748878350987,150.0,"{'C': 1, 'gamma': 0.03}"
+inner_selected,previous_year,22,จันทบุรี,2017,1622.4677716390424,1094.3146358986455,,
+inner_selected,previous_year,33,ศรีสะเกษ,2017,1130.2681992337166,717.8329571106095,,
+inner_selected,previous_year,53,อุตรดิตถ์,2017,923.234129518457,241.5694319784588,,
+inner_selected,previous_year,84,สุราษฎร์ธานี,2017,795.3192439351094,978.2416936195236,,
+inner_selected,previous_year,86,ชุมพร,2017,872.7456057932488,1075.1041257367388,,
+previous_year,previous_year,22,จันทบุรี,2018,1509.5797559873474,1622.4677716390424,,
+previous_year,previous_year,33,ศรีสะเกษ,2018,1457.7218728162125,1130.2681992337166,,
+previous_year,previous_year,53,อุตรดิตถ์,2018,960.31023330298,923.234129518457,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2018,899.8616579759498,795.3192439351094,,
+previous_year,previous_year,86,ชุมพร,2018,1051.4398679356798,872.7456057932488,,
+province_median,province_median,22,จันทบุรี,2018,1509.5797559873474,1336.0011866370821,,
+province_median,province_median,33,ศรีสะเกษ,2018,1457.7218728162125,870.3607065869433,,
+province_median,province_median,53,อุตรดิตถ์,2018,960.31023330298,567.476155918949,,
+province_median,province_median,84,สุราษฎร์ธานี,2018,899.8616579759498,1102.5036083359842,,
+province_median,province_median,86,ชุมพร,2018,1051.4398679356798,1005.3735949120587,,
+province_trend,province_trend,22,จันทบุรี,2018,1509.5797559873474,1115.2556644820338,,100.0
+province_trend,province_trend,33,ศรีสะเกษ,2018,1457.7218728162125,964.0697326450809,,100.0
+province_trend,province_trend,53,อุตรดิตถ์,2018,960.31023330298,857.384050657877,,100.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2018,899.8616579759498,1021.8036319284162,,100.0
+province_trend,province_trend,86,ชุมพร,2018,1051.4398679356798,980.9695144599505,,100.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2018,1509.5797559873474,1194.0594329492778,,100.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2018,1457.7218728162125,995.2571249113623,,100.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2018,960.31023330298,872.8472888880708,,100.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2018,899.8616579759498,990.4843594005134,,100.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2018,1051.4398679356798,967.5872241995563,,100.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2018,1509.5797559873474,1188.7298303731186,,100.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2018,1457.7218728162125,996.0308151540905,,100.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2018,960.31023330298,834.209180228952,,100.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2018,899.8616579759498,1013.2386553074899,,100.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2018,1051.4398679356798,1005.5011187669205,,100.0
+stage_ridge,stage_ridge,22,จันทบุรี,2018,1509.5797559873474,1198.970960070317,120.0,100.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2018,1457.7218728162125,995.127200566959,120.0,100.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2018,960.31023330298,857.4713937459642,120.0,100.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2018,899.8616579759498,1011.6556205663694,120.0,100.0
+stage_ridge,stage_ridge,86,ชุมพร,2018,1051.4398679356798,997.3034355210362,120.0,100.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2018,1509.5797559873474,1298.8882479006156,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2018,1457.7218728162125,1047.8198702900677,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2018,960.31023330298,849.0016127070618,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2018,899.8616579759498,932.2235726199425,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2018,1051.4398679356798,928.7883488235686,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2018,1509.5797559873474,1301.2550805213732,150.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2018,1457.7218728162125,928.894991194753,150.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2018,960.31023330298,757.5942287858102,150.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2018,899.8616579759498,1005.8179461906188,150.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2018,1051.4398679356798,1010.28532609861,150.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2018,1509.5797559873474,1252.574130449929,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2018,1457.7218728162125,991.5836873184974,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2018,960.31023330298,784.9271586264958,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2018,899.8616579759498,968.6711015389137,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2018,1051.4398679356798,968.6711015389137,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2018,1509.5797559873474,1305.86018876626,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2018,1457.7218728162125,928.5237593167019,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2018,960.31023330298,846.7615195355418,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2018,899.8616579759498,1023.8092501428837,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2018,1051.4398679356798,1034.699827394731,150.0,10
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2018,1509.5797559873474,1196.5227587611978,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2018,1457.7218728162125,1008.7328037768123,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2018,960.31023330298,751.8467180915308,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2018,899.8616579759498,1025.0981802375284,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2018,1051.4398679356798,1013.701781918658,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2018,1509.5797559873474,1207.4682273076605,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,985.5468041616496,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2018,960.31023330298,864.3552238310526,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1037.8821785951395,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2018,1051.4398679356798,1021.4779466853988,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2018,1509.5797559873474,1213.1911582240027,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,996.9941951183869,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2018,960.31023330298,778.6238375246348,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1046.7800573646077,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2018,1051.4398679356798,1027.8672936311164,,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2018,1509.5797559873474,1243.6467887191984,140.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2018,1457.7218728162125,965.3099107418907,140.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2018,960.31023330298,861.1681480993741,140.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2018,899.8616579759498,1019.3143027764464,140.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2018,1051.4398679356798,991.2751283747511,140.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2018,1509.5797559873474,1243.6281852211314,130.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,982.3572939244963,130.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2018,960.31023330298,894.8674819973952,130.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1032.6202093311522,130.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2018,1051.4398679356798,999.034811387416,130.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2018,1509.5797559873474,1273.8540050292188,140.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,963.5352636338661,140.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2018,960.31023330298,900.1798438727685,140.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1036.8999561699297,140.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2018,1051.4398679356798,995.7893492679381,140.0,100.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2018,1509.5797559873474,1300.3116712102274,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2018,1457.7218728162125,930.8053769132852,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2018,960.31023330298,759.4452374321926,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2018,899.8616579759498,1001.7977389557304,150.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2018,1051.4398679356798,1010.2853260986102,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2018,1509.5797559873474,1312.1662134543353,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,924.9662894624813,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2018,960.31023330298,779.6529794651595,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1002.4723217386927,150.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2018,1051.4398679356798,1015.1026794933,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2018,1509.5797559873474,1312.1662134543353,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,923.3014486793458,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2018,960.31023330298,777.454792830247,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,999.7335450005803,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2018,1051.4398679356798,1015.1026794933,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2018,1509.5797559873474,1269.9867425365028,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2018,1457.7218728162125,816.7918172984707,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2018,960.31023330298,729.1994401982005,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2018,899.8616579759498,1014.0663430848966,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2018,1051.4398679356798,996.2996034630511,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2018,1509.5797559873474,1302.5374616545737,150.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,907.4791423286924,150.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2018,960.31023330298,849.1018936096999,150.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1024.4886293087807,150.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2018,1051.4398679356798,1039.3849010167594,150.0,10
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2018,1509.5797559873474,1295.335719384412,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2018,1457.7218728162125,931.316529653068,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2018,960.31023330298,750.6938027003737,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2018,899.8616579759498,1002.7683616195465,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2018,1051.4398679356798,988.2735659002309,150.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2018,1509.5797559873474,1342.2055071685456,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2018,1457.7218728162125,981.1128094627474,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2018,960.31023330298,941.8550961551315,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2018,899.8616579759498,1119.902028733344,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2018,1051.4398679356798,1094.888294458831,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2018,1509.5797559873474,1338.163978882968,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2018,1457.7218728162125,980.7474410259849,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2018,960.31023330298,682.1514982188461,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2018,899.8616579759498,1013.8475073102429,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2018,1051.4398679356798,995.1521933537227,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2018,1509.5797559873474,1150.0428703782245,120.0,"{'C': 10, 'gamma': 0.3}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2018,1457.7218728162125,925.7185986888518,120.0,"{'C': 10, 'gamma': 0.3}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2018,960.31023330298,898.4763869741095,120.0,"{'C': 10, 'gamma': 0.3}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2018,899.8616579759498,945.5572252013249,120.0,"{'C': 10, 'gamma': 0.3}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2018,1051.4398679356798,942.2773733786221,120.0,"{'C': 10, 'gamma': 0.3}"
+inner_selected,stage_extra_trees_combined,22,จันทบุรี,2018,1509.5797559873474,1338.163978882968,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+inner_selected,stage_extra_trees_combined,33,ศรีสะเกษ,2018,1457.7218728162125,980.7474410259849,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+inner_selected,stage_extra_trees_combined,53,อุตรดิตถ์,2018,960.31023330298,682.1514982188461,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+inner_selected,stage_extra_trees_combined,84,สุราษฎร์ธานี,2018,899.8616579759498,1013.8475073102429,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+inner_selected,stage_extra_trees_combined,86,ชุมพร,2018,1051.4398679356798,995.1521933537227,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 0.7}"
+previous_year,previous_year,22,จันทบุรี,2019,1751.2007548950223,1509.5797559873474,,
+previous_year,previous_year,33,ศรีสะเกษ,2019,1105.8944482522274,1457.7218728162125,,
+previous_year,previous_year,53,อุตรดิตถ์,2019,648.0971705877345,960.31023330298,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2019,1173.8261738261738,899.8616579759498,,
+previous_year,previous_year,86,ชุมพร,2019,1759.6383519289377,1051.4398679356798,,
+province_median,province_median,22,จันทบุรี,2019,1751.2007548950223,1344.0006243096575,,
+province_median,province_median,33,ศรีสะเกษ,2019,1105.8944482522274,907.6433121019109,,
+province_median,province_median,53,อุตรดิตถ์,2019,648.0971705877345,588.9775795281137,,
+province_median,province_median,84,สุราษฎร์ธานี,2019,1173.8261738261738,1037.9939209726444,,
+province_median,province_median,86,ชุมพร,2019,1759.6383519289377,1017.9957624374312,,
+province_trend,province_trend,22,จันทบุรี,2019,1751.2007548950223,1165.9223631431862,,100.0
+province_trend,province_trend,33,ศรีสะเกษ,2019,1105.8944482522274,1018.709553252866,,100.0
+province_trend,province_trend,53,อุตรดิตถ์,2019,648.0971705877345,896.3948329646211,,100.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2019,1173.8261738261738,1051.8196879712575,,100.0
+province_trend,province_trend,86,ชุมพร,2019,1759.6383519289377,1018.6820635999196,,100.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2019,1751.2007548950223,1230.1348860846979,,100.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2019,1105.8944482522274,1103.1005015965045,,100.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2019,648.0971705877345,915.9482237893176,,100.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2019,1173.8261738261738,1031.284857802118,,100.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2019,1759.6383519289377,1029.9279249738536,,100.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2019,1751.2007548950223,1227.2503872061106,,100.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2019,1105.8944482522274,1101.8968585664097,,100.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2019,648.0971705877345,876.0473085025221,,100.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2019,1173.8261738261738,1039.518857885095,,100.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2019,1759.6383519289377,1037.616667157388,,100.0
+stage_ridge,stage_ridge,22,จันทบุรี,2019,1751.2007548950223,1223.7279226245507,120.0,100.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2019,1105.8944482522274,1100.0642361348614,120.0,100.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2019,648.0971705877345,898.8789242029171,120.0,100.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2019,1173.8261738261738,1026.475093804692,120.0,100.0
+stage_ridge,stage_ridge,86,ชุมพร,2019,1759.6383519289377,1032.5350637395884,120.0,100.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2019,1751.2007548950223,1331.8325982770407,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2019,1105.8944482522274,1175.7860630514178,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2019,648.0971705877345,878.994967622801,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2019,1173.8261738261738,965.6639714085454,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2019,1759.6383519289377,964.2589589461161,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2019,1751.2007548950223,1330.3196000024986,130.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2019,1105.8944482522274,1135.0566115793754,130.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2019,648.0971705877345,798.8809055941794,130.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2019,1173.8261738261738,980.2802890445246,130.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2019,1759.6383519289377,993.8011263240763,130.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2019,1751.2007548950223,1361.3588404701586,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2019,1105.8944482522274,1237.4249313337302,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2019,648.0971705877345,910.22128704965,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2019,1173.8261738261738,1018.4520638408245,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2019,1759.6383519289377,1040.1650130945764,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2019,1751.2007548950223,1319.2707714876249,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2019,1105.8944482522274,1200.1382421260703,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2019,648.0971705877345,840.5761749749541,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2019,1173.8261738261738,897.5605123313733,150.0,10
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2019,1759.6383519289377,945.9371635469985,150.0,10
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2019,1751.2007548950223,1236.243626570843,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2019,1105.8944482522274,1109.3590159477674,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2019,648.0971705877345,828.5803381721871,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2019,1173.8261738261738,1051.9227231514055,,100.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2019,1759.6383519289377,1047.1852219268558,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2019,1751.2007548950223,1233.8394724594716,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1046.6097766887324,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2019,648.0971705877345,854.8165884186645,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1054.503720295784,,100.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2019,1759.6383519289377,1044.384627201131,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2019,1751.2007548950223,1241.6482834685096,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1056.0255396682958,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2019,648.0971705877345,823.5626648538853,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1064.7219193561416,,100.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2019,1759.6383519289377,1052.4463409588263,,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2019,1751.2007548950223,1260.4691389202465,130.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2019,1105.8944482522274,1060.1625135711824,130.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2019,648.0971705877345,878.5233408701085,130.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2019,1173.8261738261738,1064.5798150000164,130.0,100.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2019,1759.6383519289377,1030.9890628662786,130.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2019,1751.2007548950223,1250.0871209849756,120.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1026.0634033700005,120.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2019,648.0971705877345,878.4340137005688,120.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1044.3383597747466,120.0,100.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2019,1759.6383519289377,1018.2224770015157,120.0,100.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2019,1751.2007548950223,1493.4453656449782,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1148.7827249954282,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2019,648.0971705877345,827.432955659211,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1187.1228481096975,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2019,1759.6383519289377,1082.9876262782493,130.0,10.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2019,1751.2007548950223,1331.7847369639244,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2019,1105.8944482522274,1129.7081526214056,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2019,648.0971705877345,805.9149422200898,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2019,1173.8261738261738,994.5763940014165,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2019,1759.6383519289377,991.219458942296,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2019,1751.2007548950223,1273.1319351052532,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1134.974248733463,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2019,648.0971705877345,852.4629960543427,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,965.6611499780723,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2019,1759.6383519289377,992.7113560104863,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2019,1751.2007548950223,1274.2172802655716,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1128.3069173111564,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2019,648.0971705877345,856.5669551092248,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,975.7472515869719,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2019,1759.6383519289377,997.2337855357682,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2019,1751.2007548950223,1319.2707714876249,150.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2019,1105.8944482522274,1200.1382421260703,150.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2019,648.0971705877345,840.5761749749541,150.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2019,1173.8261738261738,897.5605123313733,150.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2019,1759.6383519289377,945.9371635469985,150.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2019,1751.2007548950223,1319.6781944238546,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1054.491261308075,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2019,648.0971705877345,922.748546174878,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1067.3570640172504,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2019,1759.6383519289377,1015.250421784023,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2019,1751.2007548950223,1344.9571253196195,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2019,1105.8944482522274,1068.1375855801898,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2019,648.0971705877345,925.2898292925466,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2019,1173.8261738261738,1071.5530499607014,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2019,1759.6383519289377,1013.1364649348225,120.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2019,1751.2007548950223,1369.6103513284168,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2019,1105.8944482522274,1070.5144508513297,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2019,648.0971705877345,998.0988924084724,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2019,1173.8261738261738,1119.3964717759723,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2019,1759.6383519289377,1059.506030161339,120.0,"{'depth': 4, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2019,1751.2007548950223,1297.8214461170417,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2019,1105.8944482522274,1029.159739206834,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2019,648.0971705877345,663.4857493628722,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2019,1173.8261738261738,999.701465085927,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2019,1759.6383519289377,1009.769281191081,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2019,1751.2007548950223,1467.1203186609064,130.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2019,1105.8944482522274,952.7740097176638,130.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2019,648.0971705877345,759.5967218490391,130.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2019,1173.8261738261738,1121.837104562974,130.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2019,1759.6383519289377,1089.0382007124833,130.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_svr_combined,22,จันทบุรี,2019,1751.2007548950223,1467.1203186609064,130.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_svr_combined,33,ศรีสะเกษ,2019,1105.8944482522274,952.7740097176638,130.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_svr_combined,53,อุตรดิตถ์,2019,648.0971705877345,759.5967218490391,130.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_svr_combined,84,สุราษฎร์ธานี,2019,1173.8261738261738,1121.837104562974,130.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_svr_combined,86,ชุมพร,2019,1759.6383519289377,1089.0382007124833,130.0,"{'C': 10, 'gamma': 'scale'}"
+previous_year,previous_year,22,จันทบุรี,2020,1928.5329623479784,1751.2007548950223,,
+previous_year,previous_year,33,ศรีสะเกษ,2020,1158.008658008658,1105.8944482522274,,
+previous_year,previous_year,53,อุตรดิตถ์,2020,559.5888039628219,648.0971705877345,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2020,961.6520614152856,1173.8261738261738,,
+previous_year,previous_year,86,ชุมพร,2020,1608.6624047961338,1759.6383519289377,,
+province_median,province_median,22,จันทบุรี,2020,1928.5329623479784,1365.8592000428705,,
+province_median,province_median,33,ศรีสะเกษ,2020,1158.008658008658,932.5400844887479,,
+province_median,province_median,53,อุตรดิตถ์,2020,559.5888039628219,596.0069415792384,,
+province_median,province_median,84,สุราษฎร์ธานี,2020,961.6520614152856,1102.5036083359842,,
+province_median,province_median,86,ชุมพร,2020,1608.6624047961338,1034.7178151865555,,
+province_trend,province_trend,22,จันทบุรี,2020,1928.5329623479784,1612.7435998930537,,1.0
+province_trend,province_trend,33,ศรีสะเกษ,2020,1158.008658008658,1186.9929548240775,,1.0
+province_trend,province_trend,53,อุตรดิตถ์,2020,559.5888039628219,840.9629071005916,,1.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2020,961.6520614152856,1275.1509364710982,,1.0
+province_trend,province_trend,86,ชุมพร,2020,1608.6624047961338,1251.2701853706374,,1.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2020,1928.5329623479784,1655.4491807724953,,1.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2020,1158.008658008658,1195.2306389758128,,1.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2020,559.5888039628219,823.3835264993404,,1.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2020,961.6520614152856,1270.5734755314538,,1.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2020,1608.6624047961338,1357.4178431114196,,1.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2020,1928.5329623479784,1616.0708687730553,,1.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2020,1158.008658008658,1181.8752943510963,,1.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2020,559.5888039628219,776.1680069593367,,1.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2020,961.6520614152856,1169.939427920841,,1.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2020,1608.6624047961338,1349.5072991474217,,1.0
+stage_ridge,stage_ridge,22,จันทบุรี,2020,1928.5329623479784,1743.3010418889512,120.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2020,1158.008658008658,1184.4685410713164,120.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2020,559.5888039628219,879.627454032817,120.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2020,961.6520614152856,1440.4117071483633,120.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2020,1608.6624047961338,1420.9455120225407,120.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2020,1928.5329623479784,1402.3776312910934,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2020,1158.008658008658,1207.3200076290236,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2020,559.5888039628219,633.8434306540906,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2020,961.6520614152856,1250.6603419238347,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2020,1608.6624047961338,1272.1915399375396,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2020,1928.5329623479784,1355.9488402378379,130.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2020,1158.008658008658,1122.7020354802191,130.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2020,559.5888039628219,622.5260214210468,130.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2020,961.6520614152856,1207.776998294534,130.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2020,1608.6624047961338,1221.9117836917874,130.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2020,1928.5329623479784,1528.294817513816,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2020,1158.008658008658,1265.9696992278914,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2020,559.5888039628219,663.5306529830775,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2020,961.6520614152856,1294.0629981769878,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2020,1608.6624047961338,1294.0629981769878,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2020,1928.5329623479784,1363.542708770371,120.0,10
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2020,1158.008658008658,1110.6843226664623,120.0,10
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2020,559.5888039628219,659.1711488682424,120.0,10
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2020,961.6520614152856,1259.2876914647939,120.0,10
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2020,1608.6624047961338,1198.5034031631762,120.0,10
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2020,1928.5329623479784,1624.6748664177758,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2020,1158.008658008658,1183.3751878182748,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2020,559.5888039628219,786.0111837701194,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2020,961.6520614152856,1191.1727008713337,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2020,1608.6624047961338,1349.2078582881545,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2020,1928.5329623479784,1607.1846989522573,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1154.3193722380458,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2020,559.5888039628219,790.7636897368154,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1174.8113863573492,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2020,1608.6624047961338,1369.6545960696828,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2020,1928.5329623479784,1607.7740274391563,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1155.213948294717,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2020,559.5888039628219,805.5253867482065,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1171.8243359028202,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2020,1608.6624047961338,1374.9155723526405,,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2020,1928.5329623479784,1753.5447833953222,120.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2020,1158.008658008658,1175.2242185281293,120.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2020,559.5888039628219,823.5139438059167,120.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2020,961.6520614152856,1468.7708334535102,120.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2020,1608.6624047961338,1423.6211336975164,120.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2020,1928.5329623479784,1692.0772015563923,120.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1077.563002790623,120.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2020,559.5888039628219,795.7143715873835,120.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1392.7709216996236,120.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2020,1608.6624047961338,1357.0955394308476,120.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2020,1928.5329623479784,1604.110104456027,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1056.4465007895617,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2020,559.5888039628219,728.1738297200279,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1138.8821875428987,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2020,1608.6624047961338,1285.1059312537109,130.0,10.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2020,1928.5329623479784,1373.1329099428808,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2020,1158.008658008658,1102.216664703893,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2020,559.5888039628219,625.0892160546713,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2020,961.6520614152856,1202.2061897803271,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2020,1608.6624047961338,1203.6551028328806,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2020,1928.5329623479784,1326.5450668065025,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1101.8260408309065,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2020,559.5888039628219,622.0901143182111,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1199.7105272457425,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2020,1608.6624047961338,1192.695044302195,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2020,1928.5329623479784,1341.1109826533484,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1084.6342657785108,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2020,559.5888039628219,625.4399472000464,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1195.4301839142286,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2020,1608.6624047961338,1176.077498538336,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2020,1928.5329623479784,1369.1970772393586,120.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2020,1158.008658008658,1127.107701550511,120.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2020,559.5888039628219,667.5838429120944,120.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2020,961.6520614152856,1287.9212838355934,120.0,10
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2020,1608.6624047961338,1194.9996783135648,120.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2020,1928.5329623479784,1420.1226727465437,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1081.6983224205114,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2020,559.5888039628219,505.84655745405604,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1333.9387688061888,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2020,1608.6624047961338,1265.5659594595395,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2020,1928.5329623479784,1464.3434865027195,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1090.9723375528952,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2020,559.5888039628219,503.5257509937629,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1326.1513926823163,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2020,1608.6624047961338,1265.3906102473063,120.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2020,1928.5329623479784,1635.6006600961502,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2020,1158.008658008658,1110.0101263835786,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2020,559.5888039628219,593.2332043218541,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2020,961.6520614152856,1410.1105937323396,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2020,1608.6624047961338,1405.2101199055392,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2020,1928.5329623479784,1438.9894710536605,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2020,1158.008658008658,1099.5912508654835,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2020,559.5888039628219,597.062268144845,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2020,961.6520614152856,1129.4231870352887,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2020,1608.6624047961338,1120.0990462099048,120.0,"{'max_depth': 3, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2020,1928.5329623479784,1679.1384220532063,140.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2020,1158.008658008658,985.0306858573176,140.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2020,559.5888039628219,726.4116271741943,140.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2020,961.6520614152856,1103.4844315831124,140.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2020,1608.6624047961338,1299.1089447213576,140.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,stage_ridge_vpd,22,จันทบุรี,2020,1928.5329623479784,1692.0772015563923,120.0,1.0
+inner_selected,stage_ridge_vpd,33,ศรีสะเกษ,2020,1158.008658008658,1077.563002790623,120.0,1.0
+inner_selected,stage_ridge_vpd,53,อุตรดิตถ์,2020,559.5888039628219,795.7143715873835,120.0,1.0
+inner_selected,stage_ridge_vpd,84,สุราษฎร์ธานี,2020,961.6520614152856,1392.7709216996236,120.0,1.0
+inner_selected,stage_ridge_vpd,86,ชุมพร,2020,1608.6624047961338,1357.0955394308476,120.0,1.0
+previous_year,previous_year,22,จันทบุรี,2021,1842.8039691808733,1928.5329623479784,,
+previous_year,previous_year,33,ศรีสะเกษ,2021,1337.9446640316205,1158.008658008658,,
+previous_year,previous_year,53,อุตรดิตถ์,2021,691.1307491971984,559.5888039628219,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2021,1010.066897545656,961.6520614152856,,
+previous_year,previous_year,86,ชุมพร,2021,1658.340405832883,1608.6624047961338,,
+province_median,province_median,22,จันทบุรี,2021,1842.8039691808733,1387.7177757760835,,
+province_median,province_median,33,ศรีสะเกษ,2021,1337.9446640316205,957.4368568755848,,
+province_median,province_median,53,อุตรดิตถ์,2021,691.1307491971984,588.9775795281137,,
+province_median,province_median,84,สุราษฎร์ธานี,2021,1010.066897545656,1037.9939209726444,,
+province_median,province_median,86,ชุมพร,2021,1658.340405832883,1051.4398679356798,,
+province_trend,province_trend,22,จันทบุรี,2021,1842.8039691808733,1683.836808082143,,1.0
+province_trend,province_trend,33,ศรีสะเกษ,2021,1337.9446640316205,1227.1924659459316,,1.0
+province_trend,province_trend,53,อุตรดิตถ์,2021,691.1307491971984,858.5468441792242,,1.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2021,1010.066897545656,1289.8563097577917,,1.0
+province_trend,province_trend,86,ชุมพร,2021,1658.340405832883,1326.0912481269822,,1.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2021,1842.8039691808733,1775.8818091923192,,1.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2021,1337.9446640316205,1234.2795252236474,,1.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2021,691.1307491971984,789.4230697594867,,1.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2021,1010.066897545656,1206.8883268850946,,1.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2021,1658.340405832883,1424.4599996401187,,1.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2021,1842.8039691808733,1842.2386926510285,,1.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2021,1337.9446640316205,1305.3379233106066,,1.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2021,691.1307491971984,872.0683475524008,,1.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2021,1010.066897545656,1244.0360299991921,,1.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2021,1658.340405832883,1440.8409559271881,,1.0
+stage_ridge,stage_ridge,22,จันทบุรี,2021,1842.8039691808733,1880.9780564902549,150.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2021,1337.9446640316205,1292.7041567396336,150.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2021,691.1307491971984,785.1505361696253,150.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2021,1010.066897545656,1178.1700326654636,150.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2021,1658.340405832883,1441.3020284230286,150.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2021,1842.8039691808733,1488.4251304554707,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2021,1337.9446640316205,1301.3621611990166,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2021,691.1307491971984,606.7990209911557,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2021,1010.066897545656,975.5048711924591,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2021,1658.340405832883,1375.5816402090045,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2021,1842.8039691808733,1510.1836538496957,130.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2021,1337.9446640316205,1204.5082238935108,130.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2021,691.1307491971984,589.721908444103,130.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2021,1010.066897545656,983.2761298479198,130.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2021,1658.340405832883,1388.2708551645446,130.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2021,1842.8039691808733,1609.4231169151474,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2021,1337.9446640316205,1238.7659200991818,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2021,691.1307491971984,655.6293516636854,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2021,1010.066897545656,1037.6710020946532,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2021,1658.340405832883,1349.0289830948934,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2021,1842.8039691808733,1487.8831959896586,130.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2021,1337.9446640316205,1088.4418589593415,130.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2021,691.1307491971984,563.9015317713377,130.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2021,1010.066897545656,1104.5527550480494,130.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2021,1658.340405832883,1448.097723845263,130.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2021,1842.8039691808733,1841.0568544638945,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2021,1337.9446640316205,1312.4701974693971,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2021,691.1307491971984,853.4999902065824,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2021,1010.066897545656,1247.864960479997,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2021,1658.340405832883,1447.041124108353,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2021,1842.8039691808733,1777.5088827987256,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1310.2468084492186,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2021,691.1307491971984,905.8054808386966,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1212.6528305292293,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2021,1658.340405832883,1456.2587317880375,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2021,1842.8039691808733,1780.618062816634,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1316.3106929835137,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2021,691.1307491971984,887.1182733899786,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1212.834599287555,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2021,1658.340405832883,1463.222998444209,,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2021,1842.8039691808733,1753.4060755604619,130.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2021,1337.9446640316205,1234.4600625985736,130.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2021,691.1307491971984,847.7425118875052,130.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2021,1010.066897545656,1245.2178372042106,130.0,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2021,1658.340405832883,1408.073979831385,130.0,10.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2021,1842.8039691808733,1827.78975537597,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1385.5737225982166,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2021,691.1307491971984,822.9495373980377,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1182.1254137912904,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2021,1658.340405832883,1443.272495192849,150.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2021,1842.8039691808733,1733.8039362617844,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1281.2669203239752,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2021,691.1307491971984,878.653693851673,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1274.245367218396,130.0,10.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2021,1658.340405832883,1427.520303943972,130.0,10.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2021,1842.8039691808733,1517.613462447708,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2021,1337.9446640316205,1204.159326486428,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2021,691.1307491971984,589.6031862450103,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2021,1010.066897545656,983.9240040931874,130.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2021,1658.340405832883,1368.130879901021,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2021,1842.8039691808733,1511.1589289318692,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1207.4787106435006,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2021,691.1307491971984,609.419134208992,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,967.875699128102,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2021,1658.340405832883,1393.0835461376419,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2021,1842.8039691808733,1517.0107400554562,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1211.8607575819617,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2021,691.1307491971984,609.1981093838675,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,968.4402486747282,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2021,1658.340405832883,1366.8462132656377,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2021,1842.8039691808733,1554.8897836180859,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2021,1337.9446640316205,1094.635893219947,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2021,691.1307491971984,610.4241229930079,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2021,1010.066897545656,1140.8420901544916,130.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2021,1658.340405832883,1431.1290871812705,130.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2021,1842.8039691808733,1477.103150827008,130.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1141.9173698065829,130.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2021,691.1307491971984,629.4560442761519,130.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1093.9482171126124,130.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2021,1658.340405832883,1459.5573889049217,130.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2021,1842.8039691808733,1529.1086219213987,130.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1121.6748208775807,130.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2021,691.1307491971984,645.9655071443386,130.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1108.2306854211904,130.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2021,1658.340405832883,1431.6437046082087,130.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2021,1842.8039691808733,1699.0043269404077,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2021,1337.9446640316205,1233.8737159316813,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2021,691.1307491971984,680.2036328296151,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2021,1010.066897545656,1126.7102722186926,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2021,1658.340405832883,1476.9040721527092,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2021,1842.8039691808733,1579.9770353676943,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2021,1337.9446640316205,1175.66313037606,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2021,691.1307491971984,676.1427653497075,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2021,1010.066897545656,1106.0351926904327,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2021,1658.340405832883,1327.9213783216378,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2021,1842.8039691808733,1541.6322098205683,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2021,1337.9446640316205,1453.1765998905448,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2021,691.1307491971984,1078.5542156833224,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2021,1010.066897545656,1055.3567652988063,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2021,1658.340405832883,1642.5012214512678,120.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,whole_year_ridge_vpd,22,จันทบุรี,2021,1842.8039691808733,1777.5088827987256,,1.0
+inner_selected,whole_year_ridge_vpd,33,ศรีสะเกษ,2021,1337.9446640316205,1310.2468084492186,,1.0
+inner_selected,whole_year_ridge_vpd,53,อุตรดิตถ์,2021,691.1307491971984,905.8054808386966,,1.0
+inner_selected,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2021,1010.066897545656,1212.6528305292293,,1.0
+inner_selected,whole_year_ridge_vpd,86,ชุมพร,2021,1658.340405832883,1456.2587317880375,,1.0
+previous_year,previous_year,22,จันทบุรี,2022,2194.396012547389,1842.8039691808733,,
+previous_year,previous_year,33,ศรีสะเกษ,2022,1347.7905073649754,1337.9446640316205,,
+previous_year,previous_year,53,อุตรดิตถ์,2022,798.9996340124436,691.1307491971984,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2022,719.076881872424,1010.066897545656,,
+previous_year,previous_year,86,ชุมพร,2022,1208.6184481426476,1658.340405832883,,
+province_median,province_median,22,จันทบุรี,2022,2194.396012547389,1411.9782406587115,,
+province_median,province_median,33,ศรีสะเกษ,2022,1347.7905073649754,1019.8175360000282,,
+province_median,province_median,53,อุตรดิตถ์,2022,798.9996340124436,596.0069415792384,,
+province_median,province_median,84,สุราษฎร์ธานี,2022,719.076881872424,1024.0304092591502,,
+province_median,province_median,86,ชุมพร,2022,1208.6184481426476,1063.2719968362094,,
+province_trend,province_trend,22,จันทบุรี,2022,2194.396012547389,1745.0695593353616,,1.0
+province_trend,province_trend,33,ศรีสะเกษ,2022,1347.7905073649754,1284.4601708987357,,1.0
+province_trend,province_trend,53,อุตรดิตถ์,2022,798.9996340124436,892.9388671363281,,1.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2022,719.076881872424,1315.0071059689983,,1.0
+province_trend,province_trend,86,ชุมพร,2022,1208.6184481426476,1401.5741635748695,,1.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2022,2194.396012547389,1807.110229304195,,1.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2022,1347.7905073649754,1338.2703014667054,,1.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2022,798.9996340124436,843.8218212349661,,1.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2022,719.076881872424,1222.4204269549764,,1.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2022,1208.6184481426476,1515.9411665497914,,1.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2022,2194.396012547389,1854.0101933415624,,1.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2022,1347.7905073649754,1419.7506015095548,,1.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2022,798.9996340124436,921.4154733295542,,1.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2022,719.076881872424,1208.402543121932,,1.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2022,1208.6184481426476,1588.4881493657053,,1.0
+stage_ridge,stage_ridge,22,จันทบุรี,2022,2194.396012547389,1841.880471180908,140.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2022,1347.7905073649754,1522.871793638486,140.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2022,798.9996340124436,857.5040927932589,140.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2022,719.076881872424,997.1711480661668,140.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2022,1208.6184481426476,1328.6282437092816,140.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2022,2194.396012547389,1591.7518079502936,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2022,1347.7905073649754,1362.718285476227,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2022,798.9996340124436,814.0986112075756,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2022,719.076881872424,1079.5872516130414,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2022,1208.6184481426476,1558.3985935805758,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2022,2194.396012547389,1597.9695497275409,130.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2022,1347.7905073649754,1274.245528325098,130.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2022,798.9996340124436,908.1830457344989,130.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2022,719.076881872424,1087.581219396351,130.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2022,1208.6184481426476,1562.750244740618,130.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2022,2194.396012547389,1737.1020744325099,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2022,1347.7905073649754,1225.2505043770543,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2022,798.9996340124436,843.9699348538755,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2022,719.076881872424,1046.3270036912256,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2022,1208.6184481426476,1518.3360064506612,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2022,2194.396012547389,1680.2962017285085,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2022,1347.7905073649754,1246.453438773863,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2022,798.9996340124436,894.7395467349448,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2022,719.076881872424,1068.7036410134103,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2022,1208.6184481426476,1480.5618637826453,150.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2022,2194.396012547389,1860.7899041180465,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2022,1347.7905073649754,1438.8001518578726,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2022,798.9996340124436,869.6524770346055,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2022,719.076881872424,1215.6641282077185,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2022,1208.6184481426476,1587.6779767093833,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2022,2194.396012547389,1836.5720574022093,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1550.7594156643922,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2022,798.9996340124436,998.9929403547878,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,1171.4984262062405,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2022,1208.6184481426476,1548.5624976012218,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2022,2194.396012547389,1846.1148874753994,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1578.2629897838929,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2022,798.9996340124436,939.1400111865088,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,1169.005030038588,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2022,1208.6184481426476,1558.0933882553868,,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2022,2194.396012547389,1861.510180122817,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2022,1347.7905073649754,1484.9753875898468,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2022,798.9996340124436,875.7041695957032,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2022,719.076881872424,1070.5791397485698,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2022,1208.6184481426476,1318.596319153888,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2022,2194.396012547389,1793.1660877456766,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1521.56468042708,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2022,798.9996340124436,909.1453807947822,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,935.0629678228943,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2022,1208.6184481426476,1361.766705905687,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2022,2194.396012547389,1823.3257878373606,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1482.6227931174394,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2022,798.9996340124436,941.0499220898926,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,994.9809528125425,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2022,1208.6184481426476,1380.1287570314007,140.0,1.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2022,2194.396012547389,1604.2501580770293,140.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2022,1347.7905073649754,1334.945307501991,140.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2022,798.9996340124436,922.740944919192,140.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2022,719.076881872424,1079.732515895419,140.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2022,1208.6184481426476,1524.5762626654953,140.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2022,2194.396012547389,1593.7040104715172,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1269.9097339454079,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2022,798.9996340124436,904.1310204532151,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,1089.4632763483705,130.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2022,1208.6184481426476,1560.1527731999017,130.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2022,2194.396012547389,1598.3155210036416,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1357.8394025363198,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2022,798.9996340124436,879.9435718949393,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,1077.8300862776343,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2022,1208.6184481426476,1521.2851518976372,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2022,2194.396012547389,1714.599668522137,140.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2022,1347.7905073649754,1230.7213838474968,140.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2022,798.9996340124436,924.7869113888896,140.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2022,719.076881872424,1024.088107780999,140.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2022,1208.6184481426476,1484.6682471278084,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2022,2194.396012547389,1664.0901536342449,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1202.9200627659761,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2022,798.9996340124436,933.6722683470565,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,1007.2633764931034,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2022,1208.6184481426476,1480.9244478115768,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2022,2194.396012547389,1658.7189665854498,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2022,1347.7905073649754,1209.7516659204011,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2022,798.9996340124436,931.7776852669988,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2022,719.076881872424,998.5131073560437,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2022,1208.6184481426476,1465.7363606222254,140.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2022,2194.396012547389,1556.5924084742046,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2022,1347.7905073649754,1347.486944027814,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2022,798.9996340124436,989.7369620201424,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2022,719.076881872424,898.2901023364648,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2022,1208.6184481426476,1306.7664800469793,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2022,2194.396012547389,1682.0540329638613,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2022,1347.7905073649754,1251.9572923971698,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2022,798.9996340124436,764.1389248865196,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2022,719.076881872424,1046.741579976994,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2022,1208.6184481426476,1497.7066263754398,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2022,2194.396012547389,1565.146598895094,150.0,"{'C': 10, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2022,1347.7905073649754,1681.132308319594,150.0,"{'C': 10, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2022,798.9996340124436,869.1753980030479,150.0,"{'C': 10, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2022,719.076881872424,469.6173333272293,150.0,"{'C': 10, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2022,1208.6184481426476,717.8764530606843,150.0,"{'C': 10, 'gamma': 0.03}"
+inner_selected,stage_ridge_ndvi,22,จันทบุรี,2022,2194.396012547389,1861.510180122817,140.0,1.0
+inner_selected,stage_ridge_ndvi,33,ศรีสะเกษ,2022,1347.7905073649754,1484.9753875898468,140.0,1.0
+inner_selected,stage_ridge_ndvi,53,อุตรดิตถ์,2022,798.9996340124436,875.7041695957032,140.0,1.0
+inner_selected,stage_ridge_ndvi,84,สุราษฎร์ธานี,2022,719.076881872424,1070.5791397485698,140.0,1.0
+inner_selected,stage_ridge_ndvi,86,ชุมพร,2022,1208.6184481426476,1318.596319153888,140.0,1.0
+previous_year,previous_year,22,จันทบุรี,2023,1967.7139975442904,2194.396012547389,,
+previous_year,previous_year,33,ศรีสะเกษ,2023,1269.1893186444738,1347.7905073649754,,
+previous_year,previous_year,53,อุตรดิตถ์,2023,850.0169090294218,798.9996340124436,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2023,1033.1888976832165,719.076881872424,,
+previous_year,previous_year,86,ชุมพร,2023,1224.117095342881,1208.6184481426476,,
+province_median,province_median,22,จันทบุรี,2023,1967.7139975442904,1436.2387055413394,,
+province_median,province_median,33,ศรีสะเกษ,2023,1269.1893186444738,1082.1982151244715,,
+province_median,province_median,53,อุตรดิตถ์,2023,850.0169090294218,603.036303630363,,
+province_median,province_median,84,สุราษฎร์ธานี,2023,1033.1888976832165,1010.066897545656,,
+province_median,province_median,86,ชุมพร,2023,1224.117095342881,1075.1041257367388,,
+province_trend,province_trend,22,จันทบุรี,2023,1967.7139975442904,1803.933792702609,,1.0
+province_trend,province_trend,33,ศรีสะเกษ,2023,1269.1893186444738,1313.9933923552085,,1.0
+province_trend,province_trend,53,อุตรดิตถ์,2023,850.0169090294218,910.521513395983,,1.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2023,1033.1888976832165,1294.4445401486616,,1.0
+province_trend,province_trend,86,ชุมพร,2023,1224.117095342881,1411.6327610269,,1.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2023,1967.7139975442904,1979.7689871239877,,1.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2023,1269.1893186444738,1355.1412501292186,,1.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2023,850.0169090294218,882.4469530802418,,1.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2023,1033.1888976832165,1074.4844936169643,,1.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2023,1224.117095342881,1345.0291725461382,,1.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2023,1967.7139975442904,1987.6829597508772,,1.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2023,1269.1893186444738,1320.2818192384007,,1.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2023,850.0169090294218,865.6505823831943,,1.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2023,1033.1888976832165,1050.729319960577,,1.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2023,1224.117095342881,1340.1858957181785,,1.0
+stage_ridge,stage_ridge,22,จันทบุรี,2023,1967.7139975442904,1910.6695526715635,150.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2023,1269.1893186444738,1212.5942388753508,150.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2023,850.0169090294218,783.8216055738208,150.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2023,1033.1888976832165,1095.9759182804423,150.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2023,1224.117095342881,1344.5901710902667,150.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2023,1967.7139975442904,1651.0583230740551,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2023,1269.1893186444738,1320.3103113153718,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2023,850.0169090294218,858.802559572187,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2023,1033.1888976832165,971.6574874449882,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2023,1224.117095342881,1262.8924394222897,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2023,1967.7139975442904,1654.1618786898755,120.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2023,1269.1893186444738,1291.2206567646138,120.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2023,850.0169090294218,826.9205889882272,120.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2023,1033.1888976832165,966.6296778945186,120.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2023,1224.117095342881,1194.3564999198804,120.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2023,1967.7139975442904,1790.0151449474886,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2023,1269.1893186444738,1215.8894027454974,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2023,850.0169090294218,836.4410872666502,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2023,1033.1888976832165,994.7628126811534,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2023,1224.117095342881,1193.9431024677212,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2023,1967.7139975442904,1738.1060011846143,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2023,1269.1893186444738,1200.829007803164,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2023,850.0169090294218,744.1086360664148,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2023,1033.1888976832165,1061.0031132482854,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2023,1224.117095342881,1209.9562188753375,150.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2023,1967.7139975442904,1745.2145444319835,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2023,1269.1893186444738,1344.5320642535296,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2023,850.0169090294218,820.2711873267903,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2023,1033.1888976832165,1059.8236405166217,,1.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2023,1224.117095342881,1343.2513697182721,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2023,1967.7139975442904,1989.0327481741178,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1319.619393254071,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2023,850.0169090294218,912.1552772857456,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1069.384475044981,,1.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2023,1224.117095342881,1322.6096446398392,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2023,1967.7139975442904,1696.7208830971144,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1276.6914633436768,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2023,850.0169090294218,874.8113830424995,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1069.31136787155,,1.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2023,1224.117095342881,1320.2430907485066,,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2023,1967.7139975442904,1750.1787694459854,150.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2023,1269.1893186444738,1277.6075115683898,150.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2023,850.0169090294218,858.3263034900151,150.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2023,1033.1888976832165,1202.1502265334238,150.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2023,1224.117095342881,1386.115349704991,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2023,1967.7139975442904,1930.6694129336647,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1330.3224113026183,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2023,850.0169090294218,900.6468443497954,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1119.0022603899472,150.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2023,1224.117095342881,1350.7221910555218,150.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2023,1967.7139975442904,1791.4418973296786,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1425.8367807612005,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2023,850.0169090294218,935.2417202335309,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1218.8695485938513,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2023,1224.117095342881,1361.394559781281,140.0,1.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2023,1967.7139975442904,1667.8046077820609,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2023,1269.1893186444738,1290.738035990528,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2023,850.0169090294218,829.592179421224,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2023,1033.1888976832165,964.0742867010603,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2023,1224.117095342881,1206.141987020972,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2023,1967.7139975442904,1659.3169306523334,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1295.8563345007178,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2023,850.0169090294218,849.8527439889108,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,957.3559053531138,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2023,1224.117095342881,1200.394251523995,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2023,1967.7139975442904,1611.3524991989943,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1333.8797445052553,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2023,850.0169090294218,765.7186298896092,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,980.8078492850382,150.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2023,1224.117095342881,1259.6624636044908,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2023,1967.7139975442904,1663.5354916364408,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2023,1269.1893186444738,1212.5514441001444,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2023,850.0169090294218,738.0698417961131,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2023,1033.1888976832165,1050.7047855156898,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2023,1224.117095342881,1229.197484786634,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2023,1967.7139975442904,1730.529140441205,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1237.1028637897566,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2023,850.0169090294218,787.0997273216899,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1035.4505304817942,140.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2023,1224.117095342881,1187.5192339151165,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2023,1967.7139975442904,1716.125492604158,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2023,1269.1893186444738,1246.1865546553036,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2023,850.0169090294218,774.4965944835484,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2023,1033.1888976832165,1039.387343509905,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2023,1224.117095342881,1209.5299344058628,140.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2023,1967.7139975442904,1647.181777950739,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2023,1269.1893186444738,1266.8054098208904,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2023,850.0169090294218,712.0841431325371,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2023,1033.1888976832165,1100.3675924581523,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2023,1224.117095342881,1284.5387428854262,130.0,"{'depth': 4, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2023,1967.7139975442904,1791.5732283607008,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2023,1269.1893186444738,1226.9265004547162,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2023,850.0169090294218,678.8179370064647,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2023,1033.1888976832165,1048.0959720610972,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2023,1224.117095342881,1238.0578651010167,150.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 1.0}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2023,1967.7139975442904,1258.3918545893425,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2023,1269.1893186444738,1131.0619774164302,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2023,850.0169090294218,837.0443919226446,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2023,1033.1888976832165,900.2113048130334,120.0,"{'C': 10, 'gamma': 'scale'}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2023,1224.117095342881,1593.1408134942087,120.0,"{'C': 10, 'gamma': 'scale'}"
+inner_selected,previous_year,22,จันทบุรี,2023,1967.7139975442904,2194.396012547389,,
+inner_selected,previous_year,33,ศรีสะเกษ,2023,1269.1893186444738,1347.7905073649754,,
+inner_selected,previous_year,53,อุตรดิตถ์,2023,850.0169090294218,798.9996340124436,,
+inner_selected,previous_year,84,สุราษฎร์ธานี,2023,1033.1888976832165,719.076881872424,,
+inner_selected,previous_year,86,ชุมพร,2023,1224.117095342881,1208.6184481426476,,
+previous_year,previous_year,22,จันทบุรี,2024,1519.5835718132034,1967.7139975442904,,
+previous_year,previous_year,33,ศรีสะเกษ,2024,1067.8949164107812,1269.1893186444738,,
+previous_year,previous_year,53,อุตรดิตถ์,2024,806.0641951912827,850.0169090294218,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2024,855.6481181253586,1033.1888976832165,,
+previous_year,previous_year,86,ชุมพร,2024,990.8252868737756,1224.117095342881,,
+province_median,province_median,22,จันทบุรี,2024,1519.5835718132034,1472.9092307643434,,
+province_median,province_median,33,ศรีสะเกษ,2024,1067.8949164107812,1094.0463316883495,,
+province_median,province_median,53,อุตรดิตถ์,2024,806.0641951912827,613.0149357289556,,
+province_median,province_median,84,สุราษฎร์ธานี,2024,855.6481181253586,1021.6278976144363,,
+province_median,province_median,86,ชุมพร,2024,990.8252868737756,1123.049878415773,,
+province_trend,province_trend,22,จันทบุรี,2024,1519.5835718132034,1838.148039276743,,1.0
+province_trend,province_trend,33,ศรีสะเกษ,2024,1067.8949164107812,1333.4771107829858,,1.0
+province_trend,province_trend,53,อุตรดิตถ์,2024,806.0641951912827,928.8964372859195,,1.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2024,855.6481181253586,1298.6421308395243,,1.0
+province_trend,province_trend,86,ชุมพร,2024,990.8252868737756,1421.037977196677,,1.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2024,1519.5835718132034,1909.5486726164618,,1.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2024,1067.8949164107812,1333.068157910356,,1.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2024,806.0641951912827,911.727300073776,,1.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2024,855.6481181253586,1198.7927931684303,,1.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2024,990.8252868737756,1354.0070372082298,,1.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2024,1519.5835718132034,1816.8499059554033,,10.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2024,1067.8949164107812,1253.8536844118,,10.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2024,806.0641951912827,875.2967930020145,,10.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2024,855.6481181253586,1131.481740972322,,10.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2024,990.8252868737756,1270.1201821542281,,10.0
+stage_ridge,stage_ridge,22,จันทบุรี,2024,1519.5835718132034,1714.0497887362385,140.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2024,1067.8949164107812,1060.893700244515,140.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2024,806.0641951912827,857.449818399692,140.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2024,855.6481181253586,1076.2000836403129,140.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2024,990.8252868737756,1227.141392135658,140.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2024,1519.5835718132034,1714.4946484077552,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2024,1067.8949164107812,1280.961501348955,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2024,806.0641951912827,868.6054523529895,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2024,855.6481181253586,1013.3057047573407,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2024,990.8252868737756,1281.3172882467197,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2024,1519.5835718132034,1718.8455180310766,120.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2024,1067.8949164107812,1268.365129184037,120.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2024,806.0641951912827,841.0087275176488,120.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2024,855.6481181253586,997.5234460617088,120.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2024,990.8252868737756,1226.2247547163215,120.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2024,1519.5835718132034,1890.0034368885438,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2024,1067.8949164107812,1218.1200397771624,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2024,806.0641951912827,849.5952631481699,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2024,855.6481181253586,998.2923583890764,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2024,990.8252868737756,1218.1200397771624,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2024,1519.5835718132034,1850.2625239855265,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2024,1067.8949164107812,1171.4582138898743,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2024,806.0641951912827,845.3277144990859,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2024,855.6481181253586,1063.92592954106,150.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2024,990.8252868737756,1230.4505092647648,150.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2024,1519.5835718132034,1832.216305295492,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2024,1067.8949164107812,1193.2632408328043,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2024,806.0641951912827,862.6862176027234,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2024,855.6481181253586,1154.5251660973638,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2024,990.8252868737756,1293.599668177181,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2024,1519.5835718132034,1846.0884149804451,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1196.2826529380563,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2024,806.0641951912827,868.0485553378563,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1166.2537468289397,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2024,990.8252868737756,1251.8916763556033,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2024,1519.5835718132034,1857.094012933383,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1156.9659405901805,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2024,806.0641951912827,856.3420142804176,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1179.261760578202,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2024,990.8252868737756,1269.091192851637,,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2024,1519.5835718132034,1785.4202139200847,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2024,1067.8949164107812,1062.778721060131,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2024,806.0641951912827,899.5006618450991,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2024,855.6481181253586,1111.7578083147826,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2024,990.8252868737756,1236.0618274798883,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2024,1519.5835718132034,1746.2198845835042,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1081.4690993125555,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2024,806.0641951912827,826.9754697583517,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1080.6739434964322,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2024,990.8252868737756,1162.945238393893,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2024,1519.5835718132034,1825.7843500793485,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1074.5896648980658,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2024,806.0641951912827,826.4306192142056,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1111.9699212060998,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2024,990.8252868737756,1142.5244590845236,140.0,1.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2024,1519.5835718132034,1735.2188595516518,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2024,1067.8949164107812,1261.0860349632158,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2024,806.0641951912827,838.3906926590997,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2024,855.6481181253586,995.7589338340657,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2024,990.8252868737756,1232.120394982707,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2024,1519.5835718132034,1705.038721790492,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1254.4577214177516,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2024,806.0641951912827,838.481755062026,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1014.57757045963,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2024,990.8252868737756,1225.251621293749,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2024,1519.5835718132034,1723.8325346789013,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1254.15807470349,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2024,806.0641951912827,829.88844212717,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1009.1283585179756,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2024,990.8252868737756,1229.0295912021863,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2024,1519.5835718132034,1851.087062599515,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2024,1067.8949164107812,1169.1485751566886,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2024,806.0641951912827,849.7402412517065,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2024,855.6481181253586,1056.8547116545662,150.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2024,990.8252868737756,1235.8179758681251,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2024,1519.5835718132034,1851.2880571560713,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1170.9012404827724,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2024,806.0641951912827,849.5875467940912,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,1070.4480294760435,150.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2024,990.8252868737756,1225.2640986697375,150.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2024,1519.5835718132034,1836.0948216918707,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2024,1067.8949164107812,1214.8128084621528,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2024,806.0641951912827,782.558492927947,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2024,855.6481181253586,995.3755592613251,140.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2024,990.8252868737756,1179.3528900629058,140.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2024,1519.5835718132034,1916.1887050904636,120.0,"{'depth': 2, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2024,1067.8949164107812,1166.197754414747,120.0,"{'depth': 2, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2024,806.0641951912827,837.8820325034334,120.0,"{'depth': 2, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2024,855.6481181253586,1167.689104108313,120.0,"{'depth': 2, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2024,990.8252868737756,1160.6660831432173,120.0,"{'depth': 2, 'l2_leaf_reg': 20, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2024,1519.5835718132034,1801.323697615885,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2024,1067.8949164107812,1184.1000066448885,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2024,806.0641951912827,675.1703570817677,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2024,855.6481181253586,1091.8593477496413,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2024,990.8252868737756,1228.1322188560662,130.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2024,1519.5835718132034,1758.6501133767463,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2024,1067.8949164107812,1218.03652746864,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2024,806.0641951912827,795.9441444061865,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2024,855.6481181253586,1125.42349276935,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2024,990.8252868737756,1204.8128771506938,120.0,"{'C': 1, 'gamma': 0.03}"
+inner_selected,stage_ridge,22,จันทบุรี,2024,1519.5835718132034,1714.0497887362385,140.0,1.0
+inner_selected,stage_ridge,33,ศรีสะเกษ,2024,1067.8949164107812,1060.893700244515,140.0,1.0
+inner_selected,stage_ridge,53,อุตรดิตถ์,2024,806.0641951912827,857.449818399692,140.0,1.0
+inner_selected,stage_ridge,84,สุราษฎร์ธานี,2024,855.6481181253586,1076.2000836403129,140.0,1.0
+inner_selected,stage_ridge,86,ชุมพร,2024,990.8252868737756,1227.141392135658,140.0,1.0
+previous_year,previous_year,22,จันทบุรี,2025,1713.7247196196297,1519.5835718132034,,
+previous_year,previous_year,33,ศรีสะเกษ,2025,1370.8643430845184,1067.8949164107812,,
+previous_year,previous_year,53,อุตรดิตถ์,2025,929.5418345357444,806.0641951912827,,
+previous_year,previous_year,84,สุราษฎร์ธานี,2025,933.27107167873,855.6481181253586,,
+previous_year,previous_year,86,ชุมพร,2025,1158.093655902814,990.8252868737756,,
+province_median,province_median,22,จันทบุรี,2025,1713.7247196196297,1509.5797559873474,,
+province_median,province_median,33,ศรีสะเกษ,2025,1370.8643430845184,1082.1982151244715,,
+province_median,province_median,53,อุตรดิตถ์,2025,929.5418345357444,622.9935678275482,,
+province_median,province_median,84,สุราษฎร์ธานี,2025,933.27107167873,1010.066897545656,,
+province_median,province_median,86,ชุมพร,2025,1158.093655902814,1075.1041257367388,,
+province_trend,province_trend,22,จันทบุรี,2025,1713.7247196196297,1725.3074393436395,,10.0
+province_trend,province_trend,33,ศรีสะเกษ,2025,1370.8643430845184,1267.6068970018307,,10.0
+province_trend,province_trend,53,อุตรดิตถ์,2025,929.5418345357444,906.7217730296645,,10.0
+province_trend,province_trend,84,สุราษฎร์ธานี,2025,933.27107167873,1225.1062877075635,,10.0
+province_trend,province_trend,86,ชุมพร,2025,1158.093655902814,1337.6546222356176,,10.0
+lag_yield_ridge,lag_yield_ridge,22,จันทบุรี,2025,1713.7247196196297,1641.8719826425352,,10.0
+lag_yield_ridge,lag_yield_ridge,33,ศรีสะเกษ,2025,1370.8643430845184,1192.8977419495466,,10.0
+lag_yield_ridge,lag_yield_ridge,53,อุตรดิตถ์,2025,929.5418345357444,862.7862405755227,,10.0
+lag_yield_ridge,lag_yield_ridge,84,สุราษฎร์ธานี,2025,933.27107167873,1068.0817809733046,,10.0
+lag_yield_ridge,lag_yield_ridge,86,ชุมพร,2025,1158.093655902814,1193.669283666347,,10.0
+whole_year_ridge,whole_year_ridge,22,จันทบุรี,2025,1713.7247196196297,1709.1125648815519,,1.0
+whole_year_ridge,whole_year_ridge,33,ศรีสะเกษ,2025,1370.8643430845184,1281.7353974527762,,1.0
+whole_year_ridge,whole_year_ridge,53,อุตรดิตถ์,2025,929.5418345357444,939.2887094580838,,1.0
+whole_year_ridge,whole_year_ridge,84,สุราษฎร์ธานี,2025,933.27107167873,1140.6879148943021,,1.0
+whole_year_ridge,whole_year_ridge,86,ชุมพร,2025,1158.093655902814,1298.410395217687,,1.0
+stage_ridge,stage_ridge,22,จันทบุรี,2025,1713.7247196196297,1758.0308970057608,140.0,1.0
+stage_ridge,stage_ridge,33,ศรีสะเกษ,2025,1370.8643430845184,1109.788592584335,140.0,1.0
+stage_ridge,stage_ridge,53,อุตรดิตถ์,2025,929.5418345357444,811.3926521532652,140.0,1.0
+stage_ridge,stage_ridge,84,สุราษฎร์ธานี,2025,933.27107167873,1029.3525198697116,140.0,1.0
+stage_ridge,stage_ridge,86,ชุมพร,2025,1158.093655902814,1090.490946668424,140.0,1.0
+lag_yield_random_forest,lag_yield_random_forest,22,จันทบุรี,2025,1713.7247196196297,1574.17455703276,,5
+lag_yield_random_forest,lag_yield_random_forest,33,ศรีสะเกษ,2025,1370.8643430845184,1087.1970710042779,,5
+lag_yield_random_forest,lag_yield_random_forest,53,อุตรดิตถ์,2025,929.5418345357444,879.8484543757548,,5
+lag_yield_random_forest,lag_yield_random_forest,84,สุราษฎร์ธานี,2025,933.27107167873,953.4335857844063,,5
+lag_yield_random_forest,lag_yield_random_forest,86,ชุมพร,2025,1158.093655902814,920.4116140261635,,5
+stage_random_forest,stage_random_forest,22,จันทบุรี,2025,1713.7247196196297,1585.9727412793204,120.0,5
+stage_random_forest,stage_random_forest,33,ศรีสะเกษ,2025,1370.8643430845184,1046.9857544321667,120.0,5
+stage_random_forest,stage_random_forest,53,อุตรดิตถ์,2025,929.5418345357444,863.2078796745491,120.0,5
+stage_random_forest,stage_random_forest,84,สุราษฎร์ธานี,2025,933.27107167873,965.0987703032928,120.0,5
+stage_random_forest,stage_random_forest,86,ชุมพร,2025,1158.093655902814,965.6922362464082,120.0,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,22,จันทบุรี,2025,1713.7247196196297,1595.6183666361067,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,33,ศรีสะเกษ,2025,1370.8643430845184,1054.9173896302711,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,53,อุตรดิตถ์,2025,929.5418345357444,795.2463078630096,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,84,สุราษฎร์ธานี,2025,933.27107167873,937.7500918470147,,5
+lag_yield_gradient_boosting,lag_yield_gradient_boosting,86,ชุมพร,2025,1158.093655902814,937.7500918470147,,5
+stage_gradient_boosting,stage_gradient_boosting,22,จันทบุรี,2025,1713.7247196196297,1620.141908672776,140.0,5
+stage_gradient_boosting,stage_gradient_boosting,33,ศรีสะเกษ,2025,1370.8643430845184,1074.384537306295,140.0,5
+stage_gradient_boosting,stage_gradient_boosting,53,อุตรดิตถ์,2025,929.5418345357444,796.9364289508368,140.0,5
+stage_gradient_boosting,stage_gradient_boosting,84,สุราษฎร์ธานี,2025,933.27107167873,992.5026407454887,140.0,5
+stage_gradient_boosting,stage_gradient_boosting,86,ชุมพร,2025,1158.093655902814,1024.4268907096682,140.0,5
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,22,จันทบุรี,2025,1713.7247196196297,1673.649257802149,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,33,ศรีสะเกษ,2025,1370.8643430845184,1226.0299712944845,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,53,อุตรดิตถ์,2025,929.5418345357444,926.2284974481158,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,84,สุราษฎร์ธานี,2025,933.27107167873,1078.3832626118676,,10.0
+whole_year_ridge_ndvi,whole_year_ridge_ndvi,86,ชุมพร,2025,1158.093655902814,1241.3661735006572,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,22,จันทบุรี,2025,1713.7247196196297,1633.6322333730268,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1154.0745717059194,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,53,อุตรดิตถ์,2025,929.5418345357444,896.3973296110307,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,1107.6174802967694,,10.0
+whole_year_ridge_vpd,whole_year_ridge_vpd,86,ชุมพร,2025,1158.093655902814,1240.8855726703518,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,22,จันทบุรี,2025,1713.7247196196297,1641.994342771705,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1174.4042627411732,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,53,อุตรดิตถ์,2025,929.5418345357444,903.1170836448647,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,1099.7941446855823,,10.0
+whole_year_ridge_ndvi_vpd,whole_year_ridge_ndvi_vpd,86,ชุมพร,2025,1158.093655902814,1244.6715330065304,,10.0
+stage_ridge_ndvi,stage_ridge_ndvi,22,จันทบุรี,2025,1713.7247196196297,1710.2974888441513,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,33,ศรีสะเกษ,2025,1370.8643430845184,1096.6946759549871,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,53,อุตรดิตถ์,2025,929.5418345357444,820.758495793489,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,84,สุราษฎร์ธานี,2025,933.27107167873,988.7437515160975,140.0,1.0
+stage_ridge_ndvi,stage_ridge_ndvi,86,ชุมพร,2025,1158.093655902814,1087.0877049367236,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,22,จันทบุรี,2025,1713.7247196196297,1712.9810336869639,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1101.6750517722976,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,53,อุตรดิตถ์,2025,929.5418345357444,816.1142901283318,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,1009.0308857715596,140.0,1.0
+stage_ridge_vpd,stage_ridge_vpd,86,ชุมพร,2025,1158.093655902814,1097.1709799553412,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,22,จันทบุรี,2025,1713.7247196196297,1687.9277552117123,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1078.667257370627,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,53,อุตรดิตถ์,2025,929.5418345357444,811.5506713606342,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,947.1634705807646,140.0,1.0
+stage_ridge_ndvi_vpd,stage_ridge_ndvi_vpd,86,ชุมพร,2025,1158.093655902814,1109.3333801558053,140.0,1.0
+stage_random_forest_ndvi,stage_random_forest_ndvi,22,จันทบุรี,2025,1713.7247196196297,1632.7026433187918,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,33,ศรีสะเกษ,2025,1370.8643430845184,1041.4455218761825,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,53,อุตรดิตถ์,2025,929.5418345357444,861.1501648520448,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,84,สุราษฎร์ธานี,2025,933.27107167873,963.5893028336124,120.0,5
+stage_random_forest_ndvi,stage_random_forest_ndvi,86,ชุมพร,2025,1158.093655902814,963.287131167125,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,22,จันทบุรี,2025,1713.7247196196297,1569.0755235251281,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1019.9483982628117,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,53,อุตรดิตถ์,2025,929.5418345357444,872.8415646054904,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,967.1641436801507,120.0,5
+stage_random_forest_vpd,stage_random_forest_vpd,86,ชุมพร,2025,1158.093655902814,969.4686416725467,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,22,จันทบุรี,2025,1713.7247196196297,1617.765859414087,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1017.2730779231179,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,53,อุตรดิตถ์,2025,929.5418345357444,869.691709924674,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,965.7618277782631,120.0,5
+stage_random_forest_ndvi_vpd,stage_random_forest_ndvi_vpd,86,ชุมพร,2025,1158.093655902814,968.1159613309044,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,22,จันทบุรี,2025,1713.7247196196297,1640.4296424435483,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,33,ศรีสะเกษ,2025,1370.8643430845184,1054.9799738209274,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,53,อุตรดิตถ์,2025,929.5418345357444,838.4590477374996,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,84,สุราษฎร์ธานี,2025,933.27107167873,1022.5641554803826,120.0,5
+stage_gradient_boosting_ndvi,stage_gradient_boosting_ndvi,86,ชุมพร,2025,1158.093655902814,1026.1632526113692,120.0,5
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,22,จันทบุรี,2025,1713.7247196196297,1661.7259795225057,120.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1023.7665391684179,120.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,53,อุตรดิตถ์,2025,929.5418345357444,869.1009126173876,120.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,947.0000676480719,120.0,10
+stage_gradient_boosting_vpd,stage_gradient_boosting_vpd,86,ชุมพร,2025,1158.093655902814,988.8237058155594,120.0,10
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,22,จันทบุรี,2025,1713.7247196196297,1650.8482317165362,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1004.805720006061,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,53,อุตรดิตถ์,2025,929.5418345357444,842.1647360634338,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,1025.3977486903368,120.0,5
+stage_gradient_boosting_ndvi_vpd,stage_gradient_boosting_ndvi_vpd,86,ชุมพร,2025,1158.093655902814,1033.1397837776835,120.0,5
+stage_catboost_combined,stage_catboost_combined,22,จันทบุรี,2025,1713.7247196196297,1645.1358060538553,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,33,ศรีสะเกษ,2025,1370.8643430845184,998.844348812504,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,53,อุตรดิตถ์,2025,929.5418345357444,820.5074191129689,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,84,สุราษฎร์ธานี,2025,933.27107167873,997.3937372308181,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_catboost_combined,stage_catboost_combined,86,ชุมพร,2025,1158.093655902814,1093.2177767883472,120.0,"{'depth': 2, 'l2_leaf_reg': 3, 'learning_rate': 0.1}"
+stage_extra_trees_combined,stage_extra_trees_combined,22,จันทบุรี,2025,1713.7247196196297,1640.433222764341,120.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,33,ศรีสะเกษ,2025,1370.8643430845184,1094.1882765316566,120.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,53,อุตรดิตถ์,2025,929.5418345357444,779.4726873307358,120.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,84,สุราษฎร์ธานี,2025,933.27107167873,993.9949132021786,120.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_extra_trees_combined,stage_extra_trees_combined,86,ชุมพร,2025,1158.093655902814,1112.1159423384404,120.0,"{'max_depth': 5, 'min_samples_leaf': 3, 'max_features': 0.7}"
+stage_svr_combined,stage_svr_combined,22,จันทบุรี,2025,1713.7247196196297,1587.0379321333837,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,33,ศรีสะเกษ,2025,1370.8643430845184,1159.501794282464,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,53,อุตรดิตถ์,2025,929.5418345357444,848.1611996302029,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,84,สุราษฎร์ธานี,2025,933.27107167873,982.922536321414,120.0,"{'C': 1, 'gamma': 0.03}"
+stage_svr_combined,stage_svr_combined,86,ชุมพร,2025,1158.093655902814,1136.855368742351,120.0,"{'C': 1, 'gamma': 0.03}"
+inner_selected,stage_ridge_vpd,22,จันทบุรี,2025,1713.7247196196297,1712.9810336869639,140.0,1.0
+inner_selected,stage_ridge_vpd,33,ศรีสะเกษ,2025,1370.8643430845184,1101.6750517722976,140.0,1.0
+inner_selected,stage_ridge_vpd,53,อุตรดิตถ์,2025,929.5418345357444,816.1142901283318,140.0,1.0
+inner_selected,stage_ridge_vpd,84,สุราษฎร์ธานี,2025,933.27107167873,1009.0308857715596,140.0,1.0
+inner_selected,stage_ridge_vpd,86,ชุมพร,2025,1158.093655902814,1097.1709799553412,140.0,1.0

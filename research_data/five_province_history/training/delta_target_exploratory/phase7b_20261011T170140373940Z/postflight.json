@@ -1,0 +1,39 @@
+{
+  "tests": {
+    "python": 279,
+    "javascript": 30,
+    "failures": 0,
+    "skipped": 0
+  },
+  "protected_entries": 778,
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "inner_gate": false,
+  "outer_evaluated": false,
+  "training_runs": 1,
+  "artifact_hashes": {
+    "choices.csv": "25929fed6ee5654ccff6cb37699c3da49b72804c418cd1137c1737676c6ed932",
+    "completed_artifact_hashes.json": "a03b5714ba1b8fc67ac548260ba9cb6ec84d0a479ee12cae880f22911653ebec",
+    "config.json": "565e2b7b93392395b1287c98248b25645245ed05d64f8ad03de5c537fba9e461",
+    "diagnostic_summary.json": "57c9fbf8e627cd79784f79aaaac441a1f35092f5bd4de165ad2d17b6ae9d4b7f",
+    "fit_audit.csv": "9ecb1066625ad9e196c761455dc510b23a21664a82eb6d074277be4bf77607b9",
+    "folds.json": "dd7fe7756151dbd192440ad972fbd3bfe0ff3d24885c79f2fb1dcad9f68ab387",
+    "inner_candidate_predictions.csv": "1de7188c2a1abb774b54f31eea0838e7ca722ae1707e3a4d2848717d7268d04a",
+    "inner_gate.json": "ecf387d2d98386a1285205ff4125b8f85f17f1f083a42f352fd5b05232cc0b31",
+    "inner_predictions.csv": "7b8048dcfeeacf09dbd94c3b8e3bec7c36e06299f4c2e3613434123544012909",
+    "manifest.json": "4ae14da48571dc0a87420c603161cff791c1eb195f7b41725d6268ab113679b7",
+    "status.json": "c858229d09ba48a70eb47bac78431d4a90dbf0955701bd058edf7984cea21290",
+    "target_availability.csv": "6dec2ad85903afb8a8cf0f06f7756784032571b667659736fbafa58f1e852340",
+    "target_lineage.csv": "654de28272ee87cf4085e5c50daf324bd270c5a0e14622398773052087e313a9",
+    "tuning.csv": "7ee71c84acdef2ff3243e79bfcb65b43b734c74d115e7d2e1d2c76bab6b8be8a",
+    "source_snapshot/tests__test_delta_target.py": "bf35fd14cd6d88c7c6f7937f4f8d29acc2c9777320c17bf6025d85e4cbd19656",
+    "source_snapshot/tools__compare_harvest_stage_yield.py": "645123ec02023e04aaa0964fb541b72482ab269944551d6b718ee16f1c750ac8",
+    "source_snapshot/tools__durian_model__experiment_delta_target.py": "a9b97947013d1f4bd4cf50561e356a69fd6f290d83d7c22e71fb504a3a049c2b",
+    "source_snapshot/tools__durian_model__experiment_province_expansion.py": "441117ec6bb03d06704a824246c3d63a2420f23145c6d7333a0c66d28b330d7a",
+    "source_snapshot/tools__durian_model__experiment_province_expansion_training.py": "664649a2549c485975a6fdcbfa83ceca90ccc0eab07f1df24e709519dcf38097",
+    "source_snapshot/tools__durian_model__experiment_weather_ablation.py": "84dcf64fed8a564314ff18e79b6775ce9090d23946032b58765df7d3840d55e3"
+  },
+  "reports": {
+    "docs/DURIAN_DELTA_TARGET_PREFLIGHT_TH.md": "2920706525e6ea7ebcaf4c9d86b674b52e4590565d9acfd2e08c7bd57d71b68a",
+    "docs/DURIAN_DELTA_TARGET_RESULT_TH.md": "167146e5d289cbc7477a29ce66ff01b19cfcfbed0b26c27082987521c46664be"
+  }
+}

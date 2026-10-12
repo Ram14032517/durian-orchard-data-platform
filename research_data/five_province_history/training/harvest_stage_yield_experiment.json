@@ -1,0 +1,112 @@
+{
+  "purpose": "Exploratory retrospective association; not a forecast or causal test.",
+  "target": "OAE annual production tonnes * 1000 / bearing rai; province-year.",
+  "periods": {
+    "train": "2004-2021",
+    "validation": "2022-2023",
+    "test": "2024-2025"
+  },
+  "fixed_peak_months_from_training": {
+    "22": [
+      4,
+      5,
+      6
+    ],
+    "33": [
+      5,
+      6,
+      7
+    ],
+    "53": [
+      6,
+      7,
+      8
+    ],
+    "84": [
+      7,
+      8,
+      9
+    ],
+    "86": [
+      7,
+      8,
+      9
+    ]
+  },
+  "models": [
+    {
+      "model": "province_trend",
+      "age_days": null,
+      "validation_mae_kg_rai": 241.59700670193098,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 218.35780209138665,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    },
+    {
+      "model": "whole_year_weather",
+      "age_days": null,
+      "validation_mae_kg_rai": 237.3811423906114,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 208.20370029080595,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    },
+    {
+      "model": "backcast_stage_weather",
+      "age_days": 120,
+      "validation_mae_kg_rai": 218.90543426310643,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 200.15609631756823,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    },
+    {
+      "model": "backcast_stage_weather",
+      "age_days": 130,
+      "validation_mae_kg_rai": 221.38983528102213,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 204.6547104954871,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    },
+    {
+      "model": "backcast_stage_weather",
+      "age_days": 140,
+      "validation_mae_kg_rai": 225.91664355987132,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 207.6877822797896,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    },
+    {
+      "model": "backcast_stage_weather",
+      "age_days": 150,
+      "validation_mae_kg_rai": 227.1670286919857,
+      "validation_alpha": 1.0,
+      "test_mae_kg_rai": 209.52155314703708,
+      "train_rows": 90,
+      "validation_rows": 10,
+      "test_rows": 10
+    }
+  ],
+  "selected_by_validation": {
+    "model": "backcast_stage_weather",
+    "age_days": 120,
+    "alpha": 1.0
+  },
+  "interpretation_limits": [
+    "The 2024-2025 results were viewed during this exploratory analysis; they are not an untouched confirmatory test.",
+    "The fixed three-month season is chosen from reported harvest tonnes in training years only; no validation/test-year monthly harvest values select the weather window.",
+    "The selected season is an approximate calendar window, not an observed flowering/fruit stage for each year.",
+    "Harvest data include cultivars; fruit-age scenarios are assumptions, not observed flowering dates.",
+    "Weather is one NASA POWER reference point per province, not a productive-area-weighted spatial mean.",
+    "Province fixed effects and a linear year trend do not control cultivar mix, irrigation, tree age, pests, or other management.",
+    "Do not interpret lower MAE or feature coefficients as proof of causation."
+  ]
+}

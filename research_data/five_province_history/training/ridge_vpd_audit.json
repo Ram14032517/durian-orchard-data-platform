@@ -1,0 +1,29 @@
+{
+  "panel_years": [
+    2010,
+    2025
+  ],
+  "rows": 80,
+  "provinces": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86"
+  ],
+  "target": "production_tonnes * 1000 / bearing_rai",
+  "lag_source": "2009-2024 actual annual yield, not the current-year target",
+  "input_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "unit": "province-year, kg/rai",
+  "reason_for_period": "Calendar-based recent-year focus; no low-yield rows removed",
+  "source_edition": "Local OAE XLSX: years 2540-2568, data_date 2026-07-14; catalog year metadata differs",
+  "finality": "Recorded official snapshot, not synthetic labels. Final-versus-estimate status is not explicitly encoded per row; not independently reconfirmed for every year.",
+  "limits": [
+    "Retrospectively revised records; publication vintages not reconstructed",
+    "No orchard-level labels, bearing-orchard spatial weights or measured soil nutrients"
+  ]
+}

@@ -1,6 +1,9 @@
 # Use a NEW environment. Do not overwrite the user's existing Anaconda/.venv.
 pandas>=2.2,<4
 numpy>=1.26,<3
+# Nonlinear rolling yield benchmark (not needed to open the dashboard).
+scikit-learn>=1.5,<2
+catboost>=1.2.8,<2
 openpyxl>=3.1,<4
 requests>=2.31,<3
 shapely>=2.1,<3
@@ -11,3 +14,7 @@ nbclient>=0.10,<1
 nbconvert>=7.16,<8
 ipykernel>=6.29,<8
 ipywidgets>=8.1,<9
+# Optional Thai PDF/report builder (not needed by step 0-6 itself).
+reportlab>=4.4,<5
+pypdf>=5,<7
+uharfbuzz>=0.50,<1

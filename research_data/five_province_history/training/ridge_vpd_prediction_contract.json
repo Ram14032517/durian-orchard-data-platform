@@ -1,0 +1,44 @@
+{
+  "demo": "2025 rolling-origin test data; model trained through 2024; observed weather, not a live forecast",
+  "future_model_train_end": 2025,
+  "age_days": 140,
+  "seasons": {
+    "22": [
+      4,
+      5,
+      6
+    ],
+    "33": [
+      5,
+      6,
+      7
+    ],
+    "53": [
+      6,
+      7,
+      8
+    ],
+    "84": [
+      6,
+      7,
+      8
+    ],
+    "86": [
+      7,
+      8,
+      9
+    ]
+  },
+  "predictors": [
+    "previous_yield_kg_rai",
+    "pre_bloom_90d_rain_mm",
+    "fruit_0_29d_rain_mm",
+    "fruit_30_59d_rain_mm",
+    "fruit_60_89d_solar_mj_m2_day",
+    "fruit_90_to_harvest_temperature_c",
+    "vpd_pre_bloom_mean_kpa",
+    "vpd_early_fruit_p90_kpa"
+  ],
+  "warning": "Populate every window using the saved age and season; use issue-date forecasts/scenarios for unavailable days. Never label scenarios as observations.",
+  "area": "Optional bearing_rai converts kg/rai to conditional tonnes; excludes newly planted nonbearing area"
+}

@@ -23,7 +23,9 @@ class NavigationTests(unittest.TestCase):
                     self.assertTrue((document.parent/unquote(parts.path)).exists())
 
     def test_start_page_uses_existing_numbered_tasks(self):
-        tasks=json.loads((ROOT/'.vscode/tasks.json').read_text(encoding='utf-8'))['tasks']
+        config=json.loads((ROOT/'.vscode/tasks.json').read_text(encoding='utf-8'))
+        tasks=config['tasks']
+        inputs={item['id']:item for item in config.get('inputs',[])}
         labels=[task['label'] for task in tasks]
         self.assertEqual(len(labels),len(set(labels)))
         guide=(ROOT/'00_START_HERE_TH.md').read_text(encoding='utf-8')
@@ -35,4 +37,7 @@ class NavigationTests(unittest.TestCase):
             for argument in task.get('args',[]):
                 if argument.startswith('${workspaceFolder}/'):
                     with self.subTest(argument=argument):
-                        self.assertTrue((ROOT/argument.removeprefix('${workspaceFolder}/')).is_file())
+                        paths=[argument.removeprefix('${workspaceFolder}/')]
+                        for key in re.findall(r'\$\{input:([^}]+)\}',argument):
+                            paths=[path.replace('${input:'+key+'}',option) for path in paths for option in inputs[key]['options']]
+                        for path in paths:self.assertTrue((ROOT/path).is_file(),path)

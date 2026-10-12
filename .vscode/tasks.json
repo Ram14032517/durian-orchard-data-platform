@@ -44,6 +44,30 @@
       "problemMatcher": []
     },
     {
+      "label": "Durian ML: รัน Ridge + VPD ทุกขั้น 0-6",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["-X", "utf8", "${workspaceFolder}/tools/durian_model/run_all.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Durian ML: เลือกรันทีละขั้น 0-6",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["-X", "utf8", "${workspaceFolder}/tools/durian_model/${input:durianModelStep}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Durian ML: สร้าง Notebook และรายงาน PDF",
+      "type": "process",
+      "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
+      "args": ["-X", "utf8", "${workspaceFolder}/tools/durian_model/build_report.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
       "label": "Durian: 90 เปิดเซิร์ฟเวอร์แผนที่ (ขั้นสูง)",
       "type": "process",
       "command": "${workspaceFolder}/.build/national-analysis-venv/Scripts/python.exe",
@@ -54,6 +78,7 @@
     }
   ],
   "inputs": [
+    {"id": "durianModelStep", "type": "pickString", "description": "Ridge + VPD: รันตามลำดับ 0-6 (ทุกขั้นใช้ผลขั้นก่อนหน้า)", "options": ["step0_audit_data.py", "step1_split_years.py", "step2_process_data.py", "step3_train_model.py", "step4_investigate_feature_importance.py", "step5_evaluate_result.py", "step6_predict_live.py"], "default": "step0_audit_data.py"},
     {"id": "province", "type": "pickString", "description": "จังหวัด: 22 จันทบุรี / 33 ศรีสะเกษ / 53 อุตรดิตถ์ / 84 สุราษฎร์ธานี / 86 ชุมพร", "options": ["22", "33", "53", "84", "86"], "default": "84"},
     {"id": "year", "type": "promptString", "description": "ปี ค.ศ.", "default": "2025"},
     {"id": "month", "type": "pickString", "description": "เดือน", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"], "default": "7"}

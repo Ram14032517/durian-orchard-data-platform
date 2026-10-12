@@ -1,0 +1,29 @@
+{
+  "training_performed": false,
+  "pit_certified": false,
+  "python_tests": 257,
+  "python_passed": 257,
+  "javascript_tests": 30,
+  "javascript_passed": 30,
+  "original_protected_files": 684,
+  "original_protected_unchanged": true,
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "report_sha256": "d99199bf70756439fcd318fedbe334762befbdd0ba7c5ac2182404d676e357ac",
+  "new_code_sha256": {
+    "tools/durian_model/experiment_province_expansion.py": "441117ec6bb03d06704a824246c3d63a2420f23145c6d7333a0c66d28b330d7a",
+    "tools/durian_model/audit_province_expansion_inputs.py": "55d0617b405dbd87a68013a58f478ffac5773c0ff3e8094635f65422eebdd15e",
+    "tests/test_province_expansion_preparation.py": "b945e9f76c635b85c58e0120e110c3e66f7368427d482dcfb7f01eefd5b6a936"
+  },
+  "source_snapshot_sha256": {
+    "analyze_harvest_backcast.py": "81be74dedd7c255b3d6c527d2df89242289b3b42f91b7ac5a834381e65779c2c",
+    "audit_province_expansion_inputs.final.py": "55d0617b405dbd87a68013a58f478ffac5773c0ff3e8094635f65422eebdd15e",
+    "audit_province_expansion_inputs.py": "9860f4b2c0849e5cf5fbb85d4b77e40546fcaa9dab46bc0d85d615426d106056",
+    "availability_guard.py": "2655afe2a48f44ea9a4e98d0875cd30c8a53ebd706039e6687d84c84fed12d03",
+    "common.py": "77279dd59829558116106e3f5282494938080edbbec77c0efe09c4ba9499abaf",
+    "compare_harvest_stage_yield.py": "645123ec02023e04aaa0964fb541b72482ab269944551d6b718ee16f1c750ac8",
+    "experiment_issue_date.py": "8ae0530e05198e6215d073e0469fe0dc699c39623d86d1b9bf7a1ed1e68b660b",
+    "experiment_province_expansion.py": "441117ec6bb03d06704a824246c3d63a2420f23145c6d7333a0c66d28b330d7a",
+    "experiment_rebaseline.py": "bfb3a582518433ebd989ba8c9dad02bbf23b29926cf4edd97db29a9d60c82d45",
+    "test_province_expansion_preparation.py": "b945e9f76c635b85c58e0120e110c3e66f7368427d482dcfb7f01eefd5b6a936"
+  }
+}

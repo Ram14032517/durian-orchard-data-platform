@@ -10,5 +10,8 @@
 6. [โมเดลสถิติเซนเซอร์เดิม](MODEL_GUIDE_TH.md) — anomaly baseline ไม่ใช่โมเดลรายจังหวัดล่าสุด ซึ่งอยู่ใน [training](../research_data/five_province_history/training/README_TH.md)
 7. [Git/GitHub](GITHUB_GUIDE_TH.md) และ [ข้อควรตรวจก่อนเผยแพร่](PORTFOLIO_PUBLICATION_TH.md)
 8. [กรอบงานตามคำแนะนำอาจารย์เดิม](NEXT_SESSION_TH.md) — ใช้เป็นบริบทโจทย์ สถานะงานให้ดูข้อ 1
+9. [แผนวิเคราะห์เชิงพื้นที่ ดิน–อากาศ–ผลผลิต](RESEARCH_PLAN_SPATIAL_SOIL_WEATHER_YIELD_TH.md) — เป้าหมาย วิธีทำ ลำดับเก็บข้อมูล และข้อจำกัดของโมเดล
+10. [ส่งต่องานให้บัญชีใหม่](ACCOUNT_HANDOFF_TH.md) — ข้อความเริ่มแชต สถานะงาน จุดแก้ไฟล์ และวิธีเข้าถึงข้อมูล
+11. [ตรวจหลักฐานผลผลิตรายอำเภอ](DISTRICT_DATA_SOURCE_REVIEW_TH.md) — รอบ 8 ต.ค. พบตารางอุตรดิตถ์ 2563–2564 และตรวจปัญหาปี/คาดการณ์ ยังไม่เพิ่ม target เข้า training
 
 Checkpoint, QA และแผนเก่าอยู่ใน [archive](archive/README_TH.md) ไม่ถือว่ารายการค้างในเอกสารเก่ายังค้างทุกข้อ

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: durian-orchard-dashboard
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: DASHBOARD_USER
+        value: owner
+      - key: DASHBOARD_PASSWORD
+        generateValue: true
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: ORCHARD_DEVICE_ID
+        sync: false
+      - key: PYTHONUNBUFFERED
+        value: '1'
+      - key: OPENBLAS_NUM_THREADS
+        value: '1'

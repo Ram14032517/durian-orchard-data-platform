@@ -1,49 +1,160 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ข้อมูลดิน อากาศ และผลผลิตทุเรียน 5 จังหวัด</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
-<style>*{box-sizing:border-box}body{margin:0;font:15px Tahoma,Arial;color:#203d35;background:#f2f5f1}header{padding:12px 20px;background:#164e40;color:white}header h1{font-size:21px;margin:0 0 6px}main{display:grid;grid-template-columns:minmax(360px,1fr) minmax(400px,580px);height:calc(100vh - 79px)}#map{height:100%;min-height:420px}aside{overflow:auto;padding:16px}section{padding:14px;background:white;margin:0 0 12px;border:1px solid #cdd8d0;border-radius:6px}h2{font-size:17px;margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{font:inherit;padding:7px;max-width:100%;border:1px solid #b6c5bb;border-radius:4px}button{background:#176d56;color:white;cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}.muted{font-size:12px;color:#54645d}.warn{padding:9px;background:#fff1d3;color:#6c5018}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;border-bottom:1px solid #ddd;text-align:right}td:first-child,th:first-child{text-align:left}.scroll{overflow:auto;max-height:280px}a{color:#16624e}#chart{width:100%;height:170px}.point{font-size:13px;padding:8px;border-left:4px solid #197a61;background:#eef7f2}.b{border-color:#bd721e}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}@media(max-width:800px){main{display:block;height:auto}#map{height:50vh;position:sticky;top:0;z-index:1}aside{overflow:visible}}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style></head><body>
+<link rel="stylesheet" href="orchard_lumen.css"><script type="module" src="orchard_lumen.js"></script>
+<style>*{box-sizing:border-box}body{margin:0}header h1{margin:0 0 6px}h2{margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{max-width:100%;padding:7px}button{cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;text-align:right}td:first-child,th:first-child{text-align:left}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style></head><body>
 <style>@media(max-width:800px){#map{position:relative;top:auto;z-index:0}}#season-calendar th,#season-calendar td{white-space:nowrap}</style>
-<header><h1>แผนที่ทุเรียน 5 จังหวัด • ดิน × อากาศ × ฤดูกาล × ผลผลิต</h1><small>จันทบุรี · ชุมพร · ศรีสะเกษ · อุตรดิตถ์ · สุราษฎร์ธานี — เลือกจังหวัด → เดือน → ดูข้อมูล → ดาวน์โหลดไปวิเคราะห์</small></header>
-<main><div id="map" aria-label="แผนที่ประเทศไทยและชุดดิน"></div><aside>
+<header class="orchard-header"><svg class="orchard-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 16Q31 5 40 4M36 10Q50 0 57 12Q44 20 36 10" fill="#8B9D83" stroke="#D4B895" stroke-width="3"/><path d="M29 16L37 14 42 21 50 24 49 33 54 40 48 47 44 56 35 55 27 59 20 53 12 49 14 40 9 32 17 27 20 19Z" fill="#C08E3A" stroke="#D4B895" stroke-width="2"/><path d="M31 23Q48 40 32 52Q16 40 31 23Z" fill="#E8DCC7"/><path d="M31 28L33 46" stroke="#C08E3A" stroke-width="2"/></svg><div class="orchard-heading"><h1>ข้อมูลดิน อากาศ และผลผลิตทุเรียน 5 จังหวัด</h1><p class="header-description">เปรียบเทียบพื้นที่ A/B ดูอากาศตามช่วงวันที่และผลผลิตรายปี พร้อมดาวน์โหลดไปวิเคราะห์ต่อ</p><details class="usage-guide"><summary>วิธีใช้</summary><ol><li>เลือกจังหวัด อำเภอ และหน่วยดินของ A เพิ่ม B เมื่ออยากเปรียบเทียบ แล้วกด “ตกลง / ดูข้อมูล”</li><li>เลือกช่วงวันที่และตัวแปรอากาศ แล้วกด “ดูอากาศ” ข้อมูลดินและผลผลิตอยู่คนละแท็บ</li><li>กด “แก้ไขพื้นที่” เพื่อเลือกใหม่ หรือเปิดแท็บข้อมูลเพื่อดาวน์โหลด</li></ol><p>พิกัดในระบบเป็นจุดอ้างอิง ไม่ใช่พิกัดสวน ผลผลิตกำกับระดับพื้นที่และปีแยกจากอากาศ</p></details></div></header>
+<div id="server-notice" role="alert" hidden>API ของเว็บยังไม่พร้อม หากเปิดในเครื่องให้ใช้ 00_OPEN_REPORT.cmd ไม่ใช้ file:// หากเป็นเว็บที่ deploy ให้ตรวจสถานะเซิร์ฟเวอร์และการตั้งค่า</div>
+<main><div class="map-pane"><div class="map-selection"><span>คลิกแผนที่เพื่อเลือก</span><lumen-radio-group role="radiogroup" aria-label="พื้นที่เป้าหมายบนแผนที่"><label><input id="map-area-a" type="radio" name="map-area" value="A" checked>พื้นที่ A</label><label><input id="map-area-b" type="radio" name="map-area" value="B">พื้นที่ B</label></lumen-radio-group></div><nav id="province-shortcuts" aria-label="ซูมเข้าจังหวัด"></nav><div id="map" aria-label="แผนที่ประเทศไทยและชุดดิน"></div></div><aside>
+<style id="orchard-tailwind">__TAILWIND_STYLE__</style>
 <style>__MONTHLY_STYLE__</style>
-<nav class="quick-nav" aria-label="ไปยังขั้นตอนวิเคราะห์"><a href="#report-section">1 เลือกเดือน</a><a href="#area-section">2 พื้นที่ / ชุดดิน</a><a href="#weather-section">3 กราฟอากาศ</a><a href="#yield-section">4 ผลผลิต</a><a href="#training-section">5 ข้อมูลเทรน</a></nav><p id="view-summary" class="view-summary" role="status">กำลังเตรียมพื้นที่และเดือนที่เลือก…</p>
+<div id="area-strip" class="area-strip"><div class="area-strip-labels" role="status"><p id="area-summary-a">A: ยังไม่เลือก</p><p id="area-summary-b">B: ยังไม่เลือก</p></div><button id="toggle-area-editor" type="button" aria-expanded="true" aria-controls="area-section">ย่อพื้นที่</button><p id="map-target" role="status">ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ A</p></div>
+<section id="area-section" class="workspace-controls"><div class="area-heading"><h2>เลือกตำแหน่งอ้างอิง A/B</h2><lumen-tooltip><button type="button" data-ui-trigger aria-label="คำแนะนำการเลือกพื้นที่">คำแนะนำ</button><span role="tooltip">เลือกตำแหน่งที่นี่ ดูคุณสมบัติดินในแท็บ “ข้อมูลดิน” พิกัดอ้างอิงไม่ใช่พิกัดสวน</span></lumen-tooltip></div><div class="area-pair">
+<fieldset id="area-a"><legend>พื้นที่ A · พื้นที่หลัก</legend><div class="area-inputs"><label>จังหวัด A <select id="province"></select></label><label>อำเภอ A <select id="district"></select></label><label>หน่วยดิน A <select id="soil"><option value="">เลือกอำเภอก่อน</option></select></label><button id="focus-a" type="button" aria-pressed="true">ซูม / เลือกบนแผนที่ A</button></div><div id="selected" class="point">เลือกพื้นที่เพื่อเริ่ม</div></fieldset>
+<details id="comparison-controls"><summary id="comparison-summary">เพิ่มพื้นที่ B เพื่อเปรียบเทียบ (ไม่บังคับ)</summary><fieldset id="area-b"><legend>พื้นที่ B · เปรียบเทียบ</legend><div class="area-inputs"><label>จังหวัด B <select id="province-b"><option value="">ยังไม่เลือกพื้นที่ B</option></select></label><label>อำเภอ B <select id="district-b" disabled><option value="">เลือกจังหวัดก่อน</option></select></label><label>หน่วยดิน B <select id="soil-b" disabled><option value="">เลือกอำเภอก่อน</option></select></label><button id="focus-b" type="button">ซูม / เลือกบนแผนที่ B</button><button id="clear-b" type="button">ล้าง B</button></div><div id="compare-point" class="point b">ยังไม่ได้เลือกพื้นที่ B</div></fieldset></details>
+</div><div class="area-actions"><button id="swap-areas" type="button" disabled>สลับ A ↔ B</button><button id="fit-areas" type="button">เห็น A และ B พร้อมกัน</button><button id="soil-toggle" type="button">แสดง/ซ่อนชั้นดิน</button><button id="apply-areas" type="button">ตกลง / ดูข้อมูล</button><small>พิกัดเป็นจุดอ้างอิง ดินมาจากแผนที่ LDD 2561 ไม่ใช่ขอบเขตสวนทุเรียน</small></div></section>
+<nav class="quick-nav" aria-label="หัวข้อข้อมูล"><a href="#current-section">จังหวัดและสวนวันนี้</a><a href="#weather-section">อากาศ A/B</a><a href="#soil-analysis">ข้อมูลดิน</a><a href="#yield-section">ผลผลิตจังหวัด</a><a href="#report-section">ฤดู / รายเดือน</a><a href="#training-section">ดาวน์โหลด / หลักฐาน</a></nav><p id="view-summary" class="view-summary" role="status">กำลังเตรียมช่วงวันที่…</p>
+<section id="current-section"><h2>จังหวัดและสวนวันนี้</h2><p class="scope-note">จังหวัดตามพื้นที่ A · สวนเป็นจุดเซนเซอร์ส่วนตัว ไม่ย้ายตามแผนที่ A/B</p><div class="report-controls"><label>ปีประมาณการจังหวัด <select id="current-year"></select></label><button id="refresh-current" type="button">อัปเดตข้อมูล</button></div><h3>ประมาณการผลผลิตจังหวัด</h3><div id="current-province" role="status">กำลังอ่านโมเดล…</div><h3>ข้อมูลสวนของฉัน</h3><div id="current-orchard" class="report-grid" role="status">กำลังอ่าน snapshot…</div><p class="scope-note">ตรวจไฟล์ snapshot ทุก 5 นาที ไม่ใช่การเชื่อมชีตโดยตรง แสดงเวลาวัดเสมอและเตือนเมื่อเก่าเกิน 1 ชั่วโมง</p><fieldset><legend>ระยะและสถานการณ์ที่สังเกตในสวน</legend><div class="area-inputs"><label>จังหวัดสวน <select id="orchard-province"><option value="">เลือกจังหวัดสวนจริง</option></select></label><label>ระยะที่เห็นจริง <select id="orchard-stage"><option value="unknown">ยังไม่ทราบ</option><option value="recovery">ฟื้นต้น / ทำใบ</option><option value="flower">เตรียมดอก</option><option value="bloom">ดอกบาน</option><option value="young">ผลอ่อน</option><option value="growth">ขยายผล</option><option value="harvest">เก็บเกี่ยว</option></select></label><label>วันนี้ให้น้ำหรือไม่ <select id="orchard-water"><option value="unknown">ยังไม่บันทึก</option><option value="no">ไม่ได้ให้น้ำ</option><option value="yes">ให้น้ำ</option></select></label><label>สิ่งที่พบ <select id="orchard-situation"><option value="unknown">ยังไม่บันทึก</option><option value="normal">ไม่พบความผิดปกติ</option><option value="dry">ดินแห้ง / น้ำไม่พอ</option><option value="wet">น้ำขัง</option><option value="drop">พบผลร่วง</option><option value="flush">แตกใบอ่อน</option><option value="storm">พายุ / ลมแรง</option></select></label></div><button id="save-orchard-state" type="button">บันทึกสถานะที่สังเกต</button><p id="orchard-state-note" role="status"></p><p id="orchard-calendar" class="scope-note"></p></fieldset><p class="warn">ปฏิทินและผลผลิตจังหวัดเป็นบริบท ไม่ใช้ยืนยันระยะของสวน และสถานะที่เลือกยังไม่ปรับค่าผลผลิตจังหวัดโดยไม่มีโมเดลรองรับ</p></section>
 <section class="monthly-report" aria-label="รายงานรายเดือน"><h2>เลือกเดือน ดูฤดูและรายงานของพื้นที่</h2><div class="report-controls"><label>จังหวัดรายงาน <select id="report-province"></select></label><label>ปีรายงาน <select id="report-year"></select></label></div><div id="month-buttons" class="month-grid" role="group" aria-label="เลือกเดือนรายงาน"></div><h3 id="report-title" class="report-heading"></h3><h3 class="report-subhead">ระยะตามปฏิทินอ้างอิง</h3><div id="report-stage"></div><h3 class="report-subhead">ข้อมูลของเดือน–ปีที่เลือก</h3><div id="report-metrics" class="report-grid"></div><p id="report-weather-note" class="scope-note"></p><h3 class="report-subhead">รายงานที่ตรงเดือน–ปีนี้</h3><div id="report-events"></div><details><summary>ข้อมูลที่ต้องมีเพื่อวิเคราะห์ระยะนี้ให้แม่นขึ้น</summary><ul id="report-questions"></ul></details><h3 class="report-subhead">เทียบทั้ง 5 จังหวัดในเดือนเดียวกัน</h3><div id="report-compare" class="report-comparison"></div><p class="scope-note">— หมายถึงไม่มีระเบียน/ไม่มีค่า ไม่ใช่ศูนย์; กรอบระยะจากคู่มือปี 2567 ไม่เปลี่ยนตามปี ส่วนอากาศ ผลผลิต และข่าวกรองตามปีที่เลือก</p></section>
 <section><h2>ภาพรวมฤดูเก็บเกี่ยว 5 จังหวัด</h2><button id="overview">กลับภาพรวมประเทศไทย</button> <label>ปีผลผลิต <select id="season-year"></select></label><div id="season-calendar" class="scroll"></div><p class="muted">สัดส่วน % ของผลผลิตรายเดือนที่รายงานในจังหวัด–ปีนั้น (สศก. ทุกพันธุ์) ไม่ใช่ระยะออกดอก/ผลอ่อนรายสวน เครื่องหมาย — คือไม่มีระเบียน ไม่ใช่ศูนย์ คลิกชื่อจังหวัดเพื่อเลือกพื้นที่</p></section>
-<section><h2>1. เลือกพื้นที่และชุดดิน</h2><label>จังหวัด <select id="province"></select></label><label>อำเภอ <select id="district"></select></label><label>หน่วยดิน <select id="soil"><option value="">ทุกหน่วยดิน</option></select></label><button id="soil-toggle">แสดง/ซ่อนชั้นดิน</button><p class="muted">ขอบเขตดิน LDD ปี 2561 ลดรายละเอียดเส้น 50 ม. สีแยกหน่วยดิน การอยู่ในพื้นที่สีไม่ได้ยืนยันว่าปลูกทุเรียน</p><div id="selected" class="point">เลือกพื้นที่เพื่อเริ่ม</div><button id="pin-b">ใช้จุดนี้เป็นพื้นที่ B เพื่อเปรียบเทียบ</button><div id="compare-point" class="point b">ยังไม่ได้เลือกพื้นที่ B</div></section>
-<section><h2>2. วันที่และอากาศ</h2><label>เลือกทั้งเดือน <input type="month" id="month" value="2024-04"></label><br><label>เริ่ม <input type="date" id="start" value="2024-04-01"></label><label>ถึง <input type="date" id="end" value="2024-04-30"></label><button id="load">ดูอากาศ / เทียบ A กับ B</button><p id="status" role="status">เลือกจุดและช่วงวันที่แล้วกดดูอากาศ</p><p id="weather-warning" class="warn" hidden></p><p class="muted">NASA POWER เป็นอากาศกริด ณ จุดที่เลือก วันแบบ LST พื้นที่ใกล้กันอาจได้ค่าเดียวกัน ไม่ใช่ความละเอียดรายแปลง และค่าลมเป็นค่าเฉลี่ย ไม่ใช่ลมกระโชก</p><div id="weather"></div><label>เลือกกราฟเปรียบเทียบ <select id="chart-metric"><option value="T2M">อุณหภูมิเฉลี่ย</option><option value="T2M_MAX">อุณหภูมิสูงสุด</option><option value="T2M_MIN">อุณหภูมิต่ำสุด</option><option value="PRECTOTCORR">ปริมาณฝน</option><option value="RH2M">ความชื้นอากาศ</option><option value="ALLSKY_SFC_SW_DWN">รังสีดวงอาทิตย์</option><option value="WS2M">ความเร็วลมเฉลี่ย</option></select></label><p id="chart-note" class="muted"></p><svg id="chart" viewBox="0 0 500 195" role="img" aria-label="กราฟอากาศ A เทียบ B"></svg><div class="scroll" id="monthly"></div><details><summary>ค่ารายวัน</summary><div class="scroll" id="daily"></div></details></section>
+<section><h2>2. วันที่และอากาศ</h2><label>เลือกทั้งเดือน <input type="month" id="month" value="2024-04"></label><br><label>เริ่ม <input type="date" id="start" value="2024-04-01"></label><label>ถึง <input type="date" id="end" value="2024-04-30"></label><button id="load">ดูอากาศ / เทียบ A กับ B</button><p id="status" role="status">เลือกจุดและช่วงวันที่แล้วกดดูอากาศ</p><p id="weather-warning" class="warn" hidden></p><p class="muted">NASA POWER เป็นอากาศกริด ณ จุดที่เลือก วันแบบ LST พื้นที่ใกล้กันอาจได้ค่าเดียวกัน ไม่ใช่ความละเอียดรายแปลง และค่าลมเป็นค่าเฉลี่ย ไม่ใช่ลมกระโชก</p><div id="weather"></div><label>เลือกกราฟเปรียบเทียบ <select id="chart-metric"><option value="T2M">อุณหภูมิเฉลี่ย</option><option value="T2M_MAX">อุณหภูมิสูงสุด</option><option value="T2M_MIN">อุณหภูมิต่ำสุด</option><option value="PRECTOTCORR">ปริมาณฝน</option><option value="RH2M">ความชื้นอากาศ</option><option value="ALLSKY_SFC_SW_DWN">รังสีดวงอาทิตย์</option><option value="WS2M">ความเร็วลมเฉลี่ย</option></select></label><p id="chart-note" class="muted"></p><svg id="chart" viewBox="0 0 500 195" role="img" aria-label="กราฟอากาศ A เทียบ B"></svg><div class="scroll" id="monthly"></div><details id="daily-details"><summary>ค่ารายวัน</summary><div id="daily-controls" class="daily-controls"><label>แสดงต่อหน้า <select id="daily-limit"><option value="7">7 วัน</option><option value="10">10 วัน</option><option value="0">ทั้งหมด</option></select></label><button id="daily-prev" type="button" disabled>หน้าก่อน</button><button id="daily-next" type="button" disabled>หน้าถัดไป</button><span id="daily-page" role="status">ยังไม่มีข้อมูล</span></div><p class="scope-note">กดหัวคอลัมน์เพื่อเรียงน้อยไปมาก / มากไปน้อย ค่าที่ไม่มีข้อมูลอยู่ท้ายรายการ กราฟและ CSV ยังคงใช้ทุกวันในช่วงที่เลือก</p><div class="scroll" id="daily"></div></details></section>
 <section><h2>3. ช่วงนี้อยู่ระยะใดของทุเรียน</h2><div id="season"></div><p class="warn">ยังไม่มีระยะพืชจริงครบทุกอำเภอ–ปี เดือนผลผลิตบอกช่วงเก็บเกี่ยวระดับจังหวัด ไม่บอกวันออกดอกหรือวันผลร่วงรายสวน</p><details><summary>ประมาณช่วงดอกบานจากวันเก็บเกี่ยว</summary><label>อำเภอ/สวนและพันธุ์ <input id="crop" placeholder="เช่น บ้านนาสาร / หมอนทอง"></label><label>วันเก็บเกี่ยว <input type="date" id="harvest" value="2024-07-15"></label><label>อายุผลต่ำสุด วัน <input type="number" id="min-age" value="120" min="1" max="365"></label><label>สูงสุด <input type="number" id="max-age" value="140" min="1" max="365"></label><button id="backcast">นับย้อนและเลือกช่วงอากาศ</button><p id="estimate" class="muted">120–140 วันเป็นค่าเริ่มต้นสำหรับทดลอง ต้องยืนยันอายุผลตามพันธุ์และวันเก็บจริงก่อนใช้ ไม่ใช่ปฏิทินที่ยืนยันของพื้นที่</p></details><p class="muted">ลำดับที่ต้องติดตาม: ฟื้นต้น/ทำใบ → เตรียมดอก → ดอกบาน → ผลอ่อน → ขยายผล → เก็บเกี่ยว; ยังระบุวันที่แต่ละระยะจากอากาศเพียงอย่างเดียวไม่ได้</p></section>
 <section><h2>4. ผลผลิตเพิ่ม/ลดแค่ไหน</h2><div id="yield-note"></div><div class="scroll" id="yield"></div><h3>อากาศก่อนฤดูเก็บเกี่ยว: ปีที่เลือกเทียบปีก่อน</h3><div class="scroll" id="annual-year-context"></div><h3>ทดสอบตัวแปรที่สัมพันธ์กับผลผลิตต่อไร่</h3><p id="annual-model-note" class="muted">กำลังอ่านผลโมเดลรายปี…</p><div class="scroll" id="annual-model"></div><p class="muted">ตัวเลข สศก. เป็นทั้งจังหวัดทุกพันธุ์ ยังไม่มีผลผลิตแยกตามหน่วยดิน/อำเภอที่ตรวจครบ จึงไม่แจกยอดจังหวัดลงจุดที่เลือก การเปลี่ยนแปลงนี้ยังไม่ใช่ผลของอุณหภูมิโดยตรง</p></section>
+<section id="soil-analysis" aria-labelledby="soil-analysis-title"><h2 id="soil-analysis-title">วิเคราะห์ดิน × ผลผลิตรายอำเภอ — ชุดทดลอง</h2><p id="soil-analysis-scope" role="status"></p><p class="warn">ผลผลิตอุตรดิตถ์ 2563–2564: ตรวจตัวเลขจาก PDF แล้ว แต่ยังไม่ยืนยันยอดจริง/คาดการณ์ มีเพียง 2 ปี ไม่แสดงคะแนนความแม่นยำโมเดล</p><h3>คุณสมบัติดินของพื้นที่ A</h3><div class="scroll" id="soil-analysis-properties"></div><p id="soil-analysis-gap" class="muted"></p><h3>ผลผลิตต่อไร่ที่เอกสารรายงาน</h3><div id="district-yield-bars" aria-label="กราฟแท่งผลผลิตต่อไร่ พร้อมชื่ออำเภอ ปี และค่า"></div><p id="district-analysis-note"></p><details><summary>ตัวเลขต้นฉบับและค่าที่คำนวณจากยอดปัดเศษ</summary><div class="scroll" id="district-evidence-table"></div></details><a id="district-evidence-link" href="https://www.opsmoac.go.th/uttaradit-dwl-files-441891791379#page=10" target="_blank" rel="noopener">หลักฐาน หน้า 10 ตาราง 4.12.3</a><h3>ตรวจอากาศย้อนหลัง ณ จุด A</h3><button id="district-weather-2020" disabled>ดูอากาศปี 2563</button> <button id="district-weather-2021" disabled>ดูอากาศปี 2564</button><p class="muted">โหลดทั้งปีเพื่อสำรวจ ไม่ถือว่าทั้งปีเป็นระยะวิกฤตเดียวกัน จุดภายในหน่วยดินไม่ใช่ค่าเฉลี่ยอำเภอ NASA POWER เป็นกริด ไม่ใช่ค่าตรวจในสวน กราฟอากาศอยู่ในส่วนวันที่และอากาศด้านบน</p><a href="district_soil_exploration.csv" download>ดาวน์โหลด CSV ทดลอง 14 อำเภอ–ปี สำหรับ Python</a><p class="muted">หนึ่งแถวต่ออำเภอ–ปี ไม่แตกเป็นตัวอย่างรายชุดดิน ค่า pH ตัวเลขและ N/P/K ที่ไม่มีหลักฐานเก็บว่าง; train_eligible=false ไม่ปะปนกับ training หลัก</p></section>
 <section><h2>5. เหตุการณ์และคุณภาพที่มีรายงาน</h2><div id="events"></div><p class="muted">วันลงตรวจ/วันเผยแพร่อาจต่างจากวันเกิดเหตุ; ข้อมูลคุณภาพสินค้าและความอุดมสมบูรณ์ดินไม่ใช่ผลประเมินสุขภาพต้น</p></section>
 <section><h2>หลักฐานและไฟล์ข้อมูล</h2><a href="README_TH.md">วิธีคำนวณและข้อจำกัด</a> · <a href="HISTORY_ANALYSIS.ipynb">Jupyter Notebook</a> · <a href="production_weather_annual.csv">ผลผลิตกับอากาศรายปี</a> · <a href="training/annual_yield_feature_comparison.json">ผลเทียบโมเดลรายปี</a> · <a href="soil_properties_by_district.csv">คุณสมบัติดิน</a><p class="muted">อากาศจังหวัดที่เก็บไว้: 1981–22 ก.ย. 2026 (แสงเริ่ม 1984 ถึง 20 ก.ย. 2026) ผลผลิตในแฟ้ม สศก.: 1997–2025 ส่วนวันที่เลือก ณ จุดใหม่ดึงจาก API และเก็บต้นทางในเครื่อง</p></section>
 <section id="training-section" class="training-section"><h2>5. นำข้อมูลไปวิเคราะห์ / เทรนต่อ</h2><p>เริ่มจากชุดข้อมูลระดับจังหวัดที่ตรวจเงื่อนไขข้อมูลขาดแล้ว ไม่ใช่ข้อมูลสุขภาพต้นหรือผลผลิตรายชุดดิน</p><div class="training-links"><a href="training/monthly_model_panel.csv" download>ดาวน์โหลด CSV รายเดือน</a><a href="training/annual_yield_windows_panel.csv" download>ดาวน์โหลด CSV ผลผลิตต่อไร่รายปี</a><a href="training/manifest.json" target="_blank" rel="noopener">ดูจำนวนแถวและที่มา</a><a href="training/README_TH.md" target="_blank" rel="noopener">วิธีเปิดใน Jupyter และข้อควรระวัง</a></div><p class="muted">รายเดือน: 1 แถว/จังหวัด–เดือน เป้าหมายเป็นผลผลิตตันทุกพันธุ์; รายปี: 1 แถว/จังหวัด–ปี เป้าหมาย กก./ไร่ อากาศใช้จุดอ้างอิงจังหวัด และต้องแยก train/validation/test ตามเวลา ห้ามตีความว่าอากาศเป็นสาเหตุหรือเป็นคำตอบสุขภาพต้น</p></section>
 </aside></main><script>
 const DATA=__DATA__, $=id=>document.getElementById(id), fmt=(v,n=1)=>v===null||v===undefined||!Number.isFinite(+v)?'—':(+v).toLocaleString('th-TH',{maximumFractionDigits:n});
 const map=L.map('map',{scrollWheelZoom:false}).setView([13,101],6);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);
-const provinceLayer=L.geoJSON(DATA.boundaries,{style:{color:'#176d56',weight:1.3,fillOpacity:.08},onEachFeature:(f,l)=>l.bindTooltip(f.properties.province_name).on('click',()=>{$('province').value=String(f.properties.province_code);provinceChange()})}).addTo(map);map.fitBounds(provinceLayer.getBounds(),{animate:false});
-let A=null,B=null,markerA=null,markerB=null,soilLayer=null,features=[],loadVersion=0,weatherVersion=0,chartRowsA=[],chartRowsB=null,weatherExportState=null;const soilCache={};
+const provinceLayer=L.geoJSON(DATA.boundaries,{style:{color:'#2563eb',weight:1.3,fillOpacity:.08},onEachFeature:(f,l)=>l.bindTooltip(f.properties.province_name).on('click',()=>{areaControl('province').value=String(f.properties.province_code);provinceChange(activeArea);})}).addTo(map);
+let A=null,B=null,markerA=null,markerB=null,soilLayer=null,features=[],loadVersion=0,weatherVersion=0,chartRowsA=[],chartRowsB=null,weatherExportState=null,activeArea='A';const soilCache={};
 function table(h,r){return '<table><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+r.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</table>'}
-function invalidateWeather(message){weatherVersion++;chartRowsA=[];chartRowsB=null;for(const id of ['weather','chart','monthly','daily','chart-note'])$(id).innerHTML='';$('weather-warning').hidden=true;$('weather-warning').textContent='';$('status').textContent=message;}
+function invalidateWeather(message){weatherVersion++;chartRowsA=[];chartRowsB=null;for(const id of ['weather','chart','monthly','daily','chart-note'])$(id).innerHTML='';dailyPage=0;renderDailyTable();$('weather-warning').hidden=true;$('weather-warning').textContent='';$('status').textContent=message;}
+let dailyPage=0,dailySort='date',dailyDirection=1;
+const dailyColumns=[['date','วันที่'],['T2M','A เฉลี่ย °C'],['T2M_MAX','A สูงสุด °C'],['PRECTOTCORR','A ฝน มม.'],['B_T2M','B เฉลี่ย °C']];
+function dailyView(rowsA,rowsB,key,direction,limit,page){
+  const byDate=new Map((rowsB||[]).map(row=>[row.date,row]));
+  const numeric=value=>value===null||value===undefined||value===''||!Number.isFinite(+value)?null:+value;
+  const rows=rowsA.map(row=>({date:row.date,T2M:numeric(row.T2M),T2M_MAX:numeric(row.T2M_MAX),PRECTOTCORR:numeric(row.PRECTOTCORR),B_T2M:numeric(byDate.get(row.date)?.T2M)}));
+  rows.sort((a,b)=>{
+    if(a[key]===null&&b[key]!==null)return 1;if(b[key]===null&&a[key]!==null)return -1;
+    const comparison=key==='date'?a.date.localeCompare(b.date):(a[key]??0)-(b[key]??0);
+    return comparison*direction||a.date.localeCompare(b.date);
+  });
+  const size=limit||rows.length||1,pages=Math.max(1,Math.ceil(rows.length/size));page=Math.max(0,Math.min(page,pages-1));
+  return {rows:rows.slice(page*size,(page+1)*size),total:rows.length,page,pages,offset:page*size};
+}
+function renderDailyTable(){
+  const view=dailyView(chartRowsA,chartRowsB,dailySort,dailyDirection,+$('daily-limit').value,dailyPage);dailyPage=view.page;
+  $('daily-prev').disabled=!view.total||!view.page;$('daily-next').disabled=!view.total||view.page===view.pages-1;
+  $('daily-page').textContent=view.total?`แถว ${view.offset+1}–${view.offset+view.rows.length} จาก ${view.total} วัน · หน้า ${view.page+1}/${view.pages}`:'ยังไม่มีข้อมูล กดดูอากาศก่อน';
+  $('daily').innerHTML='<table><thead><tr>'+dailyColumns.map(([key,label])=>{
+    const active=key===dailySort,order=active?(dailyDirection===1?'ascending':'descending'):'none';
+    const suffix=active?' ('+(key==='date'?(dailyDirection===1?'เก่าไปใหม่':'ใหม่ไปเก่า'):(dailyDirection===1?'น้อยไปมาก':'มากไปน้อย'))+')':'';
+    return `<th scope="col" aria-sort="${order}"><button type="button" data-daily-sort="${key}">${label}${suffix}</button></th>`;
+  }).join('')+'</tr></thead><tbody>'+view.rows.map(row=>'<tr>'+dailyColumns.map(([key])=>'<td>'+(key==='date'?esc(row.date):fmt(row[key]))+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+  $('daily').querySelectorAll('[data-daily-sort]').forEach(button=>button.onclick=()=>{const key=button.dataset.dailySort;dailyDirection=dailySort===key?-dailyDirection:1;dailySort=key;dailyPage=0;renderDailyTable();});
+  $('daily').scrollTop=0;
+}
 function seasonCalendar(){const months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];const y=+$('season-year').value;const rows=DATA.provinces.map(p=>{const data=DATA.harvest.filter(r=>r.province_code===p.province_code&&r.year_ce===y),total=data.reduce((s,r)=>s+r.tonnes,0);return ['<button data-province="'+p.province_code+'">'+p.province_name+'</button>',...months.map((_,i)=>{const r=data.find(r=>r.month_number===i+1);return r&&total>0?fmt(100*r.tonnes/total):'—'})]});$('season-calendar').innerHTML=table(['จังหวัด / %',...months],rows);$('season-calendar').querySelectorAll('button[data-province]').forEach(b=>b.onclick=()=>{$('province').value=b.dataset.province;provinceChange()});}
 $('overview').onclick=()=>{map.fitBounds(provinceLayer.getBounds(),{padding:[20,20],animate:false});$('map').scrollIntoView({block:'start',behavior:'smooth'});};
 const homeControl=L.control({position:'topright'});homeControl.onAdd=()=>{const b=L.DomUtil.create('button');b.textContent='ประเทศไทย · 5 จังหวัด';L.DomEvent.disableClickPropagation(b);b.onclick=()=>$('overview').click();return b};homeControl.addTo(map);
 new ResizeObserver(()=>map.invalidateSize({pan:false})).observe($('map'));
 [...new Set(DATA.harvest.map(r=>r.year_ce))].sort((a,b)=>b-a).forEach(y=>$('season-year').add(new Option(y+543,y)));
 $('season-year').onchange=seasonCalendar;seasonCalendar();
-function selectA(p){weatherVersion++;chartRowsA=[];chartRowsB=null;A=p;if(markerA)map.removeLayer(markerA);markerA=L.circleMarker([p.lat,p.lon],{radius:7,color:'#075e41',fillOpacity:1}).addTo(map).bindTooltip('A: '+p.label);$('selected').textContent=`A: ${p.label} • ${p.lat}, ${p.lon} • ${p.note}`;$('weather').innerHTML='';$('chart').innerHTML='';$('chart-note').textContent='';$('monthly').innerHTML='';$('daily').innerHTML='';$('status').textContent='เปลี่ยนจุดแล้ว กดดูอากาศเพื่อโหลดค่าของจุดนี้';context();}
-function selectFeature(f){const p=f.properties;selectA({lat:p.latitude,lon:p.longitude,code:$('province').value,label:`${p.province} ${p.district} / ${p.soil_code} ${p.soil_name}`,note:`เนื้อดิน: ${p.topsoil_texture} • ปฏิกิริยาดิน: ${p.topsoil_ph} • ความอุดมสมบูรณ์: ${p.fertility} (ตามแผนที่ปี 2561)`});}
-async function provinceChange(){
-const version=++loadVersion,code=$('province').value;
-features=[];if(soilLayer){map.removeLayer(soilLayer);soilLayer=null}
-$('district').innerHTML='<option value="">เลือกอำเภอเพื่อดูชุดดิน</option>';
-$('soil').innerHTML='<option value="">เลือกอำเภอก่อน</option>';$('soil').disabled=true;
-DATA.districts.filter(d=>d.province_code===code).forEach(d=>$('district').add(new Option(d.district,d.district)));
-const p=DATA.provinces.find(p=>p.province_code===code);
-selectA({lat:p.weather_latitude,lon:p.weather_longitude,code,label:p.province_name+' (จุดอ้างอิงจังหวัด)',note:'ยังไม่ได้เลือกอำเภอหรือหน่วยดิน ไม่ใช่พิกัดสวน'});
-provinceLayer.eachLayer(l=>{const selected=String(l.feature.properties.province_code)===code;l.setStyle({fillOpacity:selected ? .22 : .08});if(selected)map.fitBounds(l.getBounds(),{padding:[20,20],animate:false})});
-try{if(!soilCache[code]){const r=await fetch('../priority_provinces/soil_layers/'+code+'.geojson');if(!r.ok)throw Error(r.status);soilCache[code]=await r.json()}if(version!==loadVersion)return;features=soilCache[code].features;if($('district').value)districtChange(true);}
-catch(e){if(version===loadVersion)$('status').textContent='โหลดชุดดินไม่สำเร็จ: '+e.message}
+function areaControl(id,which=activeArea){return $(id+(which==='B'?'-b':''));}
+function areaName(point){
+  if(!point)return 'ยังไม่เลือก';
+  const province=DATA.provinces.find(p=>p.province_code===point.code)?.province_name||point.code;
+  const soil=point.soil_properties||(point.soil_code?DATA.soil_properties.find(s=>s.province_code===point.code&&s.district===point.district&&s.soil_code===point.soil_code):null);
+  return [province,point.district?.replace(/^อ\./,''),point.soil_code?point.soil_code+' '+(soil?.soil_name||'ไม่ระบุชื่อ'):null].filter(Boolean).join(' / ');
 }
-function districtChange(show){const d=DATA.districts.find(d=>d.province_code===$('province').value&&d.district===$('district').value);if(!d){provinceChange();return;}$('soil').disabled=false;const name=DATA.provinces.find(p=>p.province_code===d.province_code).province_name;selectA({lat:d.latitude,lon:d.longitude,code:d.province_code,label:name+' '+d.district,note:d.point_method});$('soil').innerHTML='<option value="">ทุกหน่วยดินในอำเภอ</option>';const units=new Map();features.filter(f=>f.properties.district===d.district).forEach(f=>units.set(f.properties.soil_code,f.properties.soil_name));for(const [c,n] of units)$('soil').add(new Option(c+' — '+n,c));if(show)drawSoils();else map.setView([d.latitude,d.longitude],9)}
-function drawSoils(){if(soilLayer)map.removeLayer(soilLayer);const subset=features.filter(f=>f.properties.district===$('district').value&&(!$('soil').value||f.properties.soil_code===$('soil').value));const colors=['#d8b365','#5ab4ac','#b2abd2','#a6dba0','#f4a582','#92c5de'];soilLayer=L.geoJSON(subset,{style:f=>{let h=0;for(const c of f.properties.soil_code)h=(h+c.charCodeAt(0))%colors.length;return {color:'#666',weight:.7,fillColor:colors[h],fillOpacity:.5}},onEachFeature:(f,l)=>{let p=f.properties;const popup=document.createElement('div');popup.textContent=`${p.district} • ${p.soil_code} ${p.soil_name} • ${p.topsoil_texture} • ${p.topsoil_ph} • อุดมสมบูรณ์ ${p.fertility}`;l.bindPopup(popup).bindTooltip(p.soil_code+' '+p.soil_name).on('click',()=>selectFeature(f))}}).addTo(map);if(subset.length)map.fitBounds(soilLayer.getBounds(),{padding:[20,20],maxZoom:12});if($('soil').value&&subset.length)selectFeature(subset[0]);}
+function renderAreaStrip(){for(const [which,point] of [['A',A],['B',B]])$('area-summary-'+which.toLowerCase()).textContent=which+': '+areaName(point);}
+function setAreaEditor(expanded){
+  const picker=$('soil-picker');if(picker)picker.open=expanded;
+  requestAnimationFrame(()=>map.invalidateSize());
+  $('area-section').hidden=!expanded;$('toggle-area-editor').textContent=expanded?'ย่อพื้นที่':'แก้ไขพื้นที่';
+  $('toggle-area-editor').setAttribute('aria-expanded',String(expanded));
+}
+function samePoint(a,b){return !!a&&!!b&&Math.abs(Number(a.lat)-Number(b.lat))<.00001&&Math.abs(Number(a.lon)-Number(b.lon))<.00001;}
+function clearComparison(message='ยังไม่ได้เลือกพื้นที่ B'){
+  B=null;if(markerB){map.removeLayer(markerB);markerB=null;}
+  $('compare-point').textContent=message;$('swap-areas').disabled=true;$('comparison-summary').textContent='เพิ่มพื้นที่ B เพื่อเปรียบเทียบ (ไม่บังคับ)';
+}
+function selectA(p){
+  invalidateWeather('พื้นที่ A เปลี่ยนแล้ว กดดูอากาศเพื่อโหลดค่าที่เลือก');A=p;
+  if(markerA)map.removeLayer(markerA);markerA=L.circleMarker([p.lat,p.lon],{radius:7,color:'#2563eb',fillOpacity:1}).addTo(map).bindTooltip('A: '+p.label);
+  $('selected').textContent=`พิกัดอ้างอิง A: ${p.lat}, ${p.lon}\n${p.note}`;
+  if(samePoint(A,B))clearComparison('พื้นที่ B ซ้ำกับ A กรุณาเลือกจังหวัด อำเภอ หรือหน่วยดินอื่น');
+  context();
+}
+function selectB(p){
+  invalidateWeather('พื้นที่ B เปลี่ยนแล้ว กดดูอากาศเพื่อเปรียบเทียบ');
+  if(samePoint(A,p)){clearComparison('พื้นที่ B ซ้ำกับ A กรุณาเลือกพื้นที่อื่นเพื่อเปรียบเทียบ');context();return;}
+  B=p;if(markerB)map.removeLayer(markerB);markerB=L.circleMarker([p.lat,p.lon],{radius:10,color:'#b45309',dashArray:'4 3',fillOpacity:.25}).addTo(map).bindTooltip('B: '+p.label);
+  $('compare-point').textContent=`พิกัดอ้างอิง B: ${p.lat}, ${p.lon}\n${p.note}`;$('swap-areas').disabled=false;
+  $('comparison-summary').textContent='พื้นที่ B: '+areaName(p)+' — แก้ไข';context();
+}
+function selectArea(p,which=activeArea){if(which==='B')selectB(p);else selectA(p);}
+function fitProvince(code){
+  map.stop();map.invalidateSize({pan:false});
+  provinceLayer.eachLayer(l=>{const selected=String(l.feature.properties.province_code)===code;l.setStyle({fillOpacity:selected?.22:.08});if(selected)map.fitBounds(l.getBounds(),{padding:[16,16],maxZoom:10,animate:false});});
+}
+function updateMapTarget(which){
+  activeArea=which;$('map-target').textContent=`ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ ${which}`;
+  $('map-area-a').checked=which==='A';$('map-area-b').checked=which==='B';
+  for(const side of ['A','B'])$('focus-'+side.toLowerCase()).setAttribute('aria-pressed',String(side===which));
+  document.querySelectorAll('#province-shortcuts button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.province===areaControl('province',which).value)));
+}
+async function focusArea(which){
+  updateMapTarget(which);const version=++loadVersion,code=areaControl('province',which).value;
+  if($('soil-legend'))$('soil-legend').hidden=true;
+  if(!code){features=[];if(soilLayer){map.removeLayer(soilLayer);soilLayer=null;}return;}
+  fitProvince(code);
+  try{if(!soilCache[code]){const r=await fetch('../priority_provinces/soil_layers/'+code+'.geojson');if(!r.ok)throw Error(r.status);soilCache[code]=await r.json();}
+    if(version!==loadVersion)return;features=soilCache[code].features;
+    if(areaControl('district',which).value){fillSoilOptions(which);drawSoils(false);}else if(soilLayer){map.removeLayer(soilLayer);soilLayer=null;}
+  }catch(e){if(version===loadVersion)$('status').textContent='โหลดชุดดินไม่สำเร็จ: '+e.message+' • เปิดผ่าน 00_OPEN_REPORT.cmd';}
+}
+function selectFeature(f){
+  const p=f.properties,which=activeArea;areaControl('district',which).value=p.district;fillSoilOptions(which);areaControl('soil',which).value=p.soil_code;
+  selectArea({lat:p.latitude,lon:p.longitude,code:areaControl('province',which).value,district:p.district,soil_code:p.soil_code,soil_properties:{soil_name:p.soil_name,topsoil_texture:p.topsoil_texture,topsoil_ph:p.topsoil_ph,fertility:p.fertility},label:`${p.province} ${p.district} / ${p.soil_code} ${p.soil_name}`,note:'จุดอ้างอิงภายในหน่วยดินที่เลือก ไม่ใช่พิกัดสวน'},which);
+}
+async function provinceChange(which='A'){
+  const code=areaControl('province',which).value,district=areaControl('district',which),soil=areaControl('soil',which);
+  district.innerHTML='<option value="">เลือกอำเภอเพื่อดูชุดดิน</option>';district.disabled=!code;
+  soil.innerHTML='<option value="">เลือกอำเภอก่อน</option>';soil.disabled=true;
+  DATA.districts.filter(d=>d.province_code===code).forEach(d=>district.add(new Option(d.district,d.district)));
+  if(!code){clearComparison();invalidateWeather('ล้างพื้นที่ B แล้ว');context();await focusArea(which);return;}
+  const p=DATA.provinces.find(p=>p.province_code===code);
+  selectArea({lat:p.weather_latitude,lon:p.weather_longitude,code,label:p.province_name+' (จุดอ้างอิงจังหวัด)',note:'ยังไม่ได้เลือกอำเภอ/หน่วยดิน ไม่ใช่พิกัดสวน'},which);
+  await focusArea(which);
+}
+function fillSoilOptions(which){
+  const soil=areaControl('soil',which),selected=soil.value,district=areaControl('district',which).value;
+  soil.disabled=!district;soil.innerHTML='<option value="">ทุกหน่วยดินในอำเภอ</option>';
+  const units=new Map();features.filter(f=>f.properties.district===district).forEach(f=>units.set(f.properties.soil_code,f.properties.soil_name));
+  for(const [c,n] of units)soil.add(new Option(c+' — '+n,c));soil.value=units.has(selected)?selected:'';
+}
+function districtChange(show,which='A'){
+  updateMapTarget(which);features=soilCache[areaControl('province',which).value]?.features||[];
+  const d=DATA.districts.find(d=>d.province_code===areaControl('province',which).value&&d.district===areaControl('district',which).value);
+  if(!d){provinceChange(which);return;}areaControl('soil',which).value='';fillSoilOptions(which);
+  const name=DATA.provinces.find(p=>p.province_code===d.province_code).province_name;
+  selectArea({lat:d.latitude,lon:d.longitude,code:d.province_code,district:d.district,label:name+' '+d.district,note:d.point_method},which);
+  if(show)drawSoils(false);else map.setView([d.latitude,d.longitude],9,{animate:false});
+}
+function drawSoils(select=true){
+  if(soilLayer)map.removeLayer(soilLayer);const which=activeArea,district=areaControl('district',which).value,code=areaControl('soil',which).value;
+  const subset=features.filter(f=>f.properties.district===district&&(!code||f.properties.soil_code===code));
+  const units=[...new Map(features.filter(f=>f.properties.district===district).map(f=>[f.properties.soil_code,f.properties])).values()].sort((a,b)=>a.soil_code.localeCompare(b.soil_code));
+  const palette=['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'];
+  const soilColors=new Map(units.map((p,i)=>[p.soil_code,palette[i]||`hsl(${Math.round(i*137.508)%360} 55% ${i%2?62:78}%)`]));
+  soilLayer=L.geoJSON(subset,{style:f=>({color:'#555',weight:1,fillColor:soilColors.get(f.properties.soil_code),fillOpacity:.65}),onEachFeature:(f,l)=>{const p=f.properties;l.bindTooltip('รหัส '+p.soil_code+': '+p.soil_name,{direction:'top'}).on('click',()=>selectFeature(f));}}).addTo(map);
+  const legend=$('soil-legend');if(legend){legend.hidden=!subset.length;legend.innerHTML='<summary>สีหน่วยดิน '+(which==='B'?'พื้นที่ B':'พื้นที่ A')+' · '+esc(district)+' (ไม่ใช่ระดับความเสี่ยง)</summary><div class="soil-legend-items">'+units.filter(p=>!code||p.soil_code===code).map(p=>`<span class="soil-legend-item"><span class="soil-swatch" style="background:${soilColors.get(p.soil_code)}"></span>${esc(p.soil_code)} — ${esc(p.soil_name)}</span>`).join('')+'</div>';}
+  if(subset.length)map.fitBounds(soilLayer.getBounds(),{padding:[16,16],maxZoom:12,animate:false});if(select&&code&&subset.length)selectFeature(subset[0]);
+}
 const events={
 '22':[['ขลุง–มะขาม 2569','ลงตรวจ 1 พ.ค.; ข่าวรายงานผลร่วงจากพายุมากกว่า 100 ตันรวมพื้นที่ ไม่ระบุวันเริ่มพายุรายสวน','https://doaenews.doae.go.th/wp-content/uploads/2026/05/3-%E0%B8%9E%E0%B8%A4%E0%B8%A9%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%A1-2569.pdf']],
 '33':[['ศรีสะเกษ 2567','รายงานผลร่วงและผลผลิตต่ำกว่าคาด; ฤดูเก็บเกี่ยว มิ.ย.–ส.ค. ไม่มีวันร่วงรายสวน','https://www.doae.go.th/เริ่มแล้วฤดูกาลทุเรียน/'],['สามอำเภอพื้นที่ GI ปี 2568','กันทรลักษ์ ขุนหาญ ศรีรัตนะ คาดเก็บ พ.ค.–ส.ค.; มาก มิ.ย.–ก.ค.','https://calendar.m-culture.go.th/events/104648']],
@@ -84,43 +195,69 @@ async function weatherAtPoint(p,start,end){
         `API ไม่พร้อม (${error.message}); ใช้อากาศจุดอ้างอิงจังหวัด ${ref.province_name} (${ref.weather_latitude}, ${ref.weather_longitude}) แทนพิกัดที่เลือก ${p.lat}, ${p.lon} • ไม่ใช่ค่ารายอำเภอหรือหน่วยดิน`};
   }
 }
-async function loadWeather(){if(!A)return;let id=++weatherVersion,a={...A},b=B?{...B}:null,start=$('start').value,end=$('end').value;if(!start||!end||start>end){$('status').textContent='ตรวจช่วงวันที่';return}$('status').textContent='กำลังดึงอากาศ ณ จุดที่เลือก…';context();try{const [resultA,resultB]=await Promise.all([weatherAtPoint(a,start,end),b?weatherAtPoint(b,start,end):Promise.resolve(null)]);if(id!==weatherVersion)return;const x=resultA.rows,z=resultB?.rows||null;chartRowsA=x;chartRowsB=z;weatherExportState={a,b,resultA,resultB,start,end};const warnings=[resultA.warning&&'A: '+resultA.warning,resultB?.warning&&'B: '+resultB.warning].filter(Boolean);$('weather-warning').hidden=!warnings.length;$('weather-warning').textContent=warnings.join(' • ');$('status').textContent=`ช่วง ${start} ถึง ${end} • A: ${x.filter(r=>r.T2M!==null).length}/${x.length} วันมีอุณหภูมิ • A: ${resultA.source}${resultB?' • B: '+resultB.source:''}`;
+async function loadWeather(){if(!A)return;let id=++weatherVersion,a={...A},b=B?{...B}:null,start=$('start').value,end=$('end').value;if(!start||!end||start>end){$('status').textContent=!start||!end?'กรุณาเลือกวันเริ่มและวันสิ้นสุดให้ครบ':'วันเริ่มต้องไม่อยู่หลังวันสิ้นสุด กรุณาแก้ช่วงวันที่';return}$('status').textContent='กำลังดึงอากาศ ณ จุดที่เลือก…';context();try{const [resultA,resultB]=await Promise.all([weatherAtPoint(a,start,end),b?weatherAtPoint(b,start,end):Promise.resolve(null)]);if(id!==weatherVersion)return;const x=resultA.rows,z=resultB?.rows||null;chartRowsA=x;chartRowsB=z;weatherExportState={a,b,resultA,resultB,start,end};const warnings=[resultA.warning&&'A: '+resultA.warning,resultB?.warning&&'B: '+resultB.warning].filter(Boolean);$('weather-warning').hidden=!warnings.length;$('weather-warning').textContent=warnings.join(' • ');$('status').textContent=`ช่วง ${start} ถึง ${end} • A: ${x.filter(r=>r.T2M!==null).length}/${x.length} วันมีอุณหภูมิ • A: ${resultA.source}${resultB?' • B: '+resultB.source:''}`;
 const metrics=[['อุณหภูมิเฉลี่ย °C',r=>mean(r,'T2M')],['อุณหภูมิสูงสุด °C',r=>extreme(r,'T2M_MAX',Math.max)],['อุณหภูมิต่ำสุด °C',r=>extreme(r,'T2M_MIN',Math.min)],['ฝนรวม มม.',r=>sum(r,'PRECTOTCORR')],['ฝนเฉลี่ยต่อวันที่มีข้อมูล มม./วัน',r=>mean(r,'PRECTOTCORR')],['ความชื้นเฉลี่ย %',r=>mean(r,'RH2M')],['แสงเฉลี่ย MJ/m²/วัน',r=>mean(r,'ALLSKY_SFC_SW_DWN')],['ลมเฉลี่ย m/s',r=>mean(r,'WS2M')]];$('weather').innerHTML=table(['ค่า','A',b?'B':'ยังไม่เลือก B'],metrics.map(([n,f])=>[n,fmt(f(x)),z?fmt(f(z)):'—']));
-const groups={};x.forEach(r=>(groups[r.date.slice(0,7)]??=[]).push(r));$('monthly').innerHTML=table(['เดือน (เฉพาะวันที่เลือก)','เฉลี่ย °C','ฝนรวม มม.','ฝนเฉลี่ย มม./วัน','วันมีฝนข้อมูล'],Object.entries(groups).map(([m,g])=>[m,fmt(mean(g,'T2M')),fmt(sum(g,'PRECTOTCORR')),fmt(mean(g,'PRECTOTCORR')),g.filter(r=>r.PRECTOTCORR!==null).length+'/'+g.length]));$('daily').innerHTML=table(['วันที่','A เฉลี่ย °C','A สูงสุด °C','A ฝน มม.','B เฉลี่ย °C'],x.map(r=>[r.date,fmt(r.T2M),fmt(r.T2M_MAX),fmt(r.PRECTOTCORR),fmt(z?.find(s=>s.date===r.date)?.T2M)]));chart(x,z);
+const groups={};x.forEach(r=>(groups[r.date.slice(0,7)]??=[]).push(r));$('monthly').innerHTML=table(['เดือน (เฉพาะวันที่เลือก)','เฉลี่ย °C','ฝนรวม มม.','ฝนเฉลี่ย มม./วัน','วันมีฝนข้อมูล'],Object.entries(groups).map(([m,g])=>[m,fmt(mean(g,'T2M')),fmt(sum(g,'PRECTOTCORR')),fmt(mean(g,'PRECTOTCORR')),g.filter(r=>r.PRECTOTCORR!==null).length+'/'+g.length]));dailyPage=0;renderDailyTable();chart(x,z);
 }catch(e){if(id===weatherVersion)$('status').textContent='โหลดไม่สำเร็จ: '+e.message}}
 const chartMetrics={T2M:['อุณหภูมิเฉลี่ย','°C'],T2M_MAX:['อุณหภูมิสูงสุด','°C'],T2M_MIN:['อุณหภูมิต่ำสุด','°C'],PRECTOTCORR:['ฝน','มม.'],RH2M:['ความชื้นอากาศ','%'],ALLSKY_SFC_SW_DWN:['รังสีดวงอาทิตย์','MJ/m²/วัน'],WS2M:['ลมเฉลี่ย','m/s']};
 function chartSeries(rows,key,monthly){
   if(!rows)return null;
-  if(!monthly)return rows.map(r=>({date:r.date,value:Number.isFinite(+r[key])&&r[key]!==null?+r[key]:null}));
+  const valid=value=>value!==null&&value!==undefined&&value!==''&&Number.isFinite(+value);
+  if(!monthly)return rows.map(r=>({date:r.date,value:valid(r[key])?+r[key]:null}));
   const groups=new Map();for(const r of rows){const month=r.date.slice(0,7);if(!groups.has(month))groups.set(month,[]);groups.get(month).push(r)}
-  return [...groups].map(([date,group])=>{const values=group.map(r=>r[key]).filter(v=>v!==null&&v!==undefined&&Number.isFinite(+v)).map(Number);
+  return [...groups].map(([date,group])=>{const values=group.map(r=>r[key]).filter(valid).map(Number);
     const value=!values.length?null:key==='PRECTOTCORR'?values.reduce((s,v)=>s+v,0):key==='T2M_MAX'?Math.max(...values):key==='T2M_MIN'?Math.min(...values):values.reduce((s,v)=>s+v,0)/values.length;
     return {date,value};});
 }
 function chart(a,b){
   const svg=$('chart'),key=$('chart-metric').value,[name,unit]=chartMetrics[key],monthly=a.length>62;
   const first=chartSeries(a,key,monthly),second=chartSeries(b,key,monthly),values=[...first,...(second||[])].map(r=>r.value).filter(Number.isFinite);
-  svg.setAttribute('aria-label',`${name} ${unit} ${monthly?'รายเดือน':'รายวัน'} A เทียบ B`);
+  svg.setAttribute('aria-label',`${name} ${unit} ${monthly?'รายเดือน':'รายวัน'} ${second?'A เทียบ B':'พื้นที่ A'}`);
   if(!values.length){svg.innerHTML='';$('chart-note').textContent=`${name}: ไม่มีค่าที่ใช้ได้ในช่วงที่เลือก`;return}
   const rain=key==='PRECTOTCORR',lo=rain?0:Math.floor(Math.min(...values)-1),hi=Math.ceil(Math.max(...values)+(rain?1:1));
   const y=v=>155-(v-lo)/Math.max(1,hi-lo)*112,x=i=>42+i/Math.max(1,first.length-1)*440;
-  let s=`<text x="42" y="15" fill="#203d35">${name} (${unit}) • A เขียว${second?' / B น้ำตาล':''}</text>`;
+  let s=`<text x="42" y="15" fill="#172b4d">${name} (${unit}) • A น้ำเงิน${second?' / B ส้ม (เส้นประ)':''}</text>`;
   for(let i=0;i<=4;i++){const value=lo+(hi-lo)*i/4,yy=y(value);s+=`<line x1="42" y1="${yy}" x2="485" y2="${yy}" stroke="#d7dfda"/><text x="2" y="${yy+4}" fill="#485a50" font-size="11">${value.toFixed(value>=10?0:1)}</text>`}
-  if(rain){const width=Math.max(1,Math.min(8,420/first.length*.35));[first,second].forEach((series,k)=>{if(!series)return;series.forEach((p,i)=>{if(p.value===null)return;const xx=x(i)+(k?2:-width),yy=y(p.value);s+=`<rect x="${xx}" y="${yy}" width="${width}" height="${Math.max(0,155-yy)}" fill="${k?'#bd721e':'#197a61'}" opacity=".85"/>`})})}
-  else [first,second].forEach((series,k)=>{if(!series)return;let prev=null;series.forEach((p,i)=>{if(p.value===null){prev=null;return}const xx=x(i),yy=y(p.value);if(prev)s+=`<line x1="${prev[0]}" y1="${prev[1]}" x2="${xx}" y2="${yy}" stroke="${k?'#bd721e':'#197a61'}" stroke-width="2" ${k?'stroke-dasharray="5 3"':''}/>`;prev=[xx,yy]})});
+  if(rain){const width=Math.max(1,Math.min(8,420/first.length*.35));[first,second].forEach((series,k)=>{if(!series)return;series.forEach((p,i)=>{if(p.value===null)return;const xx=x(i)+(k?2:-width),yy=y(p.value);s+=`<rect x="${xx}" y="${yy}" width="${width}" height="${Math.max(0,155-yy)}" fill="${k?'#b45309':'#2563eb'}" ${k?'stroke="#b45309" stroke-dasharray="2 2"':''} opacity=".85"/>`})})}
+  else [first,second].forEach((series,k)=>{if(!series)return;let prev=null;series.forEach((p,i)=>{if(p.value===null){prev=null;return}const xx=x(i),yy=y(p.value);if(prev)s+=`<line x1="${prev[0]}" y1="${prev[1]}" x2="${xx}" y2="${yy}" stroke="${k?'#b45309':'#2563eb'}" stroke-width="2" ${k?'stroke-dasharray="5 3"':''}/>`;prev=[xx,yy]})});
   s+=`<text x="42" y="181" font-size="11">${first[0].date}</text><text x="389" y="181" font-size="11">${first.at(-1).date}</text>`;svg.innerHTML=s;
   const same=B&&A&&Math.abs(Number(A.lat)-Number(B.lat))<.00001&&Math.abs(Number(A.lon)-Number(B.lon))<.00001;
   $('chart-note').textContent=`${monthly?'ช่วงยาว: รวมฝนรายเดือน; ตัวอื่นเฉลี่ยรายเดือน (ค่าสูงสุด/ต่ำสุดใช้ค่าสุดขั้วรายเดือน)':'แสดงค่ารายวัน; วันข้อมูลขาดเว้นช่องว่าง'}${same?' • A และ B เป็นพิกัดเดียวกัน กราฟจึงทับกัน':''}`;
 }
 $('chart-metric').onchange=()=>{if(chartRowsA.length)chart(chartRowsA,chartRowsB)};
-$('province').onchange=provinceChange;$('district').onchange=()=>districtChange(true);$('soil').onchange=drawSoils;$('soil-toggle').onclick=()=>{if(soilLayer){if(map.hasLayer(soilLayer))map.removeLayer(soilLayer);else soilLayer.addTo(map)}};$('pin-b').onclick=()=>{if(!A)return;B={...A};weatherVersion++;if(markerB)map.removeLayer(markerB);markerB=L.circleMarker([B.lat,B.lon],{radius:10,color:'#bd721e',fillOpacity:.2}).addTo(map);$('compare-point').textContent='B: '+B.label+' • '+B.lat+', '+B.lon;$('status').textContent='เลือกจุด A อีกแห่ง แล้วกดดูอากาศเพื่อเปรียบเทียบ'};$('load').onclick=loadWeather;
+for(const which of ['A','B']){
+  areaControl('province',which).onchange=()=>provinceChange(which);
+  areaControl('district',which).onchange=()=>districtChange(true,which);
+  areaControl('soil',which).onchange=()=>{updateMapTarget(which);features=soilCache[areaControl('province',which).value]?.features||[];if(!areaControl('soil',which).value)districtChange(true,which);else drawSoils();};
+  $('focus-'+which.toLowerCase()).onclick=()=>focusArea(which).then(()=>{if(innerWidth<=800)$('map').scrollIntoView({behavior:'auto',block:'start'});});
+}
+$('soil-toggle').onclick=()=>{if(soilLayer){if(map.hasLayer(soilLayer))map.removeLayer(soilLayer);else soilLayer.addTo(map);$('soil-legend').hidden=!map.hasLayer(soilLayer);}else if(areaControl('district').value)drawSoils(false);};
+$('clear-b').onclick=()=>{$('province-b').value='';provinceChange('B').then(()=>focusArea('A'));};
+$('comparison-controls').ontoggle=()=>{if(!$('comparison-controls').open&&activeArea==='B')focusArea('A');};
+$('toggle-area-editor').onclick=()=>setAreaEditor($('area-section').hidden);
+$('map-area-a').onchange=()=>focusArea('A');$('map-area-b').onchange=()=>focusArea('B');
+$('apply-areas').onclick=()=>{setAreaEditor(false);showWorkspaceView('weather-section');};
+function syncAreaControls(point,which){
+  const province=areaControl('province',which),district=areaControl('district',which);province.value=point.code;district.disabled=false;
+  district.innerHTML='<option value="">เลือกอำเภอเพื่อดูชุดดิน</option>';DATA.districts.filter(d=>d.province_code===point.code).forEach(d=>district.add(new Option(d.district,d.district)));district.value=point.district||'';
+  features=soilCache[point.code]?.features||[];fillSoilOptions(which);areaControl('soil',which).value=point.soil_code||'';
+}
+$('swap-areas').onclick=()=>{if(!B)return;const a={...A},b={...B};clearComparison();syncAreaControls(b,'A');syncAreaControls(a,'B');selectA(b);selectB(a);focusArea('A');};
+$('fit-areas').onclick=()=>{if(A&&B)map.fitBounds(L.latLngBounds([[A.lat,A.lon],[B.lat,B.lon]]),{padding:[24,24],maxZoom:12,animate:false});else focusArea('A');};
+$('load').onclick=loadWeather;
+$('daily-limit').onchange=()=>{dailyPage=0;renderDailyTable();};
+$('daily-prev').onclick=()=>{dailyPage--;renderDailyTable();};
+$('daily-next').onclick=()=>{dailyPage++;renderDailyTable();};
 $('month').onchange=()=>{let [y,m]=$('month').value.split('-').map(Number);if(!y||!m)return;$('start').value=`${y}-${String(m).padStart(2,'0')}-01`;$('end').value=new Date(Date.UTC(y,m,0)).toISOString().slice(0,10);invalidateWeather('ช่วงวันที่เปลี่ยนแล้ว กดดูอากาศเพื่ออัปเดต');context()};['start','end'].forEach(k=>$(k).onchange=()=>{invalidateWeather('ช่วงวันที่เปลี่ยนแล้ว กดดูอากาศเพื่ออัปเดต');context()});
 // Capture runs before the click handler, invalidating any in-flight A/B result.
-$('pin-b').addEventListener('click',()=>invalidateWeather('พื้นที่เปรียบเทียบเปลี่ยนแล้ว กดดูอากาศอีกครั้ง'),true);
 $('load').addEventListener('click',()=>invalidateWeather('กำลังตรวจช่วงวันที่และโหลดข้อมูลใหม่'),true);
 $('backcast').addEventListener('click',()=>invalidateWeather('กำลังตรวจช่วงอายุผล'),true);
 $('backcast').onclick=()=>{let h=$('harvest').value,lo=+$('min-age').value,hi=+$('max-age').value;if(!h||lo<=0||hi<lo||hi>365){$('estimate').textContent='ตรวจวันเก็บเกี่ยวและอายุผล';return}function sub(n){let d=new Date(h+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-n);return d.toISOString().slice(0,10)}$('start').value=sub(hi);$('end').value=sub(lo);$('estimate').textContent=`ช่วงดอกบานประมาณ ${sub(hi)} ถึง ${sub(lo)} • ${$('crop').value||'ยังไม่ระบุสวน/พันธุ์'} • คำนวณจากสมมติฐานอายุผล ไม่ใช่วันสังเกตจริง`;context();loadWeather()};
+__SOIL_EXPLORATION_CODE__
 __MONTHLY_CODE__
 selectReportMonth(reportMonth);
-DATA.provinces.forEach(p=>$('province').add(new Option(p.province_name,p.province_code)));$('province').value='84';provinceChange();map.fitBounds(provinceLayer.getBounds(),{padding:[20,20],animate:false});
+DATA.provinces.forEach(p=>{for(const which of ['A','B'])areaControl('province',which).add(new Option(p.province_name,p.province_code));});$('province').value='84';provinceChange();
+requestAnimationFrame(()=>fitProvince($('province').value));
+if(location.protocol==='file:')$('server-notice').hidden=false;
+else fetch('/api/project').then(r=>{if(!r.ok)throw Error('server');return r.json();}).then(p=>{if(p.application!=='orchard-analysis')$('server-notice').hidden=false;if(p.mode==='cloud'){const logout=document.createElement('a');logout.href='/logout';logout.textContent='ออกจากระบบ';logout.className='logout-link';document.querySelector('header').append(logout);}}).catch(()=>$('server-notice').hidden=false);
 </script></body></html>

@@ -1,0 +1,130 @@
+{
+  "pilot_passed": true,
+  "pilot": {
+    "rows": 20,
+    "counts": {
+      "verified_available": 20,
+      "unverified": 0,
+      "unavailable": 0
+    },
+    "percentages": {
+      "verified_available": 100.0,
+      "unverified": 0.0,
+      "unavailable": 0.0
+    },
+    "observed_state_verified": 20,
+    "full_probability_vectors_verified": 0
+  },
+  "all_inputs": {
+    "rows": 80,
+    "counts": {
+      "verified_available": 80,
+      "unverified": 0,
+      "unavailable": 0
+    },
+    "percentages": {
+      "verified_available": 100.0,
+      "unverified": 0.0,
+      "unavailable": 0.0
+    },
+    "observed_state_verified": 69,
+    "full_probability_vectors_verified": 0
+  },
+  "outer": {
+    "rows": 45,
+    "counts": {
+      "verified_available": 45,
+      "unverified": 0,
+      "unavailable": 0
+    },
+    "percentages": {
+      "verified_available": 100.0,
+      "unverified": 0.0,
+      "unavailable": 0.0
+    },
+    "observed_state_verified": 43,
+    "full_probability_vectors_verified": 0
+  },
+  "folds": {
+    "rows": 1890,
+    "counts": {
+      "verified_available": 1890,
+      "unverified": 0,
+      "unavailable": 0
+    },
+    "percentages": {
+      "verified_available": 100.0,
+      "unverified": 0.0,
+      "unavailable": 0.0
+    },
+    "observed_state_verified": 1531,
+    "full_probability_vectors_verified": 0
+  },
+  "source_documents": 80,
+  "fetched_ok": 80,
+  "dated_documents": 80,
+  "archive_index_sha256": "e281bbabb9671c1e50435580b068e4a91d4d294c0d4a20d8feb4f4d0f195f464",
+  "archive_index_url": "https://www.cpc.ncep.noaa.gov/products/expert_assessment/ENSO_DD_archive.php",
+  "reused_source_run": "research_data\\enso_outlook_archive_audit\\phase4b_20261011_noaa_v2",
+  "state_missing_documents": [
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2025/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2013/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2013/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_apr2013/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2013/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_jan2015/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2015/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2015/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2015/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2016/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2016/ensodisc.pdf",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2019/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2019/ensodisc.shtml"
+  ],
+  "protocol": {
+    "anchors": {
+      "22": 4,
+      "33": 5,
+      "53": 6,
+      "84": 7,
+      "86": 7
+    },
+    "lead_days": 60,
+    "years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "outer_years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "inner_years": 3,
+    "latest_as_of": "publication_date strictly before issue local day",
+    "content_authentication": "not independently certified",
+    "probability_parser": "sparse text mentions only"
+  },
+  "script_sha256": "a4afea3e174912ad809417210b4924d9d588c25e0e3f1a54a9e3ae753402a271",
+  "models_fitted": 0,
+  "ml_pipeline_modified": false
+}

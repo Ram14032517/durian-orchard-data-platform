@@ -1,11 +1,11 @@
 param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
 
-$receiverPath = Join-Path $ProjectRoot 'receiver_gateway\receiver_gateway.ino'
-$receiverSecretPath = Join-Path $ProjectRoot 'receiver_gateway\farm_secret.h'
-$receiverExamplePath = Join-Path $ProjectRoot 'receiver_gateway\farm_secret.example.h'
-$wifiTestPath = Join-Path $ProjectRoot 'wifi_range_test\wifi_range_test.ino'
-$wifiSecretPath = Join-Path $ProjectRoot 'wifi_range_test\wifi_secret.h'
-$wifiExamplePath = Join-Path $ProjectRoot 'wifi_range_test\wifi_secret.example.h'
+$receiverPath = Join-Path $ProjectRoot 'iot\receiver_gateway\receiver_gateway.ino'
+$receiverSecretPath = Join-Path $ProjectRoot 'iot\receiver_gateway\farm_secret.h'
+$receiverExamplePath = Join-Path $ProjectRoot 'iot\receiver_gateway\farm_secret.example.h'
+$wifiTestPath = Join-Path $ProjectRoot 'iot\wifi_range_test\wifi_range_test.ino'
+$wifiSecretPath = Join-Path $ProjectRoot 'iot\wifi_range_test\wifi_secret.h'
+$wifiExamplePath = Join-Path $ProjectRoot 'iot\wifi_range_test\wifi_secret.example.h'
 
 function Move-ConstantsToHeader {
     param(

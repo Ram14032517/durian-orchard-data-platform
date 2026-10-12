@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ข้อมูลดิน อากาศ และผลผลิตทุเรียนสำหรับหารือกับอาจารย์</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #e9edf0; color: #111; font-family: Tahoma, sans-serif; font-size: 11pt; line-height: 1.55; }
+.sheet { width: 210mm; height: 297mm; margin: 20px auto; padding: 16mm 18mm 18mm; background: white; position: relative; break-after: page; }
+.sheet:last-child { break-after: auto; }
+h1 { font-size: 20pt; line-height: 1.3; margin: 0 0 9px; font-weight: 700; color: black; }
+h2 { font-size: 13pt; line-height: 1.4; margin: 14px 0 6px; color: black; }
+h3 { font-size: 11pt; margin: 9px 0 3px; color: black; }
+p { margin: 0 0 7px; }
+.meta, .caption, .sources { font-size: 9pt; line-height: 1.5; }
+.meta { margin-bottom: 13px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; line-height: 1.5; }
+th, td { border: 1px solid #d9d9d9; padding: 7px 6px; vertical-align: middle; text-align: center; }
+th { background: #e5edf4; color: black; font-weight: 700; }
+th:first-child, td:first-child { text-align: left; }
+ul, ol { margin: 5px 0 9px; padding-left: 20px; }
+li { margin: 0 0 4px; }
+a { color: #111; text-decoration: underline; overflow-wrap: anywhere; }
+footer { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; font-size: 8pt; color: #444; display: flex; justify-content: space-between; }
+@media print { body { background: white; } .sheet { margin: 0; box-shadow: none; } }
+@media screen and (max-width: 820px) { body { overflow-x: auto; } .sheet { margin: 12px 0; } }
+</style>
+</head>
+<body>
+<section class="sheet">
+<main>
+<h1>ข้อมูลดิน อากาศ และผลผลิตทุเรียน<br>สำหรับหารือกับอาจารย์</h1>
+<p class="meta">Research Brief ภาษาไทย • Phase 9E • 12 ตุลาคม 2026<br>ใช้ภายในโครงการเท่านั้น • Public Release HOLD • Historical PIT ยังไม่รับรอง</p>
+<p>โครงการมีชุดข้อมูลภายในที่ผ่าน QC สำหรับ 4 จังหวัด ช่วง 2006–2025 พร้อมตรวจย้อนกลับถึงไฟล์ต้นทางได้ ข้อมูลเหมาะสำหรับเริ่มอธิบายองค์ประกอบดินและแนวโน้มอากาศกับผลผลิตระดับจังหวัด แต่ยังไม่รองรับข้อสรุปผลผลิตรายสวนหรือผลของอุณหภูมิในเชิงเหตุและผล ขอหารืออาจารย์เรื่องขอบเขตคำถามวิจัย วิธีวิเคราะห์ และเงื่อนไขเผยแพร่ก่อนดำเนินงานสถิติ [1–3]</p>
+
+<h2>โจทย์และวัตถุประสงค์</h2>
+<p>โจทย์คือเชื่อมผลผลิตทุเรียนของ OAE กับบริบทดินและอากาศในพื้นที่ที่แผนที่การใช้ที่ดิน LDD ระบุรหัส A403 โดยไม่เฉลี่ยดินเหมารวมทั้งจังหวัด วัตถุประสงค์คือจัดทำข้อมูลที่มีหน่วยและที่มาชัดเจน อธิบายความแตกต่างระหว่างจังหวัด และประเมินว่าควรเก็บข้อมูลใดเพิ่มก่อนศึกษาความสัมพันธ์ภูมิอากาศกับผลผลิต</p>
+
+<h2>ขอบเขตข้อมูลที่ตรวจแล้ว</h2>
+<table aria-label="Coverage ของชุดข้อมูล 4 จังหวัด">
+<thead><tr><th>จังหวัด</th><th>Yield / Weather<br>ค.ศ.</th><th>ปีพบ Yield<br>เดือนอากาศ</th><th>ปีแผนที่ A403<br>พ.ศ. / ค.ศ.</th><th>Pure<br>Polygons</th><th>จุดอากาศ</th></tr></thead>
+<tbody>
+<tr><td>จันทบุรี</td><td>2006–2025</td><td>20/20<br>240/240</td><td>2568 / 2025</td><td>8,512</td><td>16</td></tr>
+<tr><td>ชุมพร</td><td>2006–2025</td><td>20/20<br>240/240</td><td>2564 / 2021</td><td>3,897</td><td>17</td></tr>
+<tr><td>ศรีสะเกษ</td><td>2006–2025</td><td>20/20<br>240/240</td><td>2565 / 2022</td><td>1,234</td><td>17</td></tr>
+<tr><td>อุตรดิตถ์</td><td>2006–2025</td><td>20/20<br>240/240</td><td>2563 / 2020</td><td>71</td><td>9</td></tr>
+</tbody></table>
+<p class="caption">ที่มา Coverage และ QC ของรุ่น phase9d_20261012_v1 [1] ดินทั้ง 4 จังหวัดเป็นปีผลิต 2561 มาตราส่วน 1:25,000 ไม่ใช่วันสำรวจ; Survey Date ยังไม่ยืนยัน</p>
+<p><strong>80 province-years คือ 4 จังหวัด × 20 ปี ไม่ใช่สวน 80 แห่งหรือ 80 ตัวอย่างอิสระ</strong> ปีภายในจังหวัดมีการวัดซ้ำและอาจสัมพันธ์กันข้ามเวลา จังหวัดอาจได้รับสภาพอากาศร่วมกัน ส่วนดินมี 4 คู่รุ่นแผนที่ที่คงเดิม ไม่ใช่การสังเกตดินอิสระ 80 ครั้ง จำนวน 13,714 Polygon ไม่ใช่จำนวนสวนรายเจ้าของ และ 59 จุดอากาศไม่ใช่ 59 สถานีอิสระ</p>
+
+<h2>แหล่งข้อมูลและความหมายของหน่วย</h2>
+<p>LDD ให้ Polygon การใช้ที่ดินและหน่วยแผนที่ดิน; A403 เดี่ยวใช้เป็น Pure mask ตามการจำแนกการใช้ที่ดิน ไม่ใช่ชั้นความเหมาะสม S1 และไม่ใช่ขอบเขตสวนที่ยืนยันรายเจ้าของ NASA POWER เป็นอากาศกริดที่สรุปเป็น spatial profile ส่วน OAE ให้ Yield กก./ไร่ พื้นที่ให้ผลและพื้นที่ยืนต้นเป็นไร่ และผลผลิตเป็นตัน <strong>Yield OAE ครอบคลุมจังหวัด ไม่ใช่เฉพาะ A403 mask</strong> [1–3]</p>
+</main>
+<footer><span>ใช้ภายในเพื่อหารืออาจารย์ ยังไม่อนุมัติเผยแพร่</span><span>1 / 3</span></footer>
+</section>
+
+<section class="sheet">
+<main>
+<h2>วิธี Spatial Overlay และ Weather Aggregation</h2>
+<p>วิธีเดิมตัด Polygon ที่มีรหัส A403 เดี่ยว ซ้อนกับหน่วยแผนที่ดินด้วย Geometry เต็ม และคำนวณพื้นที่ intersection ในระบบพิกัด UTM ที่ตรงกัน ศรีสะเกษต้องแปลงดินจาก EPSG:32647 ให้ตรงกับการใช้ที่ดิน EPSG:32648; จังหวัดอื่นใช้ UTM 47 แปลงตารางเมตรเป็นไร่โดยหาร 1,600 มีบันทึกการซ่อม Geometry และตรวจ overlap ตามเกณฑ์เดิม ใน Phase 9D ใช้ผลที่เก็บไว้ ไม่รัน Overlay ใหม่ [2–3]</p>
+<p>สัดส่วนดินคำนวณจากพื้นที่ intersection ของหน่วยดินนั้น หารด้วยพื้นที่ Pure A403 ทั้งหมด แล้วคูณ 100 ตัวหารรวม SC, W และ Uncovered แต่ไม่รวมรหัสผสม SC และ W แสดงแยกเป็นหน่วยซับซ้อนและน้ำ ไม่ตีความเป็นชุดดินสวนที่ยืนยัน ส่วน Mixed-use เก็บพื้นที่เต็มไว้ในตาราง exclusions ไม่เดาสัดส่วนทุเรียน</p>
+<p>อากาศใช้กรอบแบ่งชั้น 0.25° เลือกจุดตัวแทนจากชิ้น A403 ใหญ่สุดในชั้น และถ่วงด้วยพื้นที่ Pure A403 ทุกชิ้นในชั้นนั้น เป็น approximate point quadrature ไม่ใช่การซ้อนกริด NASA ต้นฉบับโดยตรง ตรวจ cache และน้ำหนักก่อนรวมรายเดือน; ข้อมูลขาดไม่ถูกเติมหรือถ่วงใหม่เฉพาะส่วนที่เหลือ ค่าเฉลี่ยรายปีของ T2M, RH2M และรังสีถ่วงจำนวนวัน ส่วนฝนรวมจากอัตรา mm/วันคูณจำนวนวันของแต่ละเดือน ใช้เดือน 1–12 เท่านั้น [1–3]</p>
+<p>ชุดนี้เป็นอากาศย้อนหลังเต็มปีบน Footprint รุ่นเดียวต่อจังหวัด ไม่ใช่ Historical Forecast ณ วันออกพยากรณ์ และไม่ใช่ Weather 7 Features รวม VPD ของ ML เดิม จึงห้ามนำผลจากชุดนี้ไปอ้างความแม่นพยากรณ์ล่วงหน้า 60 วันโดยตรง</p>
+
+<h2>คำถามวิจัยที่เสนอ</h2>
+<ol>
+<li><strong>องค์ประกอบหน่วยแผนที่ดินของ Pure A403 ต่างกันอย่างไรระหว่าง 4 จังหวัด</strong> ตอบเชิงพรรณนาได้จาก soil_composition ตามรุ่นแผนที่ที่ระบุ ไม่ตอบความอุดมสมบูรณ์หรือความทนแล้งของสวนโดยไม่มีค่าที่วัดรองรับ</li>
+<li><strong>แนวโน้มอากาศและ Yield ภายในจังหวัดร่วมเปลี่ยนแปลงกันอย่างไรในช่วง 2006–2025</strong> แสดงแนวโน้มเชิงพรรณนาได้; การประมาณ association ต้องอนุมัติวิธีจัดการแนวโน้มเวลา การวัดซ้ำ และตัวแปรกวนก่อน ผลยังไม่ใช่ causal effect</li>
+<li><strong>หากอุณหภูมิเปลี่ยน Yield จะตอบสนองอย่างไรและพยากรณ์ปีใหม่ได้หรือไม่</strong> ยังตอบเชิงผลกระทบหรือใช้งานจริงไม่ได้ ต้องมีแบบจำลองที่ตรวจสอบแล้ว ข้อมูลช่วงพัฒนาการ พันธุ์ การจัดการน้ำ และหลักฐานข้อมูล ณ วันพยากรณ์เพิ่มเติม</li>
+</ol>
+
+<h2>Descriptive Figures ที่เสนอให้จัดทำภายหลัง</h2>
+<p><strong>Figure 1 Soil composition</strong> ใช้แท่งร้อยละแบบเรียงซ้อน 4 จังหวัดจาก share_of_pure_A403_pct แยก SC, W และ Uncovered; หากรวมหน่วยดินย่อยเป็น Other ต้องเปิดเผยรายการและผลรวม แสดงปีแผนที่เหนือแท่ง Mixed-use เป็นอีกแผง ไม่รวมในตัวหารหรือ Stack เดียวกัน Numerical residual ใกล้ศูนย์รายงานเป็นหมายเหตุ ไม่แก้ค่าต้นทาง</p>
+<p><strong>Figure 2 Annual weather trends</strong> ใช้กราฟแยกตัวแปรและจังหวัด ปี 2006–2025 จาก weather_profile_year: T °C, RH %, ฝน mm/ปี และรังสี MJ/m²/วัน ให้แกนของตัวแปรเดียวกันเทียบกันได้ ไม่ใช้แกนคู่ที่ทำให้เข้าใจความสัมพันธ์ผิด ระบุปี Footprint และการแชร์ Grid ในคำอธิบาย</p>
+<p><strong>Figure 3 Yield trends</strong> ใช้ province_year.yield_kg_per_rai แยก 4 จังหวัด และแผงพื้นที่ให้ผลต่างหาก ไม่แทน Yield ด้วยผลผลิตรวม ปล่อยช่องว่างเมื่อค่าเป็น null และติดป้าย OAE revised reference กราฟทั้งหมดใช้ค่าจากรุ่นที่ Seal แล้วเท่านั้น <strong>Brief นี้เสนอแบบภาพ ยังไม่สร้างกราฟหรือคำนวณแนวโน้มใหม่</strong></p>
+</main>
+<footer><span>วิธีเดิมและข้อเสนอการวิเคราะห์ แยกจากผลทดลอง</span><span>2 / 3</span></footer>
+</section>
+
+<section class="sheet">
+<main>
+<h2>Temperature Scenario และขอบเขตการตีความ</h2>
+<p>วิธีที่เสนอคือกำหนดช่วงเดือนและ ΔT ล่วงหน้า แล้วเปรียบเทียบผลจากข้อมูลฐานกับข้อมูลที่ปรับ T ด้วยโมเดลรุ่นเดียวกัน ระบุปัจจัยที่ตรึงไว้ ตรวจขอบเขตข้อมูลฝึกและความสอดคล้องของ T กับ RH หรือดัชนีที่คำนวณจาก T ไม่ตีความการตรึงปัจจัยอื่นว่าแทนภูมิอากาศจริงทั้งระบบ รอบนี้ยังไม่เลือกโมเดลหรือ ΔT และไม่รัน Scenario</p>
+<p><strong>Prediction</strong> เป็นค่าประมาณตาม Inputs และสมมติฐาน ต้องประเมินกับปีใหม่ที่ไม่ใช้พัฒนา <strong>Association</strong> เป็นการร่วมเปลี่ยนแปลงที่อาจมาจากเวลา การจัดการหรือปัจจัยกวน <strong>Causal impact</strong> เป็นผลของการแทรกแซงเทียบกับ counterfactual ต้องมีการออกแบบและสมมติฐานระบุเหตุผล การปรับ T ในโมเดลทำนายเพียงอย่างเดียวไม่พิสูจน์ผลเชิงสาเหตุ</p>
+
+<h2>ช่องว่างข้อมูลที่ต้องจัดการ</h2>
+<ul>
+<li><strong>สุราษฎร์ธานี</strong> มีดิน แต่ยังไม่มี A403 และ Weather Profile ที่ใช้วิธีเดียวกัน ห้ามใช้ Province Proxy ปะปนในชุดนี้</li>
+<li><strong>พื้นที่ปลูกผสมและประวัติพื้นที่ปลูก</strong> ขาดสัดส่วนทุเรียนใน Mixed-use และแผนที่รายปี 64/80 ปีอากาศอยู่ก่อนปีแผนที่; หลังแผนที่ก็ไม่ยืนยัน Footprint คงเดิม โดยเฉพาะอุตรดิตถ์ต้องตรวจ representativeness</li>
+<li><strong>ข้อมูลระดับสวนและฤดูผลิต</strong> ขาด Yield รายสวน ขอบเขตสวนที่ยืนยัน วันดอกบาน พันธุ์ อายุต้น การให้น้ำ และการจัดการโรค; annual calendar ยังไม่ใช่ช่วงชีววิทยาของผลผลิต</li>
+<li><strong>Vintage และสิทธิ์</strong> OAE Publication Dates/Revisions และ Historical Forecast Vintages ยังไม่ครบ; Cached POWER มีข้อทบทวน LST และ Sampling Sensitivity สิทธิ์แจกจ่าย Derived LDD/OAE ยัง Pending ไม่ถือว่าดาวน์โหลดได้แล้วเผยแพร่ได้</li>
+</ul>
+
+<h2>ทางเลือกบทความ</h2>
+<p><strong>Dataset Paper</strong> เน้น Schema, Provenance, QC, Coverage และข้อจำกัดของ Fixed Footprint งานปัจจุบันรองรับการเขียนวิธีและตรวจย้อนกลับได้ แต่ต้องยืนยันสิทธิ์แจกจ่ายและแผนเข้าถึงข้อมูลที่วารสารยอมรับก่อน ไม่ได้ผ่านเกณฑ์วารสารโดยอัตโนมัติ</p>
+<p><strong>Climate–Yield Analysis Paper</strong> เน้นคำถาม association ตามข้อ 2 ต้องกำหนดสมมติฐาน วิธีควบคุมแนวโน้มและความสัมพันธ์ใน Panel รวมถึงความไม่แน่นอนที่เหมาะกับเพียง 4 จังหวัด ข้อมูลดินที่คงเดิมแยกจาก province effect ได้จำกัด ไม่มีผลสถิติหรือหลักฐาน causal impact ใน Brief นี้</p>
+
+<h2>สิ่งที่ขอให้อาจารย์ตัดสินใจก่อนเริ่มสถิติ</h2>
+<ol>
+<li>เลือก Dataset Paper หรือ Climate–Yield Analysis เป็นเป้าหมายหลัก และยอมรับหน่วย province-year กับข้อจำกัด Footprint หรือไม่</li>
+<li>เลือกคำถามและผลลัพธ์หลัก ช่วงเวลา และวิธีจัดการแนวโน้ม ปีซ้ำ ตัวแปรกวน และความไม่แน่นอน โดยไม่เลือกวิธีจากคะแนนเดิม</li>
+<li>ต้องเก็บข้อมูล Mixed-use ฤดูผลิตและสวนเพิ่มก่อนหรือไม่; หากศึกษา Prediction จะกันปีใหม่ใดไว้ประเมินล่วงหน้า</li>
+<li>ใครจะยืนยันสิทธิ์ LDD/OAE และรูปแบบการแบ่งปันที่ได้รับอนุญาต ก่อนส่งข้อมูลหรือบทความออกนอกโครงการ</li>
+</ol>
+<p class="sources"><strong>หลักฐานในโครงการ</strong> [1] รุ่น phase9d_20261012_v1: dataset.json, qc_report.json, coverage_matrix.csv, source_manifest.json และ output_manifest.json<br>[2] DURIAN_FOUR_PROVINCE_INTERNAL_DATASET_TH.md และ DURIAN_GEOSPATIAL_DATASET_DESIGN_TH.md<br>[3] regional_orchards/SOURCE_TH.md และ VALIDATION_TH.md</p>
+</main>
+<footer><span>ยังไม่รันสถิติ ML หรือ Scenario และคง Public Release HOLD</span><span>3 / 3</span></footer>
+</section>
+</body>
+</html>

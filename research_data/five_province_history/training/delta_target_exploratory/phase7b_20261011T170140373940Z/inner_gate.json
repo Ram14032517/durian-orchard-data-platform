@@ -1,0 +1,63 @@
+{
+  "passed": false,
+  "mae_pass": false,
+  "rmse_pass": false,
+  "improvement_fraction": -0.009739222388691848,
+  "overall": [
+    {
+      "arm": "delta",
+      "n": 135,
+      "mae": 208.29273739062697,
+      "rmse": 274.3403233048751,
+      "bias": 16.458306386262546,
+      "p90_ae": 442.8893673824847,
+      "max_ae": 758.6391353497245
+    },
+    {
+      "arm": "level",
+      "n": 135,
+      "mae": 206.28369461362388,
+      "rmse": 262.5705423421643,
+      "bias": -54.914983376072186,
+      "p90_ae": 420.0953243084689,
+      "max_ae": 680.9500565700837
+    }
+  ],
+  "provinces": [
+    {
+      "province_code": "22",
+      "level_mae": 314.49357435739375,
+      "delta_mae": 280.66915299072565,
+      "passed": true
+    },
+    {
+      "province_code": "33",
+      "level_mae": 157.3938830663342,
+      "delta_mae": 179.29864472951434,
+      "passed": false
+    },
+    {
+      "province_code": "53",
+      "level_mae": 152.25693006284814,
+      "delta_mae": 214.98135190420842,
+      "passed": false
+    },
+    {
+      "province_code": "84",
+      "level_mae": 174.17516269745863,
+      "delta_mae": 153.51781765406665,
+      "passed": true
+    },
+    {
+      "province_code": "86",
+      "level_mae": 233.09892288408486,
+      "delta_mae": 212.99671967461998,
+      "passed": true
+    }
+  ],
+  "contexts_per_arm": 27,
+  "rows_per_arm": 135,
+  "unique_keys_per_arm": 55,
+  "duplicate_rows_per_arm": 80,
+  "independent_significance_claim": false
+}

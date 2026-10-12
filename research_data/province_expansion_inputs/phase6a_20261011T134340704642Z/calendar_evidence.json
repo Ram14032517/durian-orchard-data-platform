@@ -1,0 +1,57 @@
+[
+  {
+    "province_code": "21",
+    "years": [
+      2004,
+      2009
+    ],
+    "peak_month": 5,
+    "anchor": "04-01",
+    "reconciled_years": 6,
+    "monthly_missing_not_filled": true
+  },
+  {
+    "province_code": "30",
+    "years": [
+      2004,
+      2009
+    ],
+    "peak_month": 6,
+    "anchor": "05-01",
+    "reconciled_years": 6,
+    "monthly_missing_not_filled": true
+  },
+  {
+    "province_code": "77",
+    "years": [
+      2004,
+      2009
+    ],
+    "peak_month": 7,
+    "anchor": "06-01",
+    "reconciled_years": 6,
+    "monthly_missing_not_filled": true
+  },
+  {
+    "province_code": "80",
+    "years": [
+      2004,
+      2009
+    ],
+    "peak_month": 8,
+    "anchor": "07-01",
+    "reconciled_years": 6,
+    "monthly_missing_not_filled": true
+  },
+  {
+    "province_code": "85",
+    "years": [
+      2004,
+      2009
+    ],
+    "peak_month": 8,
+    "anchor": "07-01",
+    "reconciled_years": 6,
+    "monthly_missing_not_filled": true
+  }
+]

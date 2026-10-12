@@ -1,0 +1,2778 @@
+{
+  "model": "Ridge + VPD with climate-adjusted backcast scenarios",
+  "results": [
+    {
+      "strategy": "fixed_original",
+      "n": 45,
+      "mae_kg_rai": 190.86763624512568,
+      "rmse_kg_rai": 243.42358147495673,
+      "bias_kg_rai": -27.26403589115813,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 147.03740049776405,
+        "rmse_kg_rai": 182.0740585743622,
+        "bias_kg_rai": 34.96352630896726
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 0.0,
+        "mae_reduction_pct": 0.0,
+        "gain_percentile_95_kg_rai": [
+          0.0,
+          0.0
+        ],
+        "reduction_percentile_95_pct": [
+          0.0,
+          0.0
+        ],
+        "worse_years": []
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 198.38450177339666,
+          "rmse_kg_rai": 253.5174934658828,
+          "bias_kg_rai": -145.2810812313157
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 336.4370421767915,
+          "rmse_kg_rai": 418.8096285175208,
+          "bias_kg_rai": -244.30230493165783
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.14254185676128,
+          "rmse_kg_rai": 271.03043127427264,
+          "bias_kg_rai": 19.755229306799084
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 116.31769749160102,
+          "rmse_kg_rai": 138.36797747931126,
+          "bias_kg_rai": 24.284847713626096
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 210.85683767193285,
+          "rmse_kg_rai": 233.8458378907365,
+          "bias_kg_rai": 50.36486775124797
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 72.24521420170149,
+          "rmse_kg_rai": 78.82351184375271,
+          "bias_kg_rai": 57.42738035745133
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 230.3709833156846,
+          "rmse_kg_rai": 287.3521380717115,
+          "bias_kg_rai": -180.00735825561756
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 156.5931334762793,
+          "rmse_kg_rai": 208.45882132683653,
+          "bias_kg_rai": -90.79079854547524
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 141.9038166695265,
+          "rmse_kg_rai": 169.8954370761747,
+          "bias_kg_rai": 31.422440132254184
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 201.0772669729135,
+          "rmse_kg_rai": 230.217129315464,
+          "bias_kg_rai": 172.3021971837075
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 224.39298079122457,
+          "rmse_kg_rai": 297.29527826314217,
+          "bias_kg_rai": -69.24665997065951
+        }
+      ]
+    },
+    {
+      "strategy": "fixed_expanded",
+      "n": 45,
+      "mae_kg_rai": 192.0673803964757,
+      "rmse_kg_rai": 245.1239449897565,
+      "bias_kg_rai": -25.79683434809793,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 147.27221146666665,
+        "rmse_kg_rai": 182.96295190254565,
+        "bias_kg_rai": 36.194792221080924
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": -1.199744151349961,
+        "mae_reduction_pct": -0.6285739033353721,
+        "gain_percentile_95_kg_rai": [
+          -5.572837154485228,
+          3.070895392833478
+        ],
+        "reduction_percentile_95_pct": [
+          -2.9423791649649367,
+          1.9905084666381856
+        ],
+        "worse_years": [
+          2017,
+          2018,
+          2021,
+          2024
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 309.87383359063534,
+          "rmse_kg_rai": 316.11698750016296,
+          "bias_kg_rai": -58.972877117996745
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 198.66227900085465,
+          "rmse_kg_rai": 254.14096546513161,
+          "bias_kg_rai": -146.06508040971238
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 336.4370421767915,
+          "rmse_kg_rai": 418.8096285175208,
+          "bias_kg_rai": -244.30230493165783
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.0863500874816,
+          "rmse_kg_rai": 271.9569844768881,
+          "bias_kg_rai": 27.87679485652245
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 127.31450386615431,
+          "rmse_kg_rai": 146.8313653518326,
+          "bias_kg_rai": 28.065665588494333
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 197.51312009837156,
+          "rmse_kg_rai": 224.37219075765563,
+          "bias_kg_rai": 36.5177017111434
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 58.888918625353675,
+          "rmse_kg_rai": 67.04288211037742,
+          "bias_kg_rai": 49.59149408759515
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 148.82177378411853,
+          "rmse_kg_rai": 177.59194762999314,
+          "bias_kg_rai": 148.82177378411853
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 231.49052030925688,
+          "rmse_kg_rai": 287.70967476947874,
+          "bias_kg_rai": -178.96642581146455
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 159.750495968101,
+          "rmse_kg_rai": 209.3932950840289,
+          "bias_kg_rai": -87.24206454117919
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 146.5477556669672,
+          "rmse_kg_rai": 177.03680864614404,
+          "bias_kg_rai": 34.52885629888029
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 200.11831856039376,
+          "rmse_kg_rai": 232.26457741011058,
+          "bias_kg_rai": 171.34324877118777
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 222.42981147765965,
+          "rmse_kg_rai": 297.51885237660287,
+          "bias_kg_rai": -68.64778645791397
+        }
+      ]
+    },
+    {
+      "strategy": "enso_age",
+      "n": 45,
+      "mae_kg_rai": 194.57998896800842,
+      "rmse_kg_rai": 245.58831120014958,
+      "bias_kg_rai": -24.59104141567007,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 151.7740611976665,
+        "rmse_kg_rai": 184.85411617439252,
+        "bias_kg_rai": 39.86872665050762
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": -3.712352722882713,
+        "mae_reduction_pct": -1.94498805345662,
+        "gain_percentile_95_kg_rai": [
+          -9.501341317999092,
+          0.9928758261154655
+        ],
+        "reduction_percentile_95_pct": [
+          -7.540157313613793,
+          0.4834044075806787
+        ],
+        "worse_years": [
+          2017,
+          2019,
+          2021,
+          2023,
+          2024
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.9555485114707,
+          "rmse_kg_rai": 308.01061783233075,
+          "bias_kg_rai": -57.23491712575244
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 195.68652596277715,
+          "rmse_kg_rai": 248.2521824554249,
+          "bias_kg_rai": -143.31548402350774
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 343.93345905182906,
+          "rmse_kg_rai": 425.7894021605554,
+          "bias_kg_rai": -259.9813314948162
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.14254185676128,
+          "rmse_kg_rai": 271.03043127427264,
+          "bias_kg_rai": 19.755229306799084
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 120.2525976081746,
+          "rmse_kg_rai": 138.1892772352184,
+          "bias_kg_rai": 33.67882902801436
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 196.73833784203399,
+          "rmse_kg_rai": 224.37455322612675,
+          "bias_kg_rai": 34.34653792292975
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 104.85225778143737,
+          "rmse_kg_rai": 117.67879595961575,
+          "bias_kg_rai": 87.4864105876192
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 137.6500297590717,
+          "rmse_kg_rai": 171.24305521629785,
+          "bias_kg_rai": 137.6500297590717
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 235.1307602676641,
+          "rmse_kg_rai": 289.93706558301653,
+          "bias_kg_rai": -180.93321665017928
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 158.6758342648494,
+          "rmse_kg_rai": 206.38144306428052,
+          "bias_kg_rai": -87.41753411906265
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 145.44624144665372,
+          "rmse_kg_rai": 171.45920780729278,
+          "bias_kg_rai": 33.64912380144809
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 206.82353071184914,
+          "rmse_kg_rai": 233.70948040173968,
+          "bias_kg_rai": 174.6123237686548
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 226.8235781490258,
+          "rmse_kg_rai": 301.48451001497034,
+          "bias_kg_rai": -62.86590387921126
+        }
+      ]
+    },
+    {
+      "strategy": "local_age",
+      "n": 45,
+      "mae_kg_rai": 190.0871569856445,
+      "rmse_kg_rai": 246.2210683145445,
+      "bias_kg_rai": -25.650288919907048,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 143.3502148453464,
+        "rmse_kg_rai": 183.53327416478186,
+        "bias_kg_rai": 34.62373297177409
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 0.7804792594811545,
+        "mae_reduction_pct": 0.4089112616655455,
+        "gain_percentile_95_kg_rai": [
+          -8.633221224780755,
+          11.440139674000136
+        ],
+        "reduction_percentile_95_pct": [
+          -5.132530562036153,
+          7.8552552288536415
+        ],
+        "worse_years": [
+          2017,
+          2019,
+          2024,
+          2025
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 315.66547094032313,
+          "rmse_kg_rai": 322.46896182423063,
+          "bias_kg_rai": -43.0510487376514
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 189.13297661434217,
+          "rmse_kg_rai": 238.64141756215065,
+          "bias_kg_rai": -132.3808003983917
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 345.8846762440576,
+          "rmse_kg_rai": 427.29450788380217,
+          "bias_kg_rai": -263.1631489737648
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.14254185676128,
+          "rmse_kg_rai": 271.03043127427264,
+          "bias_kg_rai": 19.755229306799084
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 113.3524305747676,
+          "rmse_kg_rai": 129.8554708475302,
+          "bias_kg_rai": 40.24292615937397
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 182.1821463975749,
+          "rmse_kg_rai": 223.94620778607646,
+          "bias_kg_rai": 8.70714834317771
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 49.16336028467602,
+          "rmse_kg_rai": 59.264173384756205,
+          "bias_kg_rai": 49.16336028467602
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 160.70220403097986,
+          "rmse_kg_rai": 198.19850545789845,
+          "bias_kg_rai": 160.70220403097986
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 107.55860592731851,
+          "rmse_kg_rai": 137.2590418647541,
+          "bias_kg_rai": -70.82847029436212
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 231.2139871952875,
+          "rmse_kg_rai": 290.1727374115502,
+          "bias_kg_rai": -172.2583192370588
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 155.2298296313909,
+          "rmse_kg_rai": 203.21893437388087,
+          "bias_kg_rai": -89.36887238964512
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 137.36579300882295,
+          "rmse_kg_rai": 168.79667860512888,
+          "bias_kg_rai": 25.306296052326907
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 205.30139227892167,
+          "rmse_kg_rai": 241.76663810098546,
+          "bias_kg_rai": 172.30955444801768
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 221.32478281379974,
+          "rmse_kg_rai": 301.13534096487876,
+          "bias_kg_rai": -64.24010347317588
+        }
+      ]
+    },
+    {
+      "strategy": "enso_local_age",
+      "n": 45,
+      "mae_kg_rai": 186.2336528251145,
+      "rmse_kg_rai": 242.41984279379676,
+      "bias_kg_rai": -30.106173116510618,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 139.06512900409467,
+        "rmse_kg_rai": 177.6111105183649,
+        "bias_kg_rai": 30.60625748872722
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 4.633983420011191,
+        "mae_reduction_pct": 2.427851840769857,
+        "gain_percentile_95_kg_rai": [
+          -1.8872688480342958,
+          14.074378671571623
+        ],
+        "reduction_percentile_95_pct": [
+          -0.721532476407627,
+          9.783606942248802
+        ],
+        "worse_years": [
+          2019,
+          2024,
+          2025
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.6081867798936,
+          "rmse_kg_rai": 308.27709019638775,
+          "bias_kg_rai": -47.319135277538045
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 195.79548745488904,
+          "rmse_kg_rai": 248.25948658788445,
+          "bias_kg_rai": -144.23773768100656
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 345.30842716667985,
+          "rmse_kg_rai": 427.74366754317873,
+          "bias_kg_rai": -263.0362300224141
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.14254185676128,
+          "rmse_kg_rai": 271.03043127427264,
+          "bias_kg_rai": 19.755229306799084
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 112.17617577019125,
+          "rmse_kg_rai": 129.6319860572802,
+          "bias_kg_rai": 36.415386148180254
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 180.48287237968776,
+          "rmse_kg_rai": 217.77124674669386,
+          "bias_kg_rai": 13.384992293839854
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 56.37564894374111,
+          "rmse_kg_rai": 60.94736185365313,
+          "bias_kg_rai": 56.37564894374111
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.82007946102812,
+          "rmse_kg_rai": 170.67852912504915,
+          "bias_kg_rai": 131.82007946102812
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 106.39345561315861,
+          "rmse_kg_rai": 136.90228581257563,
+          "bias_kg_rai": -74.11379122122514
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 231.65147565674155,
+          "rmse_kg_rai": 290.4724318875245,
+          "bias_kg_rai": -171.61531308131492
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 154.03227873440062,
+          "rmse_kg_rai": 202.84525379604082,
+          "bias_kg_rai": -88.26826213825412
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 137.494264928364,
+          "rmse_kg_rai": 167.37342529655368,
+          "bias_kg_rai": 26.091387649705073
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 196.16833909109658,
+          "rmse_kg_rai": 231.08388980404362,
+          "bias_kg_rai": 163.00206778988255
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 211.82190571496983,
+          "rmse_kg_rai": 294.792880857297,
+          "bias_kg_rai": -79.74074580257162
+        }
+      ]
+    },
+    {
+      "strategy": "inner_selected",
+      "n": 45,
+      "mae_kg_rai": 188.22967572004887,
+      "rmse_kg_rai": 243.97785986726203,
+      "bias_kg_rai": -25.9703428487325,
+      "recent_2020_2025": {
+        "n": 30,
+        "mae_kg_rai": 143.34084955046646,
+        "rmse_kg_rai": 183.76156792744322,
+        "bias_kg_rai": 35.97732723006131
+      },
+      "paired_uncertainty_vs_original": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 2.637960525076778,
+        "mae_reduction_pct": 1.3820889580719253,
+        "gain_percentile_95_kg_rai": [
+          -5.758350665465912,
+          12.125090295017685
+        ],
+        "reduction_percentile_95_pct": [
+          -3.354613903218695,
+          7.859302191572226
+        ],
+        "worse_years": [
+          2017,
+          2019,
+          2024,
+          2025
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.9555485114707,
+          "rmse_kg_rai": 308.01061783233075,
+          "bias_kg_rai": -57.23491712575244
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 189.13297661434217,
+          "rmse_kg_rai": 238.64141756215065,
+          "bias_kg_rai": -132.3808003983917
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 343.93345905182906,
+          "rmse_kg_rai": 425.7894021605554,
+          "bias_kg_rai": -259.9813314948162
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.0863500874816,
+          "rmse_kg_rai": 271.9569844768881,
+          "bias_kg_rai": 27.87679485652245
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 113.3524305747676,
+          "rmse_kg_rai": 129.8554708475302,
+          "bias_kg_rai": 40.24292615937397
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 182.1821463975749,
+          "rmse_kg_rai": 223.94620778607646,
+          "bias_kg_rai": 8.70714834317771
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 49.16336028467602,
+          "rmse_kg_rai": 59.264173384756205,
+          "bias_kg_rai": 49.16336028467602
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 160.70220403097986,
+          "rmse_kg_rai": 198.19850545789845,
+          "bias_kg_rai": 160.70220403097986
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 107.55860592731851,
+          "rmse_kg_rai": 137.2590418647541,
+          "bias_kg_rai": -70.82847029436212
+        }
+      ],
+      "by_province": [
+        {
+          "province_code": "22",
+          "n": 9,
+          "mae_kg_rai": 230.9293765522514,
+          "rmse_kg_rai": 289.59401989170885,
+          "bias_kg_rai": -171.9737085940227
+        },
+        {
+          "province_code": "33",
+          "n": 9,
+          "mae_kg_rai": 154.28596843637646,
+          "rmse_kg_rai": 202.80529590582134,
+          "bias_kg_rai": -88.42501119463066
+        },
+        {
+          "province_code": "53",
+          "n": 9,
+          "mae_kg_rai": 138.50053696107787,
+          "rmse_kg_rai": 169.76060765242394,
+          "bias_kg_rai": 28.886932079684193
+        },
+        {
+          "province_code": "84",
+          "n": 9,
+          "mae_kg_rai": 201.71928879674377,
+          "rmse_kg_rai": 236.62942661994407,
+          "bias_kg_rai": 169.50808185354936
+        },
+        {
+          "province_code": "86",
+          "n": 9,
+          "mae_kg_rai": 215.71320785379518,
+          "rmse_kg_rai": 296.3429544793595,
+          "bias_kg_rai": -67.8480083882427
+        }
+      ]
+    }
+  ],
+  "baseline_reproduced": true,
+  "original_artifacts_unchanged": true,
+  "final_inner_selected_model": {
+    "config": {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    },
+    "inner_mae_kg_rai": 89.5118661831567,
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2017.5,
+        1070.0452679944992,
+        264.15280921524123,
+        61.315764109531756,
+        104.83850934663162,
+        19.29559323289935,
+        27.247420795186088,
+        0.7711030118086377,
+        1.8012890729081188
+      ],
+      "scale": [
+        0.3999999999999998,
+        0.3999999999999998,
+        0.3999999999999998,
+        0.3999999999999998,
+        0.39999999999999986,
+        4.6097722286464435,
+        385.639162861813,
+        222.25133078359735,
+        66.73197570036156,
+        84.69096737169637,
+        0.9673599467754127,
+        1.2417342377624594,
+        0.2913064369750643,
+        0.7685908087295447
+      ],
+      "coef": [
+        130.72500582886119,
+        99.7704908600185,
+        -169.73749565865822,
+        -51.25864442773103,
+        -9.499356602481392,
+        83.59249279689307,
+        168.09433237172286,
+        -33.009200422658026,
+        -162.2814839023303,
+        127.17834609015924,
+        76.68719323637922,
+        -162.42720511896036,
+        -51.11475316563193,
+        -48.05596096918799
+      ],
+      "intercept": 1089.2090837391734,
+      "alpha": 1.0
+    },
+    "train_start": 2010,
+    "train_end": 2025,
+    "feature_names": [
+      "province_22",
+      "province_33",
+      "province_53",
+      "province_84",
+      "province_86",
+      "year_ce",
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "climate_reference": {
+      "22": {
+        "train_end": 2025,
+        "rows": 16,
+        "mean": {
+          "reference_temperature_c": 26.95833258928571,
+          "reference_rain_mm": 356.11639423076923,
+          "reference_solar_mj_m2_day": 18.471376659798533
+        },
+        "scale": {
+          "reference_temperature_c": 0.6454932492797663,
+          "reference_rain_mm": 95.89610312491098,
+          "reference_solar_mj_m2_day": 0.6216358331392914
+        }
+      },
+      "33": {
+        "train_end": 2025,
+        "rows": 16,
+        "mean": {
+          "reference_temperature_c": 29.347678894927537,
+          "reference_rain_mm": 419.4878057065217,
+          "reference_solar_mj_m2_day": 19.763263417119564
+        },
+        "scale": {
+          "reference_temperature_c": 1.0268711448181447,
+          "reference_rain_mm": 108.25134450030589,
+          "reference_solar_mj_m2_day": 0.4795975434162076
+        }
+      },
+      "53": {
+        "train_end": 2025,
+        "rows": 16,
+        "mean": {
+          "reference_temperature_c": 26.829626528532607,
+          "reference_rain_mm": 532.2856997282609,
+          "reference_solar_mj_m2_day": 19.4023368432971
+        },
+        "scale": {
+          "reference_temperature_c": 1.0128112026515004,
+          "reference_rain_mm": 127.48971551140765,
+          "reference_solar_mj_m2_day": 0.7516082624552556
+        }
+      },
+      "84": {
+        "train_end": 2025,
+        "rows": 16,
+        "mean": {
+          "reference_temperature_c": 27.529360677083332,
+          "reference_rain_mm": 730.0144904891305,
+          "reference_solar_mj_m2_day": 19.382051403985507
+        },
+        "scale": {
+          "reference_temperature_c": 0.5623424778153593,
+          "reference_rain_mm": 173.5967803771386,
+          "reference_solar_mj_m2_day": 0.5194392157735246
+        }
+      },
+      "86": {
+        "train_end": 2025,
+        "rows": 16,
+        "mean": {
+          "reference_temperature_c": 26.94439022871377,
+          "reference_rain_mm": 1182.2979144021738,
+          "reference_solar_mj_m2_day": 18.350994055706522
+        },
+        "scale": {
+          "reference_temperature_c": 0.6027235774619266,
+          "reference_rain_mm": 159.91763142330186,
+          "reference_solar_mj_m2_day": 0.4718268252703682
+        }
+      }
+    },
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        6,
+        7,
+        8
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "mode": "Requires complete future observed/scenario stage weather; not a live prediction"
+  },
+  "candidate_count": 153,
+  "configurations": [
+    {
+      "kind": "fixed",
+      "base_age": 110,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 0
+    },
+    {
+      "kind": "fixed",
+      "base_age": 110,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 1
+    },
+    {
+      "kind": "fixed",
+      "base_age": 110,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 2
+    },
+    {
+      "kind": "fixed",
+      "base_age": 115,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 3
+    },
+    {
+      "kind": "fixed",
+      "base_age": 115,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 4
+    },
+    {
+      "kind": "fixed",
+      "base_age": 115,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 5
+    },
+    {
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 8
+    },
+    {
+      "kind": "fixed",
+      "base_age": 125,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 9
+    },
+    {
+      "kind": "fixed",
+      "base_age": 125,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 10
+    },
+    {
+      "kind": "fixed",
+      "base_age": 125,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 11
+    },
+    {
+      "kind": "fixed",
+      "base_age": 130,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 12
+    },
+    {
+      "kind": "fixed",
+      "base_age": 130,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 13
+    },
+    {
+      "kind": "fixed",
+      "base_age": 130,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 14
+    },
+    {
+      "kind": "fixed",
+      "base_age": 135,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 15
+    },
+    {
+      "kind": "fixed",
+      "base_age": 135,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 16
+    },
+    {
+      "kind": "fixed",
+      "base_age": 135,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 17
+    },
+    {
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 19
+    },
+    {
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 20
+    },
+    {
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 22
+    },
+    {
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 23
+    },
+    {
+      "kind": "fixed",
+      "base_age": 150,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 24
+    },
+    {
+      "kind": "fixed",
+      "base_age": 150,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 25
+    },
+    {
+      "kind": "fixed",
+      "base_age": 150,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 26
+    },
+    {
+      "kind": "fixed",
+      "base_age": 155,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 27
+    },
+    {
+      "kind": "fixed",
+      "base_age": 155,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 28
+    },
+    {
+      "kind": "fixed",
+      "base_age": 155,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 29
+    },
+    {
+      "kind": "fixed",
+      "base_age": 160,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 30
+    },
+    {
+      "kind": "fixed",
+      "base_age": 160,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 31
+    },
+    {
+      "kind": "fixed",
+      "base_age": 160,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 32
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 33
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 34
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 35
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 36
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 37
+    },
+    {
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 38
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 39
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 40
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 41
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 43
+    },
+    {
+      "kind": "enso",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 44
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 45
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 46
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 47
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 48
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 49
+    },
+    {
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 50
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 51
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 52
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 53
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 54
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 55
+    },
+    {
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 56
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 57
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 58
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 59
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 60
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 61
+    },
+    {
+      "kind": "heat",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 62
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 63
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 64
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 65
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 66
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 67
+    },
+    {
+      "kind": "heat",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 68
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 69
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 70
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 71
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 72
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 73
+    },
+    {
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 74
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 75
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 76
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 77
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 78
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 79
+    },
+    {
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 80
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 81
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 82
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 83
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 84
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 85
+    },
+    {
+      "kind": "wet",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 86
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 87
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 88
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 89
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 90
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 91
+    },
+    {
+      "kind": "wet",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 92
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 94
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 95
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 96
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 97
+    },
+    {
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 98
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 99
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 100
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 101
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 102
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 103
+    },
+    {
+      "kind": "wet",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 104
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 105
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 106
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 107
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 108
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 109
+    },
+    {
+      "kind": "local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 110
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 111
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 112
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 113
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 114
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 115
+    },
+    {
+      "kind": "local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 116
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 117
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 118
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 119
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 120
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 121
+    },
+    {
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 122
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 123
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 124
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 125
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 126
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 127
+    },
+    {
+      "kind": "local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 128
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 129
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 130
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 131
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 132
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 133
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 134
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 135
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 136
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 137
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 138
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 139
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 130,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 140
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 141
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 142
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 143
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 144
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 145
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 146
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 147
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 148
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 100.0,
+      "config_id": 149
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 150
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 151
+    },
+    {
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 152
+    }
+  ],
+  "fold_choices": [
+    {
+      "strategy": "fixed_original",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 19
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.449212557595,
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 10.0,
+      "config_id": 22
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 149.21067955326578,
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 49
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 151.9383919990308,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 10.0,
+      "config_id": 76
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 150.55023432024709,
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 145
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 149.21067955326578,
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 10.0,
+      "config_id": 49
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 201.8058169307002,
+      "kind": "fixed",
+      "base_age": 130,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 14
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 201.76938476921984,
+      "kind": "fixed",
+      "base_age": 125,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 11
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 200.2805697748917,
+      "kind": "enso",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 38
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 199.7974519851749,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 80
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 201.23800483720416,
+      "kind": "enso_local",
+      "base_age": 120,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 134
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 199.7974519851749,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 80
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 224.02165396288615,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 8
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 224.02165396288615,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 100.0,
+      "config_id": 8
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 220.16789109101282,
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 56
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 220.29258401427123,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 80
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 220.80957189041098,
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 152
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 220.16789109101282,
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 100.0,
+      "config_id": 56
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 207.03222511832067,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 202.51300835174166,
+      "kind": "fixed",
+      "base_age": 115,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 3
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 207.03222511832067,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 207.03222511832067,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 207.03222511832067,
+      "kind": "fixed",
+      "base_age": 120,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 202.51300835174166,
+      "kind": "fixed",
+      "base_age": 115,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 3
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 197.1470863608541,
+      "kind": "fixed",
+      "base_age": 150,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 24
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 195.66777098208323,
+      "kind": "fixed",
+      "base_age": 160,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 30
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 191.7303643049456,
+      "kind": "enso",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 51
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 184.89967338154702,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 78
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 193.60351469254212,
+      "kind": "enso_local",
+      "base_age": 150,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 147
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 184.89967338154702,
+      "kind": "heat",
+      "base_age": 150,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 78
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 187.9448107100309,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 185.5551536203541,
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 181.38953335461022,
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 45
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 178.15729301518925,
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 72
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 180.6729255940502,
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 141
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 178.15729301518925,
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 72
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 182.4868664622312,
+      "kind": "fixed",
+      "base_age": 150,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 24
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 180.7681326365001,
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 178.06194841060235,
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 48
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 169.78958952662796,
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 72
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 171.05003590848756,
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 141
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 169.78958952662796,
+      "kind": "heat",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 72
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.23252154901543,
+      "kind": "fixed",
+      "base_age": 145,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 121.74947887002196,
+      "kind": "enso",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 45
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 111.80832078585907,
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 120
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 112.88239871276569,
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 141
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 111.80832078585907,
+      "kind": "local",
+      "base_age": 140,
+      "amplitude": 10,
+      "alpha": 1.0,
+      "config_id": 120
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 122.72686933361418,
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 122.89286692815233,
+      "kind": "enso_local",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 141
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 122.72686933361418,
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    },
+    {
+      "strategy": "fixed_original",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "fixed_expanded",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "enso_age",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "local_age",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 89.5118661831567,
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    },
+    {
+      "strategy": "enso_local_age",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "kind": "fixed",
+      "base_age": 140,
+      "amplitude": 0,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "strategy": "inner_selected",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 89.5118661831567,
+      "kind": "wet",
+      "base_age": 140,
+      "amplitude": 5,
+      "alpha": 1.0,
+      "config_id": 93
+    }
+  ],
+  "grid": {
+    "ages": [
+      110,
+      115,
+      120,
+      125,
+      130,
+      135,
+      140,
+      145,
+      150,
+      155,
+      160
+    ],
+    "base_adaptive_ages": [
+      120,
+      130,
+      140,
+      150
+    ],
+    "shift_amplitudes": [
+      5,
+      10
+    ],
+    "alphas": [
+      1.0,
+      10.0,
+      100.0
+    ],
+    "max_shift_days": 10,
+    "rounding_days": 5
+  },
+  "target": "All-cultivar production tonnes * 1000 / bearing rai",
+  "independent_targets": 80,
+  "test_years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "test_rows_per_strategy": 45,
+  "enso_source_sha256": "36c63c8488502c3b8382e1f670bd0444c4a5f8ea2d4bfb24e4244ee457741501",
+  "input_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "code_sha256": {
+    "tools/durian_model/experiment_climate_age.py": "ae7bf4bcc677b52165f8e2c5186f8c4b7cdd37e2f1a90cfb9c8a3781b2bb7305",
+    "tools/durian_model/common.py": "77279dd59829558116106e3f5282494938080edbbec77c0efe09c4ba9499abaf",
+    "tools/fetch_enso_context.py": "38f85f102089fdbbeaaed8a97fa358554d5caa0b351789b867c02990ebee8e91",
+    "tools/analyze_harvest_backcast.py": "81be74dedd7c255b3d6c527d2df89242289b3b42f91b7ac5a834381e65779c2c",
+    "tools/compare_harvest_stage_yield.py": "645123ec02023e04aaa0964fb541b72482ab269944551d6b718ee16f1c750ac8",
+    "tools/train_monthly_production.py": "e89dce24fff6e2e8bd98c807aef650869fa13597e408897567257b98ba6ef1ca",
+    "tools/durian_model/step5_evaluate_result.py": "75121b6ca330f86d42bac4514a63a13b52860c1b5d4470a94b26523abb641211"
+  },
+  "methods": [
+    "Three peak-season months learned from earlier production only; dominant-cultivar proxy, not proven Monthong-only harvest.",
+    "Climate driver: fixed 120-day pre-harvest exposure, equally averaged over possible harvest days.",
+    "Local temperature/rain/solar standardized separately by province using only prior training years.",
+    "Wet/cloudy driver = clipped (rain_z - solar_z)/2. Heat and RONI drivers clipped to [-1,1].",
+    "ENSO driver uses RONI of the last calendar-completed three-month season for each exposure day.",
+    "Age hypotheses: heat or positive RONI shortens; wet/cloudy lengthens. Zero shift is an eligible control.",
+    "ENSO-local driver = (wet - heat - RONI)/3. Local driver = (wet - heat)/2.",
+    "Base 120/130/140/150 days, amplitude 5/10; round shifts to nearest 5 days, clip ages 110-160.",
+    "All coefficients, age recipes, seasons, normalizers and alpha chosen on earlier years; three-year inner validation.",
+    "Independent fixed-expanded control tests whether merely widening the age grid helps.",
+    "Future ENSO probabilities downloaded separately and NEVER used to reconstruct past test inputs."
+  ],
+  "limitations": [
+    "Exploratory comparison on previously examined 2017-2025 targets; no new confirmatory holdout or preregistration claim.",
+    "153 configurations and six policies increase selection opportunity; inner tuning reduces but does not remove small-sample instability.",
+    "Only 80 province-year targets. Daily and candidate exposure rows do not increase target sample size.",
+    "NOAA indices are revised snapshots; calendar-completed seasons do not prove historical publication-time availability.",
+    "Peak season, duration and climate shifts are feature scenarios, not observed flowering dates or measured fruit ages.",
+    "No measured historical cultivar mix; Monthong proxy does not turn the target into Monthong-only yield.",
+    "NASA POWER reference point is not bearing-area weighted provincial weather.",
+    "Observed pre-harvest weather conditions, not operational seasonal weather forecasts.",
+    "Bootstrap ranges condition on fixed predictions; nine year clusters, no refitting or model-selection correction.",
+    "No main model/report/dashboard automatically replaced; no live yield prediction generated."
+  ]
+}

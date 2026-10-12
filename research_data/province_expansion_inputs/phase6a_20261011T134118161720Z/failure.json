@@ -1,0 +1,7 @@
+{
+  "ready": false,
+  "training_performed": false,
+  "error_type": "ValueError",
+  "error": "Incomplete pre-training monthly calendar source",
+  "pit_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "ready": true,
+  "training_performed": false,
+  "pit_certified": false,
+  "provinces": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86",
+    "21",
+    "30",
+    "77",
+    "80",
+    "85"
+  ],
+  "new_daily_rows": 47485,
+  "panel_rows": 160,
+  "lineage_records": 1280,
+  "fold_contexts": 72,
+  "availability_checks": 130887,
+  "primary_keys": 45,
+  "secondary_keys": 45
+}

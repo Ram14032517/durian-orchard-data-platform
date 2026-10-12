@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "training": true,
+  "inner_gate": false,
+  "outer_evaluated": false,
+  "pit_certified": false,
+  "level_inner_parity": true,
+  "delta_development_stopped": true
+}

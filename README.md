@@ -71,8 +71,8 @@ Select that environment as the notebook kernel. If VS Code remembers the old `.v
 | `research_data/five_province_history/UNIFIED_MAP.html` | Generated dashboard served by the local server |
 | `research_data/five_province_history/training/` | Modeling panels, provenance, predictions, metrics, and documentation |
 | `tools/` | Data preparation, dashboard builders, analysis scripts, and local server |
-| `sender_1/`, `receiver_gateway/` | Device and gateway firmware |
-| `google-apps-script/`, `supabase/` | Ingestion implementations |
+| `iot/` | Device/gateway firmware, sensor manuals and hardware diagnostics |
+| `api/` | Google Apps Script and Supabase ingestion; run Supabase CLI from `api/` |
 | `docs/` | Sensor context, quality reviews, learning notes, and handoff documentation |
 
 Large downloads, private device configuration, local environments, caches, and orchard exports are excluded from Git. Some rebuilds therefore require downloading source data separately; see the corresponding source manifests and guides. A clone is not a backup of all local orchard data.

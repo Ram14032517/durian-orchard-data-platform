@@ -1,0 +1,1529 @@
+{
+  "results": [
+    {
+      "policy": "baseline",
+      "n": 45,
+      "mae_kg_rai": 190.86763624512568,
+      "rmse_kg_rai": 243.42358147495673,
+      "bias_kg_rai": -27.26403589115813,
+      "paired_uncertainty": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 0.0,
+        "mae_reduction_pct": 0.0,
+        "gain_percentile_95_kg_rai": [
+          0.0,
+          0.0
+        ],
+        "reduction_percentile_95_pct": [
+          0.0,
+          0.0
+        ],
+        "worse_years": []
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 198.38450177339666,
+          "rmse_kg_rai": 253.5174934658828,
+          "bias_kg_rai": -145.2810812313157
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 336.4370421767915,
+          "rmse_kg_rai": 418.8096285175208,
+          "bias_kg_rai": -244.30230493165783
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 247.14254185676128,
+          "rmse_kg_rai": 271.03043127427264,
+          "bias_kg_rai": 19.755229306799084
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 116.31769749160102,
+          "rmse_kg_rai": 138.36797747931126,
+          "bias_kg_rai": 24.284847713626096
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 210.85683767193285,
+          "rmse_kg_rai": 233.8458378907365,
+          "bias_kg_rai": 50.36486775124797
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 72.24521420170149,
+          "rmse_kg_rai": 78.82351184375271,
+          "bias_kg_rai": 57.42738035745133
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_name": "จันทบุรี",
+          "n": 9,
+          "mae_kg_rai": 230.3709833156846,
+          "rmse_kg_rai": 287.3521380717115,
+          "bias_kg_rai": -180.00735825561756
+        },
+        {
+          "province_name": "ชุมพร",
+          "n": 9,
+          "mae_kg_rai": 224.39298079122457,
+          "rmse_kg_rai": 297.29527826314217,
+          "bias_kg_rai": -69.24665997065951
+        },
+        {
+          "province_name": "ศรีสะเกษ",
+          "n": 9,
+          "mae_kg_rai": 156.5931334762793,
+          "rmse_kg_rai": 208.45882132683653,
+          "bias_kg_rai": -90.79079854547524
+        },
+        {
+          "province_name": "สุราษฎร์ธานี",
+          "n": 9,
+          "mae_kg_rai": 201.0772669729135,
+          "rmse_kg_rai": 230.217129315464,
+          "bias_kg_rai": 172.3021971837075
+        },
+        {
+          "province_name": "อุตรดิตถ์",
+          "n": 9,
+          "mae_kg_rai": 141.9038166695265,
+          "rmse_kg_rai": 169.8954370761747,
+          "bias_kg_rai": 31.422440132254184
+        }
+      ]
+    },
+    {
+      "policy": "critical",
+      "n": 45,
+      "mae_kg_rai": 197.25766108586745,
+      "rmse_kg_rai": 247.34055365869065,
+      "bias_kg_rai": -21.13891710008042,
+      "paired_uncertainty": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": -6.390024840741745,
+        "mae_reduction_pct": -3.3478828398834537,
+        "gain_percentile_95_kg_rai": [
+          -16.56896259046485,
+          3.765957486318115
+        ],
+        "reduction_percentile_95_pct": [
+          -13.248738116846749,
+          1.5262553187626038
+        ],
+        "worse_years": [
+          2021,
+          2022,
+          2023
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 192.55739105498748,
+          "rmse_kg_rai": 245.15970725143544,
+          "bias_kg_rai": -138.8269642210192
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 331.24775432716234,
+          "rmse_kg_rai": 409.3708024082534,
+          "bias_kg_rai": -255.45983115291673
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 241.1088323343838,
+          "rmse_kg_rai": 282.4549599645726,
+          "bias_kg_rai": 77.05679148823813
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 151.08308202324716,
+          "rmse_kg_rai": 162.4753865703097,
+          "bias_kg_rai": 41.665109764936645
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 216.34527359803587,
+          "rmse_kg_rai": 250.73436301354553,
+          "bias_kg_rai": 43.83569159259707
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 106.55172540104422,
+          "rmse_kg_rai": 117.21395413568862,
+          "bias_kg_rai": 49.104210614014484
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_name": "จันทบุรี",
+          "n": 9,
+          "mae_kg_rai": 240.34239524687635,
+          "rmse_kg_rai": 285.7164946173667,
+          "bias_kg_rai": -189.9787701868093
+        },
+        {
+          "province_name": "ชุมพร",
+          "n": 9,
+          "mae_kg_rai": 216.71029126284856,
+          "rmse_kg_rai": 290.18419037541037,
+          "bias_kg_rai": -57.75370625851537
+        },
+        {
+          "province_name": "ศรีสะเกษ",
+          "n": 9,
+          "mae_kg_rai": 168.47028616225444,
+          "rmse_kg_rai": 213.1897914801032,
+          "bias_kg_rai": -83.30541562437458
+        },
+        {
+          "province_name": "สุราษฎร์ธานี",
+          "n": 9,
+          "mae_kg_rai": 216.98722046374365,
+          "rmse_kg_rai": 250.7505916583978,
+          "bias_kg_rai": 189.01384055923756
+        },
+        {
+          "province_name": "อุตรดิตถ์",
+          "n": 9,
+          "mae_kg_rai": 143.77811229361447,
+          "rmse_kg_rai": 178.10171636540593,
+          "bias_kg_rai": 36.32946601005957
+        }
+      ]
+    },
+    {
+      "policy": "critical_interaction",
+      "n": 45,
+      "mae_kg_rai": 194.2170045633033,
+      "rmse_kg_rai": 246.11236587399608,
+      "bias_kg_rai": -22.449028500501257,
+      "paired_uncertainty": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": -3.3493683181775964,
+        "mae_reduction_pct": -1.7548120698032355,
+        "gain_percentile_95_kg_rai": [
+          -14.450796743914893,
+          4.0839401498042776
+        ],
+        "reduction_percentile_95_pct": [
+          -11.50818218041283,
+          1.5860333425759432
+        ],
+        "worse_years": [
+          2022,
+          2023
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 190.98001770583033,
+          "rmse_kg_rai": 242.74545870194163,
+          "bias_kg_rai": -137.44799967025028
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 332.50143806186406,
+          "rmse_kg_rai": 408.32998613061574,
+          "bias_kg_rai": -257.2003248324646
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 242.0727014225995,
+          "rmse_kg_rai": 284.14018125565445,
+          "bias_kg_rai": 78.0204475503987
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 116.31769749160102,
+          "rmse_kg_rai": 138.36797747931126,
+          "bias_kg_rai": 24.284847713626096
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 220.46239741746112,
+          "rmse_kg_rai": 255.2524977126326,
+          "bias_kg_rai": 47.072187010118434
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 109.19389793642738,
+          "rmse_kg_rai": 119.68807418768768,
+          "bias_kg_rai": 50.854847710634544
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_name": "จันทบุรี",
+          "n": 9,
+          "mae_kg_rai": 235.24381867342922,
+          "rmse_kg_rai": 284.7996540105941,
+          "bias_kg_rai": -184.88019361336217
+        },
+        {
+          "province_name": "ชุมพร",
+          "n": 9,
+          "mae_kg_rai": 218.79302737211546,
+          "rmse_kg_rai": 290.8652708893434,
+          "bias_kg_rai": -57.275311523227415
+        },
+        {
+          "province_name": "ศรีสะเกษ",
+          "n": 9,
+          "mae_kg_rai": 165.5370994351268,
+          "rmse_kg_rai": 211.9285906333351,
+          "bias_kg_rai": -87.05591440893167
+        },
+        {
+          "province_name": "สุราษฎร์ธานี",
+          "n": 9,
+          "mae_kg_rai": 215.08539449257134,
+          "rmse_kg_rai": 249.76823417336877,
+          "bias_kg_rai": 187.5871490173566
+        },
+        {
+          "province_name": "อุตรดิตถ์",
+          "n": 9,
+          "mae_kg_rai": 136.42568284327385,
+          "rmse_kg_rai": 172.7574488017197,
+          "bias_kg_rai": 29.379128025658375
+        }
+      ]
+    },
+    {
+      "policy": "critical_wet",
+      "n": 45,
+      "mae_kg_rai": 189.3766381374107,
+      "rmse_kg_rai": 246.05655631010745,
+      "bias_kg_rai": -24.958446575212854,
+      "paired_uncertainty": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": 1.4909981077149723,
+        "mae_reduction_pct": 0.7811686344772029,
+        "gain_percentile_95_kg_rai": [
+          -9.602583109236434,
+          11.886376548555717
+        ],
+        "reduction_percentile_95_pct": [
+          -6.151918308767224,
+          5.889068656306828
+        ],
+        "worse_years": [
+          2021,
+          2023
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 195.25386614010483,
+          "rmse_kg_rai": 249.98534873222818,
+          "bias_kg_rai": -144.47714313854948
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 330.15321719179553,
+          "rmse_kg_rai": 408.1958484866739,
+          "bias_kg_rai": -255.21319077754362
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 246.70949995668607,
+          "rmse_kg_rai": 278.3611372902961,
+          "bias_kg_rai": 58.70130633179595
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 117.69289089055496,
+          "rmse_kg_rai": 123.14923732800075,
+          "bias_kg_rai": 51.03642592232213
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 157.99130952119907,
+          "rmse_kg_rai": 228.0497013540838,
+          "bias_kg_rai": -47.21222403077602
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 120.1640685024095,
+          "rmse_kg_rai": 176.06274218715333,
+          "bias_kg_rai": 120.1640685024095
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_name": "จันทบุรี",
+          "n": 9,
+          "mae_kg_rai": 231.30161578163066,
+          "rmse_kg_rai": 288.51727012956155,
+          "bias_kg_rai": -176.6097215055459
+        },
+        {
+          "province_name": "ชุมพร",
+          "n": 9,
+          "mae_kg_rai": 224.19061134850136,
+          "rmse_kg_rai": 305.128691616321,
+          "bias_kg_rai": -49.28115139203434
+        },
+        {
+          "province_name": "ศรีสะเกษ",
+          "n": 9,
+          "mae_kg_rai": 174.80642745564137,
+          "rmse_kg_rai": 216.17982660139992,
+          "bias_kg_rai": -75.88726324371761
+        },
+        {
+          "province_name": "สุราษฎร์ธานี",
+          "n": 9,
+          "mae_kg_rai": 180.76451945172371,
+          "rmse_kg_rai": 218.97503620304136,
+          "bias_kg_rai": 152.71798127354245
+        },
+        {
+          "province_name": "อุตรดิตถ์",
+          "n": 9,
+          "mae_kg_rai": 135.82001664955652,
+          "rmse_kg_rai": 178.01580546656103,
+          "bias_kg_rai": 24.267921991691157
+        }
+      ]
+    },
+    {
+      "policy": "inner_selected",
+      "n": 45,
+      "mae_kg_rai": 192.8727007561314,
+      "rmse_kg_rai": 247.8057453164834,
+      "bias_kg_rai": -25.43948065788033,
+      "paired_uncertainty": {
+        "method": "paired circular year-block bootstrap",
+        "block_length_years": 3,
+        "resamples": 20000,
+        "seed": 42,
+        "n_years": 9,
+        "n_rows": 45,
+        "mae_gain_kg_rai": -2.005064511005685,
+        "mae_reduction_pct": -1.0504999959399353,
+        "gain_percentile_95_kg_rai": [
+          -11.950697295994289,
+          4.6273781982473
+        ],
+        "reduction_percentile_95_pct": [
+          -7.684226255187365,
+          2.024929633620065
+        ],
+        "worse_years": [
+          2021,
+          2023
+        ]
+      },
+      "by_year": [
+        {
+          "year_ce": 2017,
+          "n": 5,
+          "mae_kg_rai": 300.76277926935893,
+          "rmse_kg_rai": 307.76120433902133,
+          "bias_kg_rai": -65.57409471125325
+        },
+        {
+          "year_ce": 2018,
+          "n": 5,
+          "mae_kg_rai": 190.98001770583033,
+          "rmse_kg_rai": 242.74545870194163,
+          "bias_kg_rai": -137.44799967025028
+        },
+        {
+          "year_ce": 2019,
+          "n": 5,
+          "mae_kg_rai": 332.50143806186406,
+          "rmse_kg_rai": 408.32998613061574,
+          "bias_kg_rai": -257.2003248324646
+        },
+        {
+          "year_ce": 2020,
+          "n": 5,
+          "mae_kg_rai": 246.70949995668607,
+          "rmse_kg_rai": 278.3611372902961,
+          "bias_kg_rai": 58.70130633179595
+        },
+        {
+          "year_ce": 2021,
+          "n": 5,
+          "mae_kg_rai": 151.08308202324716,
+          "rmse_kg_rai": 162.4753865703097,
+          "bias_kg_rai": 41.665109764936645
+        },
+        {
+          "year_ce": 2022,
+          "n": 5,
+          "mae_kg_rai": 157.99130952119907,
+          "rmse_kg_rai": 228.0497013540838,
+          "bias_kg_rai": -47.21222403077602
+        },
+        {
+          "year_ce": 2023,
+          "n": 5,
+          "mae_kg_rai": 120.1640685024095,
+          "rmse_kg_rai": 176.06274218715333,
+          "bias_kg_rai": 120.1640685024095
+        },
+        {
+          "year_ce": 2024,
+          "n": 5,
+          "mae_kg_rai": 131.65350942606744,
+          "rmse_kg_rai": 162.63299659466938,
+          "bias_kg_rai": 131.65350942606744
+        },
+        {
+          "year_ce": 2025,
+          "n": 5,
+          "mae_kg_rai": 104.00860233852006,
+          "rmse_kg_rai": 137.68104977244934,
+          "bias_kg_rai": -73.70467670138835
+        }
+      ],
+      "by_province": [
+        {
+          "province_name": "จันทบุรี",
+          "n": 9,
+          "mae_kg_rai": 227.93683070133568,
+          "rmse_kg_rai": 284.63771599895676,
+          "bias_kg_rai": -173.2449364252509
+        },
+        {
+          "province_name": "ชุมพร",
+          "n": 9,
+          "mae_kg_rai": 237.48724238116262,
+          "rmse_kg_rai": 311.8425346228612,
+          "bias_kg_rai": -62.577782424695584
+        },
+        {
+          "province_name": "ศรีสะเกษ",
+          "n": 9,
+          "mae_kg_rai": 174.57015883485798,
+          "rmse_kg_rai": 214.98098097482486,
+          "bias_kg_rai": -78.61806547286679
+        },
+        {
+          "province_name": "สุราษฎร์ธานี",
+          "n": 9,
+          "mae_kg_rai": 186.99934927549486,
+          "rmse_kg_rai": 223.81010070159795,
+          "bias_kg_rai": 159.5011038002801
+        },
+        {
+          "province_name": "อุตรดิตถ์",
+          "n": 9,
+          "mae_kg_rai": 137.36992258780595,
+          "rmse_kg_rai": 180.18395581521312,
+          "bias_kg_rai": 27.742277233131517
+        }
+      ]
+    }
+  ],
+  "candidate_count": 48,
+  "configurations": [
+    {
+      "group": "baseline",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 0
+    },
+    {
+      "group": "baseline",
+      "age_days": 120,
+      "alpha": 10.0,
+      "config_id": 1
+    },
+    {
+      "group": "baseline",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 2
+    },
+    {
+      "group": "baseline",
+      "age_days": 130,
+      "alpha": 1.0,
+      "config_id": 3
+    },
+    {
+      "group": "baseline",
+      "age_days": 130,
+      "alpha": 10.0,
+      "config_id": 4
+    },
+    {
+      "group": "baseline",
+      "age_days": 130,
+      "alpha": 100.0,
+      "config_id": 5
+    },
+    {
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 100.0,
+      "config_id": 8
+    },
+    {
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 9
+    },
+    {
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 10.0,
+      "config_id": 10
+    },
+    {
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 11
+    },
+    {
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 12
+    },
+    {
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 10.0,
+      "config_id": 13
+    },
+    {
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 14
+    },
+    {
+      "group": "critical",
+      "age_days": 130,
+      "alpha": 1.0,
+      "config_id": 15
+    },
+    {
+      "group": "critical",
+      "age_days": 130,
+      "alpha": 10.0,
+      "config_id": 16
+    },
+    {
+      "group": "critical",
+      "age_days": 130,
+      "alpha": 100.0,
+      "config_id": 17
+    },
+    {
+      "group": "critical",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "group": "critical",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 19
+    },
+    {
+      "group": "critical",
+      "age_days": 140,
+      "alpha": 100.0,
+      "config_id": 20
+    },
+    {
+      "group": "critical",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "group": "critical",
+      "age_days": 150,
+      "alpha": 10.0,
+      "config_id": 22
+    },
+    {
+      "group": "critical",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 23
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 24
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 10.0,
+      "config_id": 25
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 26
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 130,
+      "alpha": 1.0,
+      "config_id": 27
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 130,
+      "alpha": 10.0,
+      "config_id": 28
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 130,
+      "alpha": 100.0,
+      "config_id": 29
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 30
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 31
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 140,
+      "alpha": 100.0,
+      "config_id": 32
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 33
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 10.0,
+      "config_id": 34
+    },
+    {
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 35
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 36
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 10.0,
+      "config_id": 37
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 38
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 130,
+      "alpha": 1.0,
+      "config_id": 39
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 130,
+      "alpha": 10.0,
+      "config_id": 40
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 130,
+      "alpha": 100.0,
+      "config_id": 41
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 43
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 100.0,
+      "config_id": 44
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 45
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 150,
+      "alpha": 10.0,
+      "config_id": 46
+    },
+    {
+      "group": "critical_wet",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 47
+    }
+  ],
+  "fold_choices": [
+    {
+      "policy": "baseline",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "policy": "critical",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2017,
+      "inner_mae_kg_rai": 154.51158540634574,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 10.0,
+      "config_id": 7
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 201.8058169307002,
+      "group": "baseline",
+      "age_days": 130,
+      "alpha": 100.0,
+      "config_id": 5
+    },
+    {
+      "policy": "critical",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 199.50080708457904,
+      "group": "critical",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 23
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 197.11351489833478,
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 35
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 200.15878444611107,
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 38
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2018,
+      "inner_mae_kg_rai": 197.11351489833478,
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 100.0,
+      "config_id": 35
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 224.02165396288615,
+      "group": "baseline",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 2
+    },
+    {
+      "policy": "critical",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 218.89464719183002,
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 14
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 215.43060347954452,
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 26
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 218.61557038771596,
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 38
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2019,
+      "inner_mae_kg_rai": 215.43060347954452,
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 100.0,
+      "config_id": 26
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 207.03222511832067,
+      "group": "baseline",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 0
+    },
+    {
+      "policy": "critical",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 194.97635133833094,
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 12
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 199.95244366460852,
+      "group": "critical_interaction",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 24
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 170.2712258364086,
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 36
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2020,
+      "inner_mae_kg_rai": 170.2712258364086,
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 36
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 197.1470863608541,
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 9
+    },
+    {
+      "policy": "critical",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 194.4735348692544,
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 12
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 197.1470863608541,
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 9
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 195.0325325780725,
+      "group": "critical_wet",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 36
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2021,
+      "inner_mae_kg_rai": 194.4735348692544,
+      "group": "critical",
+      "age_days": 120,
+      "alpha": 1.0,
+      "config_id": 12
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 187.9448107100309,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 181.42932454091843,
+      "group": "critical",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 18
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 186.8006240922467,
+      "group": "critical_interaction",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 30
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 179.45159081690528,
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2022,
+      "inner_mae_kg_rai": 179.45159081690528,
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 182.4868664622312,
+      "group": "baseline",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 9
+    },
+    {
+      "policy": "critical",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 179.13714892270795,
+      "group": "critical",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 21
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 179.58819828273587,
+      "group": "critical_interaction",
+      "age_days": 150,
+      "alpha": 1.0,
+      "config_id": 33
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 163.0839763233918,
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2023,
+      "inner_mae_kg_rai": 163.0839763233918,
+      "group": "critical_wet",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 42
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2024,
+      "inner_mae_kg_rai": 122.38955318809992,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2025,
+      "inner_mae_kg_rai": 129.32128067800198,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "baseline",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_interaction",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "critical_wet",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    {
+      "policy": "inner_selected",
+      "test_year": 2026,
+      "inner_mae_kg_rai": 93.70520223353105,
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    }
+  ],
+  "final_inner_selected_model": {
+    "config": {
+      "group": "baseline",
+      "age_days": 140,
+      "alpha": 1.0,
+      "config_id": 6
+    },
+    "parameters": {
+      "mean": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        2017.5,
+        1070.0452679944992,
+        265.67612459687047,
+        61.94723150083611,
+        104.42478220556617,
+        19.311559650222968,
+        27.257521980112266,
+        0.7660086367907369,
+        1.7961017386035536
+      ],
+      "scale": [
+        0.3999999999999998,
+        0.3999999999999998,
+        0.3999999999999998,
+        0.3999999999999998,
+        0.39999999999999986,
+        4.6097722286464435,
+        385.639162861813,
+        220.3530941313465,
+        67.99743134806178,
+        85.88252199708766,
+        0.9837111964142198,
+        1.2538136362134495,
+        0.2792159991203993,
+        0.7671865761793424
+      ],
+      "coef": [
+        126.13200929870044,
+        104.3511726156092,
+        -157.88727907968155,
+        -55.679816433057645,
+        -16.916086401567565,
+        79.94707806332929,
+        168.27888099423367,
+        -29.562651075082616,
+        -196.33707981898726,
+        169.66833091432034,
+        68.73621010108509,
+        -145.10596385107024,
+        -55.88331282824833,
+        -52.47774845775958
+      ],
+      "intercept": 1089.2090837391734,
+      "alpha": 1.0
+    },
+    "predictors": [
+      "previous_yield_kg_rai",
+      "pre_bloom_90d_rain_mm",
+      "fruit_0_29d_rain_mm",
+      "fruit_30_59d_rain_mm",
+      "fruit_60_89d_solar_mj_m2_day",
+      "fruit_90_to_harvest_temperature_c",
+      "vpd_pre_bloom_mean_kpa",
+      "vpd_early_fruit_p90_kpa"
+    ],
+    "season_months": {
+      "22": [
+        4,
+        5,
+        6
+      ],
+      "33": [
+        5,
+        6,
+        7
+      ],
+      "53": [
+        6,
+        7,
+        8
+      ],
+      "84": [
+        6,
+        7,
+        8
+      ],
+      "86": [
+        7,
+        8,
+        9
+      ]
+    },
+    "train_end": 2025,
+    "live_prediction_generated": false
+  },
+  "baseline_reproduced": true,
+  "input_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "code_sha256": {
+    "tools/durian_model/experiment_critical_window.py": "403aee8ec6311fe809796373bfa518e406873822f0fcaf2dddc3ad6e3a847776",
+    "tools/durian_model/experiment_weather_shocks.py": "b0b6c51d4cedbae0df5dbe96d97ebc73317ad4ffd130c8753f5c4abd33e18130",
+    "tools/durian_model/common.py": "77279dd59829558116106e3f5282494938080edbbec77c0efe09c4ba9499abaf",
+    "tools/durian_model/step5_evaluate_result.py": "75121b6ca330f86d42bac4514a63a13b52860c1b5d4470a94b26523abb641211",
+    "tools/compare_harvest_stage_yield.py": "645123ec02023e04aaa0964fb541b72482ab269944551d6b718ee16f1c750ac8",
+    "tools/analyze_harvest_backcast.py": "81be74dedd7c255b3d6c527d2df89242289b3b42f91b7ac5a834381e65779c2c",
+    "tools/train_monthly_production.py": "e89dce24fff6e2e8bd98c807aef650869fa13597e408897567257b98ba6ef1ca"
+  },
+  "definitions": {
+    "window": "Inclusive 30-50 DAA (21 days), reconstructed from harvest-season proxy",
+    "rain_surge": "Rain >=10 mm after all seven preceding days <1 mm, within critical window",
+    "interaction": "Mean of cohort hot38-day count * cohort CDD; no forced negative coefficient",
+    "cohort_aggregation": "Equal possible harvest-day weights; no test production weights"
+  },
+  "limitations": [
+    "No tree-age input exists; age_days is a backcast feature-window parameter.",
+    "30-50 DAA and 38 C/10 mm cutoffs are hypotheses, not calibrated fruit-drop thresholds.",
+    "Rain surge is not measured leaf flush; CDD is not root-zone water shortage.",
+    "No measured flowering dates, cultivar mixture, irrigation or crop-damage labels.",
+    "Previously explored 45 test targets; no independent holdout or causal attribution.",
+    "Nine year clusters in descriptive fixed-prediction bootstrap; no selection correction.",
+    "No main model, previous experiment outputs, report or dashboard replaced."
+  ]
+}

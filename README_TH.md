@@ -14,8 +14,8 @@
 ## ติดตั้ง Supabase
 
 1. สร้าง Supabase project แล้วเปิด SQL Editor
-2. รัน `supabase/migrations/001_iot_schema.sql`
-3. สร้าง Edge Function ชื่อ `farm-ingest` แล้วใส่โค้ดจาก `supabase/functions/farm-ingest/index.ts`
+2. รัน `api/supabase/migrations/001_iot_schema.sql`
+3. สร้าง Edge Function ชื่อ `farm-ingest` แล้วใส่โค้ดจาก `api/supabase/functions/farm-ingest/index.ts`
 4. ตั้ง Secret `DEVICE_INGEST_KEY` เป็นข้อความสุ่มยาวอย่างน้อย 32 ตัวอักษร
 5. Deploy function โดยปิด JWT verification สำหรับ endpoint อุปกรณ์ แล้วใช้ `x-device-key` ตรวจแทน
 6. นำ URL รูปแบบ `https://PROJECT.supabase.co/functions/v1/farm-ingest` ใส่ใน `SUPABASE_INGEST_URL`
@@ -25,7 +25,7 @@
 ## ติดตั้ง Google Sheets
 
 1. สร้าง Google Sheet เปล่าหนึ่งไฟล์
-2. เปิด Extensions > Apps Script และวาง `google-apps-script/Code.gs`
+2. เปิด Extensions > Apps Script และวาง `api/google-apps-script/Code.gs`
 3. ใน Project Settings > Script properties เพิ่ม `SPREADSHEET_ID` และ `DEVICE_INGEST_KEY`
 4. Deploy > New deployment > Web app, Execute as Me, Who has access = Anyone
 5. นำ URL `/exec` ใส่ใน `GOOGLE_SHEETS_URL`

@@ -1,0 +1,46 @@
+{
+  "age_scenarios_days": [
+    120,
+    130,
+    140,
+    150
+  ],
+  "monthly_rows": 2992,
+  "annual_scenario_rows": 880,
+  "province_years": 110,
+  "year_min": 2004,
+  "year_max": 2025,
+  "stages": {
+    "pre_bloom_90d": "90 วันก่อนดอกบานสมมติ",
+    "fruit_full": "ดอกบานสมมติถึงก่อนเก็บเกี่ยว",
+    "fruit_0_29d": "อายุ 0–29 วัน",
+    "fruit_30_59d": "อายุ 30–59 วัน",
+    "fruit_60_89d": "อายุ 60–89 วัน",
+    "fruit_90_to_harvest": "อายุ 90 วันถึงก่อนเก็บเกี่ยว"
+  },
+  "weather_scope": "NASA POWER province reference point; LST; not bearing-area spatial mean",
+  "cultivar_scope": "OAE monthly/annual production includes all cultivars; Monthong age scenarios only",
+  "forecast_feature_eligible": false,
+  "methods": [
+    "Full bloom = harvest day minus assumed age; every day in each reported month is equally possible",
+    "Stage windows are analytical bins, not observed physiological stages",
+    "Peak3 = three consecutive calendar months with greatest reported tonnes, separately for each province-year",
+    "Weather means and expected rain/radiation totals are averaged over possible harvest dates, then weighted by monthly tonnes",
+    "Monthly/annual reconciliation is reported; missing harvest months are not observed zero",
+    "Missing weather makes that feature null; per-field exposure coverage remains available",
+    "Realized harvest timing/shares are outcome information: descriptive retrospective analysis, not prospective forecast features",
+    "Annual yield denominator is bearing area; new non-bearing planted area is excluded",
+    "Temporal harvest weights do not replace spatial bearing-area weights; soil/crop maps do not identify tree age"
+  ],
+  "research_urls": [
+    "https://kukr.lib.ku.ac.th/KPS/Detail/info/276150",
+    "https://doi.org/10.3390/horticulturae11040432",
+    "https://www.opsmoac.go.th/chiangrai-dwl-files-472791791910"
+  ],
+  "inputs": {
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054",
+    "reference_points.csv": "332e5b3be9bdc10aa29d46947641cdc1a5e6848a280303e1142ae9bf5b217b76"
+  }
+}

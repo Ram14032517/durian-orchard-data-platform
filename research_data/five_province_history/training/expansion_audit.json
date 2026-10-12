@@ -1,0 +1,219 @@
+{
+  "created_utc": "2026-10-10T12:14:14.210680+00:00",
+  "input_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "annual_source_sha256": "6a3ae44026b5ef8037a8bb091852281d890168a8d795c9c44d5cde9a48613d4c",
+  "monthly_source_sha256": "461dab6a68ff2aca9bceb81e9a35b0137e77aff7ed9afb29054910ddf53cb62f",
+  "annual_data_dates": [
+    "2026-07-14 00:00:00"
+  ],
+  "monthly_data_dates": [
+    "2026-07-22 00:00:00"
+  ],
+  "catboost": {
+    "n": 45,
+    "mae_kg_rai": 204.85380526454904,
+    "rmse_kg_rai": 266.472521058528,
+    "bias_kg_rai": -59.52827027381144,
+    "wape_pct": 16.952808461769294,
+    "r2": 0.5381524563319728
+  },
+  "paired_mean_gain": 10.658132026571792,
+  "paired_median_gain": 29.595745740371626,
+  "wins": 27,
+  "ties": 0,
+  "grouped": {
+    "province_code": [
+      {
+        "province_code": "22",
+        "n": 9,
+        "model_mae": 297.1045040354827,
+        "baseline_mae": 262.9187758696618,
+        "bias": -205.0973200035118,
+        "mean_gain": -34.18572816582095,
+        "median_gain": -34.23847432866705,
+        "wins": 4
+      },
+      {
+        "province_code": "33",
+        "n": 9,
+        "model_mae": 175.2778639041298,
+        "baseline_mae": 212.94193522336303,
+        "bias": -58.77528184612436,
+        "mean_gain": 37.664071319233244,
+        "median_gain": 29.094886884461403,
+        "wins": 6
+      },
+      {
+        "province_code": "53",
+        "n": 9,
+        "model_mae": 125.05850759110685,
+        "baseline_mae": 175.25785432376446,
+        "bias": -68.7826248120622,
+        "mean_gain": 50.1993467326576,
+        "median_gain": 42.54582367926389,
+        "wins": 7
+      },
+      {
+        "province_code": "84",
+        "n": 9,
+        "model_mae": 176.22238756881745,
+        "baseline_mae": 186.92045474577677,
+        "bias": 139.28542990101315,
+        "mean_gain": 10.698067176959349,
+        "median_gain": 18.190004048838205,
+        "wins": 5
+      },
+      {
+        "province_code": "86",
+        "n": 9,
+        "model_mae": 250.60576322320856,
+        "baseline_mae": 239.5206662930383,
+        "bias": -104.27155460837207,
+        "mean_gain": -11.085096930170291,
+        "median_gain": 37.230335487717184,
+        "wins": 5
+      }
+    ],
+    "year_ce": [
+      {
+        "year_ce": 2017,
+        "n": 5,
+        "model_mae": 325.1557370857538,
+        "baseline_mae": 401.5068090062813,
+        "bias": -122.67652592281752,
+        "mean_gain": 76.3510719205275,
+        "median_gain": 37.230335487717184,
+        "wins": 4
+      },
+      {
+        "year_ce": 2018,
+        "n": 5,
+        "model_mae": 205.01669780836647,
+        "baseline_mae": 152.13089384039705,
+        "bias": -170.4757338115656,
+        "mean_gain": -52.885803967969444,
+        "median_gain": -34.23847432866705,
+        "wins": 2
+      },
+      {
+        "year_ce": 2019,
+        "n": 5,
+        "model_mae": 321.9230971373015,
+        "baseline_mae": 377.5648972060775,
+        "bias": -210.85747464968546,
+        "mean_gain": 55.64180006877596,
+        "median_gain": 112.99887480556902,
+        "wins": 3
+      },
+      {
+        "year_ce": 2020,
+        "n": 5,
+        "model_mae": 254.72322384627358,
+        "baseline_mae": 136.22096867559821,
+        "bias": -84.3881686142631,
+        "mean_gain": -118.5022551706754,
+        "median_gain": -154.7509047845972,
+        "wins": 2
+      },
+      {
+        "year_ce": 2021,
+        "n": 5,
+        "model_mae": 112.91400279197508,
+        "baseline_mae": 99.05995631831277,
+        "bias": -112.4673715404602,
+        "mean_gain": -13.854046473662311,
+        "median_gain": 47.298258001583235,
+        "wins": 3
+      },
+      {
+        "year_ce": 2022,
+        "n": 5,
+        "model_mae": 213.57433301197506,
+        "baseline_mae": 242.0037489757167,
+        "bias": 25.91022105578138,
+        "mean_gain": 28.429415963741643,
+        "median_gain": 7.304719425484109,
+        "wins": 3
+      },
+      {
+        "year_ce": 2023,
+        "n": 5,
+        "model_mae": 72.8978763369807,
+        "baseline_mae": 137.18222835032086,
+        "bias": 22.0291558258401,
+        "mean_gain": 64.28435201334017,
+        "median_gain": 6.548938027616487,
+        "wins": 3
+      },
+      {
+        "year_ce": 2024,
+        "n": 5,
+        "model_mae": 214.27159234338333,
+        "baseline_mae": 220.84202596597638,
+        "bias": 213.7088362798332,
+        "mean_gain": 6.570433622593077,
+        "median_gain": 42.54582367926389,
+        "wins": 3
+      },
+      {
+        "year_ce": 2025,
+        "n": 5,
+        "model_mae": 123.20768701893205,
+        "baseline_mae": 173.095907281407,
+        "bias": -96.53737108696598,
+        "mean_gain": 49.888220262474945,
+        "median_gain": 31.853375871499793,
+        "wins": 4
+      }
+    ]
+  },
+  "selection_margins": [
+    {
+      "year_ce": 2017,
+      "gap": 18.91610726081302
+    },
+    {
+      "year_ce": 2018,
+      "gap": 16.285831358411713
+    },
+    {
+      "year_ce": 2019,
+      "gap": 0.9272615412931771
+    },
+    {
+      "year_ce": 2020,
+      "gap": 19.769391863674514
+    },
+    {
+      "year_ce": 2021,
+      "gap": 1.933480116784608
+    },
+    {
+      "year_ce": 2022,
+      "gap": 0.1150964085000794
+    },
+    {
+      "year_ce": 2023,
+      "gap": 34.64229522686534
+    },
+    {
+      "year_ce": 2024,
+      "gap": 12.450663692937042
+    },
+    {
+      "year_ce": 2025,
+      "gap": 5.304117137566777
+    }
+  ],
+  "candidate_switches": 6,
+  "weather_context_rows_checked": 1120,
+  "normal_cutoff_check": true,
+  "weather_cutoff_check": true,
+  "strict_forecast_eligible": false,
+  "reason": "Historical annual/monthly publication vintages and weather release availability unverified",
+  "production_changed": false
+}

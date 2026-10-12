@@ -1,0 +1,202 @@
+{
+  "created_utc": "2026-10-10T06:31:51.897204+00:00",
+  "target": "yield_kg_per_rai_calculated",
+  "independent_rows": 80,
+  "years": [
+    2010,
+    2025
+  ],
+  "provinces": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86"
+  ],
+  "outer_years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "inner_years": 3,
+  "age_days": 140,
+  "leads_days_before_main_season": [
+    60,
+    0
+  ],
+  "weather_release_lag_days": 7,
+  "future_weather": "calendar-day means from 10 preceding years; VPD mean of daily VPD",
+  "selection": "all families and parameters selected by earlier-year inner MAE only",
+  "missing_package": "XGBoost not installed; not downloaded for this experiment",
+  "input_sha256": {
+    "production_annual.csv": "c5eed63bddcb777afcbf4bb04e9f25cccdbf08d758636136a96730c884655b73",
+    "harvest_monthly.csv": "a1a04a1bcd4e37d1640a76a3fb733221563fcb5b00a43f6ce2046760bff7f739",
+    "weather_daily.csv": "28dfcab00a24086735a7a8b596a19c52334a5025a7c3abb0297ff2a663d21054"
+  },
+  "limitations": [
+    "Revised annual target and lag snapshots; historical release vintages unverified",
+    "Climatology scenario is not an archived numerical weather forecast",
+    "Seven-day weather release lag is an assumption, not validated source latency",
+    "One reference weather grid per province, no bearing-orchard weights",
+    "All cultivars; main-season proxy does not isolate Monthong targets",
+    "Annual targets include off-season production outside the main-season proxy",
+    "2017-2025 previously inspected; exploratory, not a new independent holdout"
+  ],
+  "candidates": [
+    {
+      "kind": "previous_year",
+      "parameter": null,
+      "features": [],
+      "group": "lag"
+    },
+    {
+      "kind": "province_median",
+      "parameter": null,
+      "features": [],
+      "group": "median"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 1.0,
+      "features": [
+        "previous_yield_kg_rai"
+      ],
+      "group": "lag_ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 10.0,
+      "features": [
+        "previous_yield_kg_rai"
+      ],
+      "group": "lag_ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 100.0,
+      "features": [
+        "previous_yield_kg_rai"
+      ],
+      "group": "lag_ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 1.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 10.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_ridge"
+    },
+    {
+      "kind": "ridge",
+      "parameter": 100.0,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_ridge"
+    },
+    {
+      "kind": "random_forest",
+      "parameter": 3,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_rf"
+    },
+    {
+      "kind": "random_forest",
+      "parameter": 5,
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_rf"
+    },
+    {
+      "kind": "catboost",
+      "parameter": {
+        "depth": 2,
+        "l2_leaf_reg": 10,
+        "learning_rate": 0.03
+      },
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_catboost"
+    },
+    {
+      "kind": "catboost",
+      "parameter": {
+        "depth": 3,
+        "l2_leaf_reg": 10,
+        "learning_rate": 0.03
+      },
+      "features": [
+        "previous_yield_kg_rai",
+        "pre_bloom_90d_rain_mm",
+        "fruit_0_29d_rain_mm",
+        "fruit_30_59d_rain_mm",
+        "fruit_60_89d_solar_mj_m2_day",
+        "fruit_90_to_harvest_temperature_c",
+        "vpd_pre_bloom_mean_kpa",
+        "vpd_early_fruit_p90_kpa"
+      ],
+      "group": "stage_catboost"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "pilot_passed": false,
+  "pilot": {
+    "rows": 20,
+    "counts": {
+      "verified_available": 18,
+      "unverified": 0,
+      "unavailable": 2
+    },
+    "percentages": {
+      "verified_available": 90.0,
+      "unverified": 0.0,
+      "unavailable": 10.0
+    },
+    "observed_state_verified": 15,
+    "full_probability_vectors_verified": 0
+  },
+  "all_inputs": {
+    "rows": 20,
+    "counts": {
+      "verified_available": 18,
+      "unverified": 0,
+      "unavailable": 2
+    },
+    "percentages": {
+      "verified_available": 90.0,
+      "unverified": 0.0,
+      "unavailable": 10.0
+    },
+    "observed_state_verified": 15,
+    "full_probability_vectors_verified": 0
+  },
+  "outer": {
+    "rows": 20,
+    "counts": {
+      "verified_available": 18,
+      "unverified": 0,
+      "unavailable": 2
+    },
+    "percentages": {
+      "verified_available": 90.0,
+      "unverified": 0.0,
+      "unavailable": 10.0
+    },
+    "observed_state_verified": 15,
+    "full_probability_vectors_verified": 0
+  },
+  "folds": null,
+  "source_documents": 20,
+  "fetched_ok": 20,
+  "dated_documents": 17,
+  "state_missing_documents": [
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2020/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2020/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2020/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_apr2023/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2023/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2025/ensodisc.shtml",
+    "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2025/ensodisc.shtml"
+  ],
+  "protocol": {
+    "anchors": {
+      "22": 4,
+      "33": 5,
+      "53": 6,
+      "84": 7,
+      "86": 7
+    },
+    "lead_days": 60,
+    "years": [
+      2017,
+      2020,
+      2023,
+      2025
+    ],
+    "outer_years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "inner_years": 3,
+    "latest_as_of": "publication_date strictly before issue local day",
+    "content_authentication": "not independently certified",
+    "probability_parser": "sparse text mentions only"
+  },
+  "script_sha256": "f008c8e76a613975cb6621f369882c03c170a2a04bae8afba7735133f73fe0c0",
+  "models_fitted": 0,
+  "ml_pipeline_modified": false
+}

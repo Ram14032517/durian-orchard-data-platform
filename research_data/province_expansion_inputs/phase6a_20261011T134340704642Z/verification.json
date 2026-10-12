@@ -1,0 +1,78 @@
+{
+  "training_performed": false,
+  "historical_pit_certified": false,
+  "sealed_artifacts": 42,
+  "protected_files": 685,
+  "production_sha256": "b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680",
+  "original_evaluation_keys": 45,
+  "new_evaluation_keys": 45,
+  "fold_contexts": 72,
+  "dependency_checks": 130887,
+  "roles": {
+    "issue_rule": 72,
+    "feature": 124740,
+    "training_label": 5130,
+    "evaluation_target": 540,
+    "selection_label": 405
+  },
+  "source_availability": {
+    "unverified": 62
+  },
+  "warnings": {
+    "availability_status=unverified": 130347,
+    "Missing publication date for the exact source version": 130347,
+    "Missing or mismatched version-specific publication evidence": 130347,
+    "Issue rule created after historical issue date": 72,
+    "Later evaluation reference; finality must be checked separately": 540
+  },
+  "weather_by_province": [
+    {
+      "province_code": "21",
+      "rows": 9497,
+      "first": "2000-01-01",
+      "last": "2025-12-31"
+    },
+    {
+      "province_code": "30",
+      "rows": 9497,
+      "first": "2000-01-01",
+      "last": "2025-12-31"
+    },
+    {
+      "province_code": "77",
+      "rows": 9497,
+      "first": "2000-01-01",
+      "last": "2025-12-31"
+    },
+    {
+      "province_code": "80",
+      "rows": 9497,
+      "first": "2000-01-01",
+      "last": "2025-12-31"
+    },
+    {
+      "province_code": "85",
+      "rows": 9497,
+      "first": "2000-01-01",
+      "last": "2025-12-31"
+    }
+  ],
+  "missing_weather_values": 0,
+  "api_versions": [
+    "v2.10.0"
+  ],
+  "source_models": [
+    "MERRA2",
+    "POWER",
+    "SRB",
+    "SYN1DEG"
+  ],
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "requests": "2.34.2",
+    "openpyxl": "3.1.5",
+    "scikit-learn": "1.9.1",
+    "catboost": "1.2.10"
+  }
+}

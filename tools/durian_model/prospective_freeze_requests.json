@@ -1,0 +1,66 @@
+{
+  "candidate": {
+    "kind": "candidate",
+    "status": "pending_approval",
+    "selected_model": null,
+    "model_version": null,
+    "artifacts": {},
+    "schedule": {
+      "target_year": 2027,
+      "lead_days": 60,
+      "anchors": {
+        "22": "04-01",
+        "33": "05-01",
+        "53": "06-01",
+        "84": "07-01",
+        "86": "07-01"
+      },
+      "issues": {
+        "22": "2027-01-31T00:00:00+07:00",
+        "33": "2027-03-02T00:00:00+07:00",
+        "53": "2027-04-02T00:00:00+07:00",
+        "84": "2027-05-02T00:00:00+07:00",
+        "86": "2027-05-02T00:00:00+07:00"
+      },
+      "shared_fit_cutoff": "2027-01-31T00:00:00+07:00"
+    },
+    "required_inputs": {},
+    "feature_lineage": {},
+    "truth_policy": "score first-release and revised actual separately; never overwrite",
+    "training_authorized": false,
+    "issuance_authorized": false,
+    "historical_pit_certified": false
+  },
+  "baseline": {
+    "kind": "baseline",
+    "status": "pending_approval",
+    "selected_model": null,
+    "model_version": null,
+    "artifacts": {},
+    "schedule": {
+      "target_year": 2027,
+      "lead_days": 60,
+      "anchors": {
+        "22": "04-01",
+        "33": "05-01",
+        "53": "06-01",
+        "84": "07-01",
+        "86": "07-01"
+      },
+      "issues": {
+        "22": "2027-01-31T00:00:00+07:00",
+        "33": "2027-03-02T00:00:00+07:00",
+        "53": "2027-04-02T00:00:00+07:00",
+        "84": "2027-05-02T00:00:00+07:00",
+        "86": "2027-05-02T00:00:00+07:00"
+      },
+      "shared_fit_cutoff": "2027-01-31T00:00:00+07:00"
+    },
+    "required_inputs": {},
+    "feature_lineage": {},
+    "truth_policy": "score first-release and revised actual separately; never overwrite",
+    "training_authorized": false,
+    "issuance_authorized": false,
+    "historical_pit_certified": false
+  }
+}
