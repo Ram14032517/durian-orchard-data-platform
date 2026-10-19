@@ -199,7 +199,7 @@ def render_report():
             feature['geometry'] = mapping(shapely.orient_polygons(shape(feature['geometry']), exterior_cw=True))
     def safe_json(obj):
         return json.dumps(obj, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
-    template = (ROOT/'tools/soil_evidence_report.html').read_text(encoding='utf-8')
+    template = (ROOT/'web/templates/soil_evidence_report.html').read_text(encoding='utf-8')
     rendered = template.replace('/*__D3__*/', (ROOT/'.build/soil-evidence/d3.min.js').read_text(encoding='utf-8'))
     rendered = rendered.replace('__ANALYSIS_JSON__', safe_json(data)).replace('__GEOMETRY_JSON__', safe_json(maps))
     (OUT/'START_HERE.html').write_text(rendered, encoding='utf-8')

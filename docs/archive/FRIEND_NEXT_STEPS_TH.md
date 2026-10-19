@@ -2,7 +2,7 @@
 
 อัปเดต 26 กันยายน 2569 — อ่านไฟล์นี้ก่อนเริ่มงาน
 
-**มีงานต่อจากคู่มือนี้แล้ว:** ดู `docs/archive/MAP_QA_2026-09-26_TH.md` สำหรับผลทดสอบในรอบนั้น ตารางฤดูในหน้ารวม ปุ่มภาพรวมประเทศ cache TTL และชุดทดสอบ API ทำแล้ว รายการด้านล่างเป็นแผนเดิม ให้เทียบสถานะปัจจุบันใน `docs/FIVE_PROVINCE_HANDOFF_TH.md` ก่อนทำซ้ำ
+**มีงานต่อจากคู่มือนี้แล้ว:** ดู `docs/archive/MAP_QA_2026-09-26_TH.md` สำหรับผลทดสอบในรอบนั้น ตารางฤดูในหน้ารวม ปุ่มภาพรวมประเทศ cache TTL และชุดทดสอบ API ทำแล้ว รายการด้านล่างเป็นแผนเดิม ให้เทียบสถานะปัจจุบันใน `docs/operations/FIVE_PROVINCE_HANDOFF_TH.md` ก่อนทำซ้ำ
 
 ## 1. เป้าหมายและขอบเขต
 
@@ -18,7 +18,7 @@
 - `SEASONS_MAP.html` เป็นหน้าฤดูเก็บเกี่ยว 5 จังหวัด ส่วน `UNIFIED_MAP.html` เป็นหน้ารวมดิน/อากาศ/ผลผลิตที่ยังต้องทดสอบ end-to-end
 - มีข้อมูลอากาศรายวัน 5 จุดอ้างอิงจังหวัด และข้อมูลผลผลิตระดับจังหวัด ไม่ใช่ค่าจริงทุกสวนหรือทุกอำเภอ
 - จุดอ้างอิงอำเภอ 68 จุดมาจากรูปแปลงดิน ไม่ใช่ทะเบียนสวนทุเรียนที่ตรวจยืนยันแล้ว
-- อ่านรายละเอียดความครอบคลุมเดิมใน `docs/FIVE_PROVINCE_HANDOFF_TH.md` และ `research_data/five_province_history/README_TH.md`
+- อ่านรายละเอียดความครอบคลุมเดิมใน `docs/operations/FIVE_PROVINCE_HANDOFF_TH.md` และ `research_data/five_province_history/README_TH.md`
 
 ## 3. ต้องแยก branch ไหม?
 
@@ -34,10 +34,10 @@ git switch -c codex/map-ui-qa
 
 | ลำดับ | Branch ที่แนะนำ | งานและไฟล์หลัก |
 |---|---|---|
-| 1 | `codex/map-ui-qa` | ทดสอบ/แก้หน้าฤดูและหน้ารวม: `tools/five_province_seasons.html`, `tools/unified_orchard_map.html` |
+| 1 | `codex/map-ui-qa` | ทดสอบ/แก้หน้าฤดูและหน้ารวม: `web/templates/five_province_seasons.html`, `web/templates/unified_orchard_map.html` |
 | 2 | `codex/weather-api-tests` | ทดสอบ API/cache: `tools/serve_orchard_analysis.py`; เพิ่ม `tests/test_orchard_api.py` |
 | 3 | `codex/phenology-evidence` | รวบรวมหลักฐานฤดู/เหตุการณ์: เพิ่ม `research_data/five_province_history/phenology_events.csv` และ `EVIDENCE_SOURCES_TH.md` |
-| 4 | `codex/history-analysis` | วิเคราะห์เปรียบเทียบจากหลักฐานที่ตรวจแล้ว: `tools/build_history_notebook.py`, `tools/build_five_province_history.py` |
+| 4 | `codex/history-analysis` | วิเคราะห์เปรียบเทียบจากหลักฐานที่ตรวจแล้ว: `tools/notebooks/build_history_notebook.py`, `tools/build_five_province_history.py` |
 
 หากมีเพื่อนคนเดียว เริ่มลำดับ 1 ให้ผ่านและ merge ก่อน แล้วค่อยสร้าง branch งานถัดไป ไม่จำเป็นต้องเปิดครบสี่ branch พร้อมกัน หากหลายคนช่วยกัน ให้แบ่งเจ้าของไฟล์เพื่อไม่แก้ template เดียวกันพร้อมกัน
 
@@ -102,7 +102,7 @@ evidence_type,source_url,source_title,retrieved_date,notes
 - แยก `observed` (รายงานว่าเกิดจริง), `forecast` (คาดการณ์), `administrative_cut_date` (วันเริ่มตัดตามประกาศ), `backcast_scenario` (คำนวณสมมติ)
 - วันที่เกิดเหตุไม่ใช่วันที่ข่าวเผยแพร่; ถ้ารู้แค่เดือนให้เก็บ precision ว่า month ไม่สร้างวันขึ้นเอง
 - ไม่ทราบพิกัด/พันธุ์ให้เว้นว่าง ไม่ใส่พิกัดกลางจังหวัดแล้วเรียกว่าสวน
-- ตรวจลิงก์รายงานเหตุการณ์ที่ hardcode ใน `tools/unified_orchard_map.html` และ `tools/five_province_history.html` ก่อนนำมาใช้วิเคราะห์
+- ตรวจลิงก์รายงานเหตุการณ์ที่ hardcode ใน `web/templates/unified_orchard_map.html` และ `web/templates/five_province_history.html` ก่อนนำมาใช้วิเคราะห์
 - ผลผลิต OAE ที่มีเป็นทุกพันธุ์ระดับจังหวัด ไม่ใช่หมอนทองทั้งหมด ไม่แจกยอดลงอำเภอหรือชุดดิน
 - คุณสมบัติดินจากแผนที่ไม่ใช่ผลตรวจความอุดมสมบูรณ์ปัจจุบันของสวน และ polygon ดินไม่ยืนยันว่ามีทุเรียนปลูก
 
@@ -119,7 +119,7 @@ evidence_type,source_url,source_title,retrieved_date,notes
 ก่อน commit ให้ `git status` และ `git diff` แล้ว stage **เฉพาะไฟล์ของงานตนเอง** ตัวอย่างงาน UI:
 
 ```powershell
-git add tools/unified_orchard_map.html tools/five_province_seasons.html research_data/five_province_history/UNIFIED_MAP.html research_data/five_province_history/SEASONS_MAP.html
+git add web/templates/unified_orchard_map.html web/templates/five_province_seasons.html research_data/five_province_history/UNIFIED_MAP.html research_data/five_province_history/SEASONS_MAP.html
 git diff --cached --stat
 git commit -m "fix: validate five-province map interactions"
 git push -u origin codex/map-ui-qa

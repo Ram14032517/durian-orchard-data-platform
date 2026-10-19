@@ -15,8 +15,8 @@ class BundleTests(TestCase):
             for name in INPUTS:
                 (base/name).write_bytes(b'source bytes\r\n')
             (folder/'panel.csv').write_bytes(b'model bytes\r\n')
-            (root/'docs').mkdir()
-            (root/'docs/PORTFOLIO_PUBLICATION_TH.md').write_text('publication notes')
+            (root/'docs/operations').mkdir(parents=True)
+            (root/'docs/operations/PORTFOLIO_PUBLICATION_TH.md').write_text('publication notes')
             path,created=package(root)
             self.assertTrue(created)
             with ZipFile(path) as archive:

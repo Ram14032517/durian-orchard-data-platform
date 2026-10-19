@@ -2,7 +2,7 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
-const source=fs.readFileSync('tools/orchard_monthly_report.js','utf8');
+const source=fs.readFileSync('web/assets/js/orchard_monthly_report.js','utf8');
 const chartSource=source.slice(source.indexOf('function telemetryChart('),source.indexOf('let historyRequest='));
 const context={esc:v=>String(v),fmt:v=>v==null?'—':String(v),Date,Number,Math};
 vm.createContext(context);vm.runInContext(chartSource,context);

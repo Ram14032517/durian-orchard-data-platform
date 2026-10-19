@@ -121,7 +121,7 @@ def run():
         '- [scikit-learn: cross-validation และข้อจำกัดการเลือกโมเดล](https://scikit-learn.org/stable/modules/cross_validation.html)',
         '- [CatBoost: validation dataset และการตรวจ overfitting](https://catboost.ai/docs/en/concepts/overfitting-detector)',
         'ตรวจเอกสาร 10 ต.ค. 2569']
-    path = ROOT / 'docs/ML_ISSUE_DATE_EXPERIMENT_TH.md'
+    path = ROOT / 'docs/research/modeling/ML_ISSUE_DATE_EXPERIMENT_TH.md'
     path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(path)
 

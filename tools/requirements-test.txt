@@ -1,0 +1,6 @@
+# Install from the project root with its own Python environment.
+-r requirements-national-analysis.txt
+-r requirements-cloud.txt
+PyYAML>=6,<7
+pyshp>=2.3,<4
+pyproj>=3.6,<4

@@ -5,7 +5,7 @@ const root = new URL('../', import.meta.url);
 const require = createRequire(new URL('.build/lumen/package.json', root));
 const { build } = require('esbuild');
 await build({
-  entryPoints: [fileURLToPath(new URL('tools/orchard_lumen.js', root))],
+  entryPoints: [fileURLToPath(new URL('web/assets/js/orchard_lumen.js', root))],
   nodePaths: [fileURLToPath(new URL('.build/lumen/node_modules', root))],
   outfile: fileURLToPath(new URL('research_data/five_province_history/orchard_lumen.js', root)),
   bundle: true, minify: true, format: 'esm', target: ['es2020'], legalComments: 'eof',

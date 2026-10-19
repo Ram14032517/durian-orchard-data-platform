@@ -32,8 +32,8 @@ class ProjectOrganizationTests(unittest.TestCase):
         self.assertEqual(example.returncode, 1)
 
     def test_secret_helpers_use_moved_paths(self):
-        for name in ['tools/audit_staged_secrets.py', 'tools/move_gateway_ingest_secrets.ps1',
-                     'tools/sanitize_firmware_secrets.ps1']:
+        for name in ['tools/maintenance/audit_staged_secrets.py', 'tools/maintenance/move_gateway_ingest_secrets.ps1',
+                     'tools/maintenance/sanitize_firmware_secrets.ps1']:
             source = (ROOT / name).read_text(encoding='utf-8')
             self.assertRegex(source, r'iot[/\\]receiver_gateway[/\\]')
 

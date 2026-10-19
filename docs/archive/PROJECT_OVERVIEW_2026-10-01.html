@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="th">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ภาพรวมโปรเจกต์สวนทุเรียน</title>
+<style>
+:root{color-scheme:light dark;--bg:#f7f8f5;--fg:#202923;--muted:#526057;--line:#ced8cf;--accent:#226843;--panel:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 system-ui,-apple-system,sans-serif}main{max-width:1050px;margin:auto;padding:36px 24px 60px}h1{font-size:28px;line-height:1.4;margin:8px 0}h2{font-size:22px;margin:26px 0 12px}h3{font-size:18px}p{margin:8px 0 16px}.muted,small{color:var(--muted)}nav{display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:24px}button{font:inherit;padding:7px 14px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg);cursor:pointer}button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}a{color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}.box{padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:8px}.note{border-left:3px solid var(--accent);padding:12px 18px;background:var(--panel);margin:20px 0}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.flow span{padding:9px 12px;border:1px solid var(--line);border-radius:5px}ul,ol{padding-left:25px}li{margin:8px 0}.table{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:15px}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel)}footer{margin-top:36px;border-top:1px solid var(--line);padding-top:16px}code{font-size:.9em;overflow-wrap:anywhere}[hidden]{display:none!important}@media(prefers-color-scheme:dark){:root{--bg:#18201b;--fg:#edf2ed;--muted:#b4c1b7;--line:#3e5143;--accent:#8fcea6;--panel:#232d26}button[aria-pressed=true]{color:#18201b}}@media(max-width:600px){main{padding:22px 16px}h1{font-size:24px}th,td{padding:9px}}@media print{nav{display:none}section[hidden]{display:block!important}section{break-inside:avoid}body{background:white;color:black}}
+</style>
+<main>
+<small>DURIAN ORCHARD DATA PLATFORM · ข้อมูลตรวจจาก checkout วันที่ 1 ตุลาคม 2569</small>
+<h1>ภาพรวมโปรเจกต์สวนทุเรียน</h1>
+<p class="muted">ระบบติดตามสภาพสวนด้วย IoT และงานศึกษาดิน–อากาศ–ผลผลิตใน 5 จังหวัด</p>
+<nav aria-label="เลือกเนื้อหา">
+<button type="button" aria-pressed="true" data-view="overview">ภาพรวม</button>
+<button type="button" aria-pressed="false" data-view="iot">IoT สวนจริง</button>
+<button type="button" aria-pressed="false" data-view="regional">ข้อมูล 5 จังหวัด</button>
+<button type="button" aria-pressed="false" data-view="next">ใช้งานบน Mac / งานต่อ</button>
+</nav>
+<section id="overview">
+<h2>สองสายงานที่สนับสนุนโครงงาน</h2>
+<div class="grid"><article class="box"><h3>1. เฝ้าระวังสวนจริง</h3><p>เก็บข้อมูลดินและอากาศ ตรวจค่าขาดหรือค้าง และคัดช่วงที่ควรเข้าตรวจสวน มีโค้ด Gateway ระบบรับข้อมูล และ baseline ตรวจความผิดปกติ</p><p class="muted">ยังต้องเก็บอาการและผลยืนยันโรคของต้นจริงก่อนประเมินการทำนายโรค</p></article><article class="box"><h3>2. ศึกษาข้อมูลระดับภูมิภาค</h3><p>เปรียบเทียบ 5 จังหวัดผ่านแผนที่ กราฟอากาศ ชุดดิน และผลผลิต ทดลองโมเดลผลผลิตโดยแบ่งข้อมูลตามเวลา</p><p class="muted">ผลระดับจังหวัดใช้แทนสุขภาพหรือผลผลิตของต้นแต่ละต้นไม่ได้</p></article></div>
+<h2>เส้นทางข้อมูลในโค้ด Gateway ปัจจุบัน</h2>
+<div class="flow"><span>ดิน RS485 + อากาศ Tuya</span>→<span>ESP32 Gateway</span>→<span>Supabase / Google Sheets</span>→<span>ตรวจคุณภาพ / วิเคราะห์</span></div>
+<p class="muted">Gateway ยังดึงพยากรณ์ TMD และ NDVI ส่วน LoRa เป็นเส้นทางที่เอกสารระบุ แต่ sender หลักยังว่าง จึงยังยืนยันเส้นทาง LoRa จาก repository นี้ไม่ได้</p>
+<h2>จุดเริ่มอ่าน</h2><ul><li><a href="../../00_START_HERE_TH.md">คู่มือเริ่มต้น</a> และ <a href="../setup/MAC_SETUP_TH.md">คู่มือ Mac</a></li><li><a href="../operations/FIVE_PROVINCE_HANDOFF_TH.md">สถานะงานและข้อจำกัด</a></li><li><a href="../../00_OPEN_ME.ipynb">Notebook หลัก</a> สำหรับอ่านและรันการวิเคราะห์</li></ul>
+<div class="note">หน้าภาพรวมนี้เปิดเป็นไฟล์ HTML ได้โดยตรง ใช้ได้โดยไม่พึ่ง React หรือส่วนขยาย Canvas ส่วนแผนที่วิเคราะห์ให้เปิดด้วย 00_OPEN_REPORT.command เพื่อเริ่มเซิร์ฟเวอร์</div>
+</section>
+<section id="iot" hidden>
+<h2>ระบบ IoT ที่มีอยู่</h2><ul><li>Gateway อ่านเซนเซอร์ดินผ่าน Modbus และอากาศจาก Tuya</li><li>ส่งข้อมูลไป Supabase และ Google Sheets พร้อม event_id สำหรับกันข้อมูลซ้ำ</li><li>มีสคริปต์ตรวจช่วงขาดหาย ค่าอากาศค้าง และโมเดล median/MAD สำหรับคัดค่าผิดปกติ</li><li>โค้ด <code>sender_1/sender_1.ino</code> ยังมีเพียง setup/loop เปล่า</li></ul>
+<h2>Snapshot ที่อยู่ใน repository</h2><p>14 สิงหาคม–19 กันยายน 2569 จำนวน 2,409 แถว เป็นสำเนาที่บันทึกไว้ ไม่ใช่สถานะอุปกรณ์สด</p>
+<div class="table"><table><caption>คุณภาพข้อมูลจาก data/analysis_soil_2026-09-19/profile.json</caption><thead><tr><th>รายการ</th><th>จำนวน</th></tr></thead><tbody><tr><td>รอบข้อมูล 15 นาทีที่ขาด</td><td>1,058 รอบ</td></tr><tr><td>ช่องว่างเกิน 30 นาที</td><td>40 ช่วง</td></tr><tr><td>ช่องว่างยาวที่สุด</td><td>11 ชั่วโมง</td></tr><tr><td>แถวค่าอากาศค้างเพิ่มตามกฎตรวจ</td><td>1,365 แถว</td></tr><tr><td>แถวที่ weather signature ใช้ได้</td><td>1,000 แถว</td></tr></tbody></table></div>
+<h2>หลักฐานที่ยังต้องเพิ่ม</h2><p>สอบเทียบค่าดิน ตรวจ EC/N/P/K และเก็บ tree_id เวลาให้น้ำ ภาพถ่าย อาการ ระดับความรุนแรง และผลยืนยันจากผู้ตรวจ เพื่อเชื่อมสภาพแวดล้อมกับเหตุการณ์ที่ต้นจริง</p><p class="muted">ยังไม่ได้ยืนยันสถานะ deployment หรือการส่งข้อมูลจากอุปกรณ์ในสวนในรอบนี้</p>
+</section>
+<section id="regional" hidden>
+<h2>จันทบุรี · ศรีสะเกษ · อุตรดิตถ์ · สุราษฎร์ธานี · ชุมพร</h2><p>แผนที่รวมใช้ข้อมูลอากาศ NASA POWER ข้อมูลผลผลิตระดับจังหวัด และขอบเขตดิน มีเครื่องมือเปรียบเทียบพื้นที่ A/B และส่งออกข้อมูล</p>
+<ul><li>อากาศรายวัน: 83,520 จังหวัด–วัน ช่วง 1981–25 ก.ย. 2026 รวมวันที่ค่าขาด</li><li>Panel รายเดือน: 2,745 แถว โดยผลทดลองใช้แถวที่มีข้อมูลครบ 748 แถว แบ่ง train 602 / validation 71 / test 75</li><li>Panel รายปี: 145 จังหวัด–ปี แบ่ง train 125 / validation 10 / test 10</li></ul>
+<h2>ผลทดลองโมเดลรายเดือนที่บันทึกไว้</h2><div class="table"><table><caption>ที่มา: training/model_metrics.csv · ชุดทดสอบ 75 แถว · MAE ต่ำกว่าดีกว่า</caption><thead><tr><th>โมเดล</th><th>Test MAE (ตัน)</th></tr></thead><tbody><tr><td>Seasonal median</td><td>15,271</td></tr><tr><td>Ridge จังหวัด–เดือน (เลือกด้วย validation)</td><td>14,685</td></tr><tr><td>Ridge เพิ่มอากาศเดือนก่อน</td><td>15,284</td></tr></tbody></table></div>
+<div class="note">การเพิ่มอากาศเดือนก่อนยังไม่ช่วยในผลทดลองชุดนี้ MAE เป็นความคลาดเคลื่อนหน่วยตัน ไม่ใช่เปอร์เซ็นต์ความแม่นยำ และผลนี้ไม่ใช่การวินิจฉัยโรค</div>
+<p>รุ่นรายปีเลือก window 6 เดือนด้วย validation ได้ test MAE ประมาณ 212 กก./ไร่ เทียบ baseline ไม่เพิ่มอากาศประมาณ 183 กก./ไร่ จึงยังไม่มีหลักฐานว่ารุ่นที่เลือกเหนือกว่า baseline บน test ซึ่งมีเพียง 10 จังหวัด–ปี</p>
+<p><a href="../../research_data/five_province_history/training/README_TH.md">อ่านรายละเอียดชุดเทรนและข้อจำกัด</a></p>
+</section>
+<section id="next" hidden>
+<h2>เปิดใช้งานบน Mac</h2><ol><li>เปิดโฟลเดอร์โปรเจกต์ใน VS Code</li><li>เลือก Terminal → Run Task → Durian: 01 เปิดแผนที่ (เริ่มตรงนี้) หรือดับเบิลคลิก <code>00_OPEN_REPORT.command</code> ใน Finder</li><li>เมื่อเปิด Notebook เลือก Python environment <code>.build/national-analysis-venv/bin/python</code></li></ol><p><a href="../setup/MAC_SETUP_TH.md">อ่านคำสั่งและวิธีเลือก interpreter</a></p>
+<h2>สิ่งที่ควรทำต่อ</h2><ol><li>ยืนยันฮาร์ดแวร์ที่ติดตั้งจริง และตัดสินใจว่าจะใช้ดินต่อ Gateway โดยตรงหรือผ่าน LoRa</li><li>ทดสอบการอ่านเซนเซอร์และการส่งข้อมูลต่อเนื่อง พร้อมตรวจคุณภาพข้อมูลใหม่</li><li>เก็บข้อมูลรายต้น การให้น้ำ และอาการจริงให้เชื่อมกับเวลาในระบบได้</li><li>ทำ alert ที่บอกเหตุผลและสถานะเซนเซอร์ แล้วประเมินกับผลตรวจสวน</li><li>ใช้ข้อมูล 5 จังหวัดเป็นบริบทวิจัยและผลทดลองที่อธิบายข้อจำกัดได้</li></ol>
+</section>
+<footer><small>สรุปจาก checkout ae99d3b และผลโมเดลที่บันทึกไว้ การตั้งค่า Mac จัดทำในรอบนี้ ข้อมูลในหน้านี้ไม่อัปเดตอัตโนมัติ</small></footer>
+</main>
+<script>
+document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{
+document.querySelectorAll('[data-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+document.querySelectorAll('main>section').forEach(section=>section.hidden=section.id!==button.dataset.view);
+}));
+</script>
+</html>

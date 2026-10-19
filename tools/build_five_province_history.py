@@ -57,7 +57,7 @@ def main():
     soil_df=pd.DataFrame(soils).drop_duplicates()
     soil_df.to_csv(OUT/'soil_properties_by_district.csv',index=False,encoding='utf-8-sig')
     data=dict(points=clean(points),annual=clean(a),monthly=clean(m),harvest=clean(harvest),coverage=coverage,soils=clean(soil_df))
-    template=(ROOT/'tools/five_province_history.html').read_text(encoding='utf-8')
+    template=(ROOT/'web/templates/five_province_history.html').read_text(encoding='utf-8')
     (OUT/'HISTORY.html').write_text(template.replace('__DATA__',json.dumps(data,ensure_ascii=False,allow_nan=False)),encoding='utf-8')
     print('Validated:',len(d),'daily rows;',len(a),'province-years;',len(harvest),'harvest months')
     print(pd.DataFrame(coverage).to_string(index=False))

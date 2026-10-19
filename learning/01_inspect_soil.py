@@ -1,6 +1,6 @@
 """บทฝึกแรก: อ่านข้อมูลสวนอย่างเดียว ไม่แก้ไฟล์ต้นฉบับ.
 
-Run with a working Python interpreter; see docs/LEARNING_PATH_TH.md.
+Run with a working Python interpreter; see docs/setup/LEARNING_PATH_TH.md.
 """
 
 from pathlib import Path

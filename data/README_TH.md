@@ -1,6 +1,6 @@
 # ข้อมูลสวนจริง — แยกจากข้อมูลภูมิภาค
 
-อ่าน [บริบทสวน](../docs/ORCHARD_CONTEXT_TH.md) และ [กฎคลีนอากาศค้าง](../docs/WEATHER_CLEANING_TH.md) ก่อนใช้ตัวเลข
+อ่าน [บริบทสวน](../docs/orchard/ORCHARD_CONTEXT_TH.md) และ [กฎคลีนอากาศค้าง](../docs/orchard/WEATHER_CLEANING_TH.md) ก่อนใช้ตัวเลข
 
 | โฟลเดอร์ | หน้าที่ |
 | --- | --- |

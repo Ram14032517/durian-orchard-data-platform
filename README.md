@@ -6,7 +6,9 @@ An academic project connecting orchard IoT measurements with soil maps, historic
 
 **เริ่มใช้งานตามลำดับ:** [00_START_HERE_TH.md](00_START_HERE_TH.md) — จุดเปิดแผนที่/Notebook โฟลเดอร์ข้อมูล และลำดับเตรียมโมเดลในไฟล์เดียว
 
-[คู่มือภาษาไทยและการติดตั้ง IoT](README_TH.md) · [Training data guide](research_data/five_province_history/training/README_TH.md) · [Collaboration handoff](docs/FIVE_PROVINCE_HANDOFF_TH.md)
+[คู่มือภาษาไทยและการติดตั้ง IoT](README_TH.md) · [Training data guide](research_data/five_province_history/training/README_TH.md) · [Collaboration handoff](docs/operations/FIVE_PROVINCE_HANDOFF_TH.md)
+
+จัดโฟลเดอร์ใหม่: [โค้ดหน้าเว็บ](web/README_TH.md) · [คู่มือแยกหมวด](docs/README_TH.md) · [ตั้งค่าบน Mac](docs/setup/MAC_SETUP_TH.md)
 
 ## What this project does
 
@@ -21,7 +23,7 @@ An academic project connecting orchard IoT measurements with soil maps, historic
 
 ## Start here
 
-ใน VS Code เลือก **Terminal → Run Task → Durian: 01 เปิดแผนที่ (เริ่มตรงนี้)** หรือดับเบิลคลิก `00_OPEN_REPORT.cmd` ตัวเปิดจะใช้ข้อมูลของ repo นี้เท่านั้น และเลือกพอร์ตว่างหากมีสำเนา portfolio เปิดอยู่ ไม่ต้อง activate Python ด้วย PowerShell
+ใน VS Code เลือก **Terminal → Run Task → Durian: 01 เปิดแผนที่ (เริ่มตรงนี้)** หรือดับเบิลคลิก `00_OPEN_REPORT.command` บน Mac / `00_OPEN_REPORT.cmd` บน Windows ตัวเปิดจะใช้ข้อมูลของ repo นี้เท่านั้น และเลือกพอร์ตว่างหากมีสำเนา portfolio เปิดอยู่ ไม่ต้อง activate Python ด้วย PowerShell
 
 งานอื่นอยู่ใน Run Task เช่นกัน: อ่านรายงานรายเดือน (เลือกจังหวัด/ปี/เดือน), เตรียม ZIP ข้อมูลเทรน, ทดสอบ Python และรันโมเดล baseline งานรันโมเดลจะเขียนผลทดลองใหม่ ส่วนงาน ZIP จะรักษา snapshot เดิม ไม่แก้ CSV ต้นฉบับ
 
@@ -49,7 +51,7 @@ The launcher opens [the local dashboard](http://127.0.0.1:8871/research_data/fiv
 4. Review monthly production evidence and source notes.
 5. Use the training-data section to access datasets, or export the displayed weather snapshot.
 
-The launcher runs the local server in the background; closing its task terminal does not stop it. For a foreground server you can stop with `Ctrl+C`, use **Durian: 90 เปิดเซิร์ฟเวอร์แผนที่ (ขั้นสูง)** instead. Do not open the HTML template in `tools/` with `file://`: it is not the served dashboard. NASA API access needs an internet connection; available provincial fallback data is explicitly labelled and is not a measurement at the selected point.
+The launcher runs the local server in the background; closing its task terminal does not stop it. For a foreground server you can stop with `Ctrl+C`, use **Durian: 90 เปิดเซิร์ฟเวอร์แผนที่ (ขั้นสูง)** instead. HTML source templates live in `web/templates/`; open the dashboard with the launcher so that its API works. NASA API access needs an internet connection; available provincial fallback data is explicitly labelled and is not a measurement at the selected point.
 
 Training CSVs are in `research_data/five_province_history/training/`. If the ignored ZIP is absent after cloning, run the ZIP task before downloading it from the dashboard. It packages saved regional files only, does not refresh model results, and preserves an existing valid ZIP. Individual CSVs remain available without the ZIP.
 
@@ -71,6 +73,9 @@ Select that environment as the notebook kernel. If VS Code remembers the old `.v
 | `research_data/five_province_history/UNIFIED_MAP.html` | Generated dashboard served by the local server |
 | `research_data/five_province_history/training/` | Modeling panels, provenance, predictions, metrics, and documentation |
 | `tools/` | Data preparation, dashboard builders, analysis scripts, and local server |
+| `web/templates/`, `web/assets/` | Dashboard HTML source, JavaScript and CSS |
+| `tools/notebooks/` | Notebook builders; run as `python -m tools.notebooks.<module>` |
+| `tools/maintenance/` | Local configuration and repository maintenance |
 | `iot/` | Device/gateway firmware, sensor manuals and hardware diagnostics |
 | `api/` | Google Apps Script and Supabase ingestion; run Supabase CLI from `api/` |
 | `docs/` | Sensor context, quality reviews, learning notes, and handoff documentation |
@@ -98,4 +103,4 @@ The monthly experiment compares seasonal and Ridge baselines. In the recorded te
 
 ## Before making the repository public
 
-Review [the publication checklist](docs/PORTFOLIO_PUBLICATION_TH.md). Ignoring a file does not remove it from past commits. Do not publish credentials or orchard/person identifiers without permission. No public-release security certification is implied by this README.
+Review [the publication checklist](docs/operations/PORTFOLIO_PUBLICATION_TH.md). Ignoring a file does not remove it from past commits. Do not publish credentials or orchard/person identifiers without permission. No public-release security certification is implied by this README.

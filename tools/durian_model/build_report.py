@@ -371,7 +371,7 @@ def build_report():
                             topMargin=42, bottomMargin=52, title='Durian Yield Regression with Stage Weather Features',
                             author='Durian orchard research project')
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
-    (ROOT / 'docs/DURIAN_RIDGE_VPD_REPORT_TH.md').write_text('\n'.join(markdown), encoding='utf-8')
+    (ROOT / 'docs/research/modeling/DURIAN_RIDGE_VPD_REPORT_TH.md').write_text('\n'.join(markdown), encoding='utf-8')
     print('Report:', output, flush=True)
 
 

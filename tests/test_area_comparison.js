@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 function harness(fetch=async()=>({ok:true,json:async()=>({features:[]})})){
-  const html=fs.readFileSync(path.join(__dirname,'../tools/unified_orchard_map.html'),'utf8');
+  const html=fs.readFileSync(path.join(__dirname,'../web/templates/unified_orchard_map.html'),'utf8');
   const code=html.slice(html.indexOf('function areaControl('),html.indexOf('const events='));
   const controls=new Map(),fits=[];
   const $=id=>{
@@ -71,7 +71,7 @@ test('area editor collapses only on request, never on selection or focus',async(
 });
 
 test('soil comparison uses the selected real unit, no district-wide proxy or invented pH',()=>{
-  const js=fs.readFileSync(path.join(__dirname,'../tools/orchard_soil_exploration.js'),'utf8');
+  const js=fs.readFileSync(path.join(__dirname,'../web/assets/js/orchard_soil_exploration.js'),'utf8');
   const fn=new Function('DATA',js.slice(js.indexOf('function soilComparisonValues('),js.indexOf('function renderSoilExploration('))+';return soilComparisonValues;')({provinces:[{province_code:'84',province_name:'สุราษฎร์ธานี'}],soil_properties:[{province_code:'84',district:'อ.ท่าชนะ',soil_code:'Bu',soil_name:'สายบุรี',topsoil_ph:'กรดจัด',topsoil_texture:'ดินร่วน',fertility:'ต่ำ'}]});
   assert.equal(fn({code:'84',district:'อ.ท่าชนะ',soil_code:'Bu'})[4],'กรดจัด');
   assert.equal(fn({code:'84',district:'อ.ท่าชนะ',soil_code:'Bu',soil_properties:{topsoil_ph:'กรดปานกลาง'}})[4],'กรดปานกลาง');
@@ -89,7 +89,7 @@ test('a late B layer response cannot replace the current A layer',async()=>{
   assert.equal(ui.state().activeArea,'A');assert.deepEqual(ui.state().features,[{id:'53'}]);
 });
 test('annual comparison uses the exact province/year, never a different-year PDF total',()=>{
-  const js=fs.readFileSync(path.join(__dirname,'../tools/orchard_monthly_report.js'),'utf8');
+  const js=fs.readFileSync(path.join(__dirname,'../web/assets/js/orchard_monthly_report.js'),'utf8');
   const fn=new Function('DATA',js.slice(js.indexOf('function annualRecords('),js.indexOf('function selectReportMonth('))+';return annualRecords;')({annual:[
     {province_code:'84',year_ce:2023,production_tonnes:77585},
     {province_code:'84',year_ce:2025,production_tonnes:79944},

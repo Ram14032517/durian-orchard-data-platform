@@ -1,5 +1,5 @@
 const test=require('node:test');const assert=require('node:assert/strict');
-const {atmosphere,waterBalance,floweringRange}=require('../tools/orchard_physiology.js');
+const {atmosphere,waterBalance,floweringRange}=require('../web/assets/js/orchard_physiology.js');
 test('FAO56 daily calculation, saturated air and zero energy',()=>{
   const x={tmin:20,tmax:30,rh:60,u2:2,rn:12,pressure:101.3};
   const a=atmosphere(x);assert.ok(a.vpd_kpa>1.3&&a.vpd_kpa<1.4);assert.ok(a.et0_mm_day>4&&a.et0_mm_day<6);

@@ -6,7 +6,7 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const pages = [
-  'tools/unified_orchard_map.html',
+  'web/templates/unified_orchard_map.html',
   'research_data/five_province_history/UNIFIED_MAP.html',
 ];
 const province = { province_code: '86', province_name: 'ชุมพร', weather_latitude: 10.31859, weather_longitude: 99.03505 };

@@ -2,7 +2,7 @@
 
 ## Phase 1 — Rebaseline Preparation (ยังไม่ฝึกโมเดล)
 
-อ่าน [แผนและผลตรวจ](../../docs/DURIAN_REBASELINE_PLAN_TH.md) ก่อนดำเนินการ
+อ่าน [แผนและผลตรวจ](../../docs/research/modeling/DURIAN_REBASELINE_PLAN_TH.md) ก่อนดำเนินการ
 Phase 1 ไม่เรียก estimator; หลังอนุมัติ Phase 2 เพิ่ม `--train` แบบ opt-in ใน `experiment_rebaseline.py`
 ค่าเริ่มต้นยังแสดง help เท่านั้น และ `--prepare` ยังคงไม่ฝึกโมเดล
 ใช้ `--prepare` เพื่อสร้าง/audit Features และ 36 nested contexts แล้วเก็บ artifacts ใน
@@ -38,11 +38,11 @@ With Weather ต้องตรง Phase 2 snapshot ก่อน fit และ f
 
 ## Availability Guard (Experimental เท่านั้น)
 
-อ่าน [คู่มือ Guard](../../docs/DURIAN_AVAILABILITY_GUARD_TH.md) ก่อนรันใหม่ คำสั่ง `experiment_issue_date.py` ตอนนี้ตรวจ preflight อย่างเดียวโดยค่าเริ่มต้น เลือก `--mode exploratory` หรือ `--mode strict`; การฝึกต้อง opt-in ด้วย `--train` เท่านั้น รอบเพิ่ม Guard ไม่ได้ฝึกหรือเปลี่ยน MAE เดิม ปฏิทิน fixed-calendar ใหม่เป็น scenario ที่สร้างตอนนี้ ไม่ใช่หลักฐานประกาศในอดีต ผลใหม่แยกไว้ใน `training/issue_date_guarded/<mode>/` ไม่ทับผลเดิม
+อ่าน [คู่มือ Guard](../../docs/research/modeling/DURIAN_AVAILABILITY_GUARD_TH.md) ก่อนรันใหม่ คำสั่ง `experiment_issue_date.py` ตอนนี้ตรวจ preflight อย่างเดียวโดยค่าเริ่มต้น เลือก `--mode exploratory` หรือ `--mode strict`; การฝึกต้อง opt-in ด้วย `--train` เท่านั้น รอบเพิ่ม Guard ไม่ได้ฝึกหรือเปลี่ยน MAE เดิม ปฏิทิน fixed-calendar ใหม่เป็น scenario ที่สร้างตอนนี้ ไม่ใช่หลักฐานประกาศในอดีต ผลใหม่แยกไว้ใน `training/issue_date_guarded/<mode>/` ไม่ทับผลเดิม
 
 ## ทดสอบวันออกพยากรณ์: 10 ตุลาคม 2569
 
-อ่าน [รายงานผล issue-date](../../docs/ML_ISSUE_DATE_EXPERIMENT_TH.md) ก่อนใช้คะแนนเดิมเป็นคะแนนพยากรณ์สด ทดลองกันอากาศหลังวันออกพยากรณ์ออก ใช้ climatology จาก 10 ปีก่อนเป็นสถานการณ์อนาคต แล้วเปรียบเทียบ baselines, Ridge (lag only / stage), Random Forest และ CatBoost บน nested walk-forward เดิม 2017–2025 เลือกทั้ง family/parameter จาก inner validation เท่านั้น อายุผล proxy ตรึง 140 วัน ไม่ปรับสมมติฐานจาก error ปี test
+อ่าน [รายงานผล issue-date](../../docs/research/modeling/ML_ISSUE_DATE_EXPERIMENT_TH.md) ก่อนใช้คะแนนเดิมเป็นคะแนนพยากรณ์สด ทดลองกันอากาศหลังวันออกพยากรณ์ออก ใช้ climatology จาก 10 ปีก่อนเป็นสถานการณ์อนาคต แล้วเปรียบเทียบ baselines, Ridge (lag only / stage), Random Forest และ CatBoost บน nested walk-forward เดิม 2017–2025 เลือกทั้ง family/parameter จาก inner validation เท่านั้น อายุผล proxy ตรึง 140 วัน ไม่ปรับสมมติฐานจาก error ปี test
 
 ```powershell
 & .\.build\national-analysis-venv\Scripts\python.exe -X utf8 tools/durian_model/experiment_issue_date.py
@@ -239,7 +239,7 @@ RONI ที่ใช้ย้อนหลังเป็น revised snapshot แ
 
 - ผลทุกขั้นอยู่ `research_data/five_province_history/training/ridge_vpd_*` ไม่เปลี่ยนข้อมูลดิบหรือผลทดลองก่อนหน้า รันซ้ำจะเขียนทับเฉพาะชุดผลลัพธ์นี้
 - Notebook: `notebooks/DURIAN_RIDGE_VPD_STEPS.ipynb`
-- รายงานอ่าน/คัดลอกข้อความได้: `docs/DURIAN_RIDGE_VPD_REPORT_TH.md`; PDF: `output/pdf/DURIAN_RIDGE_VPD_REPORT_TH.pdf` หากแก้ข้อความถาวร ให้แก้ `report_pages()` ใน `build_report.py` แล้วสร้างใหม่ เพราะ Markdown เป็นผลลัพธ์ที่สร้างจากโค้ด
+- รายงานอ่าน/คัดลอกข้อความได้: `docs/research/modeling/DURIAN_RIDGE_VPD_REPORT_TH.md`; PDF: `output/pdf/DURIAN_RIDGE_VPD_REPORT_TH.pdf` หากแก้ข้อความถาวร ให้แก้ `report_pages()` ใน `build_report.py` แล้วสร้างใหม่ เพราะ Markdown เป็นผลลัพธ์ที่สร้างจากโค้ด
 - ตารางครบ 26 วิธี: `ridge_vpd_comparison_models.csv`; ข้อผิดพลาดจับคู่รายปี: `ridge_vpd_paired_year_errors.csv`; ช่วง bootstrap และข้อจำกัด: `ridge_vpd_evaluation.json`
 - ถ้าแก้แหล่งข้อมูล ต้องรัน 0-6 ใหม่ทั้งหมด; snapshot check จะไม่ยอมให้เอา input ใหม่ปนกับ model เดิม
 - รันขั้นก่อนหน้าซ้ำจะทำให้สถานะผลขั้นถัดไปใช้ไม่ได้จนกว่าจะรันใหม่ตามลำดับ ไฟล์เก่ายังอยู่เพื่อไม่ลบงาน แต่ต้องดู `ridge_vpd_workflow_state.json` ไม่ใช่ดูว่าไฟล์มีอยู่แล้วอย่างเดียว

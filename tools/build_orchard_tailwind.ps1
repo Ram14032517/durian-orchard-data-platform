@@ -11,5 +11,5 @@ if (!(Test-Path -LiteralPath $cliPath)) {
 if ((Get-FileHash -LiteralPath $cliPath -Algorithm SHA256).Hash -ne $expectedHash) {
     throw 'Tailwind CLI checksum mismatch; the downloaded executable was not run.'
 }
-& $cliPath -i (Join-Path $PSScriptRoot 'orchard_tailwind.css') -o (Join-Path $PSScriptRoot 'orchard_tailwind.generated.css') --minify
+& $cliPath -i (Join-Path $projectRoot 'web/assets/css/orchard_tailwind.css') -o (Join-Path $projectRoot 'web/assets/css/orchard_tailwind.generated.css') --minify
 if ($LASTEXITCODE -ne 0) { throw 'Tailwind CSS build failed.' }

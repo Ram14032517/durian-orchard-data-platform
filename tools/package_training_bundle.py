@@ -21,7 +21,7 @@ def package(root=ROOT):
     sources = [(base / name, 'sources/' + name) for name in INPUTS]
     sources.extend((path, path.name) for path in sorted(folder.iterdir())
                    if path.is_file() and path.suffix in ('.csv', '.json', '.md'))
-    sources.append((root / 'docs/PORTFOLIO_PUBLICATION_TH.md', 'PORTFOLIO_PUBLICATION_TH.md'))
+    sources.append((root / 'docs/operations/PORTFOLIO_PUBLICATION_TH.md', 'PORTFOLIO_PUBLICATION_TH.md'))
     for path, _ in sources:
         if not path.is_file():
             raise FileNotFoundError(f'Missing source: {path}')

@@ -4,7 +4,7 @@
 
 ผู้ใช้ต้องการวิเคราะห์ข้อมูล เปรียบเทียบและแสดงผล ไม่ต้องการให้พัฒนาเว็บต่อ หยุดงานเว็บแล้ว เปลี่ยนเป็น `notebooks/01_soil_durian_comparison.ipynb` พร้อมตารางจากข้อมูลจริงและโค้ดศึกษา
 
-สร้างด้วย `tools/build_soil_notebook.py` และรันเซลล์ Python ธรรมดาตามลำดับ เก็บ stdout จริงไว้ แต่ runtime ไม่มี nbformat/nbclient/ipykernel/matplotlib จึงยังไม่ได้ตรวจใน Jupyter kernel หรือทำกราฟในเล่ม ต้องระบุข้อจำกัดนี้ทุกครั้งที่ส่งต่อ และทำส่วนนี้ก่อนขยายงานใหม่ ไม่ claim ว่าตรวจ notebook แบบ native ครบแล้ว
+สร้างด้วย `tools/notebooks/build_soil_notebook.py` และรันเซลล์ Python ธรรมดาตามลำดับ เก็บ stdout จริงไว้ แต่ runtime ไม่มี nbformat/nbclient/ipykernel/matplotlib จึงยังไม่ได้ตรวจใน Jupyter kernel หรือทำกราฟในเล่ม ต้องระบุข้อจำกัดนี้ทุกครั้งที่ส่งต่อ และทำส่วนนี้ก่อนขยายงานใหม่ ไม่ claim ว่าตรวจ notebook แบบ native ครบแล้ว
 
 ## งานที่ผู้ใช้ขอ
 
@@ -18,7 +18,7 @@
 - เปิดรายงาน offline ที่ `C:\project\research_data\soil_evidence_chanthaburi\START_HERE.html`
 - มีสองแผนที่ ตารางสมบัติดิน กราฟพื้นที่ ลิงก์ทางการ และข้อจำกัด ไม่ใส่ค่าจำลอง
 - ตรวจในเบราว์เซอร์แล้ว แผนที่แสดงจริง เลือก Tg ทุ่งหว้าแล้วแผนที่/ตาราง/ข้อความเปลี่ยนตาม
-- สคริปต์และวิธีรันอยู่ `tools/build_soil_evidence.py`, `tools/soil_evidence_report.html` และ README_TH.md ในโฟลเดอร์ผลลัพธ์
+- สคริปต์และวิธีรันอยู่ `tools/build_soil_evidence.py`, `web/templates/soil_evidence_report.html` และ README_TH.md ในโฟลเดอร์ผลลัพธ์
 - ตัวเลข A403 539,971.8 ไร่ จาก 8,512 รูปแปลง ไม่ใช่จำนวนสวน ซ้อนดินได้ 99.998% มี 8.2 ไร่ที่ไม่ซ้อน
 - ข้อมูลต้นฉบับและผลแผนที่ถูก ignore จาก Git เพราะขนาด/เงื่อนไข NC-ND ยังไม่ publish/push
 - ชีตและเซนเซอร์ไม่ได้แก้ในงานนี้ ไม่แตะ repo อื่น ไม่ล็อกอิน ไม่ใช้ reset credit
