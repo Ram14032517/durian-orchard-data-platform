@@ -9,7 +9,7 @@ function harness(fetch=async()=>({ok:true,json:async()=>({features:[]})})){
   const controls=new Map(),fits=[];
   const $=id=>{
     if(!controls.has(id)){
-      const node={value:'',options:[],disabled:false,textContent:'',setAttribute(){},add(option){this.options.push(option);}};
+      const node={value:'',options:[],disabled:false,textContent:'',clientWidth:900,clientHeight:600,setAttribute(){},add(option){this.options.push(option);}};
       Object.defineProperty(node,'innerHTML',{set(){this.options=[];this.value='';}});controls.set(id,node);
     }
     return controls.get(id);

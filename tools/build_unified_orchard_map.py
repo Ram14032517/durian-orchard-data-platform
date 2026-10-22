@@ -1,12 +1,59 @@
 """Prepare public soil/district reference points and unified map assets."""
 import json
 import csv
+import argparse
+import re
 from pathlib import Path
 import pandas as pd
 from shapely.geometry import shape
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'research_data/five_province_history'
+
+def script_json(value):
+    """JSON for a script element, never executable HTML from external strings."""
+    return (json.dumps(value,ensure_ascii=False,allow_nan=False)
+            .replace('&','\\u0026').replace('<','\\u003c').replace('>','\\u003e')
+            .replace('\u2028','\\u2028').replace('\u2029','\\u2029'))
+
+def bundled_payload(path):
+    """Reuse the saved display data explicitly, without changing historical inputs."""
+    text=Path(path).read_text(encoding='utf-8')
+    match=re.search(r'\bconst\s+DATA\s*=',text)
+    if not match:raise ValueError('Saved map has no JSON DATA payload')
+    payload,_=json.JSONDecoder().raw_decode(text[match.end():].lstrip())
+    required={'provinces','districts','boundaries','annual','harvest','monthly_weather',
+              'phenology','soil_properties','district_exploration'}
+    if not isinstance(payload,dict) or not required.issubset(payload):
+        raise ValueError('Saved map display data is incomplete; historical inputs were not changed')
+    if {str(p['province_code']) for p in payload['provinces']}!={'22','33','53','84','86'}:
+        raise ValueError('Saved map must contain the five target provinces')
+    return payload
+
+def render_assets(payload,output=OUT,include_seasons=True):
+    """Refresh UI assets while preserving the selected display-data snapshot."""
+    template=(ROOT/'web/templates/unified_orchard_map.html').read_text(encoding='utf-8')
+    substitutions={
+        '__DATA__':script_json(payload),
+        '__MONTHLY_CODE__':(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8'),
+        '__MONTHLY_STYLE__':(ROOT/'web/assets/css/orchard_monthly_report.css').read_text(encoding='utf-8'),
+        '__TAILWIND_STYLE__':(ROOT/'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8'),
+        '__SOIL_EXPLORATION_CODE__':(ROOT/'web/assets/js/orchard_soil_exploration.js').read_text(encoding='utf-8'),
+        '__GAP_CODE__':(ROOT/'web/assets/js/orchard_gap_layer.js').read_text(encoding='utf-8'),
+        '__GAP_INTEGRATION_CODE__':(ROOT/'web/assets/js/orchard_gap_integration.js').read_text(encoding='utf-8'),
+        '__GAP_STYLE__':(ROOT/'web/assets/css/orchard_gap_layer.css').read_text(encoding='utf-8'),
+        '__STUDIO_STYLE__':(ROOT/'web/assets/css/orchard_studio.css').read_text(encoding='utf-8'),
+        '__MAP_MOTION_CODE__':(ROOT/'web/assets/js/orchard_map_motion.js').read_text(encoding='utf-8'),
+    }
+    template=re.sub('|'.join(map(re.escape,substitutions)),lambda match:substitutions[match.group()],template)
+    if any(token in template for token in substitutions):
+        raise ValueError('Unresolved map template placeholder')
+    (output/'UNIFIED_MAP.html').write_text(template,encoding='utf-8')
+    if not include_seasons:return
+    season_template=(ROOT/'web/templates/five_province_seasons.html').read_text(encoding='utf-8')
+    season_payload={k:v for k,v in payload.items() if k not in ('monthly_weather','phenology','soil_properties','district_exploration')}
+    (output/'SEASONS_MAP.html').write_text(season_template.replace('__DATA__',script_json(season_payload)),encoding='utf-8')
+
 def district_exploration(districts, soils, evidence):
     """Join documented district targets without allocating them to soil units."""
     source=next(s for s in evidence['sources'] if s['source_id']=='uttaradit_durian_2020_2021')
@@ -31,7 +78,19 @@ def district_exploration(districts, soils, evidence):
         result.append(row)
     return result
 
-def main():
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--reuse-bundled-data',action='store_true',
+                        help='Refresh the UI using the existing saved map data; do not recollect or rewrite historical inputs')
+    args=parser.parse_args(argv)
+    if args.reuse_bundled_data:
+        payload=bundled_payload(OUT/'UNIFIED_MAP.html')
+        render_assets(payload,include_seasons=False)
+        print('UI rebuilt using the unchanged bundled display-data snapshot; no model was trained')
+        return
+    boundary_path=ROOT/'research_data/thailand_comparison/province_display.geojson'
+    if not boundary_path.is_file():
+        parser.error('Province boundary source is not present. Use --reuse-bundled-data to preserve the existing map data.')
     points=pd.read_csv(OUT/'reference_points.csv',dtype={'province_code':str})
     districts=[]
     for code in points.province_code:
@@ -46,7 +105,7 @@ def main():
             districts.append(dict(province_code=code,district=name,latitude=round(p.y,5),longitude=round(p.x,5),point_method='จุดภายในหน่วยดินชิ้นใหญ่สุดที่มีชื่ออำเภอนี้ ไม่ใช่พิกัดสวนหรือค่าเฉลี่ยอำเภอ'))
         path.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
     pd.DataFrame(districts).to_csv(OUT/'district_reference_points.csv',index=False,encoding='utf-8-sig')
-    bounds=json.loads((ROOT/'research_data/thailand_comparison/province_display.geojson').read_text(encoding='utf-8'))
+    bounds=json.loads(boundary_path.read_text(encoding='utf-8'))
     bounds['features']=[f for f in bounds['features'] if str(f['properties']['province_code']) in set(points.province_code)]
     def records(path):return json.loads(pd.read_csv(path,dtype={'province_code':str}).to_json(orient='records',force_ascii=False))
     payload=dict(provinces=records(OUT/'reference_points.csv'),districts=districts,boundaries=bounds,
@@ -59,15 +118,6 @@ def main():
     with (OUT/'district_soil_exploration.csv').open('w',encoding='utf-8-sig',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=list(payload['district_exploration'][0]))
         writer.writeheader();writer.writerows(payload['district_exploration'])
-    template=(ROOT/'web/templates/unified_orchard_map.html').read_text(encoding='utf-8')
-    monthly_js=(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8')
-    monthly_css=(ROOT/'web/assets/css/orchard_monthly_report.css').read_text(encoding='utf-8')
-    tailwind_css=(ROOT/'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8')
-    exploration_js=(ROOT/'web/assets/js/orchard_soil_exploration.js').read_text(encoding='utf-8')
-    rendered=template.replace('__DATA__',json.dumps(payload,ensure_ascii=False)).replace('__MONTHLY_CODE__',monthly_js).replace('__MONTHLY_STYLE__',monthly_css).replace('__TAILWIND_STYLE__',tailwind_css).replace('__SOIL_EXPLORATION_CODE__',exploration_js)
-    (OUT/'UNIFIED_MAP.html').write_text(rendered,encoding='utf-8')
-    season_template=(ROOT/'web/templates/five_province_seasons.html').read_text(encoding='utf-8')
-    season_payload={k:v for k,v in payload.items() if k not in ('monthly_weather','phenology','soil_properties','district_exploration')}
-    (OUT/'SEASONS_MAP.html').write_text(season_template.replace('__DATA__',json.dumps(season_payload,ensure_ascii=False)),encoding='utf-8')
+    render_assets(payload)
     print('District reference points:',len(districts))
 if __name__=='__main__':main()

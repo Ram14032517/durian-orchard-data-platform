@@ -1,0 +1,582 @@
+/* Orchard Studio — the final presentation layer. No network fonts or data changes. */
+:root {
+  --studio-canvas: #f5f6f2;
+  --studio-paper: #ffffff;
+  --studio-ink: #1c3933;
+  --studio-muted: #586b63;
+  --studio-line: #dce4dd;
+  --studio-soft: #eef3ed;
+  --studio-teal: #176d5e;
+  --studio-teal-soft: #e8f3ed;
+  --field-ink: #1c3933;
+  --field-canvas: #f5f6f2;
+  --field-teal: #176d5e;
+  --ink: 166 34% 17%;
+  --ink-soft: 155 10% 38%;
+  --ink-muted: 155 10% 38%;
+  --surface-muted: 80 17% 96%;
+  --line: 132 13% 88%;
+  --brand: 167 65% 26%;
+  --brand-soft: 147 31% 93%;
+  --brand-solid: 167 65% 26%;
+}
+
+html { background: var(--studio-canvas); }
+body {
+  background: var(--studio-canvas);
+  color: var(--studio-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Thonburi", "Leelawadee UI", Tahoma, Arial, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+button, select, input:not([type="checkbox"]):not([type="radio"]) {
+  min-height: 44px;
+  border: 1px solid #c9d6cc;
+  border-radius: 8px;
+  color: var(--studio-ink);
+  background: var(--studio-paper);
+}
+button {
+  padding: 10px 15px;
+  font-weight: 600;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+button:hover:not(:disabled) { background: var(--studio-soft); border-color: #9ab5a5; color: #115a4c; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible {
+  outline: 3px solid #337e69;
+  outline-offset: 3px;
+}
+a { color: #176d5e; text-underline-offset: 3px; }
+h2, h3, h4 { color: var(--studio-ink); }
+h2 { letter-spacing: -.5px; }
+.scope-note, .muted, .telemetry-panel small, .telemetry-panel p, #orchard-history-note {
+  color: var(--studio-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+label, legend { color: var(--studio-ink); }
+
+/* A quiet persistent app bar, with real content taking priority over chrome. */
+.workspace-top {
+  grid-template-columns: minmax(230px, .95fr) minmax(0, 1.8fr) auto;
+  gap: 0 24px;
+  padding: 10px 28px 0;
+  background: var(--studio-paper);
+  border-bottom: 1px solid var(--studio-line);
+  z-index: 600;
+}
+.orchard-header, .workspace-top .orchard-header {
+  background: transparent;
+  color: var(--studio-ink);
+  border: 0;
+  padding: 0;
+  gap: 10px;
+  align-items: center;
+}
+.orchard-header .orchard-mark { width: 31px; height: 37px; flex: none; }
+.orchard-mark path:nth-child(1) { fill: #6d9475; stroke: #2d6654; }
+.orchard-mark path:nth-child(2) { fill: #d6c687; stroke: #57734d; }
+.orchard-mark path:nth-child(3) { fill: #f0ead3; }
+.orchard-mark path:nth-child(4) { stroke: #a89451; }
+.workspace-top .orchard-header h1, .orchard-header h1 {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: normal;
+  letter-spacing: -.25px;
+  color: var(--studio-ink);
+}
+.orchard-header .usage-guide { margin: 1px 0 0; }
+.orchard-header .usage-guide summary, .workspace-top .usage-guide summary {
+  color: var(--studio-muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.orchard-header .usage-guide[open] {
+  background: var(--studio-paper);
+  color: var(--studio-ink);
+  max-height: min(360px, 55dvh);
+  border: 1px solid var(--studio-line);
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+.workspace-top .quick-nav {
+  gap: 4px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  align-self: stretch;
+  align-items: center;
+  scrollbar-width: thin;
+}
+.workspace-top .quick-nav a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 14px;
+  color: var(--studio-muted) !important;
+  background: transparent !important;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 0;
+  border-bottom: 3px solid transparent;
+  box-shadow: none;
+  text-decoration: none;
+}
+.workspace-top .quick-nav a:hover {
+  color: var(--studio-ink) !important;
+  background: #f5f8f3 !important;
+}
+.workspace-top .quick-nav a[aria-selected="true"], .workspace-top .quick-nav a[aria-current="page"] {
+  color: var(--studio-teal) !important;
+  background: transparent !important;
+  border-bottom-color: var(--studio-teal);
+  box-shadow: none;
+  font-weight: 700;
+}
+.workspace-top > .logout-link, .logout-link {
+  background: transparent;
+  color: var(--studio-muted);
+  border: 1px solid var(--studio-line);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 7px;
+  text-decoration: none;
+}
+.logout-link:hover { color: var(--studio-ink); background: var(--studio-soft); }
+.workspace-top .area-strip { padding: 4px 0 9px; gap: 8px; }
+.area-strip .area-strip-labels { gap: 6px; }
+.area-strip .area-strip-labels p { padding: 3px 9px; font-size: 12px; border-radius: 5px; font-weight: 500; }
+.workspace-top .area-strip button {
+  min-height: 36px;
+  padding: 6px 11px;
+  color: var(--studio-teal);
+  border-color: var(--studio-line);
+  background: var(--studio-paper);
+  font-size: 12px;
+}
+#workspace-tabs > section, .orchard-home #current-section {
+  padding: 28px 32px;
+  background: var(--studio-canvas);
+}
+#workspace-tabs > section > h2, .orchard-home #current-section > h2 {
+  font-size: 28px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+/* Existing research workspaces inherit the same restrained visual language. */
+.weather-filters, .report-controls { gap: 12px; }
+.weather-filters label, .telemetry-actions label { gap: 7px; font-size: 13px; }
+.weather-plot, .telemetry-panel, .telemetry-table, .province-context {
+  background: var(--studio-paper);
+  border: 1px solid var(--studio-line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.weather-plot { padding: 20px 24px; margin: 18px 0; }
+.weather-plot #chart { background: var(--studio-paper); }
+.plot-toolbar button, .telemetry-panel-heading button { color: var(--studio-teal); border-color: #b8d0c2; }
+.telemetry-grid { gap: 16px; }
+.telemetry-toolbar h3 { font-size: 22px; }
+.telemetry-panel h3 { font-size: 16px; }
+.telemetry-panel svg text { fill: var(--studio-muted); }
+.report-grid { gap: 12px; }
+.report-stat {
+  background: var(--studio-paper);
+  border: 1px solid var(--studio-line);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.report-stat strong { color: var(--studio-ink); font-size: 32px; letter-spacing: -.7px; }
+.report-stat small { color: var(--studio-muted); font-size: 13px; }
+.period-switch { border-color: var(--studio-line); border-radius: 8px; }
+.period-switch button[aria-pressed="true"] { background: var(--studio-teal); color: #fff; }
+#load, .area-actions #apply-areas { background: var(--studio-teal); color: #fff; border-color: var(--studio-teal); }
+#load:hover, .area-actions #apply-areas:hover { background: #125748; border-color: #125748; color: #fff; }
+#status { background: var(--studio-teal-soft); color: #235d48; border-radius: 8px; font-size: 13px; }
+.warn, #server-notice { background: #fff7e8; color: #77501e; border-color: #d6b273; }
+.month-card { background: #fff; border: 1px solid var(--studio-line); border-radius: 8px; }
+.month-card[aria-pressed="true"], .month-card:hover { background: var(--studio-teal-soft); border-color: #70a38a; }
+.stage-chip { background: var(--studio-soft); border: 1px solid var(--studio-line); border-radius: 5px; }
+.training-links a { background: #fff; border: 1px solid var(--studio-line); border-radius: 8px; }
+table { font-size: 14px; color: var(--studio-ink); }
+th { background: #edf2ec; color: #485f52; font-size: 12px; }
+td, th { padding: 12px 14px; border-bottom-color: var(--studio-line); }
+#daily thead th, #orchard-history-table th { background: #edf2ec; color: #485f52; }
+#daily tbody tr:nth-child(even), #weather table tr:nth-child(odd):not(:first-child),
+#soil-analysis-properties tr:nth-child(odd):not(:first-child) { background: #f4f7f2; }
+#daily tbody tr:hover, #weather table tr:not(:first-child):hover,
+#soil-analysis-properties tr:not(:first-child):hover { background: #eaf2e9; }
+fieldset, .area-pair fieldset, #area-a, #area-b { background: #fff; border-color: var(--studio-line); }
+
+/* Atlas: a large, uninterrupted map beside an independently scrolling inspector. */
+#workspace-tabs > #soil-analysis.orchard-atlas {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 28px 28px;
+  overflow: hidden;
+}
+.atlas-topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex: none; margin-bottom: 18px; }
+.atlas-eyebrow {
+  margin: 0 0 5px;
+  color: var(--studio-teal);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.atlas-topbar h2, #soil-analysis.orchard-atlas .atlas-topbar h2 { font-size: 29px; line-height: 1.35; margin: 0; }
+.atlas-subtitle { margin: 7px 0 0; font-size: 13px; color: var(--studio-muted); line-height: 1.65; }
+.atlas-meta { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; flex: none; }
+.atlas-meta > span, .atlas-meta > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  color: var(--studio-muted);
+  background: #fff;
+  border: 1px solid var(--studio-line);
+  border-radius: 5px;
+  font-size: 11px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.atlas-meta .atlas-live { color: #176d5e; }
+.atlas-meta .atlas-live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #428967; }
+#soil-analysis.orchard-atlas #soil-picker {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.atlas-workspace, #soil-analysis.orchard-atlas #soil-picker.atlas-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 344px;
+  gap: 16px;
+  flex: 1 1 0;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+}
+.atlas-map-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #e9efe7;
+  border: 1px solid #d5dfd3;
+  border-radius: 12px;
+}
+.orchard-atlas .atlas-map-stage .map-pane, .orchard-atlas #soil-picker .atlas-map-stage .map-pane {
+  display: flex;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+.atlas-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #fff; border-bottom: 1px solid var(--studio-line); }
+.atlas-map-actions { margin-left: auto; display: flex; gap: 6px; }
+.atlas-map-actions button { min-height: 40px; padding: 7px 11px; font-size: 12px; margin: 0; }
+.atlas-map-stage.atlas-focus-mode { position: fixed; inset: 0; width: 100%; height: 100%; min-height: 0; border: 0; border-radius: 0; z-index: 1400; background: #e9efe7; }
+.atlas-map-stage.atlas-focus-mode .map-pane { width: 100%; height: 100%; }
+body.atlas-focused .workspace-top, body.atlas-focused .atlas-side-panel { visibility: hidden; }
+.atlas-extra-filter-grid { display: grid; gap: 12px; padding: 0 0 14px; }
+.atlas-extra-filter-grid select { width: 100%; }
+.gap-cluster-icon { display: grid; place-items: center; border: 1.5px solid #30705b; border-radius: 50%; background: #fff; color: #205540; box-shadow: 0 2px 7px #1c393322; }
+.gap-cluster-number { display: grid; place-items: center; width: 100%; height: 100%; font: 700 11px -apple-system, BlinkMacSystemFont, Tahoma, sans-serif; font-variant-numeric: tabular-nums; }
+.gap-cluster-icon:hover { border-color: #174d3b; background: #ecf5ef; }
+.gap-cluster-icon:focus-visible { outline: 3px solid #337e69; outline-offset: 3px; }
+.orchard-atlas .map-selection, .orchard-atlas #soil-picker .map-selection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  padding: 10px 14px;
+  background: #fff;
+  color: var(--studio-muted);
+  border-bottom: 1px solid #e7ece6;
+  font-size: 12px;
+}
+.orchard-atlas .map-selection lumen-radio-group { background: transparent; display: inline-flex; gap: 5px; padding: 0; border: 0; }
+.orchard-atlas .map-selection label, .orchard-atlas #soil-picker .map-selection label {
+  min-height: 36px;
+  margin: 0;
+  padding: 6px 10px;
+  background: #fff;
+  border: 1px solid var(--studio-line);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--studio-ink);
+}
+.orchard-atlas .map-selection label:has(input:checked) { background: var(--area-a-soft); border-color: var(--area-a); outline: 0; color: #1e4f9b; }
+.orchard-atlas .map-selection label:has(#map-area-b:checked) { background: var(--area-b-soft); border-color: var(--area-b); outline: 0; border-style: dashed; color: #8f4a15; }
+.orchard-atlas .map-selection input { width: 15px; height: 15px; min-height: 15px; }
+.orchard-atlas #province-shortcuts, .orchard-atlas #soil-picker #province-shortcuts {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  flex: none;
+  overflow-x: auto;
+  padding: 9px 12px;
+  background: #fff;
+  border-bottom: 1px solid var(--studio-line);
+  scrollbar-width: thin;
+}
+.orchard-atlas #province-shortcuts button, .orchard-atlas #soil-picker #province-shortcuts button {
+  min-height: 36px;
+  flex: none;
+  padding: 6px 12px;
+  border: 1px solid var(--studio-line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--studio-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.orchard-atlas #province-shortcuts button[aria-pressed="true"] {
+  background: var(--studio-teal-soft);
+  color: var(--studio-teal);
+  border-color: #9bc3aa;
+  box-shadow: none;
+  font-weight: 700;
+}
+.orchard-atlas #map, .orchard-atlas #soil-picker #map {
+  position: relative;
+  height: auto;
+  min-height: 280px;
+  width: 100%;
+  flex: 1 1 0;
+  background: #e9efe7;
+  z-index: 0;
+  isolation: isolate;
+}
+.atlas-map-note { position: absolute; left: 12px; bottom: 24px; z-index: 500; max-width: min(460px, calc(100% - 74px)); padding: 7px 10px; border: 1px solid #d4dfd4; border-radius: 6px; background: #fffffff2; color: #4a6251; font-size: 11px; line-height: 1.6; pointer-events: none; }
+.atlas-side-panel {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #c0cebf transparent;
+  border: 1px solid var(--studio-line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0;
+}
+.orchard-atlas .atlas-side-panel > * { margin: 0; }
+.orchard-atlas .atlas-side-panel #soil-picker {
+  padding: 0 18px;
+  border: 0;
+  border-bottom: 1px solid var(--studio-line);
+  background: #fff;
+}
+.orchard-atlas .atlas-side-panel #soil-picker > summary {
+  min-height: 52px;
+  padding: 16px 0;
+  color: var(--studio-ink);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+.orchard-atlas .atlas-side-panel #soil-picker[open] { display: block; }
+.orchard-atlas .atlas-side-panel .gap-orchards, .orchard-atlas #soil-picker #gap-orchard-controls {
+  margin: 0;
+  padding: 19px 18px;
+  border: 0;
+  border-bottom: 1px solid var(--studio-line);
+  border-radius: 0;
+  color: var(--studio-ink);
+  background: #fff;
+}
+.orchard-atlas .gap-orchards h3 { font-size: 16px; margin: 0 0 12px; padding: 0; border: 0; }
+.orchard-atlas .gap-orchards h4 { font-size: 14px; margin: 0 0 10px; }
+.orchard-atlas .gap-orchards p { font-size: 13px; line-height: 1.75; margin: 9px 0; }
+.orchard-atlas .gap-orchards .gap-visibility { min-height: 44px; margin: 6px 0; padding: 8px 10px; background: var(--studio-teal-soft); border-radius: 7px; font-size: 12px; color: #245a43; }
+.orchard-atlas .gap-orchards input[type="checkbox"] { width: 17px; height: 17px; min-height: 17px; accent-color: var(--studio-teal); }
+.orchard-atlas .gap-orchards .gap-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
+.orchard-atlas .gap-orchards .gap-field { gap: 6px; font-size: 12px; color: var(--studio-muted); font-weight: 500; }
+.orchard-atlas .gap-orchards select { min-height: 44px; padding: 9px 25px 9px 9px; border-color: #d5e0d5; border-radius: 6px; color: var(--studio-ink); font-size: 13px; }
+.orchard-atlas .gap-orchards .gap-status { color: #276848; background: #f0f6ee; border-radius: 6px; padding: 9px 11px; font-size: 13px; font-weight: 600; }
+.orchard-atlas .gap-orchards .gap-scope { color: var(--studio-muted); }
+.orchard-atlas .gap-orchards .gap-warning { background: #fff8ec; color: #7a5828; border-left: 2px solid #cfb17b; padding: 10px 11px; border-radius: 0 5px 5px 0; font-size: 11px; }
+.orchard-atlas .gap-orchards .gap-selected { border: 1px solid #bdd3bf; background: #f7faf5; border-radius: 8px; padding: 12px; margin: 14px 0; }
+.orchard-atlas .gap-orchards .gap-detail-row { grid-template-columns: minmax(90px, 1fr) minmax(0, 1.25fr); gap: 8px; padding: 7px 0; border-bottom-color: #dfe8dc; font-size: 12px; }
+.orchard-atlas .gap-orchards dt { font-weight: 500; color: var(--studio-muted); }
+.orchard-atlas .gap-orchards dd { font-weight: 500; color: var(--studio-ink); }
+.orchard-atlas .gap-orchards details { margin: 0; border-top: 1px solid var(--studio-line); }
+.orchard-atlas .gap-orchards summary { min-height: 44px; padding: 12px 0; color: var(--studio-ink); font-size: 12px; font-weight: 600; }
+.orchard-atlas .gap-orchards .gap-orchard-list { max-height: 380px; overflow: auto; padding-left: 22px; margin: 4px 0 12px; }
+.orchard-atlas .gap-orchards .gap-orchard-list li { padding: 3px 0; color: var(--studio-muted); font-size: 11px; }
+.orchard-atlas .gap-orchards .gap-orchard-list button { font-size: 11px; line-height: 1.7; border-color: #dce5da; border-radius: 5px; padding: 7px 9px; }
+.orchard-atlas .gap-orchards button { min-height: 44px; color: var(--studio-ink); border-color: #d2ded1; background: #fff; border-radius: 6px; font-size: 12px; }
+.orchard-atlas .gap-orchards button[aria-pressed="true"] { border: 1px solid #4c8d63; background: #e9f3e6; color: #245c36; }
+.orchard-atlas .gap-orchards .gap-pager { font-size: 10px; gap: 6px; }
+.orchard-atlas .gap-orchards .gap-pager button { padding: 7px 10px; font-size: 11px; }
+.orchard-atlas .gap-orchards .gap-selected-sources, .orchard-atlas .gap-orchards .gap-source-details ul { font-size: 11px; }
+.orchard-atlas .atlas-side-panel #area-section, .orchard-atlas #soil-picker #area-section {
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid var(--studio-line);
+  border-radius: 0;
+  padding: 18px;
+  margin: 0;
+  overflow: visible;
+}
+.orchard-atlas .atlas-side-panel #area-section > h2, .orchard-atlas #soil-picker #area-section > h2 { font-size: 16px; line-height: 1.5; margin: 0 0 12px; }
+.orchard-atlas .atlas-side-panel #soil-picker #area-section { padding: 0 0 16px; border: 0; }
+.orchard-atlas .area-heading p, .orchard-atlas .area-actions small { font-size: 11px; color: var(--studio-muted); line-height: 1.75; }
+.orchard-atlas .area-pair { gap: 12px; }
+.orchard-atlas .area-pair fieldset { padding: 11px; border-radius: 7px; border-color: var(--studio-line); }
+.orchard-atlas .area-pair legend { font-size: 12px; padding: 0 5px; }
+.orchard-atlas .area-inputs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; }
+.orchard-atlas .area-inputs > *, .orchard-atlas .area-pair .area-inputs label:nth-child(3) { grid-column: 1; }
+.orchard-atlas .area-inputs label { font-size: 11px; gap: 5px; }
+.orchard-atlas .area-inputs select, .orchard-atlas .area-inputs button { font-size: 12px; }
+.orchard-atlas .point { font-size: 11px; padding: 9px; border-radius: 0 5px 5px 0; background: #f1f5f9; line-height: 1.7; }
+.orchard-atlas .point.b { background: #fff8ed; }
+.orchard-atlas .area-actions { gap: 8px; margin-top: 12px; }
+.orchard-atlas .area-actions button { font-size: 12px; }
+.orchard-atlas #comparison-controls summary { font-size: 12px; min-height: 44px; padding: 12px 0; }
+.orchard-atlas .atlas-side-panel .soil-legend { border: 0; border-radius: 0; background: #fff; padding: 16px 18px; font-size: 11px; }
+.orchard-atlas .soil-legend summary { min-height: 44px; font-size: 13px; }
+.orchard-atlas .soil-legend-items { max-height: 200px; font-size: 11px; }
+.orchard-atlas .atlas-map-stage .soil-legend {
+  position: absolute;
+  left: 12px;
+  bottom: 26px;
+  z-index: 500;
+  max-width: min(460px, calc(100% - 72px));
+  max-height: 180px;
+  padding: 7px 11px;
+  overflow: auto;
+  background: #fffffff2;
+  border: 1px solid #d5e0d1;
+  border-radius: 7px;
+  font-size: 11px;
+}
+.orchard-atlas .atlas-map-stage .soil-legend summary { font-size: 11px; }
+.orchard-atlas .atlas-map-stage .soil-legend-items { max-height: 120px; }
+.atlas-soil-details { padding: 0 18px; border-top: 1px solid var(--studio-line); }
+.atlas-soil-details > summary { min-height: 52px; padding: 16px 0; font-size: 12px; color: var(--studio-ink); line-height: 1.7; }
+.atlas-soil-details h3 { font-size: 14px; padding: 0 0 9px; margin: 8px 0 12px; border-bottom: 1px solid var(--studio-line); }
+.atlas-soil-details .scope-note, .atlas-soil-details p { font-size: 11px; line-height: 1.75; }
+.atlas-soil-details td, .atlas-soil-details th { padding: 9px 7px; font-size: 12px; overflow-wrap: anywhere; }
+.atlas-soil-details #soil-analysis-properties table { min-width: 420px; }
+.atlas-soil-details .soil-selection-actions { margin: 12px 0; gap: 6px; }
+.atlas-soil-details button { font-size: 11px; padding: 8px 10px; }
+.atlas-soil-details #soil-analysis-evidence { padding-bottom: 12px; }
+.orchard-atlas #soil-analysis-properties { overflow: auto; border: 1px solid var(--studio-line); border-radius: 10px; background: #fff; }
+.orchard-atlas .soil-selection-actions { margin-top: 24px; }
+.orchard-atlas > h3 { font-size: 20px; margin-top: 28px; border-color: var(--studio-line); }
+
+/* Leaflet controls stay crisp; its tile, SVG, canvas and transform math are untouched. */
+.orchard-atlas .leaflet-container { font-family: inherit; font-size: 12px; }
+.orchard-atlas .leaflet-bar { border: 1px solid #d4dfd2; box-shadow: 0 2px 7px #233e2420; border-radius: 8px; overflow: hidden; }
+.orchard-atlas .leaflet-control-zoom a { width: 36px; height: 36px; line-height: 36px; color: #2b4f3e; background: #fff; border-color: #e4eae0; }
+.orchard-atlas .leaflet-control-zoom a:hover { background: #f1f6ee; }
+.orchard-atlas .leaflet-control-attribution { font-size: 9px; padding: 2px 6px; background: #ffffffe8; color: #5b6e5f; }
+.orchard-atlas .leaflet-control-attribution a { color: #3c6953; }
+.orchard-atlas .leaflet-control-layers { border: 1px solid #d4dfd2; border-radius: 8px; box-shadow: 0 2px 7px #233e2420; }
+.orchard-atlas .leaflet-control-layers-expanded { padding: 10px 13px; line-height: 1.8; }
+.orchard-atlas .leaflet-control-layers label { font-size: 12px; }
+.orchard-atlas .leaflet-control-layers input { min-height: auto; width: 14px; height: 14px; accent-color: var(--studio-teal); }
+.orchard-atlas .leaflet-tooltip { background: #fff; color: var(--studio-ink); border: 1px solid #d4dfd2; border-radius: 6px; padding: 7px 10px; box-shadow: 0 2px 7px #233e2414; }
+.orchard-atlas .leaflet-popup-content-wrapper { border: 1px solid #d5e0d1; border-radius: 10px; box-shadow: 0 6px 22px #203e241c; color: var(--studio-ink); }
+.orchard-atlas .leaflet-popup-content { font-family: inherit; font-size: 12px; line-height: 1.7; }
+
+@media (min-width: 1600px) {
+  #workspace-tabs > section, .orchard-home #current-section { padding-left: 48px; padding-right: 48px; }
+  #workspace-tabs > #soil-analysis.orchard-atlas { padding: 28px 36px 32px; }
+  .atlas-workspace, #soil-analysis.orchard-atlas #soil-picker.atlas-workspace { grid-template-columns: minmax(0, 1fr) 364px; }
+}
+@media (max-width: 1180px) {
+  .workspace-top { grid-template-columns: minmax(0, 1fr) auto; gap: 0 16px; padding: 10px 22px 0; }
+  .workspace-top .orchard-header { grid-column: 1; grid-row: 1; }
+  .workspace-top > .logout-link { grid-column: 2; grid-row: 1; }
+  .workspace-top .quick-nav { grid-column: 1/-1; grid-row: 2; margin-top: 5px; }
+  .workspace-top .area-strip { grid-row: 3; }
+  .atlas-workspace, #soil-analysis.orchard-atlas #soil-picker.atlas-workspace { grid-template-columns: minmax(0, 1fr) 320px; }
+  .atlas-meta { max-width: 210px; }
+  .atlas-topbar { gap: 16px; }
+}
+@media (max-width: 900px) {
+  .workspace-top { padding: 10px 16px 0; }
+  .workspace-top .orchard-header h1 { font-size: 16px; }
+  .workspace-top .quick-nav a { font-size: 13px; padding: 11px 13px; min-height: 44px; }
+  #workspace-tabs > section, .orchard-home #current-section { padding: 22px 18px; }
+  #workspace-tabs > #soil-analysis.orchard-atlas { display: block; padding: 20px 16px; overflow: auto; }
+  .atlas-topbar { align-items: flex-start; margin-bottom: 16px; }
+  .atlas-topbar h2, #soil-analysis.orchard-atlas .atlas-topbar h2 { font-size: 25px; }
+  .atlas-subtitle { font-size: 12px; }
+  .atlas-meta { max-width: 170px; gap: 6px; }
+  .atlas-meta > span, .atlas-meta > a { font-size: 10px; padding: 5px 7px; }
+  .atlas-workspace, #soil-analysis.orchard-atlas #soil-picker.atlas-workspace { grid-template-columns: minmax(0, 1fr); flex: none; height: auto; min-height: 0; gap: 14px; }
+  .atlas-map-stage { height: 57dvh; min-height: 370px; }
+  .orchard-atlas #map, .orchard-atlas #soil-picker #map { min-height: 240px; }
+  .atlas-side-panel { overflow: visible; }
+  .orchard-atlas .gap-orchards .gap-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .orchard-atlas .atlas-side-panel .gap-orchards { padding: 20px; }
+  .orchard-atlas .gap-orchards .gap-field { font-size: 12px; }
+  .orchard-atlas .gap-orchards select, .orchard-atlas .gap-orchards p { font-size: 13px; }
+  .orchard-atlas .gap-orchards .gap-warning { font-size: 12px; }
+  .orchard-atlas .area-inputs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .orchard-atlas .area-inputs > * { grid-column: auto; }
+  .orchard-atlas .area-pair .area-inputs label:nth-child(3) { grid-column: 1/-1; }
+}
+@media (max-width: 560px) {
+  .workspace-top { padding: 9px 12px 0; gap: 0 8px; }
+  .workspace-top .orchard-header { gap: 8px; flex-wrap: nowrap; }
+  .workspace-top .orchard-header h1 { font-size: 14px; line-height: 1.5; }
+  .orchard-header .orchard-mark { width: 25px; height: 31px; }
+  .orchard-heading { flex-basis: auto; }
+  .workspace-top > .logout-link { font-size: 10px; padding: 7px 8px; margin: 0; }
+  .workspace-top .area-strip { align-items: flex-start; gap: 5px; padding-top: 5px; }
+  .area-strip .area-strip-labels { gap: 4px; flex-basis: 100%; }
+  .area-strip .area-strip-labels p { font-size: 10px; padding: 3px 6px; }
+  .workspace-top .area-strip button { font-size: 11px; min-height: 34px; padding: 5px 8px; }
+  #workspace-tabs > section, .orchard-home #current-section { padding: 20px 14px; }
+  #workspace-tabs > section > h2, .orchard-home #current-section > h2 { font-size: 24px; }
+  #workspace-tabs > #soil-analysis.orchard-atlas { padding: 18px 12px; }
+  .atlas-topbar { display: block; }
+  .atlas-eyebrow { font-size: 9px; margin-bottom: 5px; }
+  .atlas-topbar h2, #soil-analysis.orchard-atlas .atlas-topbar h2 { font-size: 25px; }
+  .atlas-subtitle { font-size: 12px; margin-top: 6px; }
+  .atlas-meta { max-width: none; justify-content: flex-start; margin-top: 12px; }
+  .atlas-map-stage { height: 52dvh; min-height: 350px; border-radius: 9px; }
+  .atlas-side-panel { border-radius: 9px; }
+  .orchard-atlas .map-selection, .orchard-atlas #soil-picker .map-selection { gap: 7px; padding: 8px 10px; font-size: 11px; }
+  .orchard-atlas .map-selection label, .orchard-atlas #soil-picker .map-selection label { font-size: 11px; min-height: 36px; padding: 6px 8px; }
+  .orchard-atlas #province-shortcuts, .orchard-atlas #soil-picker #province-shortcuts { padding: 8px; gap: 5px; }
+  .orchard-atlas #province-shortcuts button, .orchard-atlas #soil-picker #province-shortcuts button { font-size: 11px; padding: 6px 10px; }
+  .orchard-atlas .atlas-side-panel .gap-orchards, .orchard-atlas .atlas-side-panel #area-section { padding: 16px; }
+  .orchard-atlas .gap-orchards .gap-filters { gap: 10px; }
+  .orchard-atlas .gap-orchards .gap-field { font-size: 11px; }
+  .orchard-atlas .gap-orchards select { font-size: 12px; }
+  .orchard-atlas .gap-orchards .gap-detail-row { grid-template-columns: minmax(90px, 1fr) minmax(0, 1.25fr); }
+  .atlas-map-note { bottom: 24px; left: 8px; font-size: 10px; max-width: calc(100% - 56px); }
+  .weather-plot { padding: 16px 12px; }
+  .telemetry-panel { padding: 16px 12px; }
+  .report-stat { padding: 15px; }
+  .report-stat strong { font-size: 27px; }
+  td, th { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+.orchard-reduced-motion, .orchard-reduced-motion *, .orchard-reduced-motion *::before, .orchard-reduced-motion *::after {
+  scroll-behavior: auto !important;
+  transition: none !important;
+  animation: none !important;
+}

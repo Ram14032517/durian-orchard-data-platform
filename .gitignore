@@ -29,6 +29,12 @@ research_data/five_province_history/evidence/
 research_data/five_province_history/point_weather_cache/
 research_data/five_province_history/exports/
 research_data/five_province_history/training/training_bundle.zip
+# GAP evidence and precise registry coordinates stay local by default.
+research_data/gap_public_sources/
+research_data/five_province_history/gap_orchards/
+research_data/five_province_history/gap_spatial_experiment/
+# Local GAP workbook attached to the readable project update; never auto-publish.
+docs/updates/attachments/
 
 # Internal research is local by default (Public HOLD).
 # Only explicitly reviewed snapshots may be force-added for a LOCAL commit.

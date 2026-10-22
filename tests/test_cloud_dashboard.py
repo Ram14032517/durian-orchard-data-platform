@@ -60,6 +60,11 @@ class CloudTests(unittest.TestCase):
 
     def test_private_paths_and_directory_listing_blocked(self):
         for path in ['/models/orchard_soil_6h.json','/.secrets/tuya_local.json','/tools/serve_orchard_cloud.py',
+                     '/docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx',
+                     '/research_data/gap_public_sources/2026-10-20/README.md',
+                     '/research_data/five_province_history/gap_orchards/manifest.json',
+                     '/research_data/five_province_history/gap_orchards/province_84.geojson',
+                     '/research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/manifest.json',
                      '/research_data/five_province_history/point_weather_cache/a.json','/research_data/five_province_history/']:
             self.assertEqual(self.client.get(path,headers=self.auth).status_code,404)
 

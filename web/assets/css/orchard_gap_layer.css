@@ -1,0 +1,37 @@
+/* Scoped registry controls: keep Leaflet SVG, A/B selection and the soil legend untouched. */
+.gap-orchards{margin:14px 0;padding:14px;border:1px solid #b8d7d8;border-radius:12px;background:#f6faf9;color:#132d38;min-width:0}
+.gap-orchards h3{margin:0 0 10px;font-size:1.05rem}
+.gap-orchards h4{margin:0 0 8px;font-size:1rem}
+.gap-orchards p{font-size:.85rem;line-height:1.6;overflow-wrap:anywhere}
+.gap-orchards .gap-visibility{display:flex;align-items:center;gap:8px;font-weight:700;margin:8px 0}
+.gap-orchards input[type=checkbox]{width:18px;height:18px;flex:none;accent-color:#087f8c}
+.gap-orchards .gap-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.gap-orchards .gap-field{display:flex;flex-direction:column;gap:5px;margin:0;font-size:.8rem;min-width:0}
+.gap-orchards select{width:100%;min-width:0;max-width:100%;font-size:.82rem;line-height:1.45;background:#fff;color:#132d38;border:1px solid #94afb5;border-radius:7px;padding:8px}
+.gap-orchards select:disabled{opacity:.65}
+.gap-orchards .gap-status{font-weight:650;color:#075a64}
+.gap-orchards .gap-scope{color:#455f68}
+.gap-orchards .gap-warning{border-left:3px solid #a76a16;background:#fff8e9;padding:9px 10px;color:#704813}
+.gap-orchards .gap-selected{margin:12px 0;padding:12px;background:#fff;border:1px solid #8db8bc;border-radius:9px}
+.gap-orchards .gap-selected[hidden]{display:none}
+.gap-orchards dl{margin:0}
+.gap-orchards .gap-detail-row{display:grid;grid-template-columns:minmax(110px,1fr) minmax(0,1.5fr);gap:8px;padding:6px 0;border-bottom:1px solid #e0ebec;font-size:.8rem;line-height:1.5}
+.gap-orchards dt{font-weight:650}
+.gap-orchards dd{margin:0;overflow-wrap:anywhere}
+.gap-orchards details{margin:10px 0}
+.gap-orchards summary{font-size:.85rem;line-height:1.5}
+.gap-orchards .gap-orchard-list{padding-left:24px;margin:10px 0}
+.gap-orchards .gap-orchard-list li{padding:3px 0;font-size:.8rem}
+.gap-orchards button{font:inherit;line-height:1.5;border:1px solid #91adb2;background:#fff;color:#132d38;border-radius:7px;padding:6px 9px;cursor:pointer;min-height:36px}
+.gap-orchards .gap-orchard-list button{display:block;width:100%;text-align:left;overflow-wrap:anywhere;font-size:.8rem}
+.gap-orchards button[aria-pressed=true]{border:2px solid #087f8c;background:#e0f1f0}
+.gap-orchards button:disabled{opacity:.5;cursor:default}
+.gap-orchards button:focus-visible,.gap-orchards select:focus-visible,.gap-orchards input:focus-visible,.gap-orchards summary:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.gap-orchards .gap-pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem}
+.gap-orchards .gap-pager button{flex:none}
+.gap-orchards .gap-selected-sources{display:flex;gap:8px;flex-wrap:wrap;font-size:.8rem}
+.gap-orchards a{color:#075a64;text-decoration:underline;overflow-wrap:anywhere}
+#soil-picker #gap-orchard-controls{order:2;margin:0;border-radius:0;border-width:1px 0}
+#soil-picker #area-section{order:3}
+.gap-orchards .gap-source-details ul{padding-left:20px;font-size:.8rem;line-height:1.7}
+@media(max-width:520px){.gap-orchards{padding:11px}.gap-orchards .gap-filters{grid-template-columns:minmax(0,1fr)}.gap-orchards .gap-detail-row{grid-template-columns:minmax(0,1fr);gap:3px}}

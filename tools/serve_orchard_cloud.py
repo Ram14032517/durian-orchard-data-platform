@@ -138,6 +138,10 @@ def create_app():
         path=(ROOT/'research_data'/name).resolve()
         roots=[ROOT/'research_data'/p for p in ('five_province_history','priority_provinces','thailand_comparison','regional_orchards')]
         if not any(path.is_relative_to(p.resolve()) for p in roots) or not path.is_file():abort(404)
+        # Precise GAP coordinates and exploratory preparations are local-only.
+        # Public publication needs a separate privacy/source-terms review.
+        if any(path.is_relative_to((ROOT/'research_data/five_province_history'/folder).resolve())
+               for folder in ('gap_orchards','gap_spatial_experiment')):abort(404)
         if any(p.startswith('.') or p=='point_weather_cache' for p in path.relative_to(ROOT).parts):abort(404)
         if path.suffix.lower() not in {'.html','.js','.css','.json','.geojson','.csv','.md','.png','.svg','.jpg'}:abort(404)
         return send_file(path)

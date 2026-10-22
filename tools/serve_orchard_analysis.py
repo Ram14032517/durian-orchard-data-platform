@@ -114,6 +114,7 @@ class Handler(SimpleHTTPRequestHandler):
         path=Path(self.translate_path(self.path)).resolve()
         roots=[ROOT/'research_data'/p for p in ('five_province_history','priority_provinces','thailand_comparison','regional_orchards')]
         if (not any(path.is_relative_to(p.resolve()) for p in roots) or not path.is_file()
+            or path.is_relative_to((ROOT/'research_data/five_province_history/gap_spatial_experiment').resolve())
             or any(p.startswith('.') for p in path.relative_to(ROOT.resolve()).parts)
             or 'point_weather_cache' in path.relative_to(ROOT.resolve()).parts
             or (path.suffix.lower() not in {'.html','.js','.css','.json','.geojson','.csv','.md','.ipynb','.png','.svg','.jpg'}

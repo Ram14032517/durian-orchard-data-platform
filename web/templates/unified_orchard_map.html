@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ข้อมูลดิน อากาศ และผลผลิตทุเรียน 5 จังหวัด</title>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
 <link rel="stylesheet" href="orchard_lumen.css"><script type="module" src="orchard_lumen.js"></script>
 <style>*{box-sizing:border-box}body{margin:0}header h1{margin:0 0 6px}h2{margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{max-width:100%;padding:7px}button{cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;text-align:right}td:first-child,th:first-child{text-align:left}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style></head><body>
@@ -8,7 +8,10 @@
 <main><div class="map-pane"><div class="map-selection"><span>คลิกแผนที่เพื่อเลือก</span><lumen-radio-group role="radiogroup" aria-label="พื้นที่เป้าหมายบนแผนที่"><label><input id="map-area-a" type="radio" name="map-area" value="A" checked>พื้นที่ A</label><label><input id="map-area-b" type="radio" name="map-area" value="B">พื้นที่ B</label></lumen-radio-group></div><nav id="province-shortcuts" aria-label="ซูมเข้าจังหวัด"></nav><div id="map" aria-label="แผนที่ประเทศไทยและชุดดิน"></div></div><aside>
 <style id="orchard-tailwind">__TAILWIND_STYLE__</style>
 <style>__MONTHLY_STYLE__</style>
+<style>__GAP_STYLE__</style>
+<style id="orchard-studio">__STUDIO_STYLE__</style>
 <div id="area-strip" class="area-strip"><div class="area-strip-labels" role="status"><p id="area-summary-a">A: ยังไม่เลือก</p><p id="area-summary-b">B: ยังไม่เลือก</p></div><button id="toggle-area-editor" type="button" aria-expanded="true" aria-controls="area-section">ย่อพื้นที่</button><p id="map-target" role="status">ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ A</p></div>
+<div id="gap-orchard-controls" aria-label="แปลงตามทะเบียน GAP"></div>
 <section id="area-section" class="workspace-controls"><div class="area-heading"><h2>เลือกตำแหน่งอ้างอิง A/B</h2><lumen-tooltip><button type="button" data-ui-trigger aria-label="คำแนะนำการเลือกพื้นที่">คำแนะนำ</button><span role="tooltip">เลือกตำแหน่งที่นี่ ดูคุณสมบัติดินในแท็บ “ข้อมูลดิน” พิกัดอ้างอิงไม่ใช่พิกัดสวน</span></lumen-tooltip></div><div class="area-pair">
 <fieldset id="area-a"><legend>พื้นที่ A · พื้นที่หลัก</legend><div class="area-inputs"><label>จังหวัด A <select id="province"></select></label><label>อำเภอ A <select id="district"></select></label><label>หน่วยดิน A <select id="soil"><option value="">เลือกอำเภอก่อน</option></select></label><button id="focus-a" type="button" aria-pressed="true">ซูม / เลือกบนแผนที่ A</button></div><div id="selected" class="point">เลือกพื้นที่เพื่อเริ่ม</div></fieldset>
 <details id="comparison-controls"><summary id="comparison-summary">เพิ่มพื้นที่ B เพื่อเปรียบเทียบ (ไม่บังคับ)</summary><fieldset id="area-b"><legend>พื้นที่ B · เปรียบเทียบ</legend><div class="area-inputs"><label>จังหวัด B <select id="province-b"><option value="">ยังไม่เลือกพื้นที่ B</option></select></label><label>อำเภอ B <select id="district-b" disabled><option value="">เลือกจังหวัดก่อน</option></select></label><label>หน่วยดิน B <select id="soil-b" disabled><option value="">เลือกอำเภอก่อน</option></select></label><button id="focus-b" type="button">ซูม / เลือกบนแผนที่ B</button><button id="clear-b" type="button">ล้าง B</button></div><div id="compare-point" class="point b">ยังไม่ได้เลือกพื้นที่ B</div></fieldset></details>
@@ -26,7 +29,12 @@
 <section id="training-section" class="training-section"><h2>5. นำข้อมูลไปวิเคราะห์ / เทรนต่อ</h2><p>เริ่มจากชุดข้อมูลระดับจังหวัดที่ตรวจเงื่อนไขข้อมูลขาดแล้ว ไม่ใช่ข้อมูลสุขภาพต้นหรือผลผลิตรายชุดดิน</p><div class="training-links"><a href="training/monthly_model_panel.csv" download>ดาวน์โหลด CSV รายเดือน</a><a href="training/annual_yield_windows_panel.csv" download>ดาวน์โหลด CSV ผลผลิตต่อไร่รายปี</a><a href="training/manifest.json" target="_blank" rel="noopener">ดูจำนวนแถวและที่มา</a><a href="training/README_TH.md" target="_blank" rel="noopener">วิธีเปิดใน Jupyter และข้อควรระวัง</a></div><p class="muted">รายเดือน: 1 แถว/จังหวัด–เดือน เป้าหมายเป็นผลผลิตตันทุกพันธุ์; รายปี: 1 แถว/จังหวัด–ปี เป้าหมาย กก./ไร่ อากาศใช้จุดอ้างอิงจังหวัด และต้องแยก train/validation/test ตามเวลา ห้ามตีความว่าอากาศเป็นสาเหตุหรือเป็นคำตอบสุขภาพต้น</p></section>
 </aside></main><script>
 const DATA=__DATA__, $=id=>document.getElementById(id), fmt=(v,n=1)=>v===null||v===undefined||!Number.isFinite(+v)?'—':(+v).toLocaleString('th-TH',{maximumFractionDigits:n});
-const map=L.map('map',{scrollWheelZoom:false}).setView([13,101],6);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);
+__MAP_MOTION_CODE__
+const map=L.map('map',{...window.createOrchardMapMotion.mapOptions,preferCanvas:true}).setView([13,101],6);
+const mapMotion=window.createOrchardMapMotion({map,L,element:$('map')});
+let mapReady=false,initialMapSettleFrame=null;
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18,keepBuffer:4,updateWhenZooming:false}).addTo(map);
+L.control.scale({metric:true,imperial:false,position:'bottomleft'}).addTo(map);
 const provinceLayer=L.geoJSON(DATA.boundaries,{style:{color:'#2563eb',weight:1.3,fillOpacity:.08},onEachFeature:(f,l)=>l.bindTooltip(f.properties.province_name).on('click',()=>{areaControl('province').value=String(f.properties.province_code);provinceChange(activeArea);})}).addTo(map);
 let A=null,B=null,markerA=null,markerB=null,soilLayer=null,features=[],loadVersion=0,weatherVersion=0,chartRowsA=[],chartRowsB=null,weatherExportState=null,activeArea='A';const soilCache={};
 function table(h,r){return '<table><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+r.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</table>'}
@@ -58,22 +66,45 @@ function renderDailyTable(){
   $('daily').scrollTop=0;
 }
 function seasonCalendar(){const months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];const y=+$('season-year').value;const rows=DATA.provinces.map(p=>{const data=DATA.harvest.filter(r=>r.province_code===p.province_code&&r.year_ce===y),total=data.reduce((s,r)=>s+r.tonnes,0);return ['<button data-province="'+p.province_code+'">'+p.province_name+'</button>',...months.map((_,i)=>{const r=data.find(r=>r.month_number===i+1);return r&&total>0?fmt(100*r.tonnes/total):'—'})]});$('season-calendar').innerHTML=table(['จังหวัด / %',...months],rows);$('season-calendar').querySelectorAll('button[data-province]').forEach(b=>b.onclick=()=>{$('province').value=b.dataset.province;provinceChange()});}
-$('overview').onclick=()=>{map.fitBounds(provinceLayer.getBounds(),{padding:[20,20],animate:false});$('map').scrollIntoView({block:'start',behavior:'smooth'});};
+$('overview').onclick=()=>{moveMapBounds(provinceLayer.getBounds(),{padding:[32,32]});};
 const homeControl=L.control({position:'topright'});homeControl.onAdd=()=>{const b=L.DomUtil.create('button');b.textContent='ประเทศไทย · 5 จังหวัด';L.DomEvent.disableClickPropagation(b);b.onclick=()=>$('overview').click();return b};homeControl.addTo(map);
-new ResizeObserver(()=>map.invalidateSize({pan:false})).observe($('map'));
+new ResizeObserver(()=>{mapMotion.invalidate({pan:true});settleInitialMap();}).observe($('map'));
 [...new Set(DATA.harvest.map(r=>r.year_ce))].sort((a,b)=>b-a).forEach(y=>$('season-year').add(new Option(y+543,y)));
 $('season-year').onchange=seasonCalendar;seasonCalendar();
 function areaControl(id,which=activeArea){return $(id+(which==='B'?'-b':''));}
+function moveMapBounds(bounds,options={}){
+  if(typeof mapMotion!=='undefined')return mapMotion.fitBounds(bounds,options);
+  return map.fitBounds(bounds,{...options,animate:false});
+}
+function moveMapView(position,zoom,options={}){
+  if(typeof mapMotion!=='undefined')return mapMotion.setView(position,zoom,options);
+  return map.setView(position,zoom,{...options,animate:false});
+}
+function settleInitialMap(){
+  const element=$('map');
+  if(mapReady||initialMapSettleFrame!==null||document.readyState==='loading'||!element.clientWidth||!element.clientHeight)return;
+  initialMapSettleFrame=requestAnimationFrame(()=>{
+    initialMapSettleFrame=null;
+    if(mapReady||document.readyState==='loading'||!element.clientWidth||!element.clientHeight)return;
+    const code=areaControl('province').value;if(!code)return;
+    // The home tab starts hidden. Size Leaflet synchronously after the map is
+    // visible; a deferred resize must not leave the first fit using 0x0 bounds.
+    map.stop();map.invalidateSize({pan:true,animate:false});
+    fitProvince(code,{animate:false});mapReady=true;
+  });
+}
 function areaName(point){
   if(!point)return 'ยังไม่เลือก';
   const province=DATA.provinces.find(p=>p.province_code===point.code)?.province_name||point.code;
+  if(point.point_kind==='gap_registry')return [province,point.registry_district||point.district,'แปลง GAP '+point.gap_id].filter(Boolean).join(' / ');
   const soil=point.soil_properties||(point.soil_code?DATA.soil_properties.find(s=>s.province_code===point.code&&s.district===point.district&&s.soil_code===point.soil_code):null);
   return [province,point.district?.replace(/^อ\./,''),point.soil_code?point.soil_code+' '+(soil?.soil_name||'ไม่ระบุชื่อ'):null].filter(Boolean).join(' / ');
 }
 function renderAreaStrip(){for(const [which,point] of [['A',A],['B',B]])$('area-summary-'+which.toLowerCase()).textContent=which+': '+areaName(point);}
 function setAreaEditor(expanded){
   const picker=$('soil-picker');if(picker)picker.open=expanded;
-  requestAnimationFrame(()=>map.invalidateSize());
+  if(typeof mapMotion!=='undefined')mapMotion.invalidate({pan:true});
+  else requestAnimationFrame(()=>map.invalidateSize());
   $('area-section').hidden=!expanded;$('toggle-area-editor').textContent=expanded?'ย่อพื้นที่':'แก้ไขพื้นที่';
   $('toggle-area-editor').setAttribute('aria-expanded',String(expanded));
 }
@@ -85,7 +116,7 @@ function clearComparison(message='ยังไม่ได้เลือกพ�
 function selectA(p){
   invalidateWeather('พื้นที่ A เปลี่ยนแล้ว กดดูอากาศเพื่อโหลดค่าที่เลือก');A=p;
   if(markerA)map.removeLayer(markerA);markerA=L.circleMarker([p.lat,p.lon],{radius:7,color:'#2563eb',fillOpacity:1}).addTo(map).bindTooltip('A: '+p.label);
-  $('selected').textContent=`พิกัดอ้างอิง A: ${p.lat}, ${p.lon}\n${p.note}`;
+  $('selected').textContent=`${p.point_kind==='gap_registry'?'พิกัดตามทะเบียน GAP':'พิกัดอ้างอิง'} A: ${p.lat}, ${p.lon}\n${p.note}`;
   if(samePoint(A,B))clearComparison('พื้นที่ B ซ้ำกับ A กรุณาเลือกจังหวัด อำเภอ หรือหน่วยดินอื่น');
   context();
 }
@@ -93,13 +124,15 @@ function selectB(p){
   invalidateWeather('พื้นที่ B เปลี่ยนแล้ว กดดูอากาศเพื่อเปรียบเทียบ');
   if(samePoint(A,p)){clearComparison('พื้นที่ B ซ้ำกับ A กรุณาเลือกพื้นที่อื่นเพื่อเปรียบเทียบ');context();return;}
   B=p;if(markerB)map.removeLayer(markerB);markerB=L.circleMarker([p.lat,p.lon],{radius:10,color:'#b45309',dashArray:'4 3',fillOpacity:.25}).addTo(map).bindTooltip('B: '+p.label);
-  $('compare-point').textContent=`พิกัดอ้างอิง B: ${p.lat}, ${p.lon}\n${p.note}`;$('swap-areas').disabled=false;
+  $('compare-point').textContent=`${p.point_kind==='gap_registry'?'พิกัดตามทะเบียน GAP':'พิกัดอ้างอิง'} B: ${p.lat}, ${p.lon}\n${p.note}`;$('swap-areas').disabled=false;
   $('comparison-summary').textContent='พื้นที่ B: '+areaName(p)+' — แก้ไข';context();
 }
 function selectArea(p,which=activeArea){if(which==='B')selectB(p);else selectA(p);}
-function fitProvince(code){
-  map.stop();map.invalidateSize({pan:false});
-  provinceLayer.eachLayer(l=>{const selected=String(l.feature.properties.province_code)===code;l.setStyle({fillOpacity:selected?.22:.08});if(selected)map.fitBounds(l.getBounds(),{padding:[16,16],maxZoom:10,animate:false});});
+function fitProvince(code,options={}){
+  const element=$('map'),visible=element.clientWidth>0&&element.clientHeight>0;
+  if(visible){map.stop();map.invalidateSize({pan:true,animate:false});}
+  else if(typeof mapReady!=='undefined')mapReady=false;
+  provinceLayer.eachLayer(l=>{const selected=String(l.feature.properties.province_code)===code;l.setStyle({fillOpacity:selected?.12:.03});if(selected&&visible)moveMapBounds(l.getBounds(),{padding:[32,32],maxZoom:10,animate:typeof mapReady==='undefined'?true:mapReady,...options});});
 }
 function updateMapTarget(which){
   activeArea=which;$('map-target').textContent=`ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ ${which}`;
@@ -109,6 +142,7 @@ function updateMapTarget(which){
 }
 async function focusArea(which){
   updateMapTarget(which);const version=++loadVersion,code=areaControl('province',which).value;
+  if(code&&typeof gapOrchards!=='undefined')gapOrchards.setProvince(code);
   if($('soil-legend'))$('soil-legend').hidden=true;
   if(!code){features=[];if(soilLayer){map.removeLayer(soilLayer);soilLayer=null;}return;}
   fitProvince(code);
@@ -143,7 +177,7 @@ function districtChange(show,which='A'){
   if(!d){provinceChange(which);return;}areaControl('soil',which).value='';fillSoilOptions(which);
   const name=DATA.provinces.find(p=>p.province_code===d.province_code).province_name;
   selectArea({lat:d.latitude,lon:d.longitude,code:d.province_code,district:d.district,label:name+' '+d.district,note:d.point_method},which);
-  if(show)drawSoils(false);else map.setView([d.latitude,d.longitude],9,{animate:false});
+  if(show)drawSoils(false);else moveMapView([d.latitude,d.longitude],9);
 }
 function drawSoils(select=true){
   if(soilLayer)map.removeLayer(soilLayer);const which=activeArea,district=areaControl('district',which).value,code=areaControl('soil',which).value;
@@ -153,7 +187,7 @@ function drawSoils(select=true){
   const soilColors=new Map(units.map((p,i)=>[p.soil_code,palette[i]||`hsl(${Math.round(i*137.508)%360} 55% ${i%2?62:78}%)`]));
   soilLayer=L.geoJSON(subset,{style:f=>({color:'#555',weight:1,fillColor:soilColors.get(f.properties.soil_code),fillOpacity:.65}),onEachFeature:(f,l)=>{const p=f.properties;l.bindTooltip('รหัส '+p.soil_code+': '+p.soil_name,{direction:'top'}).on('click',()=>selectFeature(f));}}).addTo(map);
   const legend=$('soil-legend');if(legend){legend.hidden=!subset.length;legend.innerHTML='<summary>สีหน่วยดิน '+(which==='B'?'พื้นที่ B':'พื้นที่ A')+' · '+esc(district)+' (ไม่ใช่ระดับความเสี่ยง)</summary><div class="soil-legend-items">'+units.filter(p=>!code||p.soil_code===code).map(p=>`<span class="soil-legend-item"><span class="soil-swatch" style="background:${soilColors.get(p.soil_code)}"></span>${esc(p.soil_code)} — ${esc(p.soil_name)}</span>`).join('')+'</div>';}
-  if(subset.length)map.fitBounds(soilLayer.getBounds(),{padding:[16,16],maxZoom:12,animate:false});if(select&&code&&subset.length)selectFeature(subset[0]);
+  if(subset.length)moveMapBounds(soilLayer.getBounds(),{padding:[24,24],maxZoom:12});if(select&&code&&subset.length)selectFeature(subset[0]);
 }
 const events={
 '22':[['ขลุง–มะขาม 2569','ลงตรวจ 1 พ.ค.; ข่าวรายงานผลร่วงจากพายุมากกว่า 100 ตันรวมพื้นที่ ไม่ระบุวันเริ่มพายุรายสวน','https://doaenews.doae.go.th/wp-content/uploads/2026/05/3-%E0%B8%9E%E0%B8%A4%E0%B8%A9%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%A1-2569.pdf']],
@@ -240,10 +274,12 @@ $('apply-areas').onclick=()=>{setAreaEditor(false);showWorkspaceView('weather-se
 function syncAreaControls(point,which){
   const province=areaControl('province',which),district=areaControl('district',which);province.value=point.code;district.disabled=false;
   district.innerHTML='<option value="">เลือกอำเภอเพื่อดูชุดดิน</option>';DATA.districts.filter(d=>d.province_code===point.code).forEach(d=>district.add(new Option(d.district,d.district)));district.value=point.district||'';
+  const previousFeatures=features;
   features=soilCache[point.code]?.features||[];fillSoilOptions(which);areaControl('soil',which).value=point.soil_code||'';
+  if(activeArea!==which)features=previousFeatures;
 }
 $('swap-areas').onclick=()=>{if(!B)return;const a={...A},b={...B};clearComparison();syncAreaControls(b,'A');syncAreaControls(a,'B');selectA(b);selectB(a);focusArea('A');};
-$('fit-areas').onclick=()=>{if(A&&B)map.fitBounds(L.latLngBounds([[A.lat,A.lon],[B.lat,B.lon]]),{padding:[24,24],maxZoom:12,animate:false});else focusArea('A');};
+$('fit-areas').onclick=()=>{if(A&&B)moveMapBounds(L.latLngBounds([[A.lat,A.lon],[B.lat,B.lon]]),{padding:[32,32],maxZoom:12});else focusArea('A');};
 $('load').onclick=loadWeather;
 $('daily-limit').onchange=()=>{dailyPage=0;renderDailyTable();};
 $('daily-prev').onclick=()=>{dailyPage--;renderDailyTable();};
@@ -254,10 +290,25 @@ $('load').addEventListener('click',()=>invalidateWeather('กำลังตร�
 $('backcast').addEventListener('click',()=>invalidateWeather('กำลังตรวจช่วงอายุผล'),true);
 $('backcast').onclick=()=>{let h=$('harvest').value,lo=+$('min-age').value,hi=+$('max-age').value;if(!h||lo<=0||hi<lo||hi>365){$('estimate').textContent='ตรวจวันเก็บเกี่ยวและอายุผล';return}function sub(n){let d=new Date(h+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-n);return d.toISOString().slice(0,10)}$('start').value=sub(hi);$('end').value=sub(lo);$('estimate').textContent=`ช่วงดอกบานประมาณ ${sub(hi)} ถึง ${sub(lo)} • ${$('crop').value||'ยังไม่ระบุสวน/พันธุ์'} • คำนวณจากสมมติฐานอายุผล ไม่ใช่วันสังเกตจริง`;context();loadWeather()};
 __SOIL_EXPLORATION_CODE__
+__GAP_CODE__
+__GAP_INTEGRATION_CODE__
 __MONTHLY_CODE__
+const gapOrchards=window.createGapOrchardLayer({map,L,motion:mapMotion,selectionOwnsNavigation:true,container:$('gap-orchard-controls'),dataBaseUrl:'gap_orchards/',selectPoint:selectGapRegistryPoint});
+const gapFilters=$('gap-orchard-controls').querySelector('.gap-filters');
+const gapAdvancedFilters=document.createElement('details');gapAdvancedFilters.className='atlas-extra-filters';
+const gapAdvancedSummary=document.createElement('summary');gapAdvancedSummary.textContent='ตัวกรองเพิ่มเติม';
+const gapAdvancedGrid=document.createElement('div');gapAdvancedGrid.className='atlas-extra-filter-grid';
+Array.from(gapFilters.children).slice(2).forEach(field=>gapAdvancedGrid.append(field));
+gapAdvancedFilters.append(gapAdvancedSummary,gapAdvancedGrid);gapFilters.after(gapAdvancedFilters);
+const gapWeatherButton=document.createElement('button');gapWeatherButton.type='button';gapWeatherButton.id='gap-open-weather';gapWeatherButton.hidden=true;
+gapWeatherButton.textContent='ไปดูอากาศตามพิกัดที่เลือก';gapWeatherButton.onclick=()=>showWorkspaceView('weather-section');$('gap-orchard-controls').append(gapWeatherButton);
+document.querySelector('.usage-guide p').textContent='หมุด GAP ใช้พิกัดตามทะเบียนที่ยังไม่ยืนยันภาคสนาม ส่วนจังหวัด/อำเภอ/หน่วยดินเป็นจุดอ้างอิง ผลผลิตยังเป็นระดับจังหวัด ไม่ใช่ผลผลิตรายสวน';
 selectReportMonth(reportMonth);
 DATA.provinces.forEach(p=>{for(const which of ['A','B'])areaControl('province',which).add(new Option(p.province_name,p.province_code));});$('province').value='84';provinceChange();
-requestAnimationFrame(()=>fitProvince($('province').value));
+// DOM readiness is enough: external tiles/fonts may keep Safari's window load
+// pending, but must never prevent a visible map from finding its first bounds.
+document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(settleInitialMap),{once:true});
+if(document.readyState!=='loading')requestAnimationFrame(settleInitialMap);
 if(location.protocol==='file:')$('server-notice').hidden=false;
 else fetch('/api/project').then(r=>{if(!r.ok)throw Error('server');return r.json();}).then(p=>{if(p.application!=='orchard-analysis')$('server-notice').hidden=false;if(p.mode==='cloud'){const logout=document.createElement('a');logout.href='/logout';logout.textContent='ออกจากระบบ';logout.className='logout-link';document.querySelector('header').append(logout);}}).catch(()=>$('server-notice').hidden=false);
 </script></body></html>

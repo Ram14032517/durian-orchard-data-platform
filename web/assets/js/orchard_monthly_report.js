@@ -81,8 +81,8 @@ document.querySelectorAll('aside > section:not(.monthly-report)').forEach(sectio
 document.querySelector('.monthly-report').id='report-section';
 const monthlySection=$('report-section');
 monthlySection.querySelector('h2').textContent='2. เลือกเดือน ดูฤดูและรายงาน';
-$('weather-section').querySelector('h2').textContent='อากาศตามพิกัดอ้างอิง A/B';
-$('soil-analysis-title').textContent='คุณสมบัติดินตามแผนที่';
+$('weather-section').querySelector('h2').textContent='อากาศตามพิกัด A/B';
+$('soil-analysis-title').textContent='สำรวจสวนทุเรียน';
 $('yield-section').querySelector('h2').textContent='ผลผลิตจังหวัด A/B และผลทดลองโมเดล';
 $('yield-section').before($('soil-analysis'));
 DATA.provinces.forEach(p=>{
@@ -96,7 +96,7 @@ function showWorkspaceView(id,reveal=true){
   document.body.classList.toggle('orchard-home',id==='current-section');
   document.body.dataset.workspace=id;
   $('toggle-area-editor').textContent=id==='soil-analysis'&&$('soil-picker')?.open?'ย่อพื้นที่':'แก้ไขพื้นที่';
-  if(id!=='current-section')requestAnimationFrame(()=>map.invalidateSize());
+  if(id!=='current-section')requestAnimationFrame(()=>{mapMotion.invalidate({pan:true});if(id==='soil-analysis')settleInitialMap();});
   const core=['area-section','map-section','report-section','weather-section','soil-analysis','yield-section','training-section','current-section'];
   document.querySelectorAll('aside > section, #workspace-tabs > section').forEach(section=>{if(section.id==='area-section')return;section.hidden=section.id!==id&&!(id==='training-section'&&!core.includes(section.id));});
   document.querySelectorAll('.quick-nav a').forEach(link=>{if(link.getAttribute('href')==='#'+id)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
@@ -108,17 +108,50 @@ const workspaceTop=document.createElement('div');workspaceTop.className='workspa
 const appHeader=document.querySelector('.orchard-header'),logoutLink=appHeader.querySelector('.logout-link');
 workspaceTop.prepend(appHeader);if(logoutLink)workspaceTop.insertBefore(logoutLink,$('area-strip'));
 const mapPanel=document.querySelector('.map-pane');mapPanel.id='map-section';
-const soilPicker=document.createElement('details');soilPicker.id='soil-picker';soilPicker.open=true;
-const soilPickerSummary=document.createElement('summary');soilPickerSummary.textContent='เลือกพื้นที่และชุดดิน · กดย่อเพื่ออ่านรายละเอียด';
-soilPicker.append(soilPickerSummary,mapPanel,$('area-section'));$('soil-analysis-title').after(soilPicker);
+const atlasSection=$('soil-analysis');atlasSection.classList.add('orchard-atlas');
+const atlasTopbar=document.createElement('div');atlasTopbar.className='atlas-topbar';
+const atlasTitle=document.createElement('div'),atlasEyebrow=document.createElement('p'),atlasSubtitle=document.createElement('p');
+atlasEyebrow.className='atlas-eyebrow';atlasEyebrow.textContent='ORCHARD ATLAS';
+atlasSubtitle.className='atlas-subtitle';atlasSubtitle.textContent='เลือกแปลง ดูสภาพแวดล้อม และเปรียบเทียบพื้นที่ในแผนที่เดียว';
+atlasTitle.append(atlasEyebrow,$('soil-analysis-title'),atlasSubtitle);
+const atlasMeta=document.createElement('div');atlasMeta.className='atlas-meta';
+for(const label of ['5 จังหวัดเป้าหมาย','พิกัดตามทะเบียน GAP']){const tag=document.createElement('span');tag.textContent=label;atlasMeta.append(tag);}
+atlasTopbar.append(atlasTitle,atlasMeta);
+const atlasSoilDetails=document.createElement('details');atlasSoilDetails.className='atlas-soil-details';
+const atlasSoilSummary=document.createElement('summary');atlasSoilSummary.textContent='ข้อมูลดินและหลักฐานของพื้นที่ A/B';atlasSoilDetails.append(atlasSoilSummary);
+while(atlasSection.firstChild)atlasSoilDetails.append(atlasSection.firstChild);
+const atlasWorkspace=document.createElement('div');atlasWorkspace.className='atlas-workspace';
+const atlasStage=document.createElement('div');atlasStage.className='atlas-map-stage';
+const atlasSidebar=document.createElement('div');atlasSidebar.className='atlas-side-panel';atlasSidebar.setAttribute('aria-label','ตัวกรองและรายละเอียดสวน');
+const soilPicker=document.createElement('details');soilPicker.id='soil-picker';soilPicker.open=false;
+const soilPickerSummary=document.createElement('summary');soilPickerSummary.textContent='เลือกจุดอ้างอิง A/B เพิ่มเติม';
+soilPicker.append(soilPickerSummary,$('area-section'));
+atlasStage.append(mapPanel);atlasSidebar.append($('gap-orchard-controls'),soilPicker,atlasSoilDetails);
+atlasWorkspace.append(atlasStage,atlasSidebar);atlasSection.append(atlasTopbar,atlasWorkspace);
+const atlasMapNote=document.createElement('p');atlasMapNote.className='atlas-map-note';atlasMapNote.textContent='หมุดตามทะเบียน GAP · ยังไม่ยืนยันภาคสนาม · สีหมุดไม่ใช่ความเสี่ยงโรค';atlasStage.append(atlasMapNote);
+const atlasMapActions=document.createElement('div');atlasMapActions.className='atlas-map-actions';
+const atlasFullscreen=document.createElement('button');atlasFullscreen.type='button';atlasFullscreen.id='atlas-fullscreen';atlasFullscreen.textContent='ขยายแผนที่';atlasFullscreen.setAttribute('aria-label','ขยายแผนที่เต็มหน้าต่าง');atlasFullscreen.setAttribute('aria-pressed','false');
+function setAtlasFocus(expanded){
+  atlasStage.classList.toggle('atlas-focus-mode',expanded);document.body.classList.toggle('atlas-focused',expanded);
+  atlasFullscreen.textContent=expanded?'กลับหน้าปกติ':'ขยายแผนที่';atlasFullscreen.setAttribute('aria-label',expanded?'กลับจากแผนที่เต็มหน้าต่าง':'ขยายแผนที่เต็มหน้าต่าง');atlasFullscreen.setAttribute('aria-pressed',String(expanded));
+  requestAnimationFrame(()=>mapMotion.invalidate({pan:true}));
+}
+atlasFullscreen.onclick=()=>setAtlasFocus(!atlasStage.classList.contains('atlas-focus-mode'));
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&atlasStage.classList.contains('atlas-focus-mode')){setAtlasFocus(false);atlasFullscreen.focus();}});
+atlasMapActions.append(atlasFullscreen);mapPanel.querySelector('.map-selection').append(atlasMapActions);
 soilPicker.addEventListener('toggle',()=>setAreaEditor(soilPicker.open));
 $('toggle-area-editor').onclick=()=>{const expanded=document.body.dataset.workspace!=='soil-analysis'||!soilPicker.open;showWorkspaceView('soil-analysis',false);setAreaEditor(expanded);};
-$('apply-areas').textContent='ดูรายละเอียดดิน';$('apply-areas').onclick=()=>{setAreaEditor(false);$('soil-analysis-scope').scrollIntoView({block:'start'});};
-const viewLabels={'current-section':'สวนของฉัน','weather-section':'อากาศ','soil-analysis':'ดิน','yield-section':'ผลผลิต','report-section':'ฤดูกาล','training-section':'ดาวน์โหลด','map-section':'แผนที่'};
+$('apply-areas').textContent='ดูรายละเอียดดิน';$('apply-areas').onclick=()=>{setAreaEditor(false);atlasSoilDetails.open=true;$('soil-analysis-scope').scrollIntoView({block:'nearest'});};
+const viewLabels={'current-section':'สวนของฉัน','weather-section':'สภาพอากาศ','soil-analysis':'แผนที่สวน','yield-section':'ผลผลิต','report-section':'ฤดูกาล','training-section':'ข้อมูล','map-section':'แผนที่'};
 document.querySelectorAll('.quick-nav a').forEach(link=>{const id=link.getAttribute('href').slice(1);link.textContent=viewLabels[id];link.onclick=event=>{event.preventDefault();showWorkspaceView(id);};});
-showWorkspaceView('current-section',false);
+// Keep the original IoT dashboard as the entry point on every visit/reload.
+// Research-map selection is navigation only; it must not replace the orchard home.
+showWorkspaceView('current-section',false);setAreaEditor(false);
+const openGapMap=document.createElement('button');openGapMap.type='button';openGapMap.id='open-gap-map';openGapMap.textContent='ดูหมุดแปลงตามทะเบียน GAP';
+openGapMap.onclick=()=>{showWorkspaceView('soil-analysis',false);requestAnimationFrame(()=>{if(areaControl('province').value)fitProvince(areaControl('province').value);});};
+$('current-section').querySelector('h2').after(openGapMap);
 for(const id of ['focus-a','focus-b'])$(id).addEventListener('click',()=>showWorkspaceView('map-section'));
-const soilLegend=document.createElement('details');soilLegend.id='soil-legend';soilLegend.className='soil-legend';soilLegend.hidden=true;soilLegend.open=true;document.querySelector('.map-pane').append(soilLegend);
+const soilLegend=document.createElement('details');soilLegend.id='soil-legend';soilLegend.className='soil-legend';soilLegend.hidden=true;soilLegend.open=true;atlasSidebar.append(soilLegend);
 $('soil-analysis-properties').previousElementSibling.remove();
 $('district-yield-bars').previousElementSibling.after($('soil-analysis').querySelector('.warn'));
 const soilSelectionActions=document.createElement('div');soilSelectionActions.className='soil-selection-actions';
@@ -162,9 +195,9 @@ document.addEventListener('click',async event=>{
 });
 document.addEventListener('fullscreenchange',()=>document.querySelectorAll('[data-expand-plot]').forEach(button=>{button.textContent=document.fullscreenElement===button.closest('.weather-plot,.telemetry-panel')?'กลับหน้าปกติ':'ขยายกราฟ';}));
 function weatherCsv(snapshot){
-  const metrics=Object.keys(chartMetrics),headers=['area','province_code','location_label','selected_latitude','selected_longitude','data_latitude','data_longitude','date',...metrics,'time_standard','source_basis','source_label','source_url','retrieved_utc','warning'];
+  const metrics=Object.keys(chartMetrics),headers=['area','province_code','location_label','selected_latitude','selected_longitude','data_latitude','data_longitude','date',...metrics,'time_standard','source_basis','source_label','source_url','retrieved_utc','warning','point_kind','gap_id','gap_snapshot_date','coordinate_quality'];
   const quote=value=>'"'+String(value??'').replace(/"/g,'""')+'"';
-  const records=[[snapshot.resultA,snapshot.a,'A'],[snapshot.resultB,snapshot.b,'B']].flatMap(([result,point,area])=>!result||!point?[]:result.rows.map(row=>[area,point.code,point.label,point.lat,point.lon,result.dataLat,result.dataLon,row.date,...metrics.map(key=>row[key]),result.timeStandard,result.basis,result.source,result.sourceUrl,result.retrievedUtc,result.warning]));
+  const records=[[snapshot.resultA,snapshot.a,'A'],[snapshot.resultB,snapshot.b,'B']].flatMap(([result,point,area])=>!result||!point?[]:result.rows.map(row=>[area,point.code,point.label,point.lat,point.lon,result.dataLat,result.dataLon,row.date,...metrics.map(key=>row[key]),result.timeStandard,result.basis,result.source,result.sourceUrl,result.retrievedUtc,result.warning,point.point_kind||'reference',point.gap_id||'',point.gap_snapshot_date||'',point.coordinate_quality||'reference_point']));
   return '\ufeff'+[headers,...records].map(row=>row.map(quote).join(',')).join('\r\n');
 }
 downloadWeather.onclick=async()=>{
@@ -271,7 +304,7 @@ selectA=point=>{selectBeforeCurrent(point);refreshCurrent();};
 setInterval(()=>{if(!document.hidden&&!$('current-section').hidden)refreshCurrent();},300000);
 
 // Orchard telemetry is independent of the research map's A/B coordinates.
-document.querySelector('header h1').textContent='สวนทุเรียนของฉัน';
+document.querySelector('header h1').textContent='Durian Orchard';
 document.querySelector('.header-description').textContent='ติดตามดินและอากาศจากเซนเซอร์ พร้อมดูแนวโน้มย้อนหลังและวิเคราะห์ 5 จังหวัด';
 $('current-section').querySelector('h2').textContent='ภาพรวมสวน';
 $('current-section').querySelector('.scope-note').textContent='ข้อมูลจุดเซนเซอร์ในสวน แยกจากจุดอ้างอิงจังหวัดและแผนที่ A/B';

@@ -8,6 +8,7 @@
 - [ใช้งานและส่งต่องาน — operations](operations/README_TH.md): สถานะที่บันทึกไว้ คำแนะนำอาจารย์ และการส่งต่อ/เผยแพร่
 - [หน้าตาแดชบอร์ด — design](design/README_TH.md): แนวทางภาพลักษณ์และแบบหน้าจอ
 - [ประวัติงาน — archive](archive/README_TH.md): Checkpoint, QA และภาพรวมรุ่นเก่า
+- [บันทึกการเปลี่ยนแปลง — updates](updates/README_TH.md): สิ่งที่เพิ่มหรือแก้แบบอ่านเป็นเอกสาร พร้อมเอกสารอัปเดตและ Excel GAP ที่แนบเฉพาะในเครื่อง
 
 อ่านผลงานล่าสุดที่ [ดัชนีงานวิจัยภายใน](../research_data/internal_research/README_TH.md) ส่วนการเปิดแผนที่และคำสั่งประจำวันอยู่ใน [คู่มือขั้นตอนละเอียด](setup/WORKFLOW_DETAIL_TH.md)
 

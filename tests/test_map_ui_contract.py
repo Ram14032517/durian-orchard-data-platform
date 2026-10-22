@@ -105,7 +105,8 @@ class MapUIContractTests(unittest.TestCase):
         self.assertNotIn('districtChange(false)', body)
         self.assertIn("soil=areaControl('soil',which)", body)
         self.assertIn('soil.disabled=true', body)
-        self.assertIn('scrollWheelZoom:false', html)
+        self.assertIn('window.createOrchardMapMotion.mapOptions', html)
+        self.assertIn('motion:mapMotion', html)
         self.assertIn('ResizeObserver', html)
 
     def test_comparison_controls_are_separate_and_no_copy_a_to_b(self):
