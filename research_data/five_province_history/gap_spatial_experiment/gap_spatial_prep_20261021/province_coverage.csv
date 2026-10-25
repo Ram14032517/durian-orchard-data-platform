@@ -1,0 +1,6 @@
+﻿province_code,province_name,source_rows,parseable_coordinate_rows,accepted_unique_registry_points,parseable_coordinate_row_share,accepted_points_per_source_row,representative_points,assigned_registry_points,maximum_assignment_distance_km,weighting_basis
+22,จันทบุรี,24847,911,886,0.03666438604258059,0.03565822835754819,8,886,26.82979094747379,one_accepted_registry_point_not_area_or_production
+33,ศรีสะเกษ,2669,656,645,0.2457849381790933,0.24166354439865118,8,645,26.19996059923256,one_accepted_registry_point_not_area_or_production
+53,อุตรดิตถ์,1993,1957,1711,0.9819367787255394,0.8585047666833918,8,1711,27.602866691826264,one_accepted_registry_point_not_area_or_production
+84,สุราษฎร์ธานี,12677,11580,11081,0.9134653309142542,0.8741027056874655,8,11081,45.822147370288306,one_accepted_registry_point_not_area_or_production
+86,ชุมพร,22029,19639,18548,0.8915066503245721,0.8419810250124835,8,18548,31.0289647388084,one_accepted_registry_point_not_area_or_production

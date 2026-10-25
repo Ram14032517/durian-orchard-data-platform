@@ -1,0 +1,5 @@
+# Preserve reviewed snapshot bytes/hashes when cloning on Windows or macOS.
+docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx -text
+research_data/five_province_history/gap_orchards/* -text
+research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/* -text whitespace=cr-at-eol
+research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/* -text whitespace=cr-at-eol

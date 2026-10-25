@@ -1,0 +1,1239 @@
+{
+  "execution_performed": false,
+  "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+  "community": "AG",
+  "time_standard": "LST",
+  "parameters": [
+    "T2M",
+    "T2M_MAX",
+    "T2M_MIN",
+    "RH2M",
+    "PRECTOTCORR",
+    "ALLSKY_SFC_SW_DWN",
+    "WS2M"
+  ],
+  "grid_identity_verified": false,
+  "requested_years": [
+    2000,
+    2025
+  ],
+  "normals_context_years": 10,
+  "note": "Request coordinates are representative GAP points, not verified native source-grid centers. No HTTP calls are made.",
+  "jobs": [
+    {
+      "sample_id": "gap-22-01",
+      "province_code": "22",
+      "latitude": 13.027228,
+      "longitude": 102.094983,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-01",
+      "province_code": "22",
+      "latitude": 13.027228,
+      "longitude": 102.094983,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-01",
+      "province_code": "22",
+      "latitude": 13.027228,
+      "longitude": 102.094983,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-02",
+      "province_code": "22",
+      "latitude": 12.6867864,
+      "longitude": 101.8570302,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-02",
+      "province_code": "22",
+      "latitude": 12.6867864,
+      "longitude": 101.8570302,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-02",
+      "province_code": "22",
+      "latitude": 12.6867864,
+      "longitude": 101.8570302,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-03",
+      "province_code": "22",
+      "latitude": 12.397212,
+      "longitude": 102.359622,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-03",
+      "province_code": "22",
+      "latitude": 12.397212,
+      "longitude": 102.359622,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-03",
+      "province_code": "22",
+      "latitude": 12.397212,
+      "longitude": 102.359622,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-04",
+      "province_code": "22",
+      "latitude": 13.312733,
+      "longitude": 102.146477,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-04",
+      "province_code": "22",
+      "latitude": 13.312733,
+      "longitude": 102.146477,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-04",
+      "province_code": "22",
+      "latitude": 13.312733,
+      "longitude": 102.146477,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-05",
+      "province_code": "22",
+      "latitude": 13.002008,
+      "longitude": 102.500425,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-05",
+      "province_code": "22",
+      "latitude": 13.002008,
+      "longitude": 102.500425,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-05",
+      "province_code": "22",
+      "latitude": 13.002008,
+      "longitude": 102.500425,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-06",
+      "province_code": "22",
+      "latitude": 12.74720146,
+      "longitude": 102.14459833,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-06",
+      "province_code": "22",
+      "latitude": 12.74720146,
+      "longitude": 102.14459833,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-06",
+      "province_code": "22",
+      "latitude": 12.74720146,
+      "longitude": 102.14459833,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-07",
+      "province_code": "22",
+      "latitude": 12.743082,
+      "longitude": 102.455206,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-07",
+      "province_code": "22",
+      "latitude": 12.743082,
+      "longitude": 102.455206,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-07",
+      "province_code": "22",
+      "latitude": 12.743082,
+      "longitude": 102.455206,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-22-08",
+      "province_code": "22",
+      "latitude": 12.966454,
+      "longitude": 101.794538,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-22-08",
+      "province_code": "22",
+      "latitude": 12.966454,
+      "longitude": 101.794538,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-22-08",
+      "province_code": "22",
+      "latitude": 12.966454,
+      "longitude": 101.794538,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-01",
+      "province_code": "33",
+      "latitude": 15.10508,
+      "longitude": 104.280897,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-01",
+      "province_code": "33",
+      "latitude": 15.10508,
+      "longitude": 104.280897,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-01",
+      "province_code": "33",
+      "latitude": 15.10508,
+      "longitude": 104.280897,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-02",
+      "province_code": "33",
+      "latitude": 14.411348,
+      "longitude": 104.062395,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-02",
+      "province_code": "33",
+      "latitude": 14.411348,
+      "longitude": 104.062395,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-02",
+      "province_code": "33",
+      "latitude": 14.411348,
+      "longitude": 104.062395,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-03",
+      "province_code": "33",
+      "latitude": 14.632223,
+      "longitude": 104.518164,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-03",
+      "province_code": "33",
+      "latitude": 14.632223,
+      "longitude": 104.518164,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-03",
+      "province_code": "33",
+      "latitude": 14.632223,
+      "longitude": 104.518164,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-04",
+      "province_code": "33",
+      "latitude": 14.878127,
+      "longitude": 104.564183,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-04",
+      "province_code": "33",
+      "latitude": 14.878127,
+      "longitude": 104.564183,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-04",
+      "province_code": "33",
+      "latitude": 14.878127,
+      "longitude": 104.564183,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-05",
+      "province_code": "33",
+      "latitude": 15.308727,
+      "longitude": 104.116712,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-05",
+      "province_code": "33",
+      "latitude": 15.308727,
+      "longitude": 104.116712,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-05",
+      "province_code": "33",
+      "latitude": 15.308727,
+      "longitude": 104.116712,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-06",
+      "province_code": "33",
+      "latitude": 14.534232,
+      "longitude": 104.773682,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-06",
+      "province_code": "33",
+      "latitude": 14.534232,
+      "longitude": 104.773682,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-06",
+      "province_code": "33",
+      "latitude": 14.534232,
+      "longitude": 104.773682,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-07",
+      "province_code": "33",
+      "latitude": 15.234753,
+      "longitude": 104.607478,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-07",
+      "province_code": "33",
+      "latitude": 15.234753,
+      "longitude": 104.607478,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-07",
+      "province_code": "33",
+      "latitude": 15.234753,
+      "longitude": 104.607478,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-33-08",
+      "province_code": "33",
+      "latitude": 14.598277,
+      "longitude": 104.249138,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-33-08",
+      "province_code": "33",
+      "latitude": 14.598277,
+      "longitude": 104.249138,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-33-08",
+      "province_code": "33",
+      "latitude": 14.598277,
+      "longitude": 104.249138,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-01",
+      "province_code": "53",
+      "latitude": 17.539934,
+      "longitude": 99.958729,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-01",
+      "province_code": "53",
+      "latitude": 17.539934,
+      "longitude": 99.958729,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-01",
+      "province_code": "53",
+      "latitude": 17.539934,
+      "longitude": 99.958729,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-02",
+      "province_code": "53",
+      "latitude": 17.521413,
+      "longitude": 100.632514,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-02",
+      "province_code": "53",
+      "latitude": 17.521413,
+      "longitude": 100.632514,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-02",
+      "province_code": "53",
+      "latitude": 17.521413,
+      "longitude": 100.632514,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-03",
+      "province_code": "53",
+      "latitude": 17.79639,
+      "longitude": 100.695421,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-03",
+      "province_code": "53",
+      "latitude": 17.79639,
+      "longitude": 100.695421,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-03",
+      "province_code": "53",
+      "latitude": 17.79639,
+      "longitude": 100.695421,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-04",
+      "province_code": "53",
+      "latitude": 17.916375,
+      "longitude": 100.996052,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-04",
+      "province_code": "53",
+      "latitude": 17.916375,
+      "longitude": 100.996052,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-04",
+      "province_code": "53",
+      "latitude": 17.916375,
+      "longitude": 100.996052,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-05",
+      "province_code": "53",
+      "latitude": 18.015532,
+      "longitude": 100.456245,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-05",
+      "province_code": "53",
+      "latitude": 18.015532,
+      "longitude": 100.456245,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-05",
+      "province_code": "53",
+      "latitude": 18.015532,
+      "longitude": 100.456245,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-06",
+      "province_code": "53",
+      "latitude": 17.775248,
+      "longitude": 100.123896,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-06",
+      "province_code": "53",
+      "latitude": 17.775248,
+      "longitude": 100.123896,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-06",
+      "province_code": "53",
+      "latitude": 17.775248,
+      "longitude": 100.123896,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-07",
+      "province_code": "53",
+      "latitude": 17.175308,
+      "longitude": 99.986205,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-07",
+      "province_code": "53",
+      "latitude": 17.175308,
+      "longitude": 99.986205,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-07",
+      "province_code": "53",
+      "latitude": 17.175308,
+      "longitude": 99.986205,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-53-08",
+      "province_code": "53",
+      "latitude": 17.4282065,
+      "longitude": 100.237648,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-53-08",
+      "province_code": "53",
+      "latitude": 17.4282065,
+      "longitude": 100.237648,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-53-08",
+      "province_code": "53",
+      "latitude": 17.4282065,
+      "longitude": 100.237648,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-01",
+      "province_code": "84",
+      "latitude": 8.31486263,
+      "longitude": 99.2823951,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-01",
+      "province_code": "84",
+      "latitude": 8.31486263,
+      "longitude": 99.2823951,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-01",
+      "province_code": "84",
+      "latitude": 8.31486263,
+      "longitude": 99.2823951,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-02",
+      "province_code": "84",
+      "latitude": 9.275297,
+      "longitude": 99.763699,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-02",
+      "province_code": "84",
+      "latitude": 9.275297,
+      "longitude": 99.763699,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-02",
+      "province_code": "84",
+      "latitude": 9.275297,
+      "longitude": 99.763699,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-03",
+      "province_code": "84",
+      "latitude": 8.888299,
+      "longitude": 98.506524,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-03",
+      "province_code": "84",
+      "latitude": 8.888299,
+      "longitude": 98.506524,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-03",
+      "province_code": "84",
+      "latitude": 8.888299,
+      "longitude": 98.506524,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-04",
+      "province_code": "84",
+      "latitude": 9.699561,
+      "longitude": 98.830839,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-04",
+      "province_code": "84",
+      "latitude": 9.699561,
+      "longitude": 98.830839,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-04",
+      "province_code": "84",
+      "latitude": 9.699561,
+      "longitude": 98.830839,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-05",
+      "province_code": "84",
+      "latitude": 9.232336,
+      "longitude": 98.834644,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-05",
+      "province_code": "84",
+      "latitude": 9.232336,
+      "longitude": 98.834644,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-05",
+      "province_code": "84",
+      "latitude": 9.232336,
+      "longitude": 98.834644,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-06",
+      "province_code": "84",
+      "latitude": 8.644009,
+      "longitude": 98.92604,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-06",
+      "province_code": "84",
+      "latitude": 8.644009,
+      "longitude": 98.92604,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-06",
+      "province_code": "84",
+      "latitude": 8.644009,
+      "longitude": 98.92604,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-07",
+      "province_code": "84",
+      "latitude": 9.756639,
+      "longitude": 100.052,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-07",
+      "province_code": "84",
+      "latitude": 9.756639,
+      "longitude": 100.052,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-07",
+      "province_code": "84",
+      "latitude": 9.756639,
+      "longitude": 100.052,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-84-08",
+      "province_code": "84",
+      "latitude": 9.025912,
+      "longitude": 99.257819,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-84-08",
+      "province_code": "84",
+      "latitude": 9.025912,
+      "longitude": 99.257819,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-84-08",
+      "province_code": "84",
+      "latitude": 9.025912,
+      "longitude": 99.257819,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-01",
+      "province_code": "86",
+      "latitude": 10.232899,
+      "longitude": 98.997579,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-01",
+      "province_code": "86",
+      "latitude": 10.232899,
+      "longitude": 98.997579,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-01",
+      "province_code": "86",
+      "latitude": 10.232899,
+      "longitude": 98.997579,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-02",
+      "province_code": "86",
+      "latitude": 10.980228,
+      "longitude": 99.14885,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-02",
+      "province_code": "86",
+      "latitude": 10.980228,
+      "longitude": 99.14885,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-02",
+      "province_code": "86",
+      "latitude": 10.980228,
+      "longitude": 99.14885,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-03",
+      "province_code": "86",
+      "latitude": 10.785385,
+      "longitude": 98.91032,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-03",
+      "province_code": "86",
+      "latitude": 10.785385,
+      "longitude": 98.91032,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-03",
+      "province_code": "86",
+      "latitude": 10.785385,
+      "longitude": 98.91032,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-04",
+      "province_code": "86",
+      "latitude": 10.947094,
+      "longitude": 99.460781,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-04",
+      "province_code": "86",
+      "latitude": 10.947094,
+      "longitude": 99.460781,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-04",
+      "province_code": "86",
+      "latitude": 10.947094,
+      "longitude": 99.460781,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-05",
+      "province_code": "86",
+      "latitude": 9.950642,
+      "longitude": 98.827758,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-05",
+      "province_code": "86",
+      "latitude": 9.950642,
+      "longitude": 98.827758,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-05",
+      "province_code": "86",
+      "latitude": 9.950642,
+      "longitude": 98.827758,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-06",
+      "province_code": "86",
+      "latitude": 9.630019,
+      "longitude": 98.717039,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-06",
+      "province_code": "86",
+      "latitude": 9.630019,
+      "longitude": 98.717039,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-06",
+      "province_code": "86",
+      "latitude": 9.630019,
+      "longitude": 98.717039,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-07",
+      "province_code": "86",
+      "latitude": 9.797186,
+      "longitude": 99.128329,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-07",
+      "province_code": "86",
+      "latitude": 9.797186,
+      "longitude": 99.128329,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-07",
+      "province_code": "86",
+      "latitude": 9.797186,
+      "longitude": 99.128329,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "gap-86-08",
+      "province_code": "86",
+      "latitude": 10.559011,
+      "longitude": 99.258594,
+      "role": "gap_representative",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "gap-86-08",
+      "province_code": "86",
+      "latitude": 10.559011,
+      "longitude": 99.258594,
+      "role": "gap_representative",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "gap-86-08",
+      "province_code": "86",
+      "latitude": 10.559011,
+      "longitude": 99.258594,
+      "role": "gap_representative",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "control-22",
+      "province_code": "22",
+      "latitude": 12.815,
+      "longitude": 102.17964,
+      "role": "original_province_reference_not_orchard",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "control-22",
+      "province_code": "22",
+      "latitude": 12.815,
+      "longitude": 102.17964,
+      "role": "original_province_reference_not_orchard",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "control-22",
+      "province_code": "22",
+      "latitude": 12.815,
+      "longitude": 102.17964,
+      "role": "original_province_reference_not_orchard",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "control-33",
+      "province_code": "33",
+      "latitude": 14.96093,
+      "longitude": 104.32724,
+      "role": "original_province_reference_not_orchard",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "control-33",
+      "province_code": "33",
+      "latitude": 14.96093,
+      "longitude": 104.32724,
+      "role": "original_province_reference_not_orchard",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "control-33",
+      "province_code": "33",
+      "latitude": 14.96093,
+      "longitude": 104.32724,
+      "role": "original_province_reference_not_orchard",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "control-53",
+      "province_code": "53",
+      "latitude": 17.76054,
+      "longitude": 100.44539,
+      "role": "original_province_reference_not_orchard",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "control-53",
+      "province_code": "53",
+      "latitude": 17.76054,
+      "longitude": 100.44539,
+      "role": "original_province_reference_not_orchard",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "control-53",
+      "province_code": "53",
+      "latitude": 17.76054,
+      "longitude": 100.44539,
+      "role": "original_province_reference_not_orchard",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "control-84",
+      "province_code": "84",
+      "latitude": 9.01557,
+      "longitude": 99.113,
+      "role": "original_province_reference_not_orchard",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "control-84",
+      "province_code": "84",
+      "latitude": 9.01557,
+      "longitude": 99.113,
+      "role": "original_province_reference_not_orchard",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "control-84",
+      "province_code": "84",
+      "latitude": 9.01557,
+      "longitude": 99.113,
+      "role": "original_province_reference_not_orchard",
+      "start": "20200101",
+      "end": "20251231"
+    },
+    {
+      "sample_id": "control-86",
+      "province_code": "86",
+      "latitude": 10.31859,
+      "longitude": 99.03505,
+      "role": "original_province_reference_not_orchard",
+      "start": "20000101",
+      "end": "20091231"
+    },
+    {
+      "sample_id": "control-86",
+      "province_code": "86",
+      "latitude": 10.31859,
+      "longitude": 99.03505,
+      "role": "original_province_reference_not_orchard",
+      "start": "20100101",
+      "end": "20191231"
+    },
+    {
+      "sample_id": "control-86",
+      "province_code": "86",
+      "latitude": 10.31859,
+      "longitude": 99.03505,
+      "role": "original_province_reference_not_orchard",
+      "start": "20200101",
+      "end": "20251231"
+    }
+  ]
+}

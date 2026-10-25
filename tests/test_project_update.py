@@ -1,4 +1,4 @@
-"""Readable update must not publish the local registry workbook or touch IoT."""
+"""Readable update preserves Excel bytes and does not expose it via IoT routes."""
 import hashlib
 import json
 from pathlib import Path
@@ -19,13 +19,17 @@ class ProjectUpdateTests(unittest.TestCase):
         self.assertIn('id="section-1"', rendered)
         self.assertNotIn('<script', rendered.lower())
 
-    def test_attachment_manifest_is_local_and_does_not_claim_training(self):
+    def test_attachment_manifest_records_public_git_not_dashboard_or_training(self):
         meta = json.loads(ATTACHMENTS.read_text(encoding='utf-8'))
         self.assertEqual(meta['training']['gap_fit_count'], 0)
         self.assertFalse(meta['training']['gap_metrics_created'])
         self.assertFalse(meta['training']['gap_train_eligible'])
         self.assertEqual(len(meta['workbook']['sheets']), 10)
-        self.assertIn('docs/updates/attachments/', (ROOT/'.gitignore').read_text())
+        self.assertEqual(meta['privacy'], 'public_git_snapshot_not_served_by_local_or_cloud_dashboard')
+        self.assertEqual(meta['distribution']['authorized_date_thailand'], '2026-10-25')
+        self.assertFalse(meta['distribution']['raw_personal_evidence_included'])
+        self.assertFalse(meta['distribution']['dashboard_access_rules_changed'])
+        self.assertIn('!docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx', (ROOT/'.gitignore').read_text())
 
     def test_attachment_is_blocked_by_static_server(self):
         handler = object.__new__(Handler)

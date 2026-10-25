@@ -1,7 +1,15 @@
 {
   "document_date_thailand": "2026-10-22",
   "registry_snapshot_date": "2026-10-20",
-  "privacy": "local_only_not_git_not_served_by_local_or_cloud_dashboard",
+  "privacy": "public_git_snapshot_not_served_by_local_or_cloud_dashboard",
+  "distribution": {
+    "authorized_date_thailand": "2026-10-25",
+    "channel": "existing_public_github_repository",
+    "branch": "codex/organize-project",
+    "note": "GAP_PUBLICATION_2026-10-25_TH.md",
+    "raw_personal_evidence_included": false,
+    "dashboard_access_rules_changed": false
+  },
   "workbook": {
     "path": "attachments/GAP_5_PROVINCES_20261020.xlsx",
     "sha256": "ef3d25feca214050e5e190d0f6d7f1fcc6e09e704d0bdb7b0205b8cb6c39af6c",

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-21T07:47:12.924490+00:00",
+  "status": "preparation_complete_no_weather_download_no_training",
+  "train_eligible": false,
+  "historical_pit_certified": false,
+  "registry_snapshot_date": "2026-10-20",
+  "statistical_unit": "province_year",
+  "target_unit": "kg_per_rai",
+  "target_rows": 80,
+  "target_years": [
+    2010,
+    2025
+  ],
+  "provinces": [
+    "22",
+    "33",
+    "53",
+    "84",
+    "86"
+  ],
+  "gap_registry_points": 32871,
+  "representative_points": 40,
+  "province_controls": 5,
+  "planned_request_jobs": 135,
+  "sampling": {
+    "method": "deterministic_farthest_point_then_nearest_assignment",
+    "maximum_per_province": 8,
+    "weights": "accepted_registry_point_counts_not_area_not_bearing_area_not_production",
+    "native_weather_grid_mapping": "unverified_no_cell_ids_inferred",
+    "field_verified": false
+  },
+  "source_sha256": {
+    "gap_layer": {
+      "manifest.json": "4dfc939f5e281988e404ec067f9df01d98e33e9819c911a6d7f477611a0a9154",
+      "province_22.geojson": "198bc777378868afd801c748aa37b092fca578c475bd5e75aa2c3bb02a2b17e5",
+      "province_33.geojson": "0adfb59d812abc550b98e53a8a846bac2f86a92afe61c7b62b4f81e01a1f8b39",
+      "province_53.geojson": "7ff07956f7e4577e864a5e4c7245b6e5a3aada91c0e7d6a69b9fcedc2ee9a79a",
+      "province_84.geojson": "6394d4c7cd66c171143604d6b687bd9372eb9c843d18a820d55e8f773e100357",
+      "province_86.geojson": "7340ceee8af3fbf425aceb74a45ba5ea8ed3a718a85fb9b10645ccb2e3ed4ba5"
+    },
+    "annual": "7e7c8e9368efab39b9469574a3adae80d15406af30013635cadfd21cf8aca73b",
+    "controls": "037ed80b4a69cf722655304ca0c464492cd8aa9da99e6509a157bb00f21147b7",
+    "code": "c528c5342b4ad536abbed735c55375edd8970555a4f6924a4ef597df9706a7f2"
+  },
+  "experiment": {
+    "arms": [
+      "original_province_reference",
+      "gap_registration_weighted_weather"
+    ],
+    "matched_population": "same_80_province_years_2010_2025",
+    "feature_engineering": "same_existing_issue_rule_and_windows",
+    "model_and_tuning": "hold_identical_between_arms_freeze_before_new_outcomes",
+    "weather_unavailable": "stop_and_report_no_silent_drop_or_fill",
+    "fit_count": 0,
+    "predictions_created": 0,
+    "metrics_created": false,
+    "no_improvement_claim": true
+  },
+  "blockers": [
+    "2026 registry cannot certify which orchards/weights existed at historical issue dates",
+    "Exact historical weather and lag/training-label publication vintages remain unverified",
+    "Current point coverage is uneven and GAP is not all durian orchards",
+    "No farm-level measured yield or confirmed dated disease labels in this preparation",
+    "Representative sampling error and native weather-source grid mapping need separate review"
+  ],
+  "next_steps": [
+    "Review coordinates, exclusions and per-province coverage before requesting weather",
+    "Authorize bounded downloads separately; retain raw bytes, units, source metadata and hashes",
+    "Verify parameter-specific source grids from authoritative metadata; do not guess cell IDs or independent sample size",
+    "Aggregate weather to the same province-year feature keys using registration weights; never replicate target labels per point",
+    "Review historical-vintage limits; any retrospective trial remains exploratory, not a prospective accuracy claim"
+  ],
+  "artifact_sha256": {
+    "availability_audit.csv": "da09416cde1b77c3868ed3928154f7846063603f78e6e22e8daf518550eb6c3a",
+    "matched_province_year_targets.csv": "a364c290062e0a07ccbd013032ef41c6e010157264575b5f2d32d34c02e80069",
+    "province_coverage.csv": "49892dc62f1fefc37f2fceed2a0e7a812a633cfaeab0dea742b6006cbbbac07d",
+    "registry_assignments.csv": "8a99da3e737de5a33f2d263f2c726afa7412493cf7bb98cc24f7e18e2ffdfc92",
+    "representative_points.csv": "aeac96a9073213db426f6e01a336cf9145ed1ee5d42e0021b9ed550d17200c81",
+    "weather_request_plan.json": "42fdf2a888007dcdd8e3aec364d440848451d021cd3e85cf9b39764aa2880bee"
+  }
+}

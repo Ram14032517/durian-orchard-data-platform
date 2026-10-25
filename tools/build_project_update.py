@@ -45,7 +45,7 @@ def render_update(markdown):
 <nav aria-label="สารบัญ"><strong>บันทึกการเปลี่ยนแปลง</strong>{navigation}</nav>
 <main><p class="intro">Project update 2026 10 22</p>{content}
 <div class="links"><a href="{UPDATE.name}">ต้นฉบับ Markdown</a><a href="attachments/GAP_5_PROVINCES_20261020.xlsx">เปิด Excel GAP</a><a href="http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html">เปิดแดชบอร์ด</a></div>
-<footer>ฉบับอ่านนี้สร้างจาก Markdown ในโฟลเดอร์เดียวกัน ไม่มีสคริปต์เชื่อมต่อ IoT และไม่แก้ข้อมูลหรือโมเดลเมื่อเปิดอ่าน เอกสารแนบ Excel เก็บเฉพาะในเครื่อง</footer>
+<footer>ฉบับอ่านนี้สร้างจาก Markdown ในโฟลเดอร์เดียวกัน ไม่มีสคริปต์เชื่อมต่อ IoT และไม่แก้ข้อมูลหรือโมเดลเมื่อเปิดอ่าน การส่งต่อ Excel ปัจจุบันอ้างอิง <a href="GAP_PUBLICATION_2026-10-25_TH.md">บันทึกวันที่ 25 ตุลาคม 2569</a></footer>
 </main></div></body></html>
 '''
 

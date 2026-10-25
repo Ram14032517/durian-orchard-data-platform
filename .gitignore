@@ -29,12 +29,54 @@ research_data/five_province_history/evidence/
 research_data/five_province_history/point_weather_cache/
 research_data/five_province_history/exports/
 research_data/five_province_history/training/training_bundle.zip
-# GAP evidence and precise registry coordinates stay local by default.
-research_data/gap_public_sources/
-research_data/five_province_history/gap_orchards/
-research_data/five_province_history/gap_spatial_experiment/
-# Local GAP workbook attached to the readable project update; never auto-publish.
-docs/updates/attachments/
+# GAP publication authorized 2026-10-25: only reviewed snapshots/source code.
+# Raw responses may contain personal data; new downloads remain local by default.
+research_data/gap_public_sources/**
+!research_data/gap_public_sources/2026-10-20/
+!research_data/gap_public_sources/2026-10-20/collect_live_plots.py
+!research_data/gap_public_sources/2026-10-20/collection_east/
+!research_data/gap_public_sources/2026-10-20/collection_east/collect_chinaport_registry.py
+!research_data/gap_public_sources/2026-10-20/collection_east/collect_east.py
+!research_data/gap_public_sources/2026-10-20/collection_east/inspect_chinaport.py
+!research_data/gap_public_sources/2026-10-20/collection_east/query_chinaport.py
+!research_data/gap_public_sources/2026-10-20/collection_live_districts/
+!research_data/gap_public_sources/2026-10-20/collection_live_districts/extract_live_districts.py
+!research_data/gap_public_sources/2026-10-20/collection_national/
+!research_data/gap_public_sources/2026-10-20/collection_national/extract_live_dashboard.py
+!research_data/gap_public_sources/2026-10-20/collection_national/extract_registry.py
+!research_data/gap_public_sources/2026-10-20/collection_north_northeast/
+!research_data/gap_public_sources/2026-10-20/collection_north_northeast/collect.py
+!research_data/gap_public_sources/2026-10-20/collection_north_northeast/collect_pdf.py
+!research_data/gap_public_sources/2026-10-20/collection_north_northeast/prepare.py
+!research_data/gap_public_sources/2026-10-20/collection_north_northeast/prepare_pdf.py
+!research_data/gap_public_sources/2026-10-20/collection_south/
+!research_data/gap_public_sources/2026-10-20/collection_south/extract_south.py
+research_data/five_province_history/gap_orchards/*
+!research_data/five_province_history/gap_orchards/manifest.json
+!research_data/five_province_history/gap_orchards/province_22.geojson
+!research_data/five_province_history/gap_orchards/province_33.geojson
+!research_data/five_province_history/gap_orchards/province_53.geojson
+!research_data/five_province_history/gap_orchards/province_84.geojson
+!research_data/five_province_history/gap_orchards/province_86.geojson
+research_data/five_province_history/gap_spatial_experiment/**
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/manifest.json
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/availability_audit.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/matched_province_year_targets.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/province_coverage.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/registry_assignments.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/representative_points.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/weather_request_plan.json
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/manifest.json
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/availability_audit.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/matched_province_year_targets.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/province_coverage.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/registry_assignments.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/representative_points.csv
+!research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021_verified/weather_request_plan.json
+docs/updates/attachments/*
+!docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx
 
 # Internal research is local by default (Public HOLD).
 # Only explicitly reviewed snapshots may be force-added for a LOCAL commit.
