@@ -7,6 +7,9 @@
 !tools/serve_orchard_analysis.py
 !tools/orchard_current_context.py
 !tools/supabase_orchard.py
+!tools/orchard_harvest.py
+!tools/orchard_forecast.py
+!tools/orchard_private_assets.py
 !tools/clean_stale_weather.py
 !tools/train_monthly_production.py
 !tools/compare_harvest_stage_yield.py
@@ -22,6 +25,8 @@
 !research_data/five_province_history/*.html
 !research_data/five_province_history/orchard_lumen.js
 !research_data/five_province_history/orchard_lumen.css
+!research_data/five_province_history/orchard_app.js
+!research_data/five_province_history/orchard_app.css
 !research_data/five_province_history/*.csv
 !research_data/five_province_history/*.json
 !research_data/five_province_history/*.md

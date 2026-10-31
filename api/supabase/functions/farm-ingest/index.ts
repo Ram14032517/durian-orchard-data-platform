@@ -41,6 +41,8 @@ Deno.serve(async (req) => {
     { auth: { persistSession: false } },
   );
 
+  // Store sensor evidence only; forecasts and NDVI are no longer archived.
+  const { ndvi, forecast_7day, forecast_hourly, ...sensorPayload } = body;
   const reading = {
     event_id: eventId,
     recorded_at: recordedAt,
@@ -73,7 +75,7 @@ Deno.serve(async (req) => {
     weather_valid: typeof weather.valid === "boolean" ? weather.valid : null,
     weather_age_sec: numberOrNull(weather.age_sec),
     weather_source: typeof weather.source === "string" ? weather.source : null,
-    source_payload: body,
+    source_payload: sensorPayload,
   };
 
   const { error: readingError } = await supabase
@@ -81,74 +83,6 @@ Deno.serve(async (req) => {
     .upsert(reading, { onConflict: "event_id" });
   if (readingError) {
     return new Response(JSON.stringify({ error: "reading_insert_failed", detail: readingError.message }), { status: 500, headers: jsonHeaders });
-  }
-
-  const ndvi = body.ndvi;
-  if (ndvi?.valid && Number.isFinite(ndvi.captured_epoch)) {
-    const capturedAt = new Date(ndvi.captured_epoch * 1000).toISOString();
-    const { error } = await supabase.from("ndvi_observations").upsert({
-      polygon_id: body.polygon_id ?? "farm-main",
-      captured_at: capturedAt,
-      ndvi_mean: numberOrNull(ndvi.mean),
-      ndvi_min: numberOrNull(ndvi.min),
-      ndvi_max: numberOrNull(ndvi.max),
-      ndvi_median: numberOrNull(ndvi.median),
-      cloud_coverage: numberOrNull(ndvi.cloud_coverage),
-      source: ndvi.source ?? null,
-      received_at: recordedAt,
-    }, { onConflict: "polygon_id,captured_at" });
-    if (error) console.error("NDVI upsert failed", error);
-  }
-
-  if (Array.isArray(body.forecast_7day)) {
-    const issuedDate = recordedAt.slice(0, 10);
-    const rows = body.forecast_7day
-      .filter((day: any) => typeof day?.date === "string")
-      .map((day: any) => ({
-        location_id: body.location_id ?? "farm-main",
-        issued_date: issuedDate,
-        forecast_date: day.date,
-        temp_max_c: numberOrNull(day.temp_max_c),
-        temp_min_c: numberOrNull(day.temp_min_c),
-        humidity_percent: numberOrNull(day.humidity_percent),
-        rain_mm: numberOrNull(day.rain_mm),
-        condition_code: numberOrNull(day.cond),
-        received_at: recordedAt,
-      }));
-    if (rows.length) {
-      const { error } = await supabase.from("weather_forecasts").upsert(rows, {
-        onConflict: "location_id,issued_date,forecast_date",
-      });
-      if (error) console.error("Forecast upsert failed", error);
-    }
-  }
-
-  if (Array.isArray(body.forecast_hourly)) {
-    const rows = body.forecast_hourly
-      .filter((hour: any) => typeof hour?.time === "string")
-      .map((hour: any) => ({
-        location_id: body.location_id ?? "farm-main",
-        issued_at: recordedAt,
-        forecast_time: hour.time,
-        temperature_c: numberOrNull(hour.temperature_c),
-        humidity_percent: numberOrNull(hour.humidity_percent),
-        pressure_hpa: numberOrNull(hour.pressure_hpa),
-        rain_mm: numberOrNull(hour.rain_mm),
-        wind_speed_ms: numberOrNull(hour.wind_speed_ms),
-        wind_direction_deg: numberOrNull(hour.wind_direction_deg),
-        cloud_low_percent: numberOrNull(hour.cloud_low_percent),
-        cloud_mid_percent: numberOrNull(hour.cloud_mid_percent),
-        cloud_high_percent: numberOrNull(hour.cloud_high_percent),
-        condition_code: numberOrNull(hour.cond),
-        source: body.hourly_forecast_source ?? null,
-        received_at: recordedAt,
-      }));
-    if (rows.length) {
-      const { error } = await supabase.from("weather_forecasts_hourly").upsert(rows, {
-        onConflict: "location_id,issued_at,forecast_time",
-      });
-      if (error) console.error("Hourly forecast upsert failed", error);
-    }
   }
 
   return new Response(JSON.stringify({ ok: true, event_id: eventId }), { status: 200, headers: jsonHeaders });

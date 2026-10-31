@@ -1,4 +1,11 @@
 /* Scoped registry controls: keep Leaflet SVG, A/B selection and the soil legend untouched. */
+/* Shared marker shapes must load in both the React map and the classic tools. */
+.gap-registry-pin,.gap-cluster-icon.gap-group-pin{background:transparent!important;border:0!important;box-shadow:none!important}
+.gap-pin-head{position:absolute;left:4px;top:5px;width:19px;height:19px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#b48b39;border:2px solid #fff;box-shadow:0 2px 5px #153c3e66}
+.gap-pin-head::after{content:"";position:absolute;inset:4px;border-radius:50%;background:#fff3cf}
+.gap-registry-pin.is-selected .gap-pin-head{width:23px;height:23px;left:2px;top:1px;background:#124f37;box-shadow:0 0 0 3px #ffffffa6,0 3px 7px #113f4455}
+.gap-group-pin .gap-pin-head{background:#176744;box-shadow:3px -3px 0 #b3d1bf,0 2px 5px #153c3e66}
+.gap-registry-pin:focus-visible,.gap-cluster-icon:focus-visible{outline:3px solid #337e69;outline-offset:3px}
 .gap-orchards{margin:14px 0;padding:14px;border:1px solid #b8d7d8;border-radius:12px;background:#f6faf9;color:#132d38;min-width:0}
 .gap-orchards h3{margin:0 0 10px;font-size:1.05rem}
 .gap-orchards h4{margin:0 0 8px;font-size:1rem}

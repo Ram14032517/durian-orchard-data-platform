@@ -141,6 +141,7 @@ button:hover{background:#edf4ff;color:#1d4ed8}button:focus-visible,select:focus-
 .telemetry-panel>svg{display:block;width:100%;height:auto;min-height:160px}.telemetry-panel>svg text{fill:#52647d;font:12px Tahoma,sans-serif}
 .telemetry-panel p,#orchard-history-note{font-size:14px;color:#52647d}.telemetry-panel .empty-series{min-height:150px;display:grid;place-items:center}
 .telemetry-table{padding:14px;background:#f3f7fc;border-radius:7px}.telemetry-table>div{overflow-x:auto}#orchard-history-table table{min-width:650px;font-variant-numeric:tabular-nums}
+.orchard-home #current-orchard>.telemetry-more{grid-column:1/-1;background:#fff;border:1px solid #dce7e1;border-radius:10px;padding:14px}.telemetry-more summary{cursor:pointer;font-weight:600}.telemetry-more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}.telemetry-more-grid .report-stat strong{font-size:22px}
 #orchard-history-table th{color:#52647d;background:#f7faff}#orchard-history-table td{border-bottom:1px solid #dce5f0}
 .province-context{padding:16px;background:#f3f7fc;border-radius:7px;margin-top:22px}
 .orchard-home #current-section>fieldset{margin-top:24px;border-radius:7px}.orchard-home #current-section>h3{margin-top:18px}

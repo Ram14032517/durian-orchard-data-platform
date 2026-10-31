@@ -3,18 +3,23 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse,parse_qs
 from pathlib import Path
 from datetime import date,datetime,timezone,timedelta
-import argparse,json,hashlib,threading,csv,io
+import argparse,json,hashlib,threading,csv,io,os
 import requests
 ROOT=Path(__file__).resolve().parents[1]
-CACHE=ROOT/'research_data/five_province_history/point_weather_cache'
-EXPORTS=ROOT/'research_data/five_province_history/exports'
+RUNTIME=Path(os.environ['ORCHARD_RUNTIME_DIR']) if os.environ.get('ORCHARD_RUNTIME_DIR') else ROOT/'research_data/five_province_history'
+CACHE=RUNTIME/'point_weather_cache'
+EXPORTS=RUNTIME/'exports'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
 
 def project_identity():
     # Identify the checkout without returning its private absolute path.
     return {'application':'orchard-analysis','protocol':1,
-            'workspace_id':hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest()}
+            'workspace_id':hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest(),
+            'private_harvest_api_version':1,
+            'private_storage_configured':bool(os.environ.get('SUPABASE_URL') and os.environ.get('DASHBOARD_PASSWORD')
+                and (os.environ.get('SUPABASE_SECRET_KEY') or os.environ.get('SUPABASE_SERVICE_ROLE_KEY'))),
+            'private_storage_project':os.environ.get('SUPABASE_URL','').rstrip('/') or None}
 
 def verified_cache(path):
     """Read a cache entry only if the recorded bytes and structure still agree."""
@@ -109,6 +114,53 @@ def fetch_weather(lat,lon,start,end):
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
+    def end_headers(self):
+        path=urlparse(self.path).path
+        if path.startswith('/research_data/five_province_history/') and Path(path).suffix.lower() in ('.html','.js','.css'):
+            # Revalidate the local UI after a rebuild; keep large data caches unchanged.
+            self.send_header('Cache-Control','no-cache, max-age=0, must-revalidate')
+        super().end_headers()
+    def private_route(self):
+        path=urlparse(self.path).path
+        if path in ('/api/orchard-status','/api/orchard-history') and os.environ.get('SUPABASE_URL'):
+            return True
+        return path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
+
+    def serve_private(self):
+        """Mount the existing Flask authentication/API on the local report server."""
+        from io import BytesIO
+        import sys
+        port=self.server.server_port
+        if self.headers.get('Host') not in (f'127.0.0.1:{port}',f'localhost:{port}'):
+            return self.send_json(403,{'error':'ใช้ที่อยู่ localhost ของโครงการเท่านั้น'})
+        try:
+            app=private_application()
+        except (RuntimeError,ImportError):
+            return self.send_json(503,{'error':'ยังไม่เปิดการบันทึกส่วนตัว ตั้ง DASHBOARD_PASSWORD และ Supabase ฝั่งเซิร์ฟเวอร์ แล้วเริ่มเซิร์ฟเวอร์ใหม่; ไม่เก็บแทนในเบราว์เซอร์'})
+        try:size=int(self.headers.get('Content-Length','0'))
+        except ValueError:return self.send_json(400,{'error':'ขนาดคำขอไม่ถูกต้อง'})
+        if not 0<=size<=65536:return self.send_json(413,{'error':'คำขอประวัติสวนมีขนาดใหญ่เกินไป'})
+        parsed=urlparse(self.path)
+        environ={'REQUEST_METHOD':self.command,'PATH_INFO':parsed.path,'QUERY_STRING':parsed.query,
+            'SCRIPT_NAME':'','SERVER_NAME':'127.0.0.1','SERVER_PORT':str(port),'SERVER_PROTOCOL':self.request_version,
+            'CONTENT_LENGTH':str(size),'CONTENT_TYPE':self.headers.get('Content-Type',''),
+            'REMOTE_ADDR':self.client_address[0],'wsgi.version':(1,0),'wsgi.url_scheme':'http',
+            'wsgi.input':BytesIO(self.rfile.read(size)),'wsgi.errors':sys.stderr,
+            'wsgi.multithread':True,'wsgi.multiprocess':False,'wsgi.run_once':False}
+        for key,value in self.headers.items():
+            if key.lower() not in ('content-type','content-length'):
+                environ['HTTP_'+key.upper().replace('-','_')]=value
+        response=[]
+        def start_response(status,headers,exc_info=None):
+            response[:]=[status,headers]
+        result=app(environ,start_response)
+        try:
+            body=b''.join(result)
+            self.send_response(int(response[0].split()[0]))
+            for key,value in response[1]:self.send_header(key,value)
+            self.end_headers();self.wfile.write(body)
+        finally:
+            if hasattr(result,'close'):result.close()
     def send_head(self):
         # Do not expose .git, .secrets, source files, or directory listings.
         path=Path(self.translate_path(self.path)).resolve()
@@ -123,12 +175,16 @@ class Handler(SimpleHTTPRequestHandler):
         return super().send_head()
     def do_GET(self):
         parsed=urlparse(self.path)
+        if self.private_route():return self.serve_private()
+        if parsed.path=='/api/province-forecast-readiness':
+            from orchard_current_context import province_forecast_readiness
+            return self.send_json(200,province_forecast_readiness())
         if parsed.path=='/api/project':return self.send_json(200,project_identity())
         if parsed.path=='/api/orchard-history':
             try:
                 from supabase_orchard import orchard_history
                 q=parse_qs(parsed.query)
-                return self.send_json(200,orchard_history(q.get('period',['day'])[0],end=q.get('end',[None])[0]))
+                return self.send_json(200,orchard_history(q.get('period',['day'])[0],end=q.get('end',[None])[0],start_date=q.get('start',[None])[0]))
             except ValueError as e:return self.send_json(400,{'error':str(e)})
             except Exception as e:return self.send_json(503,{'error':str(e)})
         if parsed.path in ('/api/orchard-status','/api/province-estimate'):
@@ -149,6 +205,7 @@ class Handler(SimpleHTTPRequestHandler):
         except (ValueError,KeyError) as e:self.send_json(400,{'error':str(e)})
         except Exception as e:self.send_json(502,{'error':str(e)})
     def do_POST(self):
+        if self.private_route():return self.serve_private()
         if urlparse(self.path).path!='/api/weather-export':self.send_error(404);return
         origin=self.headers.get('Origin')
         port=self.server.server_port
@@ -163,10 +220,22 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(200,save_weather_export(payload))
         except (ValueError,KeyError,TypeError) as e:self.send_json(400,{'error':str(e)})
         except OSError:self.send_json(500,{'error':'บันทึกไฟล์ในเครื่องไม่สำเร็จ ตรวจสิทธิ์โฟลเดอร์ exports'})
+    def do_PATCH(self):
+        if self.private_route():return self.serve_private()
+        self.send_error(404)
     def send_json(self,status,payload):
         body=json.dumps(payload,ensure_ascii=False,allow_nan=False).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
+def private_application():
+    from serve_orchard_cloud import create_app
+    return create_app()
+
 if __name__=='__main__':
+    from open_orchard_report import load_local_settings
+    load_local_settings()
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port',type=int,default=8871)
     args=parser.parse_args()

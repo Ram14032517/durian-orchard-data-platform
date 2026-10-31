@@ -1,8 +1,35 @@
-import hashlib,json,unittest
+import hashlib,json,unittest,os,tempfile
+from pathlib import Path
 from unittest.mock import Mock, patch
 from tools import open_orchard_report as launcher
 
 class LauncherTests(unittest.TestCase):
+    def test_local_settings_private_whitelist_and_existing_environment(self):
+        with tempfile.TemporaryDirectory() as folder,patch.object(launcher,'ROOT',Path(folder)),patch.dict(os.environ,{'DASHBOARD_USER':'existing'},clear=True):
+            secret=Path(folder)/'.secrets/supabase_local.json';secret.parent.mkdir()
+            secret.write_text(json.dumps({'DASHBOARD_USER':'owner','DASHBOARD_PASSWORD':'synthetic-password'}))
+            self.assertTrue(launcher.load_local_settings())
+            self.assertEqual(os.environ['DASHBOARD_USER'],'existing')
+            self.assertEqual(os.environ['DASHBOARD_PASSWORD'],'synthetic-password')
+            secret.write_text(json.dumps({'UNEXPECTED_SETTING':'synthetic'}))
+            with self.assertRaises(RuntimeError):launcher.load_local_settings()
+            os.environ['RENDER']='true'
+            self.assertFalse(launcher.load_local_settings())
+
+    @patch.object(launcher,'urlopen')
+    def test_configured_launcher_does_not_reuse_unconfigured_or_different_project(self,open_url):
+        response=open_url.return_value.__enter__.return_value;response.status=200
+        identity={'application':'orchard-analysis','protocol':1,'workspace_id':hashlib.sha256(launcher.ROOT.resolve().as_posix().casefold().encode()).hexdigest()}
+        with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','DASHBOARD_PASSWORD':'synthetic-password'},clear=True):
+            response.read.side_effect=[json.dumps(identity).encode()]
+            self.assertFalse(launcher.server_ready())
+            identity.update(private_harvest_api_version=1,private_storage_configured=True,private_storage_project='https://other.supabase.co')
+            response.read.side_effect=[json.dumps(identity).encode()]
+            self.assertFalse(launcher.server_ready())
+            identity['private_storage_project']='https://test.supabase.co'
+            response.read.side_effect=[json.dumps(identity).encode(),launcher.MARKER]
+            self.assertTrue(launcher.server_ready())
+
     @patch.object(launcher,'urlopen')
     def test_only_expected_page_is_ready(self,open_url):
         response = open_url.return_value.__enter__.return_value

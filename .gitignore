@@ -1,6 +1,7 @@
 .venv/
 .venv-portfolio/
 .build/
+web/react/node_modules/
 .secrets/
 snapshot.json
 devices.json

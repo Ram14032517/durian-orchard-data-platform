@@ -7,9 +7,18 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const pages = [
   'web/templates/unified_orchard_map.html',
-  'research_data/five_province_history/UNIFIED_MAP.html',
+  'research_data/five_province_history/UNIFIED_MAP_CLASSIC.html',
 ];
 const province = { province_code: '86', province_name: 'ชุมพร', weather_latitude: 10.31859, weather_longitude: 99.03505 };
+
+test('current month stops today; past and future months remain distinct', () => {
+  const html=fs.readFileSync(path.join(root,'web/templates/unified_orchard_map.html'),'utf8');
+  const start=html.indexOf('function weatherMonthBounds('),end=html.indexOf('\n__MAP_MOTION_CODE__',start);
+  const month=new Function(html.slice(start,end)+';return weatherMonthBounds')();
+  assert.deepEqual(month(2026,10,'2026-10-28'),{start:'2026-10-01',end:'2026-10-28',future:false,partial:true});
+  assert.deepEqual(month(2024,2,'2026-10-28'),{start:'2024-02-01',end:'2024-02-29',future:false,partial:false});
+  assert.deepEqual(month(2026,11,'2026-10-28'),{start:'2026-11-01',end:'2026-11-30',future:true,partial:false});
+});
 
 function weatherFunction(page, fetch) {
   const html = fs.readFileSync(path.join(root, page), 'utf8');

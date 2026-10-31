@@ -3,7 +3,6 @@
   'use strict';
 
   const PAGE_SIZE = 10;
-  const MAX_INDIVIDUAL_POINTS = 1200;
   const DATE_LABELS = {
     within_dates: 'อยู่ในช่วงวันที่ทะเบียน',
     future_issue: 'วันออกทะเบียนอยู่หลังวัน snapshot',
@@ -30,8 +29,10 @@
   }
 
   function filterFeatures(features, filters) {
+    const query=String(filters.query||'').normalize('NFC').trim().toLocaleLowerCase('th-TH');
     return features.filter(feature => {
       const p = feature.properties, flags = qualityFlags(feature);
+      if(query && ![feature.id,p.id,p.district,p.tambon,p.crop].filter(Boolean).join(' ').normalize('NFC').toLocaleLowerCase('th-TH').includes(query))return false;
       if (filters.district && asText(p.district, '') !== filters.district) return false;
       if (filters.dateStatus && p.date_status !== filters.dateStatus) return false;
       if (filters.quality === 'shared' && !flags.includes('shared_coordinate')) return false;
@@ -61,16 +62,11 @@
   }
 
   function groupViewport(features, project, zoom) {
-    if (zoom >= 14 && features.length <= MAX_INDIVIDUAL_POINTS) {
-      const positions = new Map();
-      for (const feature of features) {
-        const [lon, lat] = feature.geometry.coordinates, key = `${lon}:${lat}`;
-        if (!positions.has(key)) positions.set(key, {key: `point:${key}`, features: [], lat, lon});
-        positions.get(key).features.push(feature);
-      }
-      return [...positions.values()];
-    }
-    const size = zoom < 9 ? 64 : 48, cells = new Map();
+    if(features.length===1){const [lon,lat]=features[0].geometry.coordinates;return [{key:`point:${lon}:${lat}`,features:[features[0]],lat,lon}];}
+    // World-pixel cells stay stable while panning. Nearby cell centroids are
+    // merged too, so labels cannot pile up along cell boundaries. Zooming in
+    // separates locations naturally; exact shared positions remain a group.
+    const size = zoom < 9 ? 96 : 72, cells = new Map();
     for (const feature of features) {
       const [lon, lat] = feature.geometry.coordinates, point = project(lat, lon);
       const key = `${Math.floor(point.x / size)}:${Math.floor(point.y / size)}`;
@@ -78,7 +74,24 @@
       if (!group) { group = {key: `cell:${size}:${key}`, features: [], lat: 0, lon: 0}; cells.set(key, group); }
       group.features.push(feature); group.lat += lat; group.lon += lon;
     }
-    return [...cells.values()].map(group => ({key: group.key, features: group.features, lat: group.lat / group.features.length, lon: group.lon / group.features.length}));
+    let groups=[...cells.values()].map(group => ({key:group.key,features:group.features,lat:group.lat/group.features.length,lon:group.lon/group.features.length}));
+    const spacing=56;
+    while(groups.length>1){
+      const parents=groups.map((_,i)=>i),buckets=new Map();let merged=false;
+      const find=i=>{while(parents[i]!==i){parents[i]=parents[parents[i]];i=parents[i];}return i;};
+      groups.forEach((g,i)=>{
+        const p=project(g.lat,g.lon),x=Math.floor(p.x/spacing),y=Math.floor(p.y/spacing);
+        for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(const other of buckets.get(`${x+dx}:${y+dy}`)||[]){
+          if(Math.hypot(p.x-other.p.x,p.y-other.p.y)<spacing){const a=find(i),b=find(other.i);if(a!==b){parents[a]=b;merged=true;}}
+        }
+        const key=`${x}:${y}`;if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push({i,p});
+      });
+      if(!merged)break;
+      const next=new Map();
+      groups.forEach((g,i)=>{const key=find(i);if(!next.has(key))next.set(key,{key:g.key,features:[],lat:0,lon:0});const n=next.get(key);n.features.push(...g.features);n.lat+=g.lat*g.features.length;n.lon+=g.lon*g.features.length;});
+      groups=[...next.values()].map(g=>({...g,lat:g.lat/g.features.length,lon:g.lon/g.features.length}));
+    }
+    return groups;
   }
 
   function createGapOrchardLayer(options) {
@@ -93,7 +106,7 @@
     const markerRecords = new Map(), clusterCache = new Map(), featurePositions = new WeakMap();
     const requestFrame = typeof root.requestAnimationFrame === 'function' ? callback => root.requestAnimationFrame(callback) : callback => root.setTimeout(callback, 16);
     const cancelFrame = typeof root.cancelAnimationFrame === 'function' ? handle => root.cancelAnimationFrame(handle) : handle => root.clearTimeout(handle);
-    const filters = {district: '', quality: '', dateStatus: ''};
+    const filters = {district: '', quality: '', dateStatus: '', query: ''};
     const formatCount = value => Number(value || 0).toLocaleString('th-TH');
 
     function el(tag, text, className) {
@@ -129,6 +142,11 @@
     ]);
     const certification = labeledSelect('ช่วงวันที่ทะเบียน ณ snapshot', [['', 'ทุกช่วงวันที่'], ...Object.entries(DATE_LABELS)]);
     controls.append(province.wrapper, district.wrapper, quality.wrapper, certification.wrapper);
+    const searchLabel=el('label',null,'gap-search-field'),searchText=el('span','ค้นหาหมุดในจังหวัดที่เลือก'),search=el('input');
+    search.type='search';search.placeholder='ค้นรหัสแสดงผล อำเภอ หรือตำบล';search.setAttribute('aria-label','ค้นหาหมุด GAP ในจังหวัดที่เลือก');
+    searchLabel.append(searchText,search);
+    let searchTimer;
+    search.addEventListener('input',()=>{root.clearTimeout(searchTimer);searchTimer=root.setTimeout(()=>{filters.query=search.value;applyFilters();},180);});
     const status = el('p', 'เลือกจังหวัดเพื่อโหลดหมุดเฉพาะจังหวัดนั้น', 'gap-status');
     status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     const summary = el('p', '', 'gap-scope');
@@ -147,7 +165,7 @@
     const sources = el('details', null, 'gap-source-details'); sources.append(el('summary', 'แหล่งข้อมูลและข้อจำกัด'));
     const sourcesBody = el('div'); sources.append(sourcesBody);
     const warning = el('p', 'หมุดไม่ทำให้ผลผลิตจังหวัดกลายเป็นผลผลิตรายสวน อากาศ NASA เป็นข้อมูลกริด ไม่ใช่ค่าจากเซนเซอร์ในสวน และทะเบียน snapshot ปัจจุบันไม่ยืนยันตำแหน่งย้อนหลัง', 'gap-warning');
-    container.replaceChildren(heading, visibility, introduction, controls, status, retry, summary, selected, listDetails, sources, warning);
+    container.replaceChildren(heading, visibility, introduction, searchLabel, controls, status, retry, summary, selected, listDetails, sources, warning);
 
     const paneName = 'gap-registry-pane';
     if (!map.getPane(paneName)) { const pane = map.createPane(paneName); pane.style.zIndex = '450'; }
@@ -279,6 +297,7 @@
         label: `${asText(p.province_name)} ${asText(p.district)} · แปลงทะเบียน GAP ${selectedId}`,
         note: `ตำแหน่งทะเบียน GAP ณ ${asText(manifest?.snapshot_date)} ยังไม่ยืนยันภาคสนาม; อากาศ NASA เป็นข้อมูลกริด ไม่ใช่เซนเซอร์สวน; ผลผลิตยังเป็นระดับจังหวัด`,
         point_kind: 'gap_registry', gap_id: selectedId, gap_snapshot_date: manifest?.snapshot_date,
+        gap_registry_data:{area_rai:p.area_rai,issued:p.issued,expired:p.expired,date_status:p.date_status,status_reported:p.status_reported,tambon:p.tambon,crop:p.crop},
         coordinate_quality: p.coordinate_quality || p.quality, gap_quality_flags: [...qualityFlags(feature)]
       };
       try {
@@ -294,6 +313,10 @@
     }
     function stopMapClick(event) {
       if (event?.originalEvent) L.DomEvent.stopPropagation(event.originalEvent);
+    }
+    function registryPinIcon(isSelected){
+      const pin=el('span',null,'gap-pin-head');pin.setAttribute('aria-hidden','true');
+      return L.divIcon({html:pin,className:'gap-registry-pin'+(isSelected?' is-selected':''),iconSize:[26,36],iconAnchor:[13,35],tooltipAnchor:[0,-31]});
     }
     function redraw() {
       if (destroyed) return;
@@ -331,22 +354,27 @@
         const retained = markerRecords.get(key);
         if (retained) {
           if (count === 1 && retained.isSelected !== isSelected) {
-            retained.marker.setStyle({color: isSelected ? '#111827' : '#087f8c', weight: isSelected ? 3 : 1.5});
-            retained.marker.setRadius(count === 1 ? (isSelected ? 8 : 5) : Math.min(23, 10 + Math.log2(count) * 1.4));
+            if(typeof retained.marker.setIcon==='function')retained.marker.setIcon(registryPinIcon(isSelected));
+            else{
+              retained.marker.setStyle({color: isSelected ? '#111827' : '#087f8c', weight: isSelected ? 3 : 1.5});
+              retained.marker.setRadius(isSelected ? 8 : 5);
+            }
             retained.isSelected = isSelected;
           }
           continue;
         }
-        const clusterLabel = `${formatCount(count)} แปลงตามทะเบียน GAP · ยังไม่ยืนยันภาคสนาม · คลิกเพื่อซูมและเลือกรายการ`;
+        const clusterLabel = 'กลุ่มหมุดทะเบียน GAP · ยังไม่ยืนยันภาคสนาม · คลิกเพื่อดูจำนวน ซูม และเลือกรายการ';
         let marker;
         if (count > 1 && typeof L.marker === 'function' && typeof L.divIcon === 'function') {
-          const number = el('span', formatCount(count), 'gap-cluster-number');
-          number.setAttribute('aria-hidden', 'true');
+          const pin = el('span', null, 'gap-pin-head');
+          pin.setAttribute('aria-hidden', 'true');
           marker = L.marker([group.lat, group.lon], {
             pane: paneName, keyboard: true, title: clusterLabel, alt: clusterLabel,
             bubblingMouseEvents: false,
-            icon: L.divIcon({html: number, className: 'gap-cluster-icon', iconSize: [36, 36], iconAnchor: [18, 18]})
+            icon: L.divIcon({html: pin, className: 'gap-cluster-icon gap-group-pin', iconSize: [28, 36], iconAnchor: [14, 35]})
           });
+        } else if(count===1&&typeof L.marker==='function'&&typeof L.divIcon==='function'){
+          marker=L.marker([group.lat,group.lon],{pane:paneName,keyboard:true,title:'หมุดตามทะเบียน GAP · ยังไม่ยืนยันภาคสนาม',bubblingMouseEvents:false,icon:registryPinIcon(isSelected)});
         } else marker = L.circleMarker([group.lat, group.lon], {
           renderer, pane: paneName, radius: count === 1 ? (isSelected ? 8 : 5) : Math.min(23, 10 + Math.log2(count) * 1.4),
           color: isSelected ? '#111827' : '#087f8c', fillColor: count > 1 ? '#087f8c' : '#f5d782',
@@ -359,6 +387,8 @@
           if (count === 1) chooseFeature(group.features[0], false);
           else {
             clusterFeatures = group.features; page = 0; renderList(false); listDetails.open = true;
+            status.textContent = `กลุ่มที่เลือก ${formatCount(count)} แปลงตามทะเบียน · ดูและเลือกแต่ละรายการในรายละเอียดทะเบียน`;
+            if(typeof marker.setTooltipContent==='function')marker.setTooltipContent(el('span',`${formatCount(count)} แปลงตามทะเบียน · ยังไม่ยืนยันภาคสนาม`));
             const positions = group.features.map(featurePosition);
             if (positions.every(position => position[0] === positions[0][0] && position[1] === positions[0][1])) {
               setMapView(positions[0], Math.min(18, map.getZoom() + 2));
@@ -385,9 +415,11 @@
     function onZoomEnd() { zooming = false; scheduleRedraw(); }
     async function setProvince(code) {
       if (destroyed) return;
+      if (String(code || '') === provinceCode && loading) return;
       if (String(code || '') === provinceCode && currentFeatures.length && !loading) { redraw(); return; }
       const requestVersion = ++version;
       provinceCode = String(code || ''); province.input.value = provinceCode;
+      if (typeof options.onProvinceChange === 'function') options.onProvinceChange(provinceCode);
       currentFeatures = []; filtered = []; clusterFeatures = null; page = 0; selectedId = null; selected.hidden = true;
       filters.district = ''; refreshFilters(); resetClusters(); renderList(false);
       retry.hidden = true; summary.textContent = '';
@@ -424,7 +456,7 @@
     province.input.addEventListener('change', async () => {
       const code = province.input.value; await setProvince(code);
       const bbox = currentProvince()?.bbox;
-      if (code === provinceCode && Array.isArray(bbox) && bbox.length === 4) fitMapBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]], {padding: [20, 20], maxZoom: 11});
+      if (!options.selectionOwnsNavigation && code === provinceCode && Array.isArray(bbox) && bbox.length === 4) fitMapBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]], {padding: [20, 20], maxZoom: 11});
     });
     for (const [input, key] of [[district.input, 'district'], [quality.input, 'quality'], [certification.input, 'dateStatus']]) {
       input.addEventListener('change', () => {
@@ -437,7 +469,7 @@
       setProvince, setVisible,
       getState: () => ({provinceCode, visible, loading, loadedCount: currentFeatures.length, filteredCount: filtered.length, selectedId, filters: {...filters}}),
       destroy: () => {
-        destroyed = true; version++; resetClusters();
+        destroyed = true; version++; root.clearTimeout(searchTimer); resetClusters();
         map.off('moveend', scheduleRedraw); map.off('zoomstart', onZoomStart); map.off('zoomend', onZoomEnd);
         map.removeLayer(markers); map.removeLayer(renderer); container.replaceChildren();
       }

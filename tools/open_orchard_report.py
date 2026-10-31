@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import socket
 import subprocess
@@ -15,6 +16,19 @@ ROOT = Path(__file__).resolve().parents[1]
 URL = 'http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html'
 MARKER = '<title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>'.encode()
 
+def load_local_settings():
+    """Read only the ignored local server configuration; never send it to the page."""
+    path=ROOT/'.secrets/supabase_local.json'
+    if os.environ.get('RENDER')=='true' or not path.exists():return False
+    if path.is_symlink():raise RuntimeError('Local server configuration must not be a symlink')
+    values=json.loads(path.read_text(encoding='utf-8'))
+    allowed={'SUPABASE_URL','SUPABASE_SECRET_KEY','SUPABASE_SERVICE_ROLE_KEY','DASHBOARD_USER',
+             'DASHBOARD_PASSWORD','DASHBOARD_USERS_JSON','ORCHARD_DEVICE_ID','ORCHARD_LOCATION_ID'}
+    if not isinstance(values,dict) or set(values)-allowed or any(not isinstance(v,str) or not v for v in values.values()):
+        raise RuntimeError('Local server configuration is invalid; secret values are not logged')
+    for key,value in values.items():os.environ.setdefault(key,value)
+    return True
+
 def report_url(port=8871):
     return f'http://127.0.0.1:{port}/research_data/five_province_history/UNIFIED_MAP.html'
 
@@ -25,6 +39,11 @@ def server_ready(port=8871):
         expected=hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest()
         if (identity.get('application')!='orchard-analysis' or identity.get('protocol')!=1
             or identity.get('workspace_id')!=expected):return False
+        if os.environ.get('SUPABASE_URL') and os.environ.get('DASHBOARD_PASSWORD'):
+            if identity.get('private_harvest_api_version')!=1 or not identity.get('private_storage_configured'):
+                return False
+            if identity.get('private_storage_project')!=os.environ['SUPABASE_URL'].rstrip('/'):
+                return False
         with urlopen(report_url(port), timeout=2) as response:
             return response.status == 200 and MARKER in response.read()[:2048]
     except (URLError, OSError, ValueError, AttributeError):
@@ -65,6 +84,7 @@ def ensure_server(port=8871):
     raise RuntimeError('Server not ready yet. See .build/report_server.log and retry.')
 
 def main():
+    load_local_settings()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check',action='store_true',help='Read-only readiness check; do not start or open anything')
     parser.add_argument('--port',type=int,default=8871,help='First of up to nine local ports to try')

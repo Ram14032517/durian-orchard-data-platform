@@ -13,6 +13,23 @@ from compare_harvest_stage_yield import vpd_window
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def province_forecast_readiness():
+    """Fail closed: an exploratory score is not approval for a new-year forecast."""
+    return dict(status='not_ready',forecast_available=False,predicted_kg_rai=None,
+        units='kg/rai',scope='province_not_orchard',as_of=date.today().isoformat(),
+        message='ยังไม่มีโมเดลที่ผ่านเงื่อนไขพยากรณ์ปีหน้าจริง จึงไม่แสดงค่าทดลองย้อนหลังเป็น AI Forecast ของสวน',
+        checks_required=['วันออกพยากรณ์และข้อมูลที่ทราบทันวันนั้น','แหล่งและรุ่นข้อมูล Input',
+            'ผลทดสอบตามเวลาที่ไม่ใช้เลือกโมเดลย้อนหลัง','การอนุมัติใช้โมเดลแยกจากคะแนน Outer'],
+        reviewed_candidates=[
+            dict(model='Production Ridge + VPD เดิม',output='province_yield_kg_per_rai',eligible=False,
+                reason='ต้องใช้อากาศจนจบช่วงพัฒนาผล เป็น Retrospective Weather Estimate ไม่ใช่พยากรณ์ก่อนฤดู'),
+            dict(model='CatBoost fixed-calendar / weather experiments',output='province_yield_kg_per_rai',eligible=False,
+                reason='Historical Publication Vintage ยังไม่ยืนยัน และปี Outer เคยใช้พัฒนาแล้ว'),
+            dict(model='National Binary / AutoML / DOA weather ablation',output='province_increase_decrease',eligible=False,
+                reason='ทำนายทิศทาง ไม่ใช่ กก./ไร่; ผลสำรวจย้อนหลังไม่สม่ำเสมอและวันเผยแพร่ Input ยังไม่ยืนยัน')],
+        production_model_changed=False,orchard_forecast_available=False)
+
+
 def orchard_snapshot(now=None):
     now = now or datetime.now(timezone.utc)
     path = ROOT / 'data/processed/orchard_live/live_report.json'

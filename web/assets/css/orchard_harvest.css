@@ -1,0 +1,10 @@
+.private-harvest{grid-column:1/-1;margin-top:24px;padding:20px;border:1px solid var(--border,#c9d8ce);border-radius:16px;background:var(--surface,#fff);min-width:0}
+.private-harvest fieldset{min-width:0}
+.private-harvest .harvest-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.private-harvest label{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:.9rem}
+.private-harvest input,.private-harvest select,.private-harvest textarea{box-sizing:border-box;width:100%;font:inherit;padding:10px;border:1px solid #b7cbbb;border-radius:8px;background:#fff;color:#193e31}
+.private-harvest .harvest-wide{grid-column:1/-1}.private-harvest .harvest-confirm{flex-direction:row;align-items:flex-start;margin:16px 0}.private-harvest input[type=checkbox]{width:auto;flex:none;margin-top:5px}
+.private-harvest .harvest-table{overflow-x:auto;margin:12px 0}.private-harvest table{width:100%;border-collapse:collapse;font-size:.85rem}.private-harvest th,.private-harvest td{padding:10px;text-align:left;border-bottom:1px solid #dce6df;overflow-wrap:anywhere;min-width:85px}.private-harvest th{background:#edf4ef}
+.private-harvest :focus-visible{outline:3px solid #af7b23;outline-offset:3px}.private-harvest .report-controls{flex-wrap:wrap}
+@media(max-width:850px){.private-harvest .harvest-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.private-harvest{padding:12px}.private-harvest .harvest-fields{grid-template-columns:minmax(0,1fr)}}

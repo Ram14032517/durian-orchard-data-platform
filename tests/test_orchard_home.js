@@ -5,6 +5,23 @@ const vm=require('node:vm');
 
 const source=fs.readFileSync('web/assets/js/orchard_monthly_report.js','utf8');
 
+test('private data requires sign-in; other API errors do not suggest signing in',async()=>{
+  const context={
+    fetch:async()=>({ok:false,status:401,headers:{get:()=> 'application/json'},json:async()=>({error:'กรุณาเข้าสู่ระบบ'})}),
+    document:{createElement:tag=>({tag})},
+  };
+  vm.createContext(context);
+  vm.runInContext(source.slice(source.indexOf('async function currentJson('),source.indexOf('let currentRequest=')),context);
+  let denied;try{await context.currentJson('/api/orchard-status');}catch(e){denied=e;}
+  assert.equal(denied.status,401);
+  const node={append(...items){this.items=items;}};
+  context.showOrchardAccessError(node,denied,'อ่านไม่ได้: ');
+  assert.equal(node.items[1].href,'/login');assert.match(node.textContent,/ข้อมูลส่วนตัว/);
+  const other={append(){throw Error('must not insert login for a database failure');}};
+  context.showOrchardAccessError(other,{status:503,message:'database unavailable'},'อ่านไม่ได้: ');
+  assert.equal(other.textContent,'อ่านไม่ได้: database unavailable');
+});
+
 test('every open starts on the original IoT home, not a saved research-map tab',()=>{
   const calls=[];
   const setup=source.slice(source.indexOf('// Keep the original IoT dashboard'),source.indexOf('const openGapMap='));
@@ -26,6 +43,7 @@ test('changing A/B reference coordinates does not retarget the IoT status endpoi
     'view-summary':{},
     'current-province':{},
     'current-orchard':{},
+    'orchard-data-message':{},
   };
   const calls=[];
   const context={
@@ -40,6 +58,8 @@ test('changing A/B reference coordinates does not retarget the IoT status endpoi
     },
     fmt:String,
     esc:String,
+    renderOrchardInsights:()=>{},
+    orchardReferenceCards:()=>'<div></div>',
   };
   vm.createContext(context);
   vm.runInContext(source.slice(source.indexOf('let currentRequest='),source.indexOf("$('current-year').onchange=")),context);
@@ -52,7 +72,7 @@ test('changing A/B reference coordinates does not retarget the IoT status endpoi
     '/api/orchard-status',
     '/api/province-estimate?province=22&year=2026',
   ]);
-  assert.equal(nodes['current-orchard'].textContent,'No sensor reading available');
+  assert.equal(nodes['orchard-data-message'].textContent,'No sensor reading available');
 });
 
 test('IoT history uses only its own date range, never GAP or A/B coordinates',async()=>{
@@ -68,6 +88,7 @@ test('IoT history uses only its own date range, never GAP or A/B coordinates',as
     $:id=>nodes[id],
     A:{code:'84',lat:9.1,lon:99.3,gap_orchard_id:'unverified-registry'},
     telemetryFields:[],
+    selectedTelemetryFields:()=>[],
     telemetryChart:()=>'',
     table:()=>'',
     currentJson:async url=>{calls.push(url);return {source:'Supabase test fixture',raw_count:0,message:'No observations',rows:[]};},
