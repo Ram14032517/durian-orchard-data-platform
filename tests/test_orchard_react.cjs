@@ -107,3 +107,98 @@ test('estimate display requires a numeric result with the correct model status',
   assert.equal(estimateView({status:'retrospective_weather_estimate',predicted_kg_rai:0}).ready,true);
   assert.equal(estimateView({status:'missing_weather'}).ready,false);
 });
+
+test('home starts with an accessible five-tab view and mounts only Today initially',()=>{
+  const {HomeTabs}=load('web/react/src/Home.jsx');
+  const html=renderToStaticMarkup(React.createElement(HomeTabs,{children:tab=>React.createElement('p',null,'content-'+tab)}));
+  assert.equal((html.match(/role="tab"/g)||[]).length,5);
+  assert.equal((html.match(/role="tabpanel"/g)||[]).length,1);
+  assert.match(html,/aria-selected="true" aria-controls="orchard-panel-today"/);
+  assert.doesNotMatch(html,/content-history|content-forecast/);
+});
+
+test('care suggestions fail closed for missing, failed and stale sensor/forecast data',()=>{
+  const {careSuggestions}=load('web/react/src/OrchardAdvice.jsx');
+  for(const reading of [{loading:true},{error:Error('offline')},{data:{status:'stale_live',sensor_quality:{soil:'valid'},readings:{rain_1h_mm:99}}}]){
+    const items=careSuggestions(reading,{status:'stale',summaries:[{complete:true,rain_mm:100,expected_hours:24,valid_rain_hours:24}]},{saved:null});
+    assert.equal(items[0].id,'sensor');
+    assert.ok(!items.find(i=>i.id==='water').title.includes('มีฝนคาดการณ์'));
+    assert.match(items.find(i=>i.id==='stage').evidence,/ยังไม่ได้บันทึก/);
+  }
+});
+
+test('forecast advice only uses complete ready windows and does not turn missing rain into zero',()=>{
+  const {careSuggestions}=load('web/react/src/OrchardAdvice.jsx');
+  const make=summary=>careSuggestions({}, {status:'cached',summaries:[summary]},{}).find(i=>i.id==='water');
+  assert.match(make({complete:true,rain_mm:8,hours:24,expected_hours:24,valid_rain_hours:24}).title,/มีฝนคาดการณ์/);
+  assert.doesNotMatch(make({complete:false,rain_mm:8,expected_hours:24,valid_rain_hours:12}).title,/มีฝนคาดการณ์/);
+  assert.match(make({complete:false,rain_mm:null,expected_hours:24,valid_rain_hours:0}).evidence,/ยังไม่ครบ/);
+});
+
+test('today has at most three actions and advice separates evidence, gaps and sources',()=>{
+  const {TodayActions,AdviceCard,careSuggestions}=load('web/react/src/OrchardAdvice.jsx');
+  const html=renderToStaticMarkup(React.createElement(TodayActions,{reading:{},forecast:null,observation:{saved:null}}));
+  assert.equal((html.match(/<article/g)||[]).length,3);
+  const detail=renderToStaticMarkup(React.createElement(AdviceCard,{item:careSuggestions({},null,{})[0]}));
+  for(const text of ['ข้อมูลที่ใช้ / เวลา','สิ่งที่ยังไม่ทราบ','แหล่งอ้างอิง'])assert.ok(detail.includes(text));
+  assert.doesNotMatch(detail,/สวนปกติ|เสี่ยงโรค \d+%/);
+});
+
+test('shared forecast does not duplicate current cards or advice in forecast-only content',()=>{
+  const {ForecastContent}=load('web/react/src/OrchardForecast.jsx');
+  const html=renderToStaticMarkup(React.createElement(ForecastContent,{forecast:{status:'cached',hourly:[],daily:[],summaries:[]},reading:{},observation:{},includeCurrent:false,includeAdvice:false}));
+  assert.match(html,/พยากรณ์รายวัน 7 วัน/);assert.doesNotMatch(html,/อากาศปัจจุบันจาก API|รายงานโรคระดับจังหวัด/);
+});
+
+test('seven-day view compares all dates, keeps missing values and explains inspection prompts',()=>{
+  const {SevenDayForecast:unused,default:SevenDay}=load('web/react/src/SevenDayForecast.jsx');
+  const daily=Array.from({length:7},(_,i)=>({time:`2026-11-0${i+1}`,rain_mm:i===0?0:null,temperature_min_c:22,temperature_max_c:29}));
+  const html=renderToStaticMarkup(React.createElement(SevenDay,{forecast:{status:'cached',daily},reading:{},observation:{}}));
+  for(const d of daily)assert.ok(html.includes(d.time)||html.includes(new Date(d.time+'T12:00:00+07:00').toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'})));
+  assert.match(html,/ตารางเปรียบเทียบครบ 7 วัน/);assert.match(html,/ใช้ข้อมูลนี้เตรียมอะไรได้บ้าง/);
+  assert.match(html,/ไม่ใช่ระดับอันตราย/);assert.match(html,/—/);assert.doesNotMatch(html,/NaN|Infinity|สวนปกติ/);
+});
+
+test('weekly reconciliation does not sum incomplete, duplicate or discontinuous forecasts',()=>{
+  const {weekOverview}=load('web/react/src/SevenDayForecast.jsx');
+  const days=Array.from({length:7},(_,i)=>({time:`2026-11-0${i+1}`,rain_mm:0}));
+  assert.equal(weekOverview(days).totalRain,0);assert.equal(weekOverview(days).rainDays,0);
+  days[1].rain_mm=null;assert.equal(weekOverview(days).totalRain,null);assert.equal(weekOverview(days).validDays,6);
+  days[1].rain_mm=1;days[6].time='2026-11-08';assert.equal(weekOverview(days).totalRain,null);
+  days[6].time=days[5].time;assert.equal(weekOverview(days).days.length,0);
+});
+
+test('daily action conditions reject old forecasts, missing rain and unrelated or old orchard stages',()=>{
+  const {dailyPlan}=load('web/react/src/SevenDayForecast.jsx');
+  const f={status:'cached',orchard_key:'orchard-a'},day={time:'2026-11-01',rain_mm:5,rain_probability_percent:80};
+  const reading={data:{status:'stale_live',sensor_quality:{soil:'invalid'},sensor_time:'2026-10-31T01:00:00Z'}};
+  const observation={saved:{orchard_key:'orchard-a',stage:'growth',observed_at:'2026-11-01T08:00:00+07:00'}};
+  let items=dailyPlan(f,day,reading,observation,'2026-11-01');assert.deepEqual(Array.from(items,i=>i.id),['water','sensor','fruit']);
+  assert.match(items[0].why,/ยังไม่ยืนยัน/);assert.match(items[1].why,/ยังไม่สั่ง/);
+  assert.equal(dailyPlan({...f,status:'stale'},day,reading,observation,'2026-11-01')[0].id,'forecast');
+  assert.equal(dailyPlan(f,{...day,rain_mm:null},reading,observation,'2026-11-01')[0].id,'incomplete');
+  assert.equal(dailyPlan(f,{...day,time:'2026-10-31'},reading,observation,'2026-11-01')[0].id,'incomplete');
+  observation.saved.orchard_key='another';assert.ok(!dailyPlan(f,day,reading,observation,'2026-11-01').some(i=>i.id==='fruit'));
+  observation.saved.orchard_key='orchard-a';observation.saved.observed_at='2026-01-01T00:00:00Z';assert.ok(!dailyPlan(f,day,reading,observation,'2026-11-01').some(i=>i.id==='fruit'));
+});
+
+test('knowledge covers every displayed metric without inventing stage-specific thresholds',()=>{
+  const {measurementGuide,stageGuidance}=load('web/react/src/OrchardKnowledge.jsx'),{metrics}=load('web/react/src/data.js');
+  for(const [key] of metrics){const guide=measurementGuide(key);for(const field of ['use','range','caution','source','rangeKind'])assert.ok(guide[field],key+':'+field);}
+  assert.match(measurementGuide('vpd_kpa').range,/ยังไม่มี/);
+  assert.match(measurementGuide('soil_moisture_percent').range,/สอบเทียบ/);
+  assert.match(measurementGuide('soil_ph').range,/5.5–6.5/);
+  assert.match(measurementGuide('soil_n').range,/ไม่กำหนด/);
+  assert.match(stageGuidance(undefined),/ยังไม่ได้บันทึก/);
+  assert.doesNotMatch(stageGuidance('flower'),/งดน้ำทันที|\d+ ลิตร/);
+});
+
+test('soil reference image is real LDD excerpt, labels uncertainty and does not reveal coordinates',()=>{
+  const {SoilReference}=load('web/react/src/OrchardKnowledge.jsx');
+  const html=renderToStaticMarkup(React.createElement(SoilReference,{linked:true}));
+  assert.match(html,/data:image\/jpeg;base64,/);assert.match(html,/ทุ่งหว้า/);assert.match(html,/Tg/);
+  assert.match(html,/ไม่ใช่ภาพดินจริงของสวนนี้/);assert.match(html,/50 เมตร/);
+  assert.match(html,/5.5–6.0/);assert.match(html,/ไม่ยืนยันขอบเขตหรือดินทุกจุด/);
+  assert.doesNotMatch(html,/latitude|longitude|8\.833|99\.371/);
+  const unlinked=renderToStaticMarkup(React.createElement(SoilReference,{linked:false}));assert.match(unlinked,/ยังไม่ผูกกับบัญชีสวนนี้/);
+});

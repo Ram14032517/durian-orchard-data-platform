@@ -1,0 +1,62 @@
+{
+  "reviewed_on": "2026-11-01",
+  "use": "internal_only_public_hold",
+  "sources": [
+    {
+      "agency": "LDD",
+      "title": "Soil series Thungwa (Tg)",
+      "url": "https://iddindee.ldd.go.th/SoilSeries/T_2/24_Series_%28Tg%29.pdf",
+      "page": 1,
+      "sha256": "7d9b19c04b71347445c066117359faa0181800c557257c6e1b38cd6bb04c256f",
+      "image_sha256": "51d4dce3fc71b1d88289d3b285cac7ed80d93ff14e011cfeeea5dafaf155fb96",
+      "image_scope": "representative profile, not orchard photograph",
+      "reuse_license": "unverified; internal educational excerpt only"
+    },
+    {
+      "agency": "DOAE",
+      "title": "โรคทุเรียนและการป้องกันกำจัด",
+      "url": "https://esc.doae.go.th/wp-content/uploads/2024/01/โรคทุเรียนและการป้องกันกำจัด.pdf",
+      "pages": [
+        4,
+        5
+      ],
+      "verified": "full PDF read with web tool"
+    },
+    {
+      "agency": "DOAE",
+      "title": "เทคนิคการปลูกและดูแลรักษาทุเรียน",
+      "url": "https://edoae.doae.go.th/aopdh02/wp-content/uploads/sites/9/2026/01/Durian.pdf",
+      "pages": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "verified": "full PDF read; numeric climate limits not optimum ranges"
+    },
+    {
+      "agency": "DOA",
+      "title": "การเพิ่มประสิทธิภาพการใช้ปุ๋ยทุเรียนตามค่าวิเคราะห์ดินและผลผลิตฯ",
+      "url": "https://info.doa.go.th/research/?act=view_detail&id=3677",
+      "anchor": "official abstract, 3 treatments, 7 replicates, two production seasons",
+      "verified": "official abstract only; full report unavailable this round",
+      "limits": "18% fertilizer expenditure reduction is trial-specific; not sensor validation or forecast of orchard savings"
+    },
+    {
+      "agency": "University of Minnesota Extension",
+      "url": "https://extension.umn.edu/natural-resources/conservation/agricultural-soil-and-water/irrigation/soil-moisture-sensors-for-irrigation-scheduling",
+      "anchor": "VWC, field capacity and sensor placement",
+      "limits": "general measurement principles, not Thai durian thresholds"
+    },
+    {
+      "agency": "Open-Meteo",
+      "url": "https://open-meteo.com/en/docs",
+      "anchor": "variable definitions; existing integration documentation",
+      "limits": "model grid not sensor or agronomic recommendation"
+    }
+  ],
+  "excluded": [
+    "Unreachable DOA PDF climate-range sources not used to set 25–30°C or RH 75–80% targets",
+    "No general VPD/EC/NPK threshold promoted to durian-stage control rules"
+  ]
+}
