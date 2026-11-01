@@ -1,5 +1,7 @@
 # ส่งต่องานโปรเจกต์ทุเรียนให้บัญชีใหม่
 
+อัปเดตการจัดไฟล์ 1 พฤศจิกายน 2569: เริ่มที่ [แผนผังสำหรับเล่ม IoT Platform](IOT_PLATFORM_REPORT_MAP_TH.md) และ [คู่มือเริ่มต้น](../../00_START_HERE_TH.md) บันทึกด้านล่างเป็นหลักฐานย้อนหลัง ไม่ใช่สถานะ Deploy ปัจจุบัน
+
 ## ทดลองภูมิประเทศที่รันแล้ว (9 ตุลาคม 2569)
 
 โค้ด `tools/durian_model/experiment_terrain_interaction.py` ใช้โครงสร้างเดิม แก้ inner split ให้ train < validation year และไม่เติม weather ที่ขาดเป็นศูนย์ ดึง SRTM30m 90 samples (10 พิกัดผู้ใช้ × 3×3 patch) จาก Open Topo Data เก็บ raw/cache `research_data/five_province_history/terrain_srtm30_samples.json` และตาราง `terrain_selected_points.csv` เป็น proxy รอบพิกัด ไม่ใช่ค่าเฉลี่ยอำเภอ/สวนให้ผล เฉลี่ยสองจุดต่อจังหวัดด้วยน้ำหนักเท่ากัน ไม่มีน้ำหนักพื้นที่ให้ผล ยังไม่ยืนยันว่าพิกัดเป็นตัวแทนสวนจริง ตัวเลข elevation/slope ที่ผู้ใช้ส่งเก็บแยกเป็น unverified scenario ไม่อ้างว่าเป็น DEM ที่ตรวจแล้ว
