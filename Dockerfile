@@ -3,6 +3,8 @@ WORKDIR /app
 COPY tools/requirements-cloud.txt tools/requirements-cloud.txt
 RUN pip install --no-cache-dir -r tools/requirements-cloud.txt
 COPY tools/serve_orchard_cloud.py tools/serve_orchard_analysis.py tools/orchard_current_context.py tools/supabase_orchard.py tools/clean_stale_weather.py tools/train_monthly_production.py tools/compare_harvest_stage_yield.py tools/analyze_harvest_backcast.py tools/
+COPY tools/orchard_harvest.py tools/orchard_harvest.py
+COPY tools/orchard_forecast.py tools/orchard_private_assets.py tools/
 COPY tools/durian_model/common.py tools/durian_model/common.py
 COPY ml/orchard_live_model.py ml/orchard_live_model.py
 COPY models/orchard_soil_6h.json models/orchard_soil_6h.json

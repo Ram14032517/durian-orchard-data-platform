@@ -25,9 +25,6 @@ function doPost(e) {
   try {
     const book = SpreadsheetApp.openById(props.getProperty('SPREADSHEET_ID'));
     appendReading_(book, data);
-    upsertNdvi_(book, data);
-    upsertForecast_(book, data);
-    upsertHourlyForecast_(book, data);
   } finally {
     lock.releaseLock();
   }
@@ -257,6 +254,8 @@ function applySheetRetention() {
 // Run daily (or manually) to build a compact long-term summary from readings.
 // This is an environmental screening score, not NDVI or a disease diagnosis.
 function rebuildEnvironmentRiskDaily() {
+  return []; // Retired: retain readings_15min only.
+
   const book = SpreadsheetApp.openById(
     PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')
   );

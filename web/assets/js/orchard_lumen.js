@@ -8,7 +8,7 @@ tabs.id = 'workspace-tabs';
 const links = [...document.querySelectorAll('.quick-nav a')];
 const panels = links.map(link => document.querySelector(link.getAttribute('href')));
 for (const section of [...aside.querySelectorAll(':scope > section')]) {
-  if (section.id !== 'area-section' && !panels.includes(section)) document.getElementById('training-section').append(section);
+  if (!['area-section', 'training-section'].includes(section.id) && !panels.includes(section)) document.getElementById('training-section').append(section);
 }
 const nav = document.querySelector('.quick-nav');
 nav.setAttribute('role', 'tablist');

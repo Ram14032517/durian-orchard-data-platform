@@ -1,6 +1,7 @@
 # โค้ดหน้าเว็บ
 
 อัปเดต 1 พฤศจิกายน 2026: หน้าเว็บอ่าน capabilities จาก `/api/project` ก่อนโหลด GAP จึงไม่ลองโหลดหมุดที่ cloud ตั้งใจบล็อก และมีคำอธิบายโหมด IoT เครื่องนี้ ค่าเริ่มต้น local ยังเป็น snapshot; ถ้าตั้งเซิร์ฟเวอร์ `ORCHARD_DATA_SOURCE=supabase` จะอ่านสดโดยไม่ fallback เป็น snapshot อัตโนมัติ Cloud เดิมยังใช้ Supabase และไม่ย้าย device ตาม A/B ดู [บันทึกแก้ปัญหา](../docs/updates/PROJECT_UPDATE_2026-11-01_TH.md)
+อัปเดต 28 ตุลาคม 2026: หน้าหลัก `UNIFIED_MAP.html` ใช้ React + Tailwind ที่ `web/react/` แล้ว วิธี build และขอบเขตอยู่ใน [คู่มือ React](react/README_TH.md) ข้อมูลแสดงผลเดิมยังคงค่าเดิม เครื่องมือแบบเดิมเก็บที่ `UNIFIED_MAP_CLASSIC.html` และใช้ต้นทางด้านล่างเมื่อปรับเครื่องมืออ้างอิงเพิ่มเติม
 
 ตั้งแต่ 22 ตุลาคม 2026 หน้าเปิดเริ่มที่ **สวนของฉัน** (`current-section`) ทุกครั้งตามพฤติกรรมเดิม ไม่ restore แท็บแผนที่จาก sessionStorage แล้ว แผนที่ GAP ยังอยู่แท็บ **แผนที่สวน** และปุ่มเปิด GAP ตามเดิม การเลือก A/B หรือ GAP ไม่เปลี่ยน `ORCHARD_DEVICE_ID` และไม่เพิ่มพิกัดเข้า query ประวัติ IoT ดู [บันทึกอัปเดต](../docs/updates/PROJECT_UPDATE_2026-10-22_TH.md) สำหรับสถานะ local snapshot เทียบกับ Supabase cloud และข้อจำกัดการเชื่อมต่อ
 

@@ -2,10 +2,9 @@
 import json
 import csv
 import argparse
+import hashlib
 import re
 from pathlib import Path
-import pandas as pd
-from shapely.geometry import shape
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'research_data/five_province_history'
@@ -35,20 +34,25 @@ def render_assets(payload,output=OUT,include_seasons=True):
     template=(ROOT/'web/templates/unified_orchard_map.html').read_text(encoding='utf-8')
     substitutions={
         '__DATA__':script_json(payload),
-        '__MONTHLY_CODE__':(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8'),
+        '__MONTHLY_CODE__':(ROOT/'web/assets/js/my_orchard_cards.js').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8'),
         '__MONTHLY_STYLE__':(ROOT/'web/assets/css/orchard_monthly_report.css').read_text(encoding='utf-8'),
         '__TAILWIND_STYLE__':(ROOT/'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8'),
         '__SOIL_EXPLORATION_CODE__':(ROOT/'web/assets/js/orchard_soil_exploration.js').read_text(encoding='utf-8'),
         '__GAP_CODE__':(ROOT/'web/assets/js/orchard_gap_layer.js').read_text(encoding='utf-8'),
         '__GAP_INTEGRATION_CODE__':(ROOT/'web/assets/js/orchard_gap_integration.js').read_text(encoding='utf-8'),
         '__GAP_STYLE__':(ROOT/'web/assets/css/orchard_gap_layer.css').read_text(encoding='utf-8'),
-        '__STUDIO_STYLE__':(ROOT/'web/assets/css/orchard_studio.css').read_text(encoding='utf-8'),
+        '__STUDIO_STYLE__':(ROOT/'web/assets/css/orchard_studio.css').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/css/orchard_workspace.css').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/css/orchard_harvest.css').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/css/my_orchard_cards.css').read_text(encoding='utf-8'),
+        '__WORKSPACE_CODE__':(ROOT/'web/assets/js/orchard_workspace.js').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/js/orchard_harvest.js').read_text(encoding='utf-8'),
         '__MAP_MOTION_CODE__':(ROOT/'web/assets/js/orchard_map_motion.js').read_text(encoding='utf-8'),
     }
     template=re.sub('|'.join(map(re.escape,substitutions)),lambda match:substitutions[match.group()],template)
     if any(token in template for token in substitutions):
         raise ValueError('Unresolved map template placeholder')
-    (output/'UNIFIED_MAP.html').write_text(template,encoding='utf-8')
+    # Keep the established analysis tools available while the primary five pages use React.
+    (output/'UNIFIED_MAP_CLASSIC.html').write_text(template,encoding='utf-8')
+    react_template=(ROOT/'web/templates/unified_orchard_react.html').read_text(encoding='utf-8')
+    asset_version=hashlib.sha256(b''.join((OUT/name).read_bytes() for name in ('orchard_app.js','orchard_app.css'))).hexdigest()[:12]
+    (output/'UNIFIED_MAP.html').write_text(react_template.replace('__DATA__',script_json(payload)).replace('__ASSET_VERSION__',asset_version),encoding='utf-8')
     if not include_seasons:return
     season_template=(ROOT/'web/templates/five_province_seasons.html').read_text(encoding='utf-8')
     season_payload={k:v for k,v in payload.items() if k not in ('monthly_weather','phenology','soil_properties','district_exploration')}
@@ -88,6 +92,9 @@ def main(argv=None):
         render_assets(payload,include_seasons=False)
         print('UI rebuilt using the unchanged bundled display-data snapshot; no model was trained')
         return
+    # A presentation-only rebuild does not require the GIS processing environment.
+    import pandas as pd
+    from shapely.geometry import shape
     boundary_path=ROOT/'research_data/thailand_comparison/province_display.geojson'
     if not boundary_path.is_file():
         parser.error('Province boundary source is not present. Use --reuse-bundled-data to preserve the existing map data.')

@@ -90,24 +90,27 @@ const L={canvas:()=>({}),layerGroup(){const group={layers:[],addTo(){return this
 function feature(id,code,lon,lat,district='เมือง',flags=[]){return {type:'Feature',id,geometry:{type:'Point',coordinates:[lon,lat]},properties:{id,province_code:code,province_name:code==='22'?'จันทบุรี':'ชุมพร',district,tambon:'ตัวอย่าง',date_status:'within_dates',quality:'province_checked',quality_flags:['registry_gps_unverified',...flags],source_ids:['DOA'],field_verified:false}};}
 const features=[feature('gap-a','22',100,12,'เมือง',['shared_coordinate']),feature('gap-b','22',100,12,'เมือง',['shared_coordinate']),feature('gap-c','22',101,13,'ท่าใหม่')];
 const manifest={schema_version:1,snapshot_date:'2026-10-20',provinces:[{code:'22',name:'จันทบุรี',file:'province_22.geojson',bbox:[100,12,101,13],source_rows:4,excluded_counts:{invalid:1}},{code:'86',name:'ชุมพร',file:'province_86.geojson',source_rows:1}],sources:{DOA:{url:'https://gap.doa.go.th/',retrieved_date:'2026-10-20'},unsafe:{url:'https://attacker.test/'}}};
-const calls=[], selections=[];
+const calls=[], selections=[], provinceChanges=[];
 const window={document:doc,location:{href:doc.baseURI},setTimeout,clearTimeout,fetch:async(url,options)=>{
   calls.push(url);assert.equal(options.credentials,'same-origin');
   return {ok:true,json:async()=>url.endsWith('manifest.json')?manifest:{type:'FeatureCollection',features:url.endsWith('province_22.geojson')?features:[feature('gap-d','86',99,10)]}};
 }};
 vm.runInNewContext(fs.readFileSync(process.argv[1],'utf8'),{window,URL});
-const api=window.createGapOrchardLayer({map,L,container,dataBaseUrl:'../gap/',selectPoint:point=>selections.push(point)});
+const api=window.createGapOrchardLayer({map,L,container,dataBaseUrl:'../gap/',onProvinceChange:code=>provinceChanges.push(code),selectionOwnsNavigation:true,selectPoint:point=>selections.push(point)});
 const descendants=node=>[node,...node.children.flatMap(child=>child.children?descendants(child):[child])];
 (async()=>{
   assert.equal(calls.length,0,'factory must not fetch all provinces');
-  await api.setProvince('22');
+  const loading=api.setProvince('22');await api.setProvince('22');await loading;
+  assert.deepEqual(provinceChanges,['22'],'concurrent same-province request notifies and loads once');
   assert.equal(calls.length,2);assert.equal(api.getState().loadedCount,3);
   assert.equal(markerGroups[0].layers.length,2,'low-zoom same-pixel points cluster');
   const first=markerGroups[0].layers.find(marker=>marker.position[0]===12);
   const event={originalEvent:{}};first.events.click(event);assert.equal(event.originalEvent.stopped,true);
   const list=descendants(container).find(node=>node.tagName==='ol');
   assert.equal(list.children.length,2,'cluster click offers only the selected cluster in keyboard list');
+  const afterClusterNavigation=map.position;
   list.children[0].children[0].events.click();
+  assert.equal(map.position,afterClusterNavigation,'React owns point navigation; selecting a record must not add a second navigation');
   assert.equal(selections.length,1);assert.equal(selections[0].point_kind,'gap_registry');
   assert.equal(selections[0].code,'22');assert.equal(selections[0].gap_id,'gap-a');
   assert.equal(selections[0].lat,12);assert.equal(selections[0].lon,100);
@@ -121,7 +124,11 @@ const descendants=node=>[node,...node.children.flatMap(child=>child.children?des
   api.setVisible(true);assert.equal(markerGroups[0].layers.length,1);
   assert.ok(descendants(container).filter(node=>node.tagName==='a').every(node=>!node.href.includes('attacker')));
   await api.setProvince('86');assert.equal(api.getState().loadedCount,1);assert.equal(api.getState().filters.district,'');
+  assert.deepEqual(provinceChanges,['22','86'],'native province filter notifies React');
   assert.equal(calls.length,3,'province switch loads one file, not all');
+  const provinceSelect=descendants(container).find(node=>node.tagName==='select'&&node.attrs['aria-label']==='จังหวัดของหมุด GAP');
+  const beforeProvinceNavigation=map.fitted;provinceSelect.value='22';await provinceSelect.events.change();
+  assert.equal(map.fitted,beforeProvinceNavigation,'React adapter owns province navigation too, even after asynchronous file loading');
   await api.setProvince('');assert.equal(api.getState().loadedCount,0);assert.equal(markerGroups[0].layers.length,0);
   api.destroy();assert.equal(container.children.length,0);assert.equal(Object.keys(map.events).length,0);
   const deniedContainer=new Element('section',doc),beforeDenied=calls.length;
@@ -171,7 +178,7 @@ const map={zoom:6,panes:{},events:{},getPane(name){return this.panes[name];},cre
 let group;
 const L={canvas:()=>({}),layerGroup(){return group={layers:[],addTo(){return this;},clearLayers(){clears++;this.layers=[];},addLayer(layer){this.layers.push(layer);},removeLayer(layer){this.layers=this.layers.filter(item=>item!==layer);}};},
   divIcon(options){assert.equal(typeof options.html,'object','cluster count must be a safe DOM node, not HTML text');return options;},
-  marker(position,options){const marker=this.circleMarker(position,options);marker.kind='cluster';return marker;},
+  marker(position,options){const marker=this.circleMarker(position,options);marker.kind='marker';marker.setIcon=icon=>{marker.options.icon=icon;return marker;};return marker;},
   circleMarker(position,options){creations++;return {position,options,events:{},bindTooltip(){tooltipBindings++;return this;},on(name,handler){this.events[name]=handler;return this;},setStyle(style){Object.assign(this.options,style);},setRadius(radius){this.options.radius=radius;}};},DomEvent:{stopPropagation(){}}};
 function feature(id,lon,lat){return {type:'Feature',id,geometry:{type:'Point',coordinates:[lon,lat]},properties:{province_code:'22',district:'เมือง',date_status:'within_dates',quality_flags:[]}};}
 // The first two records share a world-grid cell, but not an exact coordinate.
@@ -185,16 +192,22 @@ const api=window.createGapOrchardLayer({map,L,container,selectPoint(){},motion:{
 const flush=()=>{const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn());};
 (async()=>{
   await api.setProvince('22');
-  assert.equal(group.layers.length,2);assert.equal(projectionCalls,3);
+  assert.equal(group.layers.length,2);assert.ok(projectionCalls>=3);
+  const firstProjectionCount=projectionCalls;
   const retained=group.layers.find(marker=>marker.position[0]<13), originalPosition=[...retained.position];
-  assert.equal(retained.kind,'cluster');assert.equal(retained.options.keyboard,true);
+  assert.equal(retained.kind,'marker');assert.equal(retained.options.keyboard,true);
   assert.ok(retained.options.title.includes('ยังไม่ยืนยันภาคสนาม'));
   assert.equal(retained.options.alt,retained.options.title);
-  assert.equal(retained.options.icon.className,'gap-cluster-icon');
-  assert.equal(retained.options.icon.html.className,'gap-cluster-number');
-  assert.equal(retained.options.icon.html.textContent,Number(2).toLocaleString('th-TH'));
-  assert.deepEqual(Array.from(retained.options.icon.iconSize),[36,36]);
-  assert.equal(group.layers.find(marker=>marker.position[0]===13).kind,undefined,'single registry locations stay on canvas');
+  assert.equal(retained.options.icon.className,'gap-cluster-icon gap-group-pin');
+  assert.equal(retained.options.icon.html.className,'gap-pin-head');
+  assert.ok(!retained.options.icon.html.textContent,'cluster has no visible count before clicking');
+  assert.ok(!retained.options.title.includes('2'),'hover title has no count before clicking');
+  assert.deepEqual(Array.from(retained.options.icon.iconSize),[28,36]);
+  const single=group.layers.find(marker=>marker.position[0]===13);
+  assert.equal(single.kind,'marker','single registry locations use a readable map pin');
+  assert.equal(single.options.icon.className,'gap-registry-pin');
+  assert.equal(single.options.icon.html.className,'gap-pin-head');
+  assert.deepEqual(Array.from(single.options.icon.iconAnchor),[13,35]);
   const initialCreations=creations, initialBindings=tooltipBindings, initialClears=clears;
   // Only one member of the first cluster is inside the next viewport. Its
   // centroid, tooltip membership and marker identity must nevertheless stay put.
@@ -204,7 +217,7 @@ const flush=()=>{const pending=[...frames.values()];frames.clear();pending.forEa
   flush();
   assert.equal(group.layers.length,1);assert.equal(group.layers[0],retained);
   assert.deepEqual(Array.from(group.layers[0].position),originalPosition);
-  assert.equal(projectionCalls,3,'panning must reuse world-pixel cluster geometry');
+  assert.equal(projectionCalls,firstProjectionCount,'panning must reuse world-pixel cluster geometry');
   assert.equal(creations,initialCreations);assert.equal(tooltipBindings,initialBindings);
   assert.equal(clears,initialClears,'panning must not clear the canvas layer');
   retained.events.click({});assert.equal(navigation.at(-1)[0],'fitBounds');
@@ -213,11 +226,12 @@ const flush=()=>{const pending=[...frames.values()];frames.clear();pending.forEa
   map.events.zoomstart();assert.equal(frames.size,0,'zoom cancels a pending redraw');
   map.zoom=7;map.events.moveend();
   await api.setProvince('22');
-  assert.equal(projectionCalls,3);assert.equal(boundsTests,beforeZoomTests,'no regroup/culling during animated zoom');
+  assert.equal(projectionCalls,firstProjectionCount);assert.equal(boundsTests,beforeZoomTests,'no regroup/culling during animated zoom');
   map.events.zoomend();map.events.moveend();assert.equal(frames.size,1);flush();
-  assert.equal(projectionCalls,6,'new zoom geometry is computed only after animation settles');
+  assert.ok(projectionCalls>firstProjectionCount,'new zoom geometry is computed only after animation settles');
+  const afterZoomProjections=projectionCalls;
   map.events.moveend();api.setVisible(false);assert.equal(frames.size,0);assert.equal(group.layers.length,0);
-  api.setVisible(true);assert.equal(projectionCalls,6,'visibility toggle reuses cached cluster geometry');
+  api.setVisible(true);assert.equal(projectionCalls,afterZoomProjections,'visibility toggle reuses cached cluster geometry');
   map.events.moveend();api.destroy();assert.equal(frames.size,0);assert.equal(Object.keys(map.events).length,0);
   assert.equal(group.layers.length,0);assert.equal(container.children.length,0);
   flush();assert.equal(group.layers.length,0,'destroyed layer cannot be resurrected by queued work');

@@ -1,5 +1,14 @@
 # เริ่มตรงนี้ — โปรเจกต์สวนทุเรียน
 
+## เว็บและงานรายงานปัจจุบัน — 1 พฤศจิกายน 2569
+
+- **เปิดเว็บ:** Windows ใช้ [00_OPEN_REPORT.cmd](00_OPEN_REPORT.cmd) หรือเว็บออนไลน์ [Durian Orchard](https://map-durian-analysis.vercel.app/home) ซึ่งต้องเข้าสู่ระบบเพื่ออ่านข้อมูลส่วนตัว
+- **แก้เว็บปัจจุบัน:** [React + Tailwind](web/react/README_TH.md) — โค้ดอยู่ `web/react/src/`; อย่าแก้ไฟล์ `orchard_app.js` / `orchard_app.css` ที่สร้างแล้วโดยตรง
+- **เตรียมเล่มรายงาน IoT Platform:** อ่าน [แผนผังโค้ดและหลักฐาน](docs/operations/IOT_PLATFORM_REPORT_MAP_TH.md)
+- **ข้อมูลและผลทดลองเดิม:** [ดัชนีงานวิจัย](research_data/internal_research/README_TH.md) เก็บไว้เป็นหลักฐาน ไม่ใช่ทุกผลทดลองถูกนำมาใช้งานจริง
+
+หัวข้อด้านล่างมีบันทึกย้อนหลัง ให้ใช้ส่วนนี้เป็นจุดเริ่มสำหรับเว็บปัจจุบัน
+
 จัดโฟลเดอร์ใหม่ 19 ตุลาคม 2569 · เปิดโฟลเดอร์ repository นี้ใน VS Code แล้วกด **Command+Shift+V** บน Mac เพื่ออ่านหน้านี้
 
 ## บันทึกอัปเดตล่าสุด

@@ -27,6 +27,22 @@ class CloudTests(unittest.TestCase):
 
     def tearDown(self):self.env.stop()
 
+    def test_clean_routes_keep_auth_assets_and_safe_login_destination(self):
+        anonymous=self.app.test_client()
+        for path in ['/home','/map','/weather','/yield','/seasons']:
+            response=anonymous.get(path)
+            self.assertEqual(response.status_code,302)
+            self.assertEqual(response.location,'/login?next='+path)
+            response=self.client.get(path)
+            self.assertEqual(response.status_code,200)
+            self.assertIn(b'<base href="/research_data/five_province_history/">',response.data)
+        anonymous.get('/login?next=/map')
+        with anonymous.session_transaction() as state:token=state['csrf']
+        response=anonymous.post('/login',data={'csrf':token,'username':'owner','password':'test-password-123456789','next':'/map'})
+        self.assertEqual(response.location,'/map')
+        response=anonymous.get('/login?next=https://example.org')
+        self.assertNotIn('example.org',response.location or '')
+
     def test_fail_closed_without_password(self):
         with patch.dict(os.environ,{'DASHBOARD_PASSWORD':''}):
             with self.assertRaises(RuntimeError):create_app()
@@ -78,6 +94,33 @@ class CloudTests(unittest.TestCase):
         self.assertFalse(data['capabilities']['gap_registry']['available'])
         self.assertIn('cloud',data['capabilities']['gap_registry']['message'])
         self.assertNotIn('ORCHARD_DEVICE_ID',str(data))
+    def test_login_returns_to_the_selected_page_without_open_redirect(self):
+        base='/research_data/five_province_history/UNIFIED_MAP.html'
+        for requested,expected in [(base+'#map',base+'#map'),(base+'#weather',base+'#weather'),
+                                   ('https://outside.invalid/',base),('//outside.invalid/',base),
+                                   (base+'?next=https://outside.invalid/',base),(base+'#invalid',base)]:
+            client=self.app.test_client()
+            page=client.get('/login',query_string={'next':requested})
+            self.assertEqual(page.status_code,200)
+            self.assertIn('id="toggle-password"',page.get_data(as_text=True))
+            with client.session_transaction() as state:token=state['csrf']
+            response=client.post('/login',data={'csrf':token,'username':'owner','password':'test-password-123456789','next':requested})
+            self.assertEqual(response.status_code,302)
+            self.assertEqual(response.headers['Location'],expected)
+            self.assertEqual(client.get('/login',query_string={'next':requested}).headers['Location'],expected)
+
+    def test_logout_confirmation_does_not_clear_session_and_session_is_private(self):
+        self.assertEqual(self.app.test_client().get('/api/orchard-session').status_code,401)
+        session_response=self.client.get('/api/orchard-session')
+        self.assertEqual(session_response.status_code,200)
+        self.assertEqual(session_response.json['account'],'owner')
+        self.assertNotIn('password',session_response.json)
+        self.assertEqual(self.client.get('/logout').status_code,200)
+        self.assertEqual(self.client.get('/api/orchard-session').status_code,200)
+        self.assertEqual(self.client.post('/logout',data={'csrf':'wrong'}).status_code,403)
+        self.assertEqual(self.client.get('/api/orchard-session').status_code,200)
+        self.assertEqual(self.client.post('/logout',data={'csrf':session_response.json['csrf']}).status_code,302)
+        self.assertEqual(self.client.get('/api/orchard-session').status_code,401)
 
     def test_render_requires_tls_before_accepting_login(self):
         with patch.dict(os.environ,{'RENDER':'true'}):
@@ -146,12 +189,78 @@ class CloudTests(unittest.TestCase):
         result=live_status(now.to_pydatetime(),reader)
         self.assertEqual(result['mode'],'supabase_live')
         self.assertEqual(result['soil_percent'],30.)
+        self.assertEqual(result['readings']['soil_moisture_percent'],30.)
+        self.assertEqual(result['readings']['outdoor_temperature_c'],29.)
+        self.assertEqual(result['sensor_quality'],{'soil':'valid','weather':'valid'})
         self.assertEqual(result['prediction']['predicted_hour_mean_soil_percent'],30.)
         self.assertEqual(reader.call_args.args[1]['device_id'],'eq.test-device')
         self.assertNotIn('device_id',result)
         rows[-1]['weather_valid']=False
         result=live_status(now.to_pydatetime(),reader)
         self.assertIsNone(result['vpd_kpa'])
+        self.assertIsNone(result['readings']['outdoor_temperature_c'])
+        self.assertEqual(result['sensor_quality']['weather'],'invalid')
+
+    def test_legacy_columns_retry_once_and_preserve_unknown_quality(self):
+        missing=Mock(status_code=400);missing.json.return_value={'code':'42703'}
+        success=Mock(status_code=200);success.json.return_value=[{'event_id':'fixture','source_payload':{}}]
+        with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','SUPABASE_SECRET_KEY':'sb_secret_fixture'}),patch('supabase_orchard.requests.get',side_effect=[missing,success]) as get:
+            rows=read_table('sensor_readings',{'select':'event_id,soil_valid,soil_age_sec,weather_valid,weather_age_sec','device_id':'eq.test-device'})
+        self.assertEqual(get.call_count,2)
+        self.assertEqual(get.call_args.kwargs['params']['device_id'],'eq.test-device')
+        self.assertEqual(get.call_args.kwargs['params']['select'],'event_id,source_payload')
+        self.assertIsNone(rows[0]['soil_valid']);self.assertIsNone(rows[0]['weather_age_sec'])
+        self.assertFalse(rows[0]['_quality_metadata_available']);self.assertNotIn('source_payload',rows[0])
+
+    def test_legacy_payload_preserves_explicit_false_and_rejects_invalid_age(self):
+        missing=Mock(status_code=400);missing.json.return_value={'code':'PGRST204'}
+        success=Mock(status_code=200);success.json.return_value=[{'source_payload':{
+            'soil':{'valid':False,'age_sec':0},'weather':{'valid':True,'age_sec':12,'source':'stored'}}},
+            {'source_payload':{'soil':{'valid':True,'age_sec':-1},'weather':{'valid':'true','age_sec':False}}}]
+        with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','SUPABASE_SECRET_KEY':'sb_secret_fixture'}),patch('supabase_orchard.requests.get',side_effect=[missing,success]):
+            rows=read_table('sensor_readings',{'select':'soil_valid,weather_valid,soil_age_sec,weather_age_sec'})
+        self.assertTrue(rows[0]['_quality_metadata_available']);self.assertFalse(rows[0]['soil_valid'])
+        self.assertEqual(rows[0]['weather_source'],'stored')
+        self.assertFalse(rows[1]['_quality_metadata_available']);self.assertIsNone(rows[1]['soil_age_sec'])
+        self.assertIsNone(rows[1]['weather_valid']);self.assertIsNone(rows[1]['weather_age_sec'])
+
+    def test_authentication_failure_never_uses_legacy_fallback(self):
+        denied=Mock(status_code=401);denied.json.return_value={'code':'42703'}
+        with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','SUPABASE_SECRET_KEY':'sb_secret_fixture'}),patch('supabase_orchard.requests.get',return_value=denied) as get:
+            with self.assertRaises(RuntimeError):read_table('sensor_readings',{'select':'soil_valid'})
+        self.assertEqual(get.call_count,1)
+
+    def test_unknown_legacy_quality_disables_ai_without_hiding_observations(self):
+        rows=[dict(event_id='fixture',device_id='test-device',recorded_at='2026-10-09T14:00:00Z',soil_moisture_percent=30,
+                   outdoor_temperature_c=29,outdoor_humidity_percent=75,soil_valid=None,weather_valid=None,
+                   soil_age_sec=None,weather_age_sec=None,_quality_metadata_available=False)]
+        result=live_status(datetime(2026,10,9,14,tzinfo=timezone.utc),Mock(return_value=rows))
+        self.assertEqual(result['soil_percent'],30);self.assertIsNone(result['prediction'])
+        self.assertEqual(result['quality_status'],'legacy_unverified');self.assertIn('prediction_note',result)
+
+    def test_invalid_soil_shows_only_the_latest_confirmed_historical_reading(self):
+        now=pd.Timestamp('2026-10-09T14:00:00Z')
+        rows=[dict(event_id=str(i),device_id='test-device',recorded_at=(now-pd.Timedelta(minutes=15*i)).isoformat(),
+                   soil_moisture_percent=999,soil_valid=False,soil_age_sec=None,weather_valid=True,weather_age_sec=0)
+              for i in range(200)]
+        previous=dict(event_id='older',device_id='test-device',recorded_at=(now-pd.Timedelta(hours=51)).isoformat(),
+                      soil_moisture_percent=37,soil_temperature_c=27,soil_ec=120,soil_valid=True,soil_age_sec=10)
+        reader=Mock(side_effect=[rows,[previous]])
+        result=live_status(now.to_pydatetime(),reader)
+        self.assertIsNone(result['readings']['soil_moisture_percent'])
+        self.assertEqual(result['sensor_quality']['soil'],'invalid')
+        self.assertEqual(result['last_valid_soil']['readings']['soil_moisture_percent'],37)
+        self.assertEqual(result['last_valid_soil']['sensor_time'],previous['recorded_at'])
+        self.assertEqual(reader.call_args.args[1]['offset'],'200')
+        self.assertEqual(reader.call_args.args[1]['device_id'],'eq.test-device')
+
+    def test_history_lookup_failure_does_not_break_live_weather(self):
+        row=dict(event_id='fixture',device_id='test-device',recorded_at='2026-10-09T14:00:00Z',
+                 soil_valid=False,soil_age_sec=None,weather_valid=True,weather_age_sec=0,
+                 outdoor_temperature_c=29,outdoor_humidity_percent=75)
+        result=live_status(datetime(2026,10,9,14,tzinfo=timezone.utc),Mock(side_effect=[[row],RuntimeError('offline')]))
+        self.assertEqual(result['readings']['outdoor_temperature_c'],29)
+        self.assertIsNone(result['last_valid_soil']);self.assertIn('ไม่สำเร็จ',result['last_valid_soil_note'])
 
     def test_only_free_render_plan_and_no_cloud_training(self):
         import yaml

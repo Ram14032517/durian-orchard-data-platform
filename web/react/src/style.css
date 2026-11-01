@@ -1,0 +1,73 @@
+@import "tailwindcss" source(none);
+@source "./**/*.{js,jsx}";
+@import "../../assets/css/orchard_gap_layer.css";
+@theme {--font-sans:Tahoma,"Segoe UI",Arial,sans-serif;}
+@layer base {
+  *{box-sizing:border-box}body{@apply m-0 font-sans antialiased}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}button:disabled{@apply cursor-not-allowed opacity-50}button,a,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #6dbb9b}input:not([type=checkbox]):not([type=radio]),select,textarea{@apply min-h-10 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-normal text-slate-800}input[type=checkbox],input[type=radio]{accent-color:#18775b;width:16px;height:16px;flex-shrink:0}summary{@apply cursor-pointer text-sm font-bold}small{font-size:11px}table{width:100%}
+}
+@layer components {
+  .sidebar{@apply fixed inset-y-0 left-0 z-[750] flex w-[232px] -translate-x-full flex-col px-5 py-7 text-white transition-transform duration-200 lg:translate-x-0;background:linear-gradient(165deg,#123e34,#082f28)}.sidebar-open{@apply translate-x-0;transform:none}
+  .brand{@apply flex items-center gap-3 text-2xl font-extrabold leading-tight}.brand-icon{@apply grid h-12 w-12 place-items-center rounded-2xl border border-emerald-500/30 bg-emerald-300/10 text-emerald-200}.nav-item{@apply flex w-full items-center gap-3 rounded-xl px-4 py-3.5 text-left text-sm font-semibold text-emerald-50/75 transition-colors hover:bg-emerald-300/10 hover:text-white}.nav-active{@apply border border-emerald-300/15 bg-emerald-200/20 text-white shadow-sm}
+  .app-header{@apply sticky top-0 z-[600] flex min-h-[80px] items-center justify-between gap-3 border-b border-slate-200/80 bg-white/95 px-4 py-4 backdrop-blur-md sm:px-7}
+  .page-stack{@apply grid gap-5}.page-title{@apply flex flex-wrap items-start justify-between gap-4 py-1}.page-title h1{@apply text-2xl font-bold tracking-tight sm:text-3xl}.page-title p:not(.eyebrow){@apply mt-2 text-sm text-slate-500}.eyebrow{@apply mb-2 text-xs font-bold tracking-wider text-emerald-700}.hero{@apply flex flex-wrap items-center justify-between gap-5 rounded-3xl px-6 py-7 text-white shadow-sm sm:px-8 sm:py-9;background:linear-gradient(120deg,#165541,#288369)}.hero h1{@apply text-2xl font-bold tracking-tight sm:text-3xl}.hero p:not(:first-child){@apply mt-2 max-w-2xl text-sm leading-relaxed text-emerald-50/80}.hero .btn{@apply border-white/25 bg-white/15 text-white hover:bg-white/25}
+  .card{@apply min-w-0 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_5px_22px_rgba(26,48,75,0.035)] sm:p-6}.btn,.btn-primary{@apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border px-4 py-2 text-xs font-semibold transition-colors}.btn{@apply border-slate-200 bg-white text-slate-600 hover:border-emerald-300 hover:bg-emerald-50}.btn-primary{@apply border-emerald-700 bg-emerald-700 text-white hover:bg-emerald-800}.icon-box{@apply grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700}.badge{@apply inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold}.badge-green{@apply bg-emerald-50 text-emerald-700}.badge-amber{@apply bg-amber-50 text-amber-800}.badge-red{@apply bg-rose-50 text-rose-700}.badge-neutral{@apply bg-slate-100 text-slate-500}.notice{@apply my-3 flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 p-3.5 text-xs leading-relaxed text-slate-600}.text-link{@apply text-emerald-700 underline underline-offset-4}
+  .metric{@apply relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/70 bg-white p-4 shadow-[0_5px_22px_rgba(26,48,75,0.035)] transition-shadow hover:shadow-md}.metric::before{content:"";position:absolute;right:-20px;top:-25px;width:110px;height:110px;border-radius:100%;opacity:.3;pointer-events:none;background:var(--metric-tint)}.metric-icon{@apply grid h-10 w-10 place-items-center rounded-xl}.metric-blue,.tone-blue{--metric-tint:#dbedff}.metric-amber,.tone-amber{--metric-tint:#fff1d6}.metric-cyan,.tone-cyan{--metric-tint:#dff5f4}.metric-violet,.tone-violet{--metric-tint:#eee8ff}.metric-rose,.tone-rose{--metric-tint:#ffe4e4}.metric-green,.tone-green{--metric-tint:#e0f4e7}.metric-icon{background:var(--metric-tint);color:#287a75}.tone-amber{color:#b07829}.tone-violet{color:#8165b8}.tone-rose{color:#b35c68}.chart-label{fill:#748394;font:11px Tahoma,Arial,sans-serif}.empty-state{@apply flex min-h-32 items-center justify-center rounded-xl border border-dashed border-slate-200 bg-slate-50/70 px-5 py-8 text-center text-sm leading-relaxed text-slate-500}.segment{@apply flex flex-wrap gap-1 rounded-xl bg-slate-100 p-1}.segment button{@apply rounded-lg px-3 py-2 text-xs font-semibold text-slate-500}.segment button[aria-pressed=true]{@apply bg-white text-emerald-700 shadow-sm}.stage-step{@apply rounded-xl border border-slate-100 bg-slate-50 px-2 py-4 text-center text-xs text-slate-500}.stage-step small{@apply mt-1 block text-[10px]}.stage-active{@apply border-amber-200 bg-amber-50 text-amber-800}.advice{@apply rounded-xl border p-4 text-xs leading-relaxed}.advice p{@apply my-1}.advice a{@apply mt-2 block underline underline-offset-4}.advice-blue{@apply border-blue-100 bg-blue-50/60 text-slate-600}.advice-amber{@apply border-amber-100 bg-amber-50/70 text-slate-600}.advice-green{@apply border-emerald-100 bg-emerald-50/70 text-slate-600}.table-scroll{@apply my-3 max-h-[540px] overflow-auto rounded-xl border border-slate-100}.table-scroll table{@apply border-collapse text-left text-xs}.table-scroll th{@apply sticky top-0 bg-slate-50 px-4 py-3 font-semibold text-slate-500}.table-scroll td{@apply border-t border-slate-100 px-4 py-3 leading-relaxed text-slate-600}.area-summary{@apply rounded-xl border p-4 text-sm}.area-summary p{@apply my-1}.area-summary small{@apply text-slate-500}.area-A{@apply border-blue-100 bg-blue-50/50}.area-B{@apply border-amber-100 bg-amber-50/50}.map-card{@apply relative overflow-hidden rounded-2xl border border-slate-200}.map-fullscreen{position:fixed;inset:12px;z-index:1000}.map-fullscreen>div:first-child{height:100%!important}.area-pin{background:none!important;border:0!important;pointer-events:none!important}.area-pin span{display:grid;place-items:center;width:34px;height:42px;background:#1979c4;color:#fff;border:3px solid white;border-radius:50% 50% 50% 0;box-shadow:0 4px 12px #0004;font:bold 15px Tahoma}.area-pin.B span{background:#c58125}.react-gap{font-size:12px}.react-gap h3{@apply mb-3 text-sm font-bold}.react-gap label{@apply mb-2 grid gap-1 text-xs}.react-gap .gap-filters{display:grid;grid-template-columns:1fr;gap:8px}.react-gap .gap-filter{min-width:0}.react-gap button{@apply rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs}.react-gap input,.react-gap select{max-width:100%}.react-gap .gap-selected-detail{max-height:340px;overflow:auto}.month-tile{@apply rounded-xl border border-slate-100 bg-slate-50 p-3 text-left text-xs}.month-tile small{@apply mt-1 block leading-relaxed text-slate-500}.month-active{@apply border-emerald-300 bg-emerald-50 text-emerald-800}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.auth-dialog{position:fixed;inset:0;margin:auto;width:calc(100% - 32px);max-width:460px;border:1px solid #dbe5df;border-radius:24px;padding:24px;color:#203c34;background:#fff;box-shadow:0 24px 80px #102e3240}.auth-dialog::backdrop{background:#102d2670;backdrop-filter:blur(3px)}
+
+/* Keep Leaflet's internal panes below the map's own exit/layer controls. */
+.map-card{isolation:isolate}.map-canvas{position:relative;z-index:0}.map-toolbar{z-index:10}
+.map-card.map-fullscreen{position:fixed;inset:12px;z-index:2000;width:calc(100vw - 24px);height:calc(100dvh - 24px);margin:0;background:#fff}
+.map-card.map-fullscreen>.map-canvas{height:100%!important}
+
+.sidebar{overflow-y:auto}.sidebar-logout{@apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-emerald-100/20 bg-white/5 px-3 py-3 text-xs font-semibold text-emerald-50 hover:border-rose-200/50 hover:bg-rose-950/40 hover:text-rose-100}.sidebar-account{min-width:0}.sidebar-account>span{overflow-wrap:anywhere}
+@media(min-width:1024px){.sidebar-compact{width:80px;padding-left:12px;padding-right:12px}.sidebar-compact .sidebar-label{display:none}.sidebar-compact .nav-item{justify-content:center;padding-left:12px;padding-right:12px}.sidebar-compact .brand{justify-content:center}.sidebar-compact .brand-icon{width:44px;height:44px}}
+
+/* Source groups use text labels as well as color; status badges keep their own meaning. */
+@layer components{
+.data-group{border-top-width:4px}.group-sensor{border-color:#a7d6bf;background:#f5fbf7}.group-sensor .group-source{color:#185c43}.group-sensor>.card-heading .icon-box{background:#dff2e6;color:#185c43}
+.group-forecast{border-color:#9ec9e7;background:#f4f9fd}.group-forecast .group-source{color:#1c537a}.group-forecast>.card-heading .icon-box{background:#deedf9;color:#1c537a}
+.group-soil{border-color:#ceb99a;background:#faf7f1}.group-soil .group-source{color:#684a29}.group-soil>.card-heading .icon-box{background:#efe4d4;color:#684a29}
+.group-stage{border-color:#abc68d;background:#f6faf1}.group-stage .group-source{color:#3e5c25}
+.group-attention{border-color:#e6c577;background:#fffbef}.group-attention .group-source{color:#795314}.group-attention>.card-heading .icon-box{background:#f9edc8;color:#795314}
+.data-group>.card-heading{padding-bottom:14px;border-bottom:1px solid #233b3014}.page-stack{gap:24px}
+}
+
+/* Orchard overview: compact navigation and readable, source-labelled cards. */
+@layer components {
+  .orchard-welcome{@apply flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-5 text-white sm:px-7 sm:py-6;background:linear-gradient(115deg,#164c3e,#276b50);border:1px solid #326f58}
+  .orchard-welcome .btn{background:#ffffff18;border-color:#ffffff50;color:#fff}
+  .orchard-welcome .btn:hover{background:#ffffff28}
+  .orchard-tabs{@apply grid grid-cols-5 gap-1 rounded-2xl border border-emerald-100 bg-white p-1.5 shadow-sm}
+  .orchard-tab{@apply flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-center text-[11px] font-semibold text-slate-600 transition-colors sm:flex-row sm:gap-2 sm:px-3 sm:text-sm}
+  .orchard-tab:hover{@apply bg-emerald-50 text-emerald-900}
+  .orchard-tab-active,.orchard-tab-active:hover{@apply bg-emerald-800 text-white shadow-sm}
+  .orchard-home .card-heading h2{line-height:1.55;text-wrap:balance;color:#203e35}
+  .orchard-home .group-source{display:inline-flex;max-width:100%;border:1px solid currentColor;border-radius:8px;padding:4px 8px;font-size:11px;line-height:1.6;background:#ffffff80}
+  .orchard-home .metric::before{display:none}
+  .orchard-home .metric{box-shadow:none;border-color:#dce8e0}
+  .orchard-home .metric:hover{border-color:#9eb9aa;box-shadow:0 3px 12px #163e3408}
+  .orchard-home .metric>p:nth-of-type(2){font-variant-numeric:tabular-nums}
+  .orchard-home details>summary{line-height:1.7;padding-block:4px}
+  .orchard-home details[open]>summary{padding-bottom:12px;border-bottom:1px solid #dce8e0}
+  .orchard-home .card-heading{align-items:flex-start}
+  .orchard-home .card-heading .btn{min-height:44px}
+}
+summary:focus-visible,[role=tabpanel]:focus-visible{outline:3px solid #18775b;outline-offset:4px}
+#orchard-stage-details{scroll-margin-top:110px}
+@media(max-width:639px){
+  .orchard-home{gap:16px}
+  .orchard-home .page-stack{gap:20px}
+  .orchard-home .card{padding:16px;border-radius:16px}
+  .orchard-home .card-heading{margin-bottom:16px;gap:10px}
+  .orchard-home .card-heading h2{font-size:15px}
+  .orchard-home .metric{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:14px}
+  .orchard-home .metric>div:first-child{grid-column:1/-1;margin-bottom:8px;align-items:center}
+  .orchard-home .metric .metric-icon{width:30px;height:30px;border-radius:9px}
+  .orchard-home .metric>p:first-of-type{align-self:center;font-size:13px;line-height:1.65}
+  .orchard-home .metric>p:nth-of-type(2){margin:0;font-size:26px;flex-wrap:wrap;justify-content:flex-end}
+  .orchard-home .metric>p:last-child{grid-column:1/-1;margin-top:6px;overflow-wrap:anywhere}
+  .orchard-home .btn,.orchard-home .btn-primary{min-height:44px}
+}

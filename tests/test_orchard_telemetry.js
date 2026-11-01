@@ -21,3 +21,8 @@ test('no data renders an explicit empty state, not invented telemetry',()=>{
   const output=context.telemetryChart([],'soil','ความชื้นดิน','%','#00FFFF');
   assert.match(output,/ไม่มีค่าที่ใช้ได้/);assert.doesNotMatch(output,/<path/);
 });
+test('rolling rain and wind gust charts identify aggregation without claiming rainfall sum',()=>{
+  const rows=[{time:'2026-10-09T01:00:00+07:00',rain_1h_mm:3,wind_gust:10,valid_counts:{rain_1h_mm:1,wind_gust:1}}];
+  assert.match(context.telemetryChart(rows,'rain_1h_mm','ฝน','mm','#00FFFF'),/ค่าล่าสุดของแต่ละช่วง/);
+  assert.match(context.telemetryChart(rows,'wind_gust','ลม','km\/h','#00FFFF'),/ค่าสูงสุดของแต่ละช่วง/);
+});
