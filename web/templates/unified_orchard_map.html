@@ -1,4 +1,5 @@
 <!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>
+<script>__THEME_BOOTSTRAP__</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
 <link rel="stylesheet" href="orchard_lumen.css"><script type="module" src="orchard_lumen.js?v=20261028-1"></script>
 <style>*{box-sizing:border-box}body{margin:0}header h1{margin:0 0 6px}h2{margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{max-width:100%;padding:7px}button{cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;text-align:right}td:first-child,th:first-child{text-align:left}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style></head><body>
@@ -10,6 +11,7 @@
 <style>__MONTHLY_STYLE__</style>
 <style>__GAP_STYLE__</style>
 <style id="orchard-studio">__STUDIO_STYLE__</style>
+<style id="orchard-theme">__THEME_STYLE__</style>
 <div id="area-strip" class="area-strip"><div class="area-strip-labels" role="status"><p id="area-summary-a">A: ยังไม่เลือก</p><p id="area-summary-b">B: ยังไม่เลือก</p></div><button id="toggle-area-editor" type="button" aria-expanded="true" aria-controls="area-section">ย่อพื้นที่</button><p id="map-target" role="status">ปุ่มจังหวัดและการคลิกแผนที่ใช้กับพื้นที่ A</p></div>
 <div id="gap-orchard-controls" aria-label="แปลงตามทะเบียน GAP"></div>
 <section id="area-section" class="workspace-controls"><div class="area-heading"><h2>เลือกตำแหน่งอ้างอิง A/B</h2><lumen-tooltip><button type="button" data-ui-trigger aria-label="คำแนะนำการเลือกพื้นที่">คำแนะนำ</button><span role="tooltip">เลือกตำแหน่งที่นี่ ดูคุณสมบัติดินในแท็บ “ข้อมูลดิน” พิกัดอ้างอิงไม่ใช่พิกัดสวน</span></lumen-tooltip></div><div class="area-pair">

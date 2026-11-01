@@ -9,8 +9,22 @@
 - `ui.jsx` — การ์ด, ตาราง, สถานะ และกราฟ SVG ที่ไม่เชื่อมเส้นข้ามค่าที่ขาด
 - `api.js` — API เดิม พร้อม credentials, การยกเลิกคำขอเก่า และล้างข้อมูลเมื่อบริบทเปลี่ยน
 - `style.css` — Tailwind utilities และ components โทนเขียวพร้อมการ์ดสีอ่อน รองรับมือถือ
+- `ThemeControl.jsx` — เลือก Light / Dark / ตามระบบ; ใช้ตัวตั้งค่าร่วมกับหน้า classic ที่ `web/assets/js/orchard_theme.js` และ CSS tokens ใน `web/assets/css/orchard_theme.css`
+
+ธีมถูกตั้งก่อน paint และจำเฉพาะค่าธีมใน `durian.orchard.theme.v1` ไม่เรียก API หรือเปลี่ยนข้อมูล/พิกัด A/B/บัญชี ปิดการเก็บข้อมูลใน browser แล้วยังสลับในหน้าปัจจุบันได้ แผนที่ฐานและสีข้อมูลไม่ถูก invert หน้า login/logout ของ backend คงรูปแบบเดิม
 
 ## สร้างหน้าเว็บ
+
+บน Mac/Linux จาก root ของ repository (หรือใช้คำสั่งเดียวกันบน Windows ที่มี Node/pnpm):
+
+```sh
+pnpm --dir web/react install --frozen-lockfile --ignore-scripts
+node tools/build_orchard_react.mjs
+.build/national-analysis-venv/bin/python -B tools/build_unified_orchard_map.py --reuse-bundled-data
+.build/national-analysis-venv/bin/python -B tools/open_orchard_report.py --port 8871
+```
+
+ตัว build ใช้ React/esbuild และ Tailwind CLI รุ่นที่ล็อกใน `pnpm-lock.yaml` สร้างทั้ง JS และ CSS ไม่ต้องติดตั้ง Tailwind แบบ global หรือดาวน์โหลด Windows executable มารันบน Mac
 
 จาก `C:\project`:
 
@@ -41,6 +55,8 @@ node --test tests/test_orchard_react.cjs tests/test_orchard_workspace.js tests/t
 ```
 
 Public Release HOLD; ชุดข้อมูล/Geometry ไม่ได้รับอนุญาตให้นำออกเผยแพร่จากการย้าย frontend นี้ และยังไม่มีคำพยากรณ์ผลผลิตรายสวนที่ผ่านการทดสอบ
+
+อ่านการไหลของข้อมูลทุกส่วนที่ [DATAFLOW_TH.md](../../docs/architecture/DATAFLOW_TH.md) หรือ [ฉบับภาพเปิดใน Safari](../../docs/architecture/DATAFLOW_TH.html)
 
 แผนที่หน่วยดินใช้สีเพื่อแยกรหัสจากไฟล์เดิมเท่านั้น ไม่ใช่สีมาตรฐาน LDD หรือคะแนนความเหมาะสม รหัสเดียวกันใช้สีเดียวกันทุกจังหวัด โดย SC เป็นสีเทา W เป็นสีฟ้า และคำอธิบายสีใช้ชื่อจากต้นทาง เส้นแผนที่ที่ลดรายละเอียด 50 เมตรใช้เพื่อแสดงผล ไม่ยืนยันขอบเขตดินรายสวน
 

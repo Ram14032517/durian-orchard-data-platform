@@ -1,5 +1,7 @@
 # โค้ดหน้าเว็บ
 
+ล่าสุด: เลือกธีม Light / Dark / ตามระบบ ได้ขวาบนหน้า React และ Classic ใช้ `assets/js/orchard_theme.js`/`assets/css/orchard_theme.css` ร่วมกัน ตัว build React บน Mac คือ `node tools/build_orchard_react.mjs` ดู [คู่มือ frontend](react/README_TH.md), [Dataflow](../docs/architecture/DATAFLOW_TH.html) และ [บันทึกอัปเดต](../docs/updates/THEME_DATAFLOW_2026-11-01_TH.md)
+
 อัปเดต 1 พฤศจิกายน 2026: หน้าเว็บอ่าน capabilities จาก `/api/project` ก่อนโหลด GAP จึงไม่ลองโหลดหมุดที่ cloud ตั้งใจบล็อก และมีคำอธิบายโหมด IoT เครื่องนี้ ค่าเริ่มต้น local ยังเป็น snapshot; ถ้าตั้งเซิร์ฟเวอร์ `ORCHARD_DATA_SOURCE=supabase` จะอ่านสดโดยไม่ fallback เป็น snapshot อัตโนมัติ Cloud เดิมยังใช้ Supabase และไม่ย้าย device ตาม A/B ดู [บันทึกแก้ปัญหา](../docs/updates/PROJECT_UPDATE_2026-11-01_TH.md)
 อัปเดต 28 ตุลาคม 2026: หน้าหลัก `UNIFIED_MAP.html` ใช้ React + Tailwind ที่ `web/react/` แล้ว วิธี build และขอบเขตอยู่ใน [คู่มือ React](react/README_TH.md) ข้อมูลแสดงผลเดิมยังคงค่าเดิม เครื่องมือแบบเดิมเก็บที่ `UNIFIED_MAP_CLASSIC.html` และใช้ต้นทางด้านล่างเมื่อปรับเครื่องมืออ้างอิงเพิ่มเติม
 

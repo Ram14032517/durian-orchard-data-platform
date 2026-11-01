@@ -94,6 +94,13 @@ class CloudTests(unittest.TestCase):
         self.assertFalse(data['capabilities']['gap_registry']['available'])
         self.assertIn('cloud',data['capabilities']['gap_registry']['message'])
         self.assertNotIn('ORCHARD_DEVICE_ID',str(data))
+
+    def test_private_gis_capability_matches_the_existing_vercel_gate_only(self):
+        with patch.dict(os.environ,{'VERCEL':'1','ORCHARD_GIS_PRIVATE_BUCKET':'fixture-private-bucket'}):
+            response=self.client.get('/api/project',headers={'X-Forwarded-Proto':'https'})
+        self.assertEqual(response.status_code,200)
+        self.assertTrue(response.json['capabilities']['gap_registry']['available'])
+        self.assertNotIn('fixture-private-bucket',str(response.json))
     def test_login_returns_to_the_selected_page_without_open_redirect(self):
         base='/research_data/five_province_history/UNIFIED_MAP.html'
         for requested,expected in [(base+'#map',base+'#map'),(base+'#weather',base+'#weather'),

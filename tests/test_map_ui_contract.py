@@ -61,7 +61,7 @@ class MapUIContractTests(unittest.TestCase):
     def test_tailwind_is_built_locally_without_map_reset(self):
         source = (ROOT / 'web/assets/css/orchard_tailwind.css').read_text(encoding='utf-8')
         generated = (ROOT / 'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8')
-        html = (ROOT / 'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
+        html = (ROOT / 'research_data/five_province_history/UNIFIED_MAP_CLASSIC.html').read_text(encoding='utf-8')
         self.assertIn('@apply', source)
         self.assertNotIn('preflight.css', source)
         self.assertIn('tailwindcss v4.3.3', generated)
@@ -77,18 +77,18 @@ class MapUIContractTests(unittest.TestCase):
         js = (ROOT / 'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8')
         self.assertIn('--area-a:#2563eb', css)
         self.assertIn('--area-b:#b45309', css)
-        self.assertIn('A น้ำเงิน', html)
-        self.assertIn("color:'#2563eb'", html)
-        self.assertIn("color:'#b45309'", html)
-        self.assertIn('B ส้ม (เส้นประ)', html)
+        self.assertIn('พื้นที่ A', html)
+        self.assertIn('พื้นที่ B', html)
+        self.assertTrue("className:'area-pin-icon area-'+which" in html)
+        self.assertTrue("html:'<span><b>'+which+'</b></span>'" in html)
         self.assertIn('ไม่ใช่ระดับความเสี่ยง', html)
         self.assertIn("soilLegend.id='soil-legend'", js)
         self.assertNotIn('charCodeAt(0))%colors.length', html)
 
     def test_chart_css_does_not_override_leaflet_svg(self):
-        for name in ['web/templates/unified_orchard_map.html', 'research_data/five_province_history/UNIFIED_MAP.html']:
+        for name in ['web/templates/unified_orchard_map.html', 'research_data/five_province_history/UNIFIED_MAP_CLASSIC.html']:
             html = (ROOT / name).read_text(encoding='utf-8')
-            self.assertNotRegex(html, r'(?:^|[}\s])svg\s*\{')
+            self.assertNotRegex(html, r'(?:^|[},])\s*svg\s*\{')
             self.assertIn('id="chart"', html)
 
     def test_map_contains_layers_at_all_breakpoints(self):
@@ -135,7 +135,7 @@ class MapUIContractTests(unittest.TestCase):
         self.assertIn('ข้อมูลดิน อากาศ และผลผลิตทุเรียน 5 จังหวัด', html)
 
     def test_weather_chart_switch_and_annual_model_present(self):
-        for name in ['web/templates/unified_orchard_map.html', 'research_data/five_province_history/UNIFIED_MAP.html']:
+        for name in ['web/templates/unified_orchard_map.html', 'research_data/five_province_history/UNIFIED_MAP_CLASSIC.html']:
             html = (ROOT / name).read_text(encoding='utf-8')
             for metric in ['T2M', 'T2M_MAX', 'T2M_MIN', 'PRECTOTCORR',
                            'RH2M', 'ALLSKY_SFC_SW_DWN', 'WS2M']:

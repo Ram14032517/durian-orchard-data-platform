@@ -36,7 +36,9 @@ node --test tests/test_weather_fallback.js tests/test_weather_export.js
 แผนที่ต้องเปิดผ่านเซิร์ฟเวอร์ที่ launcher เริ่มให้ ส่วน docs/archive/PROJECT_OVERVIEW_2026-10-01.html เปิดจากไฟล์ได้โดยตรง
 ตัว launcher จะพิมพ์ URL ที่ใช้งานจริงและไม่หยุดโปรแกรมอื่นที่ใช้พอร์ตอยู่
 
-เมื่อต้องทดสอบทุกส่วน รวมเว็บ cloud และ GIS ให้ติดตั้งเพิ่มด้วย `python -m pip install -r tools/requirements-test.txt` ใน environment ของโปรเจกต์ แล้วรัน `python -m unittest discover -s tests` และ `node --test tests/*.js`
+เมื่อต้องทดสอบทุกส่วน รวมเว็บ cloud และ GIS ให้ติดตั้งเพิ่มด้วย `python -m pip install -r tools/requirements-test.txt` ใน environment ของโปรเจกต์ แล้วรัน `python -m unittest discover -s tests` และ `node --test tests/*.js tests/*.cjs` เทสต์ React ต้องติดตั้ง packages ที่ล็อกไว้ก่อนด้วย `pnpm --dir web/react install --frozen-lockfile --ignore-scripts`
+
+ถ้าแก้หน้า React/ธีม ให้ใช้ `node tools/build_orchard_react.mjs` แล้ว `python tools/build_unified_orchard_map.py --reuse-bundled-data` เพื่อ build JS/CSS ด้วยข้อมูลเดิม ดู [คู่มือ frontend](../../web/react/README_TH.md) และ [Dataflow](../architecture/DATAFLOW_TH.html)
 
 ## เลือกแหล่งข้อมูล IoT ในเครื่อง
 

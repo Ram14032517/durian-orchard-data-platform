@@ -11,6 +11,7 @@ CACHE=RUNTIME/'point_weather_cache'
 EXPORTS=RUNTIME/'exports'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
+APP_PATHS=('/','/home','/map','/weather','/yield','/seasons')
 
 def orchard_data_source():
     source=os.environ.get('ORCHARD_DATA_SOURCE','local_snapshot')
@@ -148,8 +149,8 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
     def private_route(self):
         path=urlparse(self.path).path
-        if path in ('/home','/map','/weather','/yield','/seasons'):return True
-        if (path=='/api/orchard-history' or (path=='/api/orchard-status' and orchard_data_source()=='supabase')) and os.environ.get('SUPABASE_URL'):
+        if path in APP_PATHS:return bool(os.environ.get('DASHBOARD_PASSWORD') or os.environ.get('SUPABASE_URL'))
+        if (path=='/api/orchard-history' or (path=='/api/orchard-status' and os.environ.get('ORCHARD_DATA_SOURCE','local_snapshot')=='supabase')) and os.environ.get('SUPABASE_URL'):
             return True
         return path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
 
@@ -203,6 +204,10 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed=urlparse(self.path)
         if self.private_route():return self.serve_private()
+        if parsed.path in APP_PATHS:
+            # Same local static UI as the launcher URL, not a private API fallback.
+            self.path='/research_data/five_province_history/UNIFIED_MAP.html'
+            return super().do_GET()
         if parsed.path=='/api/province-forecast-readiness':
             from orchard_current_context import province_forecast_readiness
             return self.send_json(200,province_forecast_readiness())

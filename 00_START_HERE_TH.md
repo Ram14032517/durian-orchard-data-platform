@@ -13,7 +13,9 @@
 
 ## บันทึกอัปเดตล่าสุด
 
-ล่าสุด [1 พฤศจิกายน 2569 รวมการแก้ปัญหา](docs/updates/PROJECT_UPDATE_2026-11-01_TH.md) หรือ [ฉบับ HTML สำหรับ Safari](docs/updates/PROJECT_UPDATE_2026-11-01_TH.html): แก้ hash ข้ามเครื่อง คืนหลักฐาน NOAA ปรับโหมด GAP/IoT และเทสต์หลัง clone โดยไม่ train ใหม่ พร้อมแยกสิ่งที่ยังรอข้อมูล/การตั้งค่า การ push ไม่ใช่คำสั่ง deploy cloud
+ล่าสุด [1 พฤศจิกายน 2569 Sync main + ธีม Dark/Light](docs/updates/THEME_DATAFLOW_2026-11-01_TH.md) · [Dataflow ฉบับภาพสำหรับ Safari](docs/architecture/DATAFLOW_TH.html) · [Dataflow Markdown](docs/architecture/DATAFLOW_TH.md)
+
+บันทึกรอบก่อน: [รวมการแก้ปัญหา](docs/updates/PROJECT_UPDATE_2026-11-01_TH.md) หรือ [ฉบับ HTML สำหรับ Safari](docs/updates/PROJECT_UPDATE_2026-11-01_TH.html): แก้ hash ข้ามเครื่อง คืนหลักฐาน NOAA ปรับโหมด GAP/IoT และเทสต์หลัง clone โดยไม่ train ใหม่ พร้อมแยกสิ่งที่ยังรอข้อมูล/การตั้งค่า การ push ไม่ใช่คำสั่ง deploy cloud
 
 [25 ตุลาคม 2569 รวม Excel GAP และชุดข้อมูลที่ตรวจแล้วเข้า Git](docs/updates/GAP_PUBLICATION_2026-10-25_TH.md) บน branch `codex/organize-project` เปิด [Excel GAP ที่รวมมา](docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx) ได้จากโฟลเดอร์โปรเจกต์หลัง clone branch นี้
 

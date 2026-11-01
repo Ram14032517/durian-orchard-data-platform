@@ -4,10 +4,12 @@
 
 ```sh
 .build/national-analysis-venv/bin/python -B -m unittest discover -s tests -v
-node --test tests/*.js
+node --test tests/*.js tests/*.cjs
 ```
 
 unit tests ใช้ข้อมูลสังเคราะห์และ fake estimator สำหรับตรวจขอบเขตเวลา การเลือกโมเดล cache และการปฏิเสธข้อมูลผิด ไม่มีการ fit โมเดล production หรือดาวน์โหลดหลักฐานเพิ่มเติมให้อัตโนมัติ ไฟล์ fixture ระบุว่า `synthetic_unit_only` ไม่ใช่ผลผลิตหรือ labels ที่นำไปทำวิจัยได้
+
+หลัง sync หน้า React ต้องติดตั้ง dependencies รุ่นที่ล็อกด้วย `pnpm --dir web/react install --frozen-lockfile --ignore-scripts` ก่อนเทสต์ `.cjs` ซึ่ง compile JSX/render แบบ static ด้วย React จริง ดู [คู่มือ frontend](../web/react/README_TH.md) เทสต์ธีมครอบคลุมค่า OS, persistence, storage ถูกบล็อก, sync ระหว่างแท็บ และการไม่เรียกข้อมูล
 
 ## เทสต์หลักฐานภายในที่เป็น optional
 

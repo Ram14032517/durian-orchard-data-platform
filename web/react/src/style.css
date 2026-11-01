@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "./**/*.{js,jsx}";
 @import "../../assets/css/orchard_gap_layer.css";
+@import "../../assets/css/orchard_theme.css";
 @theme {--font-sans:Tahoma,"Segoe UI",Arial,sans-serif;}
 @layer base {
   *{box-sizing:border-box}body{@apply m-0 font-sans antialiased}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}button:disabled{@apply cursor-not-allowed opacity-50}button,a,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #6dbb9b}input:not([type=checkbox]):not([type=radio]),select,textarea{@apply min-h-10 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-normal text-slate-800}input[type=checkbox],input[type=radio]{accent-color:#18775b;width:16px;height:16px;flex-shrink:0}summary{@apply cursor-pointer text-sm font-bold}small{font-size:11px}table{width:100%}

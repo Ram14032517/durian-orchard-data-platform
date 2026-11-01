@@ -145,6 +145,9 @@ def create_app():
         payload.update(mode='cloud',orchard_source='supabase')
         payload['capabilities']['gap_registry']={'available':False,
             'message':'เว็บ cloud นี้ยังไม่เปิดชั้นหมุด GAP ให้ใช้แผนที่ GAP ในเครื่องจาก branch codex/organize-project การ push Git ไม่ใช่การเปิดข้อมูลบน cloud'}
+        if os.environ.get('VERCEL')=='1' and os.environ.get('ORCHARD_GIS_PRIVATE_BUCKET'):
+            payload['capabilities']['gap_registry']={'available':True,
+                'message':'ใช้ GIS ส่วนตัวตามสิทธิ์บัญชีผ่าน signed URL ของเซิร์ฟเวอร์นี้ ไม่ใช่ข้อมูล public'}
         payload['capabilities']['orchard'].update(source='supabase',configured=payload['capabilities']['orchard']['history_configured'])
         return jsonify(payload)
 

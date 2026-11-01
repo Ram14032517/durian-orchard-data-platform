@@ -165,7 +165,7 @@ class HarvestTests(unittest.TestCase):
         try:
             client=requests.Session()
             self.assertEqual(client.get(origin+'/api/orchard-harvest',timeout=5).status_code,401)
-            with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co'}):
+            with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','ORCHARD_DATA_SOURCE':'supabase'}):
                 for path in ['/api/orchard-status','/api/orchard-history']:
                     self.assertEqual(client.get(origin+path,timeout=5).status_code,401)
             client.get(origin+'/login',timeout=5)
@@ -174,7 +174,7 @@ class HarvestTests(unittest.TestCase):
             html=client.get(origin+'/login',timeout=5).text;csrf=re.search(r'name="csrf" value="([^"]+)"',html).group(1)
             self.assertEqual(client.post(origin+'/login',data={'username':'alice','password':'test-master-password-00001','csrf':csrf},allow_redirects=False,timeout=5).status_code,302)
             token=client.get(origin+'/api/orchard-session',timeout=5).json()['csrf']
-            with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co'}),patch('serve_orchard_cloud.live_status',return_value={'mode':'supabase_live'}),patch('serve_orchard_cloud.orchard_history',return_value={'source':'Supabase','rows':[]}):
+            with patch.dict(os.environ,{'SUPABASE_URL':'https://test.supabase.co','ORCHARD_DATA_SOURCE':'supabase'}),patch('serve_orchard_cloud.live_status',return_value={'mode':'supabase_live'}),patch('serve_orchard_cloud.orchard_history',return_value={'source':'Supabase','rows':[]}):
                 self.assertEqual(client.get(origin+'/api/orchard-status',timeout=5).json()['mode'],'supabase_live')
                 self.assertEqual(client.get(origin+'/api/orchard-history',timeout=5).json()['source'],'Supabase')
             self.assertEqual(client.post(origin+'/api/orchard-harvest',json=sample(),headers={'X-CSRF-Token':token},timeout=5).status_code,201)

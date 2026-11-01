@@ -7,7 +7,7 @@ function viewFor(file){
   const html=fs.readFileSync(path.join(__dirname,'..',file),'utf8');
   return new Function(html.slice(html.indexOf('function dailyView('),html.indexOf('function renderDailyTable('))+';return dailyView;')();
 }
-for(const file of ['web/templates/unified_orchard_map.html','research_data/five_province_history/UNIFIED_MAP.html']){
+for(const file of ['web/templates/unified_orchard_map.html','research_data/five_province_history/UNIFIED_MAP_CLASSIC.html']){
   const view=viewFor(file);
   test(file+': chart gaps stay missing while measured zero remains zero',()=>{
     const html=fs.readFileSync(path.join(__dirname,'..',file),'utf8');

@@ -15,7 +15,7 @@ function harness(fetch=async()=>({ok:true,json:async()=>({features:[]})})){
     return controls.get(id);
   };
   const map={removeLayer(){},stop(){},invalidateSize(){},fitBounds(bounds,options){fits.push({bounds,options});}};
-  const L={circleMarker(){return{addTo(){return this;},bindTooltip(){return this;}};}};
+  const L={divIcon:options=>options,marker(){return{addTo(){return this;},bindTooltip(){return this;}};}};
   const DATA={provinces:['84','22','53'].map((code,i)=>({province_code:code,province_name:code,weather_latitude:9+i,weather_longitude:99+i})),districts:[]};
   const provinceLayer={eachLayer(fn){for(const code of ['84','22','53'])fn({feature:{properties:{province_code:code}},setStyle(){},getBounds(){return code;}});}};
   const api=new Function('DATA','$','map','L','provinceLayer','document','fetch','Option',`

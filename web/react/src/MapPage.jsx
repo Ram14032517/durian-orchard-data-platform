@@ -2,6 +2,7 @@ import React,{useEffect,useMemo,useRef,useState} from 'react';
 import '../../assets/js/orchard_gap_layer.js';
 import {gapSpatialHelpers} from './geo.js';
 import {soilPalette,soilLegend} from './soil.js';
+import {api} from './api.js';
 import {data,format,provincePoint} from './data.js';
 import {Badge,Button,Card,Field,Icon,Notice,Table} from './ui.jsx';
 export default function MapPage({areas,setAreas,active,go}){
@@ -14,7 +15,8 @@ export default function MapPage({areas,setAreas,active,go}){
     const L=window.L,map=L.map(canvas.current,{scrollWheelZoom:true}).setView([13,101],6);mapRef.current=map;L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);L.control.scale({imperial:false}).addTo(map);
     L.geoJSON(data.boundaries,{style:{color:'#28795f',weight:1.5,fillOpacity:.04},onEachFeature:(feature,layer)=>{layer.bindTooltip(feature.properties.province_name);layer.on('click',()=>{setCode(String(feature.properties.province_code));});}}).addTo(map);
     const selectPoint=async point=>{const token=++selectionVersion.current,{which:slot}=selectionRef.current;let selection=gapSpatialHelpers.preparePoint(point,data.provinces,data.districts,soilCache.current[point.code]?.features);setAreas(old=>({...old,[slot]:selection}));setMessage('เลือกหมุด GAP เป็นพื้นที่ '+slot+' แล้ว · '+(point.registry_district||point.district||'ไม่ระบุอำเภอ'));map.stop().setView([point.lat,point.lon],14,{animate:false});if(!soilCache.current[point.code])try{const response=await fetch('../priority_provinces/soil_layers/'+point.code+'.geojson');if(!response.ok)throw Error('ไม่มีชั้นดิน');const geo=await response.json();soilCache.current[point.code]=geo;if(token!==selectionVersion.current)return;selection=gapSpatialHelpers.preparePoint(point,data.provinces,data.districts,geo.features);setAreas(old=>old[slot]?.gap_id===point.gap_id?{...old,[slot]:selection}:old);}catch{if(token===selectionVersion.current)setMessage('เลือกหมุดเป็นพื้นที่ '+slot+' แล้ว แต่ยังโหลดหน่วยดินไม่ได้ ไม่ใช้ค่าจังหวัดแทน');}};
-    gapRef.current=window.createGapOrchardLayer({map,L,container:registry.current,selectPoint,dataBaseUrl:'gap_orchards/',selectionOwnsNavigation:true,onProvinceChange:setCode});gapRef.current.setProvince(code);
+    const gapAvailability=api('/api/project').then(runtime=>runtime.capabilities?.gap_registry).catch(()=>null);
+    gapRef.current=window.createGapOrchardLayer({map,L,container:registry.current,selectPoint,dataBaseUrl:'gap_orchards/',selectionOwnsNavigation:true,onProvinceChange:setCode,availability:()=>gapAvailability});gapRef.current.setProvince(code);
     const timer=setInterval(()=>setGapState(gapRef.current?.getState()),1500);
     return()=>{selectionVersion.current++;clearInterval(timer);gapRef.current?.destroy();map.remove();mapRef.current=null;};
   },[]);

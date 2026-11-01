@@ -51,5 +51,26 @@ class RuntimeCapabilitiesTests(unittest.TestCase):
              patch.dict(os.environ,{},clear=True):
             self.assertFalse(api.project_identity()['capabilities']['gap_registry']['available'])
 
+    def test_local_live_routes_keep_private_auth_without_hijacking_snapshot(self):
+        handler=object.__new__(api.Handler)
+        with patch.dict(os.environ,{'SUPABASE_URL':'https://fixture-only.supabase.co','ORCHARD_DATA_SOURCE':'local_snapshot'}):
+            handler.path='/api/orchard-status';self.assertFalse(handler.private_route())
+            handler.path='/api/orchard-history';self.assertTrue(handler.private_route())
+            os.environ['ORCHARD_DATA_SOURCE']='supabase'
+            handler.path='/api/orchard-status';self.assertTrue(handler.private_route())
+            os.environ['ORCHARD_DATA_SOURCE']='invalid'
+            self.assertFalse(handler.private_route())  # Dispatcher returns the controlled 503.
+
+    def test_clean_page_alias_is_local_static_only_without_private_configuration(self):
+        handler=object.__new__(api.Handler)
+        with patch.dict(os.environ,{},clear=True):
+            for path in api.APP_PATHS:
+                handler.path=path;self.assertFalse(handler.private_route())
+            for path in ['/api/orchard-harvest','/api/orchard-forecast','/api/orchard-session']:
+                handler.path=path;self.assertTrue(handler.private_route())
+            os.environ['DASHBOARD_PASSWORD']='fixture-not-used-for-authentication'
+            for path in api.APP_PATHS:
+                handler.path=path;self.assertTrue(handler.private_route())
+
 
 if __name__=='__main__':unittest.main()
