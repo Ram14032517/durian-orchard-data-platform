@@ -19,6 +19,14 @@ class ProjectUpdateTests(unittest.TestCase):
         self.assertIn('id="section-1"', rendered)
         self.assertNotIn('<script', rendered.lower())
 
+    def test_render_uses_selected_update_date_and_source(self):
+        source=ROOT/'docs/updates/PROJECT_UPDATE_2026-11-01_TH.md'
+        page=render_update('# สรุปฉบับใหม่\n\nไม่ train ใหม่',source)
+        self.assertIn('2026-11-01',page)
+        self.assertIn('PROJECT_UPDATE_2026-11-01_TH.md',page)
+        self.assertNotIn('อัปเดตโครงการ 22 ตุลาคม 2569',page)
+        self.assertNotIn('<script',page.lower())
+
     def test_attachment_manifest_records_public_git_not_dashboard_or_training(self):
         meta = json.loads(ATTACHMENTS.read_text(encoding='utf-8'))
         self.assertEqual(meta['training']['gap_fit_count'], 0)

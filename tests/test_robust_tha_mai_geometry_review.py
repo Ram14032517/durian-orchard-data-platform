@@ -6,6 +6,8 @@ import shapely
 from shapely.geometry import box, Polygon
 from tools import diagnose_tha_mai_geometry as d
 from tools import robust_tha_mai_geometry_review as r
+from tools import build_tha_mai_spatial_pilot as pilot
+from tests.research_support import needs_files
 
 
 class RobustPartitionTests(unittest.TestCase):
@@ -16,6 +18,7 @@ class RobustPartitionTests(unittest.TestCase):
         self.assertTrue(all(not x["material"] for x in report["operation_conflicts"]))
         self.assertEqual(report["tolerance_rai"],.1)
 
+    @needs_files(d.ROOT/d.OUT/'minimal_inputs.json')
     def test_golden_primary_pass_with_upper_bound_warning_not_id_waiver(self):
         fixture=d.read(d.ROOT/d.OUT/"minimal_inputs.json")
         g,cuts,m=d.load_fixture(fixture)
@@ -75,6 +78,7 @@ class RobustPartitionTests(unittest.TestCase):
         self.assertGreater(report["areas_rai"]["M"],0)
         self.assertEqual(tiny.wkb,before)
 
+    @needs_files(pilot.ROOT/pilot.DEFAULT/'dataset.json')
     def test_duplicate_fragment_rejected(self):
         from tools import build_tha_mai_spatial_pilot as p
         dataset=p.read_json(p.ROOT/p.DEFAULT/"dataset.json")
@@ -82,6 +86,7 @@ class RobustPartitionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"Duplicate district_fragments"):
             r.review(dataset)
 
+    @needs_files(pilot.ROOT/pilot.DEFAULT/'dataset.json')
     def test_mixed_use_soil_contamination_rejected(self):
         from tools import build_tha_mai_spatial_pilot as p
         dataset=p.read_json(p.ROOT/p.DEFAULT/"dataset.json")
@@ -90,6 +95,7 @@ class RobustPartitionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"Mixed allocated as pure soil"):
             r.review(dataset)
 
+    @needs_files(d.ROOT/d.OUT/'minimal_inputs.json')
     def test_binary_warning_never_overrides_primary_failure(self):
         fixture=d.read(d.ROOT/d.OUT/"minimal_inputs.json")
         g,cuts,m=d.load_fixture(fixture)

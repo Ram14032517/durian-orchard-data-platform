@@ -8,11 +8,14 @@ from unittest.mock import patch
 
 import pandas as pd
 from tools import build_four_province_internal_dataset as expansion
+from tests.research_support import require_files
 
 
 class ExpansionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        require_files(expansion.ROOT / expansion.PILOT / 'output_manifest.json',
+                      expansion.ROOT / expansion.OAE)
         cls.data = expansion.prepare()
 
     def validate(self, tables=None, lineage=None, sources=None):

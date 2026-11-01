@@ -25,8 +25,13 @@ p{margin:12px 0 18px}li{margin:8px 0}ul,ol{padding-left:24px}code{font-family:ui
 '''
 
 
-def render_update(markdown):
+def render_update(markdown, source=UPDATE):
     import mistune
+    source=Path(source)
+    match=re.search(r'\d{4}-\d{2}-\d{2}',source.name)
+    if not match:raise ValueError('Update filename must contain YYYY-MM-DD')
+    stamp=match.group()
+    title='บันทึกอัปเดตโปรเจกต์สวนทุเรียน ' + ('22 ตุลาคม 2569' if source.name==UPDATE.name else stamp)
     content = mistune.html(markdown)
     headings = []
 
@@ -40,11 +45,11 @@ def render_update(markdown):
     navigation = ''.join(f'<a href="#{anchor}">{html.escape(label)}</a>' for anchor, label in headings)
     return f'''<!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light"><title>บันทึกอัปเดตโปรเจกต์สวนทุเรียน 22 ตุลาคม 2569</title>
+<meta name="color-scheme" content="light"><title>{html.escape(title)}</title>
 <style>{STYLE}</style></head><body><div class="page">
 <nav aria-label="สารบัญ"><strong>บันทึกการเปลี่ยนแปลง</strong>{navigation}</nav>
-<main><p class="intro">Project update 2026 10 22</p>{content}
-<div class="links"><a href="{UPDATE.name}">ต้นฉบับ Markdown</a><a href="attachments/GAP_5_PROVINCES_20261020.xlsx">เปิด Excel GAP</a><a href="http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html">เปิดแดชบอร์ด</a></div>
+<main><p class="intro">Project update {stamp.replace('-',' ')}</p>{content}
+<div class="links"><a href="{html.escape(source.name,quote=True)}">ต้นฉบับ Markdown</a><a href="attachments/GAP_5_PROVINCES_20261020.xlsx">เปิด Excel GAP</a><a href="http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html">เปิดแดชบอร์ด</a></div>
 <footer>ฉบับอ่านนี้สร้างจาก Markdown ในโฟลเดอร์เดียวกัน ไม่มีสคริปต์เชื่อมต่อ IoT และไม่แก้ข้อมูลหรือโมเดลเมื่อเปิดอ่าน การส่งต่อ Excel ปัจจุบันอ้างอิง <a href="GAP_PUBLICATION_2026-10-25_TH.md">บันทึกวันที่ 25 ตุลาคม 2569</a></footer>
 </main></div></body></html>
 '''
@@ -70,16 +75,21 @@ def verify_attachment(base=UPDATE.parent, manifest_path=ATTACHMENTS):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Verify HTML and unchanged local Excel without writing')
+    parser.add_argument('--source',type=Path,default=UPDATE,help='Dated Markdown in docs/updates; default preserves the 22 October report')
     args = parser.parse_args()
-    result = render_update(UPDATE.read_text(encoding='utf-8'))
+    source=args.source.resolve()
+    if source.parent!=UPDATE.parent.resolve() or source.suffix!='.md':
+        parser.error('Source must be a Markdown file directly in docs/updates')
+    output=source.with_suffix('.html')
+    result = render_update(source.read_text(encoding='utf-8'),source)
     digest = verify_attachment()
     if args.check:
-        if not OUTPUT.is_file() or OUTPUT.read_text(encoding='utf-8') != result:
+        if not output.is_file() or output.read_text(encoding='utf-8') != result:
             raise RuntimeError('HTML differs from Markdown; rebuild the update document')
         print(f'Update HTML matches Markdown; unchanged Excel SHA256 {digest}')
     else:
-        OUTPUT.write_text(result, encoding='utf-8')
-        print(f'Updated {OUTPUT.relative_to(ROOT)}; Excel preserved ({digest})')
+        output.write_text(result, encoding='utf-8')
+        print(f'Updated {output.relative_to(ROOT)}; Excel preserved ({digest})')
 
 
 if __name__ == '__main__':

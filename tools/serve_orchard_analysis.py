@@ -3,7 +3,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse,parse_qs
 from pathlib import Path
 from datetime import date,datetime,timezone,timedelta
-import argparse,json,hashlib,threading,csv,io
+import argparse,json,hashlib,threading,csv,io,os,re
 import requests
 ROOT=Path(__file__).resolve().parents[1]
 CACHE=ROOT/'research_data/five_province_history/point_weather_cache'
@@ -11,10 +11,35 @@ EXPORTS=ROOT/'research_data/five_province_history/exports'
 LOCK=threading.Lock()
 PARAMS='T2M,T2M_MAX,T2M_MIN,RH2M,PRECTOTCORR,ALLSKY_SFC_SW_DWN,WS2M'
 
-def project_identity():
+def orchard_data_source():
+    source=os.environ.get('ORCHARD_DATA_SOURCE','local_snapshot')
+    if source not in ('local_snapshot','supabase'):
+        raise RuntimeError('ORCHARD_DATA_SOURCE ต้องเป็น local_snapshot หรือ supabase')
+    return source
+
+def supabase_configured():
+    return bool(re.fullmatch(r'https://[a-z0-9-]+\.supabase\.co',os.environ.get('SUPABASE_URL','').rstrip('/'))
+                and (os.environ.get('SUPABASE_SECRET_KEY') or os.environ.get('SUPABASE_SERVICE_ROLE_KEY'))
+                and re.fullmatch(r'[A-Za-z0-9_-]{1,128}',os.environ.get('ORCHARD_DEVICE_ID','')))
+
+def project_identity(source=None):
     # Identify the checkout without returning its private absolute path.
-    return {'application':'orchard-analysis','protocol':1,
-            'workspace_id':hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest()}
+    source=orchard_data_source() if source is None else source;ready=supabase_configured()
+    gap=(ROOT/'research_data/five_province_history/gap_orchards/manifest.json').is_file()
+    return {'application':'orchard-analysis','protocol':1,'mode':'local','orchard_source':source,
+            'workspace_id':hashlib.sha256(ROOT.resolve().as_posix().casefold().encode()).hexdigest(),
+            'capabilities':{'gap_registry':{'available':gap,'message':
+                'ใช้หมุด GAP ในเครื่องได้' if gap else 'ยังไม่มีชุดหมุด GAP ในเครื่องนี้ ให้ pull branch ที่รวมข้อมูลแล้ว'},
+                'orchard':{'source':source,'configured':ready if source=='supabase' else
+                    (ROOT/'data/processed/orchard_live/live_report.json').is_file(),
+                    'history_configured':ready}}}
+
+def local_orchard_status():
+    if orchard_data_source()=='supabase':
+        from supabase_orchard import live_status
+        return live_status()
+    from orchard_current_context import orchard_snapshot
+    return orchard_snapshot()
 
 def verified_cache(path):
     """Read a cache entry only if the recorded bytes and structure still agree."""
@@ -123,10 +148,14 @@ class Handler(SimpleHTTPRequestHandler):
         return super().send_head()
     def do_GET(self):
         parsed=urlparse(self.path)
-        if parsed.path=='/api/project':return self.send_json(200,project_identity())
+        if parsed.path=='/api/project':
+            try:return self.send_json(200,project_identity())
+            except RuntimeError as e:return self.send_json(503,{'error':str(e)})
         if parsed.path=='/api/orchard-history':
             try:
                 from supabase_orchard import orchard_history
+                if not supabase_configured():
+                    return self.send_json(503,{'error':'ยังไม่ตั้งการเชื่อม Supabase ของเครื่องนี้ (SUPABASE_URL, server key และ ORCHARD_DEVICE_ID) เว็บ cloud เดิมตั้งค่าแยกกัน','code':'orchard_not_configured'})
                 q=parse_qs(parsed.query)
                 return self.send_json(200,orchard_history(q.get('period',['day'])[0],end=q.get('end',[None])[0]))
             except ValueError as e:return self.send_json(400,{'error':str(e)})
@@ -134,10 +163,11 @@ class Handler(SimpleHTTPRequestHandler):
         if parsed.path in ('/api/orchard-status','/api/province-estimate'):
             try:
                 from orchard_current_context import orchard_snapshot, province_estimate
-                if parsed.path=='/api/orchard-status':return self.send_json(200,orchard_snapshot())
+                if parsed.path=='/api/orchard-status':return self.send_json(200,local_orchard_status())
                 q=parse_qs(parsed.query)
                 return self.send_json(200,province_estimate(q['province'][0],int(q['year'][0]),fetch_weather))
             except (ValueError,KeyError) as e:return self.send_json(400,{'error':str(e)})
+            except RuntimeError as e:return self.send_json(503,{'error':str(e),'code':'orchard_unavailable'})
             except Exception as e:return self.send_json(502,{'error':str(e)})
         if parsed.path!='/api/weather':return super().do_GET()
         try:

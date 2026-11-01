@@ -292,8 +292,12 @@ $('backcast').onclick=()=>{let h=$('harvest').value,lo=+$('min-age').value,hi=+$
 __SOIL_EXPLORATION_CODE__
 __GAP_CODE__
 __GAP_INTEGRATION_CODE__
+const projectRuntime=location.protocol==='file:'?Promise.resolve(null):fetch('/api/project',{credentials:'same-origin',headers:{'Accept':'application/json'}})
+  .then(r=>{if(!r.ok)throw Error('server');return r.json();})
+  .then(p=>{if(p.application!=='orchard-analysis')throw Error('wrong server');return p;})
+  .catch(()=>{$('server-notice').hidden=false;return null;});
 __MONTHLY_CODE__
-const gapOrchards=window.createGapOrchardLayer({map,L,motion:mapMotion,selectionOwnsNavigation:true,container:$('gap-orchard-controls'),dataBaseUrl:'gap_orchards/',selectPoint:selectGapRegistryPoint});
+const gapOrchards=window.createGapOrchardLayer({map,L,motion:mapMotion,selectionOwnsNavigation:true,container:$('gap-orchard-controls'),dataBaseUrl:'gap_orchards/',selectPoint:selectGapRegistryPoint,availability:()=>projectRuntime.then(p=>p?.capabilities?.gap_registry)});
 const gapFilters=$('gap-orchard-controls').querySelector('.gap-filters');
 const gapAdvancedFilters=document.createElement('details');gapAdvancedFilters.className='atlas-extra-filters';
 const gapAdvancedSummary=document.createElement('summary');gapAdvancedSummary.textContent='ตัวกรองเพิ่มเติม';
@@ -310,5 +314,12 @@ DATA.provinces.forEach(p=>{for(const which of ['A','B'])areaControl('province',w
 document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(settleInitialMap),{once:true});
 if(document.readyState!=='loading')requestAnimationFrame(settleInitialMap);
 if(location.protocol==='file:')$('server-notice').hidden=false;
-else fetch('/api/project').then(r=>{if(!r.ok)throw Error('server');return r.json();}).then(p=>{if(p.application!=='orchard-analysis')$('server-notice').hidden=false;if(p.mode==='cloud'){const logout=document.createElement('a');logout.href='/logout';logout.textContent='ออกจากระบบ';logout.className='logout-link';document.querySelector('header').append(logout);}}).catch(()=>$('server-notice').hidden=false);
+else projectRuntime.then(p=>{
+  if(!p)return;
+  const note=document.createElement('p');note.className='scope-note';note.id='orchard-source-note';
+  note.textContent=p.orchard_source==='supabase'?'แหล่งข้อมูลสวน: Supabase ฝั่งเซิร์ฟเวอร์นี้ ไม่ย้ายอุปกรณ์ตามแผนที่ A/B':'โหมดในเครื่อง: snapshot ที่บันทึกไว้ ไม่ใช่ข้อมูลสดจากเว็บ cloud หากต้องการอ่านสดให้ตั้ง ORCHARD_DATA_SOURCE=supabase และการเชื่อมต่อฝั่งเซิร์ฟเวอร์';
+  if(p.capabilities?.orchard?.configured===false)note.textContent+=' · แหล่งข้อมูลสวนของเครื่อง/เซิร์ฟเวอร์นี้ยังไม่พร้อม';
+  $('current-orchard').before(note);
+  if(p.mode==='cloud'){const logout=document.createElement('a');logout.href='/logout';logout.textContent='ออกจากระบบ';logout.className='logout-link';document.querySelector('header').append(logout);}
+});
 </script></body></html>

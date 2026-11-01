@@ -24,7 +24,7 @@ def protected_hashes():
 def unchanged(hashes):
     if any(not (rb.ROOT / p).is_file() or rb.digest(rb.ROOT / p) != sha for p, sha in hashes.items()):
         raise ValueError('Protected files changed; stop')
-    if rb.digest(rb.PRODUCTION_MODEL) != rb.PRODUCTION_SHA256:
+    if not rb.production_model_matches():
         raise ValueError('Production model changed; stop')
 
 

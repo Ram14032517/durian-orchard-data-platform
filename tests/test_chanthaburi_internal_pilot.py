@@ -8,6 +8,7 @@ import socket
 import tempfile
 import unittest
 from unittest.mock import patch
+from tests.research_support import require_files
 
 import pandas as pd
 
@@ -20,6 +21,8 @@ spec.loader.exec_module(pilot)
 class PilotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        require_files(ROOT / pilot.OAE, ROOT / pilot.REGIONAL / 'cti_analysis.json',
+                      ROOT / 'research_data/soil_evidence_chanthaburi/analysis.json')
         with patch.object(socket, "socket", side_effect=AssertionError("Network forbidden")):
             cls.data = pilot.prepare(ROOT)
 

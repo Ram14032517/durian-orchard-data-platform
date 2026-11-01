@@ -2,11 +2,13 @@ import copy
 import unittest
 from tools import build_tha_mai_spatial_pilot as p
 from tools import review_tha_mai_spatial_pilot as r
+from tests.research_support import require_files
 
 
 class PersistedThaMaiTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        require_files(p.ROOT / p.DEFAULT / 'dataset.json')
         cls.dataset = p.read_json(p.ROOT / p.DEFAULT / "dataset.json")
 
     def test_full_persisted_geometry_reconciliation(self):

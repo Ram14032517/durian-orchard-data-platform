@@ -68,6 +68,17 @@ class CloudTests(unittest.TestCase):
                      '/research_data/five_province_history/point_weather_cache/a.json','/research_data/five_province_history/']:
             self.assertEqual(self.client.get(path,headers=self.auth).status_code,404)
 
+    def test_cloud_capabilities_do_not_advertise_private_gap_or_local_snapshot(self):
+        with patch.dict(os.environ,{'ORCHARD_DATA_SOURCE':'invalid-local-only-setting'}):
+            response=self.client.get('/api/project')
+        self.assertEqual(response.status_code,200)
+        data=response.get_json()
+        self.assertEqual(data['mode'],'cloud')
+        self.assertEqual(data['orchard_source'],'supabase')
+        self.assertFalse(data['capabilities']['gap_registry']['available'])
+        self.assertIn('cloud',data['capabilities']['gap_registry']['message'])
+        self.assertNotIn('ORCHARD_DEVICE_ID',str(data))
+
     def test_render_requires_tls_before_accepting_login(self):
         with patch.dict(os.environ,{'RENDER':'true'}):
             self.assertEqual(self.client.get('/api/project',headers=self.auth).status_code,400)
@@ -83,6 +94,36 @@ class CloudTests(unittest.TestCase):
 
     def test_supabase_missing_config_does_not_fallback_to_fake_live_snapshot(self):
         self.assertEqual(self.client.get('/api/orchard-status',headers=self.auth).status_code,503)
+
+    def test_province_estimate_accepts_checked_in_snapshot_without_retraining(self):
+        from tests.test_orchard_current_context import weather
+        class FixedDateTime:
+            @staticmethod
+            def now(zone):
+                return datetime(2026, 11, 1, tzinfo=zone)
+        with patch('serve_orchard_cloud.datetime', FixedDateTime), \
+             patch('serve_orchard_cloud.fetch_weather', side_effect=weather):
+            response = self.client.get('/api/province-estimate?province=84&year=2026')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(data['status'], 'retrospective_weather_estimate')
+        self.assertGreater(data['predicted_kg_rai'], 0)
+        self.assertIsNone(data['predicted_tonnes'])
+        self.assertEqual(data['weather_provenance']['test'], 'synthetic fixture, not live weather')
+
+    def test_province_estimate_missing_prior_yield_still_does_not_invent_prediction(self):
+        class FixedDateTime:
+            @staticmethod
+            def now(zone):
+                return datetime(2026, 11, 1, tzinfo=zone)
+        with patch('serve_orchard_cloud.datetime', FixedDateTime), \
+             patch('serve_orchard_cloud.fetch_weather') as fetch:
+            response = self.client.get('/api/province-estimate?province=84&year=2027')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(data['status'], 'pending_prior_yield')
+        self.assertIsNone(data['predicted_kg_rai'])
+        fetch.assert_not_called()
 
     def test_secret_key_stays_in_server_headers(self):
         response=Mock(status_code=200);response.json.return_value=[]

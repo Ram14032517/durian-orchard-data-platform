@@ -12,9 +12,9 @@ import tempfile
 import numpy as np
 import pandas as pd
 
-from common import ROOT, DATA, OUT, FEATURES, PROVINCES, TARGET, load_panel, check_snapshot, hashes
+from common import ROOT, DATA, OUT, FEATURES, PROVINCES, TARGET, load_panel, check_snapshot, hashes, safe_temporary_root, verify_production_snapshot
 from experiment_issue_date import IssueWeather, AGE, WEATHER_LAG, MANIFEST
-from availability_guard import check, check_feature_lineage, digest, issue_date, preflight, schedule_version
+from availability_guard import check, check_feature_lineage, digest, issue_date, preflight, schedule_version, source_identity
 
 ANCHORS = {'22': '04-01', '33': '05-01', '53': '06-01', '84': '07-01', '86': '07-01'}
 YEARS = tuple(range(2010, 2026))
@@ -24,6 +24,14 @@ SEED = 42
 OUTPUT_ROOT = OUT / 'rebaseline_exploratory'
 PRODUCTION_MODEL = OUT / 'ridge_vpd_final_model.json'
 PRODUCTION_SHA256 = 'b4b9e0985e6ba5e6ee371d8988cad5e65dee031b345eb0cf13a8695f91658680'
+
+
+def production_model_matches():
+    try:
+        verify_production_snapshot(PRODUCTION_SHA256)
+        return True
+    except (ValueError, OSError):
+        return False
 
 
 def candidates():
@@ -64,7 +72,7 @@ def midnight(day):
 
 
 def versions(manifest):
-    result = {k: digest(ROOT / r['path']) for k, r in manifest['records'].items() if 'path' in r}
+    result = {k: source_identity(r, ROOT)['version'] for k, r in manifest['records'].items() if 'path' in r}
     result.update(calendar='calendar-v1', issue_rule=schedule_version(manifest['schedule']),
                   issue_rule_feature=schedule_version(manifest['schedule']))
     return result
@@ -188,7 +196,8 @@ def prepare_folds(panel, annual, weather, manifest):
                 evaluation_reference_sha256=digest_value(evaluation.to_dict('records')),
                 train_predictors=train, forecast_predictors=forecast,
                 training_labels=train_labels, evaluation_reference=evaluation))
-    return dict(folds=folds, inputs=inputs, lineage=lineage, availability=checks, pit_certified=False)
+    return dict(folds=folds, inputs=inputs, lineage=lineage, availability=checks, pit_certified=False,
+                source_integrity={k: source_identity(r, ROOT) for k, r in manifest['records'].items() if 'path' in r})
 
 
 def digest_value(value):
@@ -209,6 +218,7 @@ def configuration(manifest_path, manifest):
         features=FEATURES, target=TARGET, age_days=AGE, weather_lag_days=WEATHER_LAG,
         schedule=manifest['schedule'], schedule_sha256=schedule_version(manifest['schedule']),
         manifest_sha256=digest(manifest_path), data_sha256=hashes(),
+        production_integrity=verify_production_snapshot(PRODUCTION_SHA256),
         code_sha256={str(p.relative_to(ROOT)).replace('\\', '/'): digest(p) for p in code_files},
         git_head=git('rev-parse', 'HEAD'), git_status=git('status', '--porcelain'),
         python=sys.version, dependencies={p: metadata.version(p) for p in ('numpy', 'pandas', 'scikit-learn', 'catboost')},
@@ -228,8 +238,7 @@ def write_preparation(prepared, config, manifest, run_id, root=OUTPUT_ROOT):
     root = lexical_root.resolve()
     if root.name != 'rebaseline_exploratory' or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', run_id):
         raise ValueError('Unsafe experimental output root/run id')
-    if root != lexical_root or (root != OUTPUT_ROOT.absolute()
-            and not root.is_relative_to(Path(tempfile.gettempdir()).resolve())):
+    if not ((root == lexical_root == OUTPUT_ROOT.absolute()) or safe_temporary_root(lexical_root)):
         raise ValueError('Only the designated experimental root or temporary test root is allowed')
     # Resolve symlinks too; refuse a path that lands inside an existing production subtree.
     destination = (root / run_id).resolve()
@@ -239,6 +248,7 @@ def write_preparation(prepared, config, manifest, run_id, root=OUTPUT_ROOT):
     destination.mkdir(exist_ok=False)
     artifacts = dict(config=config, manifest=manifest, feature_lineage=prepared['lineage'],
                      availability=prepared['availability'],
+                     source_integrity=prepared.get('source_integrity',{}),
                      folds=[{k: v for k, v in f.items() if not isinstance(v, pd.DataFrame)} for f in prepared['folds']])
     for name, value in artifacts.items():
         with (destination / (name + '.json')).open('x', encoding='utf-8') as handle:
@@ -407,7 +417,7 @@ def train_predictions(prepared, config, fitter=None):
 
 
 def train_run(manifest_path=MANIFEST):
-    if digest(PRODUCTION_MODEL) != PRODUCTION_SHA256:
+    if not production_model_matches():
         raise ValueError('Production hash differs before training')
     prepared, config, manifest = prepare(manifest_path)
     config = dict(config, preparation_only=False, training_requested=True,
@@ -423,7 +433,8 @@ def train_run(manifest_path=MANIFEST):
     tables = train_predictions(prepared, config)
     if (hashes() != config['data_sha256'] or digest(manifest_path) != config['manifest_sha256']
             or any(digest(ROOT / p) != sha for p, sha in config['code_sha256'].items())
-            or digest(PRODUCTION_MODEL) != PRODUCTION_SHA256):
+            or not production_model_matches()
+            or digest(PRODUCTION_MODEL) != config['production_before_sha256']):
         raise ValueError('Input/code/manifest/production changed during training; results not finalized')
     for name, frame in tables.items():
         with (destination / (name + '.csv')).open('x', encoding='utf-8-sig', newline='') as handle:

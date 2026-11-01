@@ -124,6 +124,14 @@ const descendants=node=>[node,...node.children.flatMap(child=>child.children?des
   assert.equal(calls.length,3,'province switch loads one file, not all');
   await api.setProvince('');assert.equal(api.getState().loadedCount,0);assert.equal(markerGroups[0].layers.length,0);
   api.destroy();assert.equal(container.children.length,0);assert.equal(Object.keys(map.events).length,0);
+  const deniedContainer=new Element('section',doc),beforeDenied=calls.length;
+  const denied=window.createGapOrchardLayer({map,L,container:deniedContainer,selectPoint(){},
+    availability:async()=>({available:false,message:'GAP is available locally, not on this cloud deployment'})});
+  await denied.setProvince('22');
+  assert.equal(calls.length,beforeDenied,'a disabled cloud capability must not request GAP files or provoke 404 retries');
+  assert.equal(denied.getState().loadedCount,0);
+  assert.ok(descendants(deniedContainer).some(node=>node.textContent==='GAP is available locally, not on this cloud deployment'));
+  denied.destroy();
 })().catch(error=>{console.error(error);process.exitCode=1;});
 """)
 

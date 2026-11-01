@@ -1,5 +1,13 @@
 # โมเดลผลผลิตทุเรียน: โค้ดขั้น 0-6 สำหรับ VS Code
 
+## การตรวจ snapshot ข้าม Mac/Windows — 1 พฤศจิกายน 2569
+
+`common.check_snapshot()` และการตรวจ input snapshot ของโมเดลในขั้น 6 ยอมรับไบต์ตรง SHA256 เดิมก่อน หากไม่ตรง จะยอมรับเฉพาะไฟล์ CSV input ทั้งสามที่ต่างเพียงการแปลง LF ↔ CRLF แบบสม่ำเสมอและเป็น UTF-8 โดย hash ของรูปแบบอีกด้านต้องตรงกับ digest ใน audit/โมเดลเดิมจริง ไม่ strip BOM, ช่องว่าง, แถวว่าง หรือแก้ตัวเลข และไม่ยอมรับ newline แบบผสม/CR เดี่ยวเป็นข้อยกเว้น
+
+`hashes()` ยังคืน SHA256 ของไบต์จริงทุกครั้ง ส่วน `verify_input_snapshot(expected)` คืนหลักฐานต่อไฟล์ (`actual_sha256`, `expected_sha256`, `comparison` และรูปแบบ newline เมื่อมีการแปลงเพื่อเปรียบเทียบ) ไม่มีการเขียนทับ CSV, audit หรือโมเดล และเพิ่ม `.gitattributes` เฉพาะ CSV ทั้งสามเพื่อไม่ให้ Git แปลง newline เพิ่มใน checkout ใหม่ การแก้ปัญหานี้ไม่ต้องรันขั้น 0–6 หรือ train ใหม่
+
+ดู [บันทึกแก้ไขและขอบเขต](../../docs/updates/SNAPSHOT_HASH_FIX_2026-11-01_TH.md) การตรวจ seal/hash ของ artifacts งานวิจัยอื่นยังเป็นแบบไบต์ตรงตามเดิม ไม่ได้รับการยกเว้นทั้งหมดโดยการแก้นี้
+
 ## Phase 1 — Rebaseline Preparation (ยังไม่ฝึกโมเดล)
 
 อ่าน [แผนและผลตรวจ](../../docs/research/modeling/DURIAN_REBASELINE_PLAN_TH.md) ก่อนดำเนินการ

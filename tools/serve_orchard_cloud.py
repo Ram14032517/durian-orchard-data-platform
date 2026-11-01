@@ -104,7 +104,13 @@ def create_app():
     def home():return redirect('/research_data/five_province_history/UNIFIED_MAP.html')
 
     @app.get('/api/project')
-    def identity():return jsonify(**project_identity(),mode='cloud',orchard_source='supabase')
+    def identity():
+        payload=project_identity(source='supabase')
+        payload.update(mode='cloud',orchard_source='supabase')
+        payload['capabilities']['gap_registry']={'available':False,
+            'message':'เว็บ cloud นี้ยังไม่เปิดชั้นหมุด GAP ให้ใช้แผนที่ GAP ในเครื่องจาก branch codex/organize-project การ push Git ไม่ใช่การเปิดข้อมูลบน cloud'}
+        payload['capabilities']['orchard'].update(source='supabase',configured=payload['capabilities']['orchard']['history_configured'])
+        return jsonify(payload)
 
     @app.get('/api/orchard-status')
     def orchard():return jsonify(live_status())

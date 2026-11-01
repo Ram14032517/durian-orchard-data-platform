@@ -2,11 +2,13 @@ import copy
 import unittest
 from tools import extract_chanthaburi_district_yield as e
 from tools import build_tha_mai_spatial_pilot as p
+from tests.research_support import require_files
 
 
 class DistrictYieldExtractionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        require_files(*(p.ROOT/e.OUT/name for name in ('district_year.json','reconciliation.json','field_lineage.json')))
         cls.rows=p.read_json(p.ROOT/e.OUT/"district_year.json")["rows"]
 
     def test_complete_extraction_and_known_visual_cells(self):

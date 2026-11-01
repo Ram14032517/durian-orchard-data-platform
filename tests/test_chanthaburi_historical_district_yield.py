@@ -1,14 +1,27 @@
 import copy
 import unittest
+from unittest.mock import patch
 from tools import audit_chanthaburi_historical_district_yield as a
+from tools import extract_chanthaburi_district_yield as extraction
+from tests.research_support import needs_files
 
 
 class HistoricalDistrictAuditTests(unittest.TestCase):
+    def setUp(self):
+        original = a.read
+        crosswalk = [{'district_code':str(2201+i),'table_district_name':row[0]}
+                     for i,row in enumerate(extraction.TRANSCRIPTION)]
+        mock = patch.object(a,'read',side_effect=lambda path:
+            crosswalk if path == a.OLD/'district_crosswalk.json' else original(path))
+        mock.start();self.addCleanup(mock.stop)
+
     def row(self):
-        r=copy.deepcopy(a.read(a.OLD/'district_year.json')['rows'][0])
-        sha=r['source_anchor']['pdf_sha256']
-        r.update(source_version=sha,source_sha256=sha,commodity='ทุเรียน')
-        return r
+        return dict(province_code='22',district_code='2201',district_name='เมืองจันทบุรี',
+            year_be=2566,year_ce=2023,year_basis='unverified_test_fixture',commodity='ทุเรียน',
+            standing_area_rai=150.,bearing_area_rai=100.,production_tonnes=200.,reported_yield_kg_rai=2000.,
+            units=extraction.UNITS.copy(),missingness={f:'present' for f in extraction.FIELDS},
+            source_version='a'*64,source_sha256='a'*64,source_anchor={'fixture':'synthetic_unit_only'},
+            finality='unverified',acceptance_scope='source_transcription_only')
 
     def test_crosswalk_rejects_wrong_name(self):
         r=self.row(); r['district_name']='ท่าใหม่'
@@ -55,6 +68,7 @@ class HistoricalDistrictAuditTests(unittest.TestCase):
         r=self.row(); r['source_sha256']='c'*64
         with self.assertRaisesRegex(ValueError,'lineage'): a.validate([r])
 
+    @needs_files(a.OUT/'candidate_standing_area.csv',a.OUT/'candidate_standing_source.json')
     def test_candidate_coverage_never_counts_as_yield(self):
         rows=a.candidate_rows()
         self.assertEqual(len(rows),110)

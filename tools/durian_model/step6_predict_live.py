@@ -9,8 +9,10 @@ def run(input_path=None, output_path=None):
         bundle = load_json('final_model.json')
         if load_json('workflow_state.json')['completed_steps'] != list(range(7)):
             raise ValueError('Run all steps 0-6 before predicting new inputs')
-        if bundle['input_sha256'] != hashes():
-            raise ValueError('Saved model belongs to another input snapshot')
+        try:
+            verify_input_snapshot(bundle['input_sha256'])
+        except ValueError as error:
+            raise ValueError('Saved model belongs to another input snapshot') from error
         inputs = pd.read_csv(input_path, dtype={'province_code': str})
         estimates = infer(bundle, inputs)
         if not output_path:

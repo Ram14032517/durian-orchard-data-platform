@@ -1,0 +1,73 @@
+{
+  "restored_date_thailand": "2026-11-01",
+  "purpose": "Restore original NOAA evidence bytes matching existing documents.csv, not new climate data or training.",
+  "method": "HTTPS downloads from the exact official source_url; compared to unchanged archived SHA256 before replacing checkout copies.",
+  "expected_hashes_changed": false,
+  "model_training_performed": false,
+  "historical_content_authentication": "unverified (original limitation unchanged)",
+  "files": [
+    {
+      "file": "2017_03.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2017/ensodisc.shtml",
+      "expected_sha256": "543205c1b294e3b1679600fbbc56a2eadf8f5a7db7c764e1ad131b5dc077075d",
+      "restored_sha256": "543205c1b294e3b1679600fbbc56a2eadf8f5a7db7c764e1ad131b5dc077075d",
+      "previous_git_sha256": "50c2d46c1e347f94a410cda31410797dc7d96fe674edda9aa77855d0646ea32c"
+    },
+    {
+      "file": "2018_01.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_jan2018/ensodisc.shtml",
+      "expected_sha256": "8806c5a34ca75bb95d4c465359d0a9727ca37ba32aa3df64bcb65cd8cd413bb5",
+      "restored_sha256": "8806c5a34ca75bb95d4c465359d0a9727ca37ba32aa3df64bcb65cd8cd413bb5",
+      "previous_git_sha256": "e579036000f6193e724859c08fe418a1d3d537f69d07c235cfac360580091c01"
+    },
+    {
+      "file": "2018_02.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2018/ensodisc.shtml",
+      "expected_sha256": "e914825740fd08b8bec858c357e50f023a70f0651dbe1689400dd3dd6e4865b1",
+      "restored_sha256": "e914825740fd08b8bec858c357e50f023a70f0651dbe1689400dd3dd6e4865b1",
+      "previous_git_sha256": "19b0ec87d4fee35955c6d4fa27b38b5e81dd546566ed54d52f49e5992b77a968"
+    },
+    {
+      "file": "2018_03.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_mar2018/ensodisc.shtml",
+      "expected_sha256": "b3f6badd7b517ead60ce4f2cb0f78b88f03999f6ff985c1dd10961fc4cc9d2f1",
+      "restored_sha256": "b3f6badd7b517ead60ce4f2cb0f78b88f03999f6ff985c1dd10961fc4cc9d2f1",
+      "previous_git_sha256": "df15c0249ac3a7973d4f5d33e09250fa8ec41a13e81784f5e6a7019af41333ce"
+    },
+    {
+      "file": "2018_04.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_apr2018/ensodisc.shtml",
+      "expected_sha256": "43d0f0ee11f0c305f21312ef194c6dfbf50c1ed687c5cf6c6601b5ca9b7a675f",
+      "restored_sha256": "43d0f0ee11f0c305f21312ef194c6dfbf50c1ed687c5cf6c6601b5ca9b7a675f",
+      "previous_git_sha256": "45842240543315229259c7594cbf444da81af0b3bd6cbb31eb73baf501b4a9f2"
+    },
+    {
+      "file": "2018_05.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2018/ensodisc.shtml",
+      "expected_sha256": "6ed640e377d40d3a33a78cc989308a561cdf8408f459b6de77b67f0bf0e94bb9",
+      "restored_sha256": "6ed640e377d40d3a33a78cc989308a561cdf8408f459b6de77b67f0bf0e94bb9",
+      "previous_git_sha256": "b9e334ab4c2f0ababe8c03d87dbdbdc9e12bd880a3b508a756e8ca73acb2216f"
+    },
+    {
+      "file": "2019_02.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_feb2019/ensodisc.shtml",
+      "expected_sha256": "c728cafaf2c0e557f68902da63fc252c727948d1754030bb8d948c73b8d0673b",
+      "restored_sha256": "c728cafaf2c0e557f68902da63fc252c727948d1754030bb8d948c73b8d0673b",
+      "previous_git_sha256": "8ed36404793fe165723323f588ca72396fdff6fa4cf33c62b717ac936c3e3359"
+    },
+    {
+      "file": "2019_01.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_jan2019/ensodisc.shtml",
+      "expected_sha256": "e21873f98552bc9de3077c5ac3a02e8309f8ace4731756d132eaab49c16fbb3d",
+      "restored_sha256": "e21873f98552bc9de3077c5ac3a02e8309f8ace4731756d132eaab49c16fbb3d",
+      "previous_git_sha256": "631c5259ceedd3554b91ac92ee2fd5b88751b3e3453062f8d6313f8bf6b40994"
+    },
+    {
+      "file": "2019_05.html",
+      "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_disc_may2019/ensodisc.shtml",
+      "expected_sha256": "28074c73747bd0f71e6415580942508f613f702697ebe81f61a83ed19ea6637d",
+      "restored_sha256": "28074c73747bd0f71e6415580942508f613f702697ebe81f61a83ed19ea6637d",
+      "previous_git_sha256": "fb399390c03cd2c3348311d30a8d618e070ba9463925d263db157e0c36f7fd21"
+    }
+  ]
+}

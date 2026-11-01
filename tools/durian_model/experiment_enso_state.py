@@ -39,6 +39,16 @@ def protocol():
     return base
 
 
+def evidence_matches(actual, expected, filename, field):
+    if actual == expected:
+        return True
+    # PDF extractors can split a word ("and" -> "an d") between versions.
+    # Only evidence formatting may differ: dates, states and all source bytes
+    # remain exact checks, and no non-whitespace character may be changed.
+    return (filename.endswith('.pdf') and field in ('publication_evidence','observed_state_evidence')
+            and re.sub(r'\s+','',actual) == re.sub(r'\s+','',expected))
+
+
 def load_archive(root=ARCHIVE):
     """Check bytes and re-extract states; metadata alone is insufficient lineage."""
     root = Path(root)
@@ -58,19 +68,24 @@ def load_archive(root=ARCHIVE):
             folds.province_code, folds.target_year, folds.input_role)) != expected_folds:
         raise ValueError('Incomplete archive consumption records')
     records = docs.to_dict('records')
+    integrity = {}
     for r in records:
         filename = r['snapshot_path']
         if Path(filename).name != filename or filename in ('', '.', '..'):
             raise ValueError('Unsafe archive snapshot path')
         source = root / 'sources' / filename
-        if rb.digest(source) != r['source_sha256']:
-            raise ValueError('Archive content hash mismatch')
         content = source.read_bytes()
+        actual = rb.digest(source)
+        proof = dict(actual_sha256=actual, expected_sha256=r['source_sha256'], comparison='exact_bytes')
+        if actual != r['source_sha256']:
+            raise ValueError('Archive content hash mismatch: ' + filename)
+        integrity[filename] = proof
+        r.update(source_actual_sha256=actual,source_hash_comparison=proof['comparison'])
         parsed = (archive.parse_pdf if filename.endswith('.pdf') else archive.parse)(
             content, int(r['archive_year']), int(r['archive_month']))
         for field in ('publication_date', 'publication_evidence', 'observed_state', 'observed_state_evidence'):
-            if (parsed.get(field) or '') != r[field]:
-                raise ValueError('Archive metadata differs from actual source extraction')
+            if not evidence_matches(parsed.get(field) or '',r[field],filename,field):
+                raise ValueError('Archive metadata differs from actual source extraction: ' + filename + ' / ' + field)
         if (r['archive_link_verified'] != 'True' or r['revised_oni_used'] != 'False'
                 or r['publication_basis'] != 'NOAA bulletin issuance header'
                 or not r['source_url'].startswith(archive.BASE)
@@ -81,7 +96,7 @@ def load_archive(root=ARCHIVE):
                            *[root / (n + '.csv') for n in tables],
                            *[root / 'sources' / r['snapshot_path'] for r in records]]}
     return dict(records=records, availability=availability, fold_availability=folds,
-                hashes=inventory, root=root)
+                hashes=inventory, root=root, source_integrity=integrity)
 
 
 def select_document(records, issue_date, cutoff):
@@ -154,6 +169,8 @@ def augment(prepared, manifest, bundle, enabled=False):
                     input_role=role, province_code=p, year_ce=y, issue_date=issue, role_cutoff=cutoff,
                     use_cutoff=min(issue[:10], cutoff[:10]), publication_date=selected['publication_date'],
                     source_url=selected['source_url'], source_sha256=selected['source_sha256'],
+                    source_actual_sha256=selected['source_actual_sha256'],
+                    source_hash_comparison=selected['source_hash_comparison'],
                     snapshot_path=selected['snapshot_path'], state=state,
                     observed_state_evidence=selected['observed_state_evidence'],
                     consumed_values=dict(zip(FEATURES, encoding)),
@@ -178,11 +195,11 @@ def cache_key(config, fold, candidate, train, forecast):
 
 def write_preparation(prepared, config, traces, manifest, run_id, root=OUTPUT_ROOT):
     root = Path(root).absolute()
-    if (root.resolve() != root or (root != OUTPUT_ROOT.absolute()
-            and not root.is_relative_to(Path(tempfile.gettempdir()).resolve()))
+    if (not ((root.resolve() == root == OUTPUT_ROOT.absolute()) or rb.safe_temporary_root(root))
             or root.name != OUTPUT_ROOT.name
             or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', run_id)):
         raise ValueError('Unsafe experimental output directory')
+    root = root.resolve()
     root.mkdir(parents=True, exist_ok=True)
     destination = root / run_id
     destination.mkdir(exist_ok=False)

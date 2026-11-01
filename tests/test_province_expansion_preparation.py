@@ -15,12 +15,14 @@ import experiment_rebaseline as rb
 from audit_province_expansion_inputs import check_hashes
 from availability_guard import check_feature_lineage
 from experiment_issue_date import IssueWeather
+from tests.research_fixtures import expansion_annual
+from tests.research_support import needs_files
 
 
 class ProvincePreparationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.annual = pd.read_csv(pe.ANNUAL, dtype={'province_code': str})
+        cls.annual = expansion_annual(pe)
 
     def weather(self):
         values = {'T2M': 25., 'T2M_MAX': 30., 'T2M_MIN': 20., 'RH2M': 60.,
@@ -53,11 +55,13 @@ class ProvincePreparationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pe.check_annual(data)
 
+    @needs_files(pe.ANNUAL, pe.MONTHLY)
     def test_pretraining_calendar_reconciles_without_filling_months(self):
-        evidence = pe.verify_calendar(pe.check_annual(self.annual))
+        evidence = pe.verify_calendar(pe.check_annual(pd.read_csv(pe.ANNUAL, dtype={'province_code': str})))
         self.assertEqual([e['peak_month'] for e in evidence], [5, 6, 7, 8, 8])
         self.assertTrue(all(e['reconciled_years'] == 6 and e['years'] == [2004, 2009] for e in evidence))
 
+    @needs_files(pe.ANNUAL, pe.MONTHLY)
     def test_missing_calendar_year_fails(self):
         original = pd.read_excel(pe.MONTHLY, sheet_name='durian_monthly')
         incomplete = original[~(original.province_name.eq('ระยอง') & original.year.eq(2547))]

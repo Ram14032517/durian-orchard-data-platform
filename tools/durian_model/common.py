@@ -2,6 +2,7 @@
 import hashlib
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -41,12 +42,86 @@ def load_csv(name):
 
 
 def hashes():
+    """Hash actual bytes for provenance; never silently normalize saved hashes."""
     return {name: hashlib.sha256((DATA / name).read_bytes()).hexdigest() for name in INPUTS}
 
 
+def _uniform_newline_variant(raw):
+    """Return the other UTF-8 LF/CRLF representation, not a content cleanup."""
+    try:
+        raw.decode('utf-8')  # Validate only; preserve BOM and every other byte.
+    except UnicodeDecodeError:
+        return None
+    without_crlf = raw.replace(b'\r\n', b'')
+    if b'\r' in without_crlf:
+        return None
+    if b'\r\n' in raw:
+        if b'\n' in without_crlf:  # Mixed line endings are not a checkout conversion.
+            return None
+        return raw.replace(b'\r\n', b'\n'), 'CRLF', 'LF'
+    if b'\n' in raw:
+        return raw.replace(b'\n', b'\r\n'), 'LF', 'CRLF'
+    return None
+
+
+def _verify_utf8_bytes(raw, expected):
+    """Comparison mechanism; callers must restrict which legacy files qualify."""
+    message = 'Inputs changed. Rerun steps 0-6; do not mix snapshots.'
+    if (not isinstance(expected, str) or len(expected) != 64
+            or any(char not in '0123456789abcdef' for char in expected)):
+        raise ValueError(message)
+    actual = hashlib.sha256(raw).hexdigest()
+    evidence = dict(actual_sha256=actual, expected_sha256=expected, comparison='exact_bytes')
+    if actual != expected:
+        variant = _uniform_newline_variant(raw)
+        if variant is None or hashlib.sha256(variant[0]).hexdigest() != expected:
+            raise ValueError(message)
+        evidence.update(comparison='uniform_lf_crlf_only', actual_line_endings=variant[1],
+                        matched_line_endings=variant[2])
+    return evidence
+
+
+def verify_input_file(name, expected, data_dir=None):
+    """Verify one explicitly named model CSV, including a legacy newline proof."""
+    if name not in INPUTS:
+        raise ValueError('Unknown model snapshot input')
+    return _verify_utf8_bytes(((DATA if data_dir is None else Path(data_dir)) / name).read_bytes(), expected)
+
+
+def verify_production_snapshot(expected, folder=None):
+    """The saved main model alone may prove its legacy LF/CRLF representation."""
+    return _verify_utf8_bytes(((OUT if folder is None else Path(folder)) / 'ridge_vpd_final_model.json').read_bytes(), expected)
+
+
+def verify_input_snapshot(expected):
+    """Verify only the three model CSV inputs against trusted saved digests.
+
+    Exact bytes are preferred. A uniform LF/CRLF conversion is accepted only
+    when its SHA256 exactly reproduces the saved digest. No data, audit or
+    model is rewritten. Return comparison evidence instead of concealing the
+    difference in hashes(); all other content changes still fail closed.
+    """
+    message = 'Inputs changed. Rerun steps 0-6; do not mix snapshots.'
+    if not isinstance(expected, dict) or set(expected) != set(INPUTS):
+        raise ValueError(message)
+    files = {name: verify_input_file(name, expected[name]) for name in INPUTS}
+    return dict(policy='model_csv_exact_or_uniform_utf8_lf_crlf_v1', files=files)
+
+
 def check_snapshot():
-    if hashes() != load_json('audit.json')['input_sha256']:
-        raise ValueError('Inputs changed. Rerun steps 0-6; do not mix snapshots.')
+    return verify_input_snapshot(load_json('audit.json')['input_sha256'])
+
+
+def safe_temporary_root(path):
+    """Allow macOS's system /var alias, not user-created symlink escapes."""
+    lexical = Path(path).absolute()
+    resolved = lexical.resolve()
+    temporary = Path(tempfile.gettempdir()).absolute()
+    canonical = temporary.resolve()
+    if lexical == resolved:
+        return resolved.is_relative_to(canonical)
+    return (lexical.is_relative_to(temporary)
+            and resolved == canonical / lexical.relative_to(temporary))
 
 
 def begin_step(number):

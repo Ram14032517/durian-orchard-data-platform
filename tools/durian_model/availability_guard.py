@@ -20,6 +20,25 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def source_identity(record, root):
+    """Keep raw evidence; only the three known model CSVs permit LF/CRLF proof.
+
+    A verified alternate byte representation may identify the saved source
+    version, but does not change publication dates or certify historical PIT.
+    Other source/code/artifact fingerprints remain strictly byte-exact.
+    """
+    path = (Path(root) / record['path']).resolve()
+    expected = record['source_version']
+    actual = digest(path)
+    evidence = dict(actual_sha256=actual, expected_sha256=expected, comparison='exact_bytes')
+    if actual != expected:
+        from common import INPUTS, verify_input_file
+        folder = (Path(root) / 'research_data/five_province_history').resolve()
+        if path.parent == folder and path.name in INPUTS:
+            evidence = verify_input_file(path.name, expected, folder)
+    return dict(**evidence, version=expected if evidence['comparison'] == 'uniform_lf_crlf_only' else actual)
+
+
 def schedule_version(schedule):
     return hashlib.sha256(json.dumps(schedule, sort_keys=True).encode()).hexdigest()
 
@@ -85,9 +104,11 @@ def preflight(manifest, root, features, provinces, mode):
         raise ValueError('Every feature requires explicit dependencies')
     versions = {'issue_rule': schedule_version(schedule), 'issue_rule_feature': schedule_version(schedule),
                 'calendar': 'calendar-v1'}
+    integrity = {}
     for key, record in records.items():
         if 'path' in record:
-            versions[key] = digest(Path(root) / record['path'])
+            integrity[key] = source_identity(record, root)
+            versions[key] = integrity[key]['version']
     rows = []
     for year in range(2014, 2026):
         for lead in (60, 0):
@@ -113,7 +134,7 @@ def preflight(manifest, root, features, provinces, mode):
                         feature=feature, dependency=ref, issue_date=issue, use_cutoff=cutoff,
                         availability_status=records[ref]['availability_status'], warnings=warnings))
     return dict(mode=mode, pit_certified=False, schedule_version=versions['issue_rule'],
-                fit_policy='shared model before earliest provincial issue', checks=rows,
+                fit_policy='shared model before earliest provincial issue', checks=rows, source_integrity=integrity,
                 limitation='Manifest evidence is reviewer-supplied, not independently authenticated by this guard')
 
 

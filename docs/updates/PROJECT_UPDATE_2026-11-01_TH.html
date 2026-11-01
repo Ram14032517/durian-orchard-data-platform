@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>บันทึกอัปเดตโปรเจกต์สวนทุเรียน 2026-11-01</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Thonburi","Leelawadee UI",Tahoma,sans-serif;color:#263c36;background:#f5f6f3;font-size:16px;line-height:1.95}
+*{box-sizing:border-box}body{margin:0}a{color:#21675a;text-underline-offset:4px}a:hover{color:#133e35}a:focus-visible{outline:3px solid #b98233;outline-offset:4px}
+.page{display:grid;grid-template-columns:230px minmax(0,810px);gap:48px;max-width:1180px;margin:auto;padding:42px 28px 70px}
+nav{position:sticky;top:24px;align-self:start;font-size:13px;line-height:1.8}nav strong{display:block;margin-bottom:12px;font-size:15px}nav a{display:block;padding:6px 0;text-decoration:none;color:#53655f}
+main{min-width:0;background:white;padding:36px 44px;border:1px solid #dce2dc;border-radius:12px}h1{font-size:28px;line-height:1.55;margin:0 0 8px;letter-spacing:-.3px;color:#182e27}h2{font-size:21px;line-height:1.6;margin:44px 0 16px;padding-top:16px;border-top:1px solid #e3e8e1;scroll-margin-top:24px}h3{font-size:17px;line-height:1.7;margin:28px 0 10px;color:#294e41}
+p{margin:12px 0 18px}li{margin:8px 0}ul,ol{padding-left:24px}code{font-family:ui-monospace,Menlo,monospace;font-size:.84em;background:#f0f3ef;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}pre{white-space:pre-wrap;background:#f0f3ef;padding:16px;border-radius:8px;overflow:auto}strong{color:#1f4437}
+.intro{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:#54776b;margin:0 0 18px}.links{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 0;font-size:13px}.links a{padding:8px 12px;border:1px solid #cfd9d1;border-radius:6px;text-decoration:none}footer{margin-top:36px;color:#65726b;font-size:12px;line-height:1.8}
+@media(max-width:850px){.page{display:block;padding:18px 14px}nav{position:static;margin-bottom:20px}nav a{display:inline-block;margin-right:16px;padding:4px 0}main{padding:26px 22px}h1{font-size:25px}}
+@media print{:root{background:white;font-size:11pt}body{background:white}.page{display:block;max-width:none;padding:0}nav,.links{display:none}main{border:0;padding:0}h2,h3{break-after:avoid}a{color:inherit}p,li{orphans:3;widows:3}footer{border-top:1px solid #ddd;padding-top:10px}}
+</style></head><body><div class="page">
+<nav aria-label="สารบัญ"><strong>บันทึกการเปลี่ยนแปลง</strong><a href="#section-1">สิ่งที่แก้แล้ว</a><a href="#section-2">สิ่งที่คงเดิม</a><a href="#section-3">ผลตรวจ</a><a href="#section-4">สิ่งที่ยังต้องมีข้อมูลหรือสิทธิ์เพิ่มเติม</a></nav>
+<main><p class="intro">Project update 2026 11 01</p><h1>บันทึกแก้ปัญหาโปรเจกต์ — 1 พฤศจิกายน 2569</h1>
+<p>งานรอบนี้รวมตัวแก้ hash จากรอบก่อนและแก้ปัญหาที่ทำได้จากโค้ด/หลักฐานที่มี โดยไม่ train ใหม่ ไม่เปลี่ยนโมเดลผลผลิต/ความชื้น ไม่สร้างผลตรวจโรคหรือผลผลิตรายสวน และไม่เผยแพร่ข้อมูลส่วนบุคคลเพิ่ม ทำงานบน branch <code>codex/organize-project</code> ฐาน <code>5463ab1</code></p>
+<h2 id="section-1">สิ่งที่แก้แล้ว</h2>
+<h3>1. Hash และความเข้ากันได้ข้าม Mac/Windows</h3>
+<p>คง SHA256 ของไบต์จริงไว้เสมอ แต่ให้ input CSV ของโมเดลหลักสามไฟล์พิสูจน์ความเท่ากันแบบ LF/CRLF ได้ ต้องคำนวณกลับมาได้ digest ที่บันทึกไว้จริง ไม่ trim ช่องว่าง ไม่ลบ BOM ไม่เรียงแถว และไม่ยอมรับค่าข้อมูลเปลี่ยน ตัวตรวจของ API, custom prediction ขั้น 6 และ availability/preparation ใช้หลักฐานเดียวกัน โดยยังแยก <code>actual_sha256</code>, <code>expected_sha256</code>, <code>comparison</code> ไว้</p>
+<p>โมเดลหลัก <code>ridge_vpd_final_model.json</code> มีข้อยกเว้นเฉพาะ newline ในลักษณะเดียวกัน ไม่ขยายไปยอมรับ JSON/โค้ดทุกไฟล์ และยังเก็บ/check raw hash ก่อน–หลังงานทดลอง เพื่อไม่ให้เปลี่ยนโมเดลระหว่างรันผ่านได้ การยอมรับรูปแบบไฟล์ไม่เปลี่ยน publication date หรือทำให้ข้อมูลกลายเป็น point-in-time certified</p>
+<p>เพิ่ม <code>.gitattributes</code> สำหรับข้อมูลและหลักฐานที่ต้องคงไบต์ ป้องกัน Git แปลง newline ซ้ำใน clone ใหม่ ดู <a href="SNAPSHOT_HASH_FIX_2026-11-01_TH.md">บันทึกตัวแก้แรก</a> สำหรับที่มา</p>
+<h3>2. คืนหลักฐาน NOAA ให้ตรง snapshot เดิม</h3>
+<p>พบประกาศ ENSO 9 ไฟล์ที่ checkout ไม่ตรง hash ใน <code>documents.csv</code> เดิม ดึงจาก URL ทางการ NOAA ที่บันทึกในแต่ละระเบียนลงที่ชั่วคราว และคืนไฟล์เฉพาะเมื่อ SHA256 ตรง digest เดิมทุกไบต์ ไม่มีการเปลี่ยน expected hash, สถานะ ENSO, วันที่ประกาศ หรือคะแนนโมเดล</p>
+<p>รายละเอียด URL/hash ก่อน–หลังอยู่ใน <a href="../../research_data/enso_outlook_archive_audit/phase4b_20261011_noaa_reviewed/RESTORATION_2026-11-01.json">RESTORATION_2026-11-01.json</a> ตัวตรวจไฟล์ archive ยังคงแบบไบต์ตรง ไม่ใช้ข้อยกเว้น newline ของ input CSV กับหลักฐาน HTML/PDF</p>
+<p>แก้ความต่างของ PDF text extractor ที่แบ่ง <code>and</code> เป็น <code>an d</code>: อนุญาตเฉพาะ whitespace ในข้อความ evidence ของ PDF โดยตัวอักษรอื่นทั้งหมดต้องตรง ไบต์ PDF, วันที่ และ state ยังตรวจตรงตามเดิม ไม่แก้ PDF/metadata และยังคงข้อจำกัด historical content authentication = unverified</p>
+<h3>3. Path ชั่วคราวบน macOS</h3>
+<p>แก้ guard ที่ปฏิเสธ <code>/var/...</code> เพราะ macOS resolve เป็น <code>/private/var/...</code> ยอมรับเฉพาะ alias ของโฟลเดอร์ชั่วคราวระบบตามจริง ไม่ยอมรับ symlink ที่ผู้ใช้สร้างเพิ่มเพื่อหนีออกจาก root ยังคงปฏิเสธ path traversal, output ซ้ำ และการเขียนทับ artifacts เดิม</p>
+<h3>4. เทสต์หลัง clone</h3>
+<p>แยก unit tests ของการขยายจังหวัด/target/การตรวจคุณภาพ ให้ใช้ข้อมูลสังเคราะห์ที่ติดป้ายชัด แทนการโหลด sealed snapshot จริงมาเป็น fixture ของ fake estimator แก้ import ของ fixture ให้รันได้ทั้ง <code>unittest discover</code> และเลือกโมดูลโดยตรง</p>
+<p>เทสต์หลักฐานภายในที่ไฟล์ไม่ได้อยู่ใน Git แสดง skip พร้อมรายการที่ขาด ไม่ถูกนับว่าผ่าน และไม่มีการ upload raw/private evidence เพิ่ม มีโหมด <code>ORCHARD_REQUIRE_RESEARCH_FIXTURES=1</code> ให้ตรวจแบบบังคับว่าต้องมีครบ ไฟล์ที่มีแต่ seal/hash ผิดยังต้อง fail ไม่ถูกจับแล้วข้าม อ่าน <a href="../../tests/README_TH.md">คู่มือทดสอบ</a></p>
+<h3>5. GAP บน local/cloud</h3>
+<p><code>/api/project</code> ประกาศ capabilities ตามโหมด เซิร์ฟเวอร์ cloud แจ้งว่าไม่เปิดชั้นหมุด GAP และ frontend ไม่พยายามดาวน์โหลดไฟล์ที่ถูกบล็อกหรือชวน retry 404 ส่วน local ใช้ชุดหมุดเดิม 32,871 จุดได้ตามเดิม</p>
+<p>ถ้าโหลดผิดพลาดจริง ข้อความแนะนำ <code>file://</code> จะใช้เฉพาะเมื่อเปิดแบบ file ส่วน HTTP แนะนำตรวจ server/ชุดข้อมูล ไม่แสดงสาเหตุผิดประเภท ไม่ได้เปิด route GAP/Excel/private preparations บน cloud และไม่เปลี่ยน Docker allowlist เพื่อเผยแพร่พิกัดเพิ่ม</p>
+<h3>6. โหมด IoT ในเครื่องให้ชัด</h3>
+<p>ค่าเริ่มต้นยังเป็น <code>ORCHARD_DATA_SOURCE=local_snapshot</code> เพื่อรักษาพฤติกรรมเดิม เพิ่ม opt-in <code>ORCHARD_DATA_SOURCE=supabase</code> สำหรับคนที่ตั้งการเชื่อมต่อฝั่งเซิร์ฟเวอร์แล้ว หากเลือกโหมดสดแต่เชื่อมต่อไม่ได้จะไม่ fallback เป็น snapshot แล้วอ้างว่าข้อมูลสด</p>
+<p>หน้าเว็บบอกแหล่งข้อมูลปัจจุบัน การตั้งค่าที่ไม่ครบอธิบายว่าเป็นของเครื่อง/เซิร์ฟเวอร์นี้ ไม่สรุปว่า cloud เดิมเสีย API identity ส่งเฉพาะ source/boolean ว่าตั้งค่าไว้หรือไม่ ไม่ส่ง key, URL Supabase, device ID หรือพิกัดสวน</p>
+<h2 id="section-2">สิ่งที่คงเดิม</h2>
+<p>หน้าแรกสวนของฉัน รหัสและขอบเขตอุปกรณ์ สัญญาอ่านข้อมูล IoT การยืนยันตัวตน cloud/CSRF/HTTPS/RLS และข้อจำกัดไฟล์ส่วนตัวไม่ถูกลดลง ข้อมูลผลผลิต/อากาศที่ใช้ฝึก audit เดิม โมเดล และ Excel GAP ไม่ถูกเขียนทับ หน้าแผนที่ build ใหม่ด้วย <code>--reuse-bundled-data</code> ซึ่งรักษา JSON DATA snapshot เดิม ไม่ดึงประวัติหรือสร้างโมเดลใหม่</p>
+<p>การ push นี้ไม่ใช่คำสั่ง deploy หรือ merge เข้า main ถ้าแพลตฟอร์มตั้ง auto-deploy เองต้องตรวจสถานะของแพลตฟอร์มแยกต่างหาก</p>
+<h2 id="section-3">ผลตรวจ</h2>
+<ul>
+<li>Python: พบ 479 กรณี ผ่าน 419 ไม่มี fail/error อีก 60 กรณีข้ามเพราะไม่มี optional private fixtures (9 กรณีรายเมธอด และ 51 กรณีใน 4 คลาสที่ข้ามตั้งแต่ setup) ตัว runner รายงาน 428 tests run และ 13 skip records ซึ่งไม่ใช่จำนวนกรณีที่ผ่านทั้งหมด</li>
+<li>JavaScript: ผ่าน 57/57 ไม่มีข้าม รวมถึงการนำทางแผนที่ A/B, GAP, missing data, weather fallback/export และขอบเขต IoT</li>
+<li>localhost จริง: <code>/api/project</code> ตอบ 200 พร้อม capabilities, ปี 2027 จังหวัด 84 ตอบ 200 <code>pending_prior_yield</code> โดยไม่สร้างตัวเลข/เรียกอากาศแทนผลผลิตปีก่อน, manifest GAP ตอบ 200 และหน้าเว็บแสดงหมุดจังหวัดสุราษฎร์ธานี 11,081 จุดเป็น 17 กลุ่ม ณ มุมมองที่ตรวจ ไม่มี console error ในการตรวจครั้งนี้</li>
+<li>หน้าแรกยังเป็นสวนของฉัน ระบุโหมด snapshot และประวัติสวนแจ้ง 503 <code>orchard_not_configured</code> อย่างชัดเจนเพราะเครื่องนี้ยังไม่ตั้ง credentials ไม่อ้างว่าแก้การเชื่อมต่อจริงสำเร็จหรือ cloud ล่ม</li>
+<li>ตรวจ input/artifacts/model ที่ป้องกันไว้ 27 ไฟล์ไม่เปลี่ยนไบต์, JSON DATA ในแผนที่ตรงกับ HEAD เดิม, <code>SEASONS_MAP.html</code> ไม่เปลี่ยน และ Excel GAP ยังคง SHA256 <code>ef3d25feca214050e5e190d0f6d7f1fcc6e09e704d0bdb7b0205b8cb6c39af6c</code></li>
+<li>การทดสอบอัตโนมัติบล็อก requests ออกเครือข่ายภายนอกและอนุญาต localhost สำหรับเทสต์ HTTP เท่านั้น การตรวจ UI ใช้หน้า localhost จริง ไม่มีการ train หรืออ้างผลความแม่นยำใหม่</li>
+</ul>
+<h2 id="section-4">สิ่งที่ยังต้องมีข้อมูลหรือสิทธิ์เพิ่มเติม</h2>
+<ul>
+<li>IoT จริงบน Mac ต้องตั้ง Supabase URL, server key และ <code>ORCHARD_DEVICE_ID</code> ฝั่งเครื่อง ไม่ใส่ค่าลับในเอกสาร/แชต/Git และไม่เดาค่าให้ เว็บ cloud จริงยังต้องมี URL/session เพื่อยืนยันเวลาวัดจากสวนแบบ end-to-end</li>
+<li>ไฟล์วิจัย private/archived ที่ขาดยังไม่ถูกกู้หรือเผยแพร่ โค้ด/หลักฐานของ sealed runs เก่าที่ fingerprint ไม่ตรงต้องตรวจฉบับเดิมหรือสร้าง preparation ฉบับใหม่โดยมี provenance แยก ไม่ปลอม seal</li>
+<li>GAP ยังเป็น registry/map/preparation ไม่ใช่ผล train ใหม่ การทดลองต้องตรวจพิกัดและ coverage ก่อนใช้แผนดึงอากาศแบบจำกัดจำนวน แล้วเทียบด้วยชุดประเมินเดียวกัน ยังไม่อ้างความแม่นเพิ่มกี่เปอร์เซ็นต์</li>
+<li>เป้าหมายทำนายโรคยังต้องมีผลตรวจพบและไม่พบโรคที่มีวันที่ รหัสสวน/ต้น และผู้ยืนยัน ข้อมูล GAP ไม่สร้าง labels เหล่านี้ให้เอง ไม่มีการเพิ่ม LLM เพื่อเดา ground truth หรือข้อแนะนำรักษาโรคที่ยังไม่ได้ยืนยัน</li>
+</ul>
+
+<div class="links"><a href="PROJECT_UPDATE_2026-11-01_TH.md">ต้นฉบับ Markdown</a><a href="attachments/GAP_5_PROVINCES_20261020.xlsx">เปิด Excel GAP</a><a href="http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html">เปิดแดชบอร์ด</a></div>
+<footer>ฉบับอ่านนี้สร้างจาก Markdown ในโฟลเดอร์เดียวกัน ไม่มีสคริปต์เชื่อมต่อ IoT และไม่แก้ข้อมูลหรือโมเดลเมื่อเปิดอ่าน การส่งต่อ Excel ปัจจุบันอ้างอิง <a href="GAP_PUBLICATION_2026-10-25_TH.md">บันทึกวันที่ 25 ตุลาคม 2569</a></footer>
+</main></div></body></html>

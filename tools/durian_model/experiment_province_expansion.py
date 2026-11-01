@@ -43,7 +43,7 @@ def reserve(run_id):
         raise ValueError('Unsafe run id')
     ROOT.mkdir(parents=True, exist_ok=True)
     destination = ROOT / run_id
-    if destination.resolve().parent != ROOT.resolve() or ROOT.resolve() != ROOT.absolute():
+    if destination.resolve().parent != ROOT.resolve() or (ROOT.resolve() != ROOT.absolute() and not rb.safe_temporary_root(ROOT)):
         raise ValueError('Unsafe input snapshot root')
     destination.mkdir(exist_ok=False)
     (destination / 'raw').mkdir()

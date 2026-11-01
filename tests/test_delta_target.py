@@ -12,12 +12,13 @@ import pandas as pd
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools/durian_model'))
 import experiment_delta_target as dt
+from tests.research_fixtures import expansion_prepared
 
 
 class DeltaTargetTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.prepared = dt.et.load_inputs()
+        cls.prepared = expansion_prepared(dt.et)
         cls.config = dict(protocol=dt.protocol(),protocol_hash=dt.rb.digest_value(dt.protocol()),
                           input_hashes={'synthetic':'1'},code_hashes={'synthetic':'1'})
 

@@ -4,6 +4,7 @@ import unittest
 from tools import build_tha_mai_advisor_preview as a
 from tools import build_tha_mai_spatial_pilot as p
 from tools import run_tha_mai_acceptance_policy as f
+from tests.research_support import needs_files
 
 
 class AdvisorPreviewTests(unittest.TestCase):
@@ -18,6 +19,7 @@ class AdvisorPreviewTests(unittest.TestCase):
         self.assertAlmostEqual(sum(groups.values()),sum(r["area_rai"] for r in rows))
         self.assertEqual(rows,before)
 
+    @needs_files(p.ROOT/f.RELEASE/'output_manifest.json', p.ROOT/a.OUT/'soil_composition_summary.json')
     def test_accepted_input_and_display_values_are_identical(self):
         release=p.ROOT/f.RELEASE
         p.previous.verify_seal(p.ROOT,f.RELEASE)
@@ -28,6 +30,7 @@ class AdvisorPreviewTests(unittest.TestCase):
         for original,row in zip(source,shown):
             self.assertTrue(all(row[key]==value for key,value in original.items()))
 
+    @needs_files(p.ROOT/a.OUT/'display_qc.json')
     def test_display_census_and_public_hold(self):
         qc=p.read_json(p.ROOT/a.OUT/"display_qc.json")
         self.assertEqual(qc["map_record_counts"]["pure_panel1"],1504)

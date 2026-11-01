@@ -11,12 +11,14 @@ import pandas as pd
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools/durian_model'))
 import experiment_province_expansion_training as et
+from tests.research_fixtures import expansion_prepared
+from unittest.mock import patch
 
 
 class ExpansionTrainingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.prepared=et.load_inputs()
+        cls.prepared=expansion_prepared(et)
         cls.config=dict(protocol=et.protocol(),protocol_hash=et.rb.digest_value(et.protocol()),
                         input_hashes={'synthetic':'1'},code_hashes={'synthetic':'1'})
 
@@ -50,13 +52,16 @@ class ExpansionTrainingTests(unittest.TestCase):
             et.project(bad,'C')
 
     def test_reference_parity_gate_rejects_changed_predictions(self):
-        reference=pd.read_csv(et.REFERENCE/'predictions.csv',dtype={'province_code':str})
-        reference=reference[reference.model.isin(['catboost_no_weather','catboost_with_weather'])].copy()
-        reference['model']=reference.model.map({'catboost_no_weather':'A','catboost_with_weather':'B'})
-        et.reference_gate(reference)
-        reference.loc[reference.index[0],'predicted_kg_rai']+=1
-        with self.assertRaises(ValueError):
+        source=pd.DataFrame([dict(model=model,province_code=p,year_ce=y,
+            issue_date=f'{y}-01-31',actual_kg_rai=100.,predicted_kg_rai=101.)
+            for model in ('catboost_no_weather','catboost_with_weather')
+            for p in et.rb.PROVINCES for y in et.rb.OUTER_YEARS])
+        reference=source.copy();reference['model']=reference.model.map({'catboost_no_weather':'A','catboost_with_weather':'B'})
+        with patch.object(et.pd,'read_csv',return_value=source):
             et.reference_gate(reference)
+            reference.loc[reference.index[0],'predicted_kg_rai']+=1
+            with self.assertRaises(ValueError):
+                et.reference_gate(reference)
 
     def test_prediction_completeness_and_inner_only_choices(self):
         tables=self.train()

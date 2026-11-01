@@ -37,3 +37,15 @@ node --test tests/test_weather_fallback.js tests/test_weather_export.js
 ตัว launcher จะพิมพ์ URL ที่ใช้งานจริงและไม่หยุดโปรแกรมอื่นที่ใช้พอร์ตอยู่
 
 เมื่อต้องทดสอบทุกส่วน รวมเว็บ cloud และ GIS ให้ติดตั้งเพิ่มด้วย `python -m pip install -r tools/requirements-test.txt` ใน environment ของโปรเจกต์ แล้วรัน `python -m unittest discover -s tests` และ `node --test tests/*.js`
+
+## เลือกแหล่งข้อมูล IoT ในเครื่อง
+
+ค่าเริ่มต้นเป็น `local_snapshot` และไม่เชื่อมต่อ Supabase อัตโนมัติ แม้จะมี credentials ใน environment ถ้าต้องการอ่านข้อมูลสดและตั้ง `SUPABASE_URL`, server key และ `ORCHARD_DEVICE_ID` ฝั่งเซิร์ฟเวอร์ไว้แล้ว ให้หยุดเซิร์ฟเวอร์ของงานนี้ก่อน แล้วเริ่มด้วย:
+
+```sh
+ORCHARD_DATA_SOURCE=supabase .build/national-analysis-venv/bin/python tools/serve_orchard_analysis.py --port 8871
+```
+
+ตั้งค่าลับด้วยวิธีเดิมของเซิร์ฟเวอร์ ไม่ใส่ลง Git/แชต ไม่ใส่ key ใน JavaScript ฝั่ง browser โหมดสดจะไม่ fallback เป็น snapshot เมื่อเชื่อมต่อไม่ได้ หน้าเว็บแสดงแหล่งข้อมูลและบอกการตั้งค่าที่ยังขาด ส่วนเว็บ cloud ใช้ Supabase ตามเดิม ไม่เปลี่ยนตามตัวแปรโหมด local นี้
+
+รายละเอียดการตรวจและข้อจำกัดของเทสต์อยู่ที่ [tests/README_TH.md](../../tests/README_TH.md)

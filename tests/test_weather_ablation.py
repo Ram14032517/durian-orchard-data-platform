@@ -15,7 +15,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools/durian_model'))
 import experiment_weather_ablation as wa
-import test_rebaseline as fixtures
+from tests import test_rebaseline as fixtures
 
 
 class WeatherAblationTests(unittest.TestCase):

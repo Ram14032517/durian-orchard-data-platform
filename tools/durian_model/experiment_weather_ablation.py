@@ -307,15 +307,15 @@ def assert_unchanged(config):
     if (rb.hashes() != config['data_sha256'] or rb.digest(rb.MANIFEST) != config['manifest_sha256']
             or any(not (rb.ROOT / p).is_file() or rb.digest(rb.ROOT / p) != h
                    for p, h in config['protected_sha256'].items())
-            or rb.digest(rb.PRODUCTION_MODEL) != rb.PRODUCTION_SHA256):
+            or not rb.production_model_matches()):
         raise ValueError('Protected files/source/Production changed; stop')
 
 
 def write_preparation(prepared, config, manifest, run_id, root=OUTPUT_ROOT):
     lexical = Path(root).absolute()
     resolved = lexical.resolve()
-    if (resolved != lexical or resolved.name != 'weather_ablation_exploratory'
-            or (resolved != OUTPUT_ROOT.absolute() and not resolved.is_relative_to(Path(tempfile.gettempdir()).resolve()))
+    if (resolved.name != 'weather_ablation_exploratory'
+            or not ((resolved == lexical == OUTPUT_ROOT.absolute()) or rb.safe_temporary_root(lexical))
             or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,99}', run_id)):
         raise ValueError('Unsafe output path')
     destination = (resolved / run_id).resolve()
@@ -350,7 +350,7 @@ def write_preparation(prepared, config, manifest, run_id, root=OUTPUT_ROOT):
 
 
 def run(training=False):
-    if rb.digest(rb.PRODUCTION_MODEL) != rb.PRODUCTION_SHA256:
+    if not rb.production_model_matches():
         raise ValueError('Production changed before preparation')
     prepared, base, manifest = rb.prepare()
     config = dict(base, protocol=protocol(), protocol_sha256=rb.digest_value(protocol()),

@@ -13,15 +13,23 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools/durian_model'))
 import experiment_enso_state as es
-import test_rebaseline as fixtures
+from tests import test_rebaseline as fixtures
 
 
 class EnsoPreparationTests(unittest.TestCase):
+    def test_pdf_extractor_spacing_never_changes_source_state_or_words(self):
+        self.assertTrue(es.evidence_matches('atmospheric an d oceanic','atmospheric and oceanic','fixture.pdf','observed_state_evidence'))
+        self.assertFalse(es.evidence_matches('El Niño','La Niña','fixture.pdf','observed_state'))
+        self.assertFalse(es.evidence_matches('2014-02-06','2014-02-07','fixture.pdf','publication_date'))
+        self.assertFalse(es.evidence_matches('and','or','fixture.pdf','observed_state_evidence'))
+        self.assertFalse(es.evidence_matches('an d','and','fixture.html','observed_state_evidence'))
+
     @classmethod
     def setUpClass(cls):
         fixtures.RebaselineTests.setUpClass()
         fixture = fixtures.RebaselineTests()
         cls.prepared = fixture.prepared()
+        cls.production_sha256 = es.rb.digest(es.rb.PRODUCTION_MODEL)
         cls.manifest = fixture.manifest
         cls.bundle = es.load_archive()
         cls.expanded, cls.traces = es.augment(cls.prepared, cls.manifest, cls.bundle, True)
@@ -134,7 +142,7 @@ class EnsoPreparationTests(unittest.TestCase):
             self.assertEqual(before, es.rb.digest(destination / 'config.json'))
             with self.assertRaises(ValueError):
                 es.write_preparation(self.expanded, config, self.traces, self.manifest, '../escape', root)
-        self.assertEqual(es.rb.digest(es.rb.PRODUCTION_MODEL), es.rb.PRODUCTION_SHA256)
+        self.assertEqual(es.rb.digest(es.rb.PRODUCTION_MODEL), self.production_sha256)
 
     def test_protocol_and_candidates_are_frozen_to_two_arms(self):
         protocol = es.protocol()

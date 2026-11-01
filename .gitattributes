@@ -1,4 +1,13 @@
 # Preserve reviewed snapshot bytes/hashes when cloning on Windows or macOS.
+# Model inputs also keep their committed bytes; legacy LF/CRLF audit checks
+# are handled explicitly by common.verify_input_snapshot(), not by Git rewrites.
+research_data/five_province_history/production_annual.csv -text
+research_data/five_province_history/harvest_monthly.csv -text
+research_data/five_province_history/weather_daily.csv -text
+research_data/five_province_history/training/ridge_vpd_final_model.json -text
+# NOAA evidence may contain mixed original line endings. Preserve raw bytes.
+research_data/enso_outlook_archive_audit/phase4b_20261011_noaa_reviewed/* -text
+research_data/enso_outlook_archive_audit/phase4b_20261011_noaa_reviewed/sources/* -text -whitespace
 docs/updates/attachments/GAP_5_PROVINCES_20261020.xlsx -text
 research_data/five_province_history/gap_orchards/* -text
 research_data/five_province_history/gap_spatial_experiment/gap_spatial_prep_20261021/* -text whitespace=cr-at-eol
