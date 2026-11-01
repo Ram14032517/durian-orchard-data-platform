@@ -27,6 +27,22 @@ class CloudTests(unittest.TestCase):
 
     def tearDown(self):self.env.stop()
 
+    def test_clean_routes_keep_auth_assets_and_safe_login_destination(self):
+        anonymous=self.app.test_client()
+        for path in ['/home','/map','/weather','/yield','/seasons']:
+            response=anonymous.get(path)
+            self.assertEqual(response.status_code,302)
+            self.assertEqual(response.location,'/login?next='+path)
+            response=self.client.get(path)
+            self.assertEqual(response.status_code,200)
+            self.assertIn(b'<base href="/research_data/five_province_history/">',response.data)
+        anonymous.get('/login?next=/map')
+        with anonymous.session_transaction() as state:token=state['csrf']
+        response=anonymous.post('/login',data={'csrf':token,'username':'owner','password':'test-password-123456789','next':'/map'})
+        self.assertEqual(response.location,'/map')
+        response=anonymous.get('/login?next=https://example.org')
+        self.assertNotIn('example.org',response.location or '')
+
     def test_fail_closed_without_password(self):
         with patch.dict(os.environ,{'DASHBOARD_PASSWORD':''}):
             with self.assertRaises(RuntimeError):create_app()

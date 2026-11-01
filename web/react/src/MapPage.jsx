@@ -1,4 +1,4 @@
-import React,{useEffect,useRef,useState} from 'react';
+import React,{useEffect,useMemo,useRef,useState} from 'react';
 import '../../assets/js/orchard_gap_layer.js';
 import {gapSpatialHelpers} from './geo.js';
 import {soilPalette,soilLegend} from './soil.js';
@@ -7,7 +7,7 @@ import {Badge,Button,Card,Field,Icon,Notice,Table} from './ui.jsx';
 export default function MapPage({areas,setAreas,active,go}){
   const canvas=useRef(null),registry=useRef(null),mapRef=useRef(null),gapRef=useRef(null),soilLayer=useRef(null),markers=useRef({}),soilCache=useRef({}),selectionRef=useRef(),[which,setWhich]=useState('A'),[code,setCode]=useState(areas.A.code),[district,setDistrict]=useState(''),[soil,setSoil]=useState(''),[showSoil,setShowSoil]=useState(false),[message,setMessage]=useState(''),[gapState,setGapState]=useState(null),[fullscreen,setFullscreen]=useState(false);
   const selectionVersion=useRef(0);selectionRef.current={areas,which,setAreas};
-  const colorForSoil=useRef(soilPalette(data.soil_properties.map(p=>p.soil_code))).current;
+  const colorForSoil=useMemo(()=>soilPalette(data.soil_properties.map(p=>p.soil_code)),[]);
   const [legend,setLegend]=useState([]),[soilLoading,setSoilLoading]=useState(false);
   useEffect(()=>{
     if(!window.L){setMessage('ยังโหลดแผนที่ไม่ได้ ตรวจการเชื่อมต่อแล้วโหลดหน้าใหม่');return;}

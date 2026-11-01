@@ -21,3 +21,53 @@
 .map-card{isolation:isolate}.map-canvas{position:relative;z-index:0}.map-toolbar{z-index:10}
 .map-card.map-fullscreen{position:fixed;inset:12px;z-index:2000;width:calc(100vw - 24px);height:calc(100dvh - 24px);margin:0;background:#fff}
 .map-card.map-fullscreen>.map-canvas{height:100%!important}
+
+.sidebar{overflow-y:auto}.sidebar-logout{@apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-emerald-100/20 bg-white/5 px-3 py-3 text-xs font-semibold text-emerald-50 hover:border-rose-200/50 hover:bg-rose-950/40 hover:text-rose-100}.sidebar-account{min-width:0}.sidebar-account>span{overflow-wrap:anywhere}
+@media(min-width:1024px){.sidebar-compact{width:80px;padding-left:12px;padding-right:12px}.sidebar-compact .sidebar-label{display:none}.sidebar-compact .nav-item{justify-content:center;padding-left:12px;padding-right:12px}.sidebar-compact .brand{justify-content:center}.sidebar-compact .brand-icon{width:44px;height:44px}}
+
+/* Source groups use text labels as well as color; status badges keep their own meaning. */
+@layer components{
+.data-group{border-top-width:4px}.group-sensor{border-color:#a7d6bf;background:#f5fbf7}.group-sensor .group-source{color:#185c43}.group-sensor>.card-heading .icon-box{background:#dff2e6;color:#185c43}
+.group-forecast{border-color:#9ec9e7;background:#f4f9fd}.group-forecast .group-source{color:#1c537a}.group-forecast>.card-heading .icon-box{background:#deedf9;color:#1c537a}
+.group-soil{border-color:#ceb99a;background:#faf7f1}.group-soil .group-source{color:#684a29}.group-soil>.card-heading .icon-box{background:#efe4d4;color:#684a29}
+.group-stage{border-color:#abc68d;background:#f6faf1}.group-stage .group-source{color:#3e5c25}
+.group-attention{border-color:#e6c577;background:#fffbef}.group-attention .group-source{color:#795314}.group-attention>.card-heading .icon-box{background:#f9edc8;color:#795314}
+.data-group>.card-heading{padding-bottom:14px;border-bottom:1px solid #233b3014}.page-stack{gap:24px}
+}
+
+/* Orchard overview: compact navigation and readable, source-labelled cards. */
+@layer components {
+  .orchard-welcome{@apply flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-5 text-white sm:px-7 sm:py-6;background:linear-gradient(115deg,#164c3e,#276b50);border:1px solid #326f58}
+  .orchard-welcome .btn{background:#ffffff18;border-color:#ffffff50;color:#fff}
+  .orchard-welcome .btn:hover{background:#ffffff28}
+  .orchard-tabs{@apply grid grid-cols-5 gap-1 rounded-2xl border border-emerald-100 bg-white p-1.5 shadow-sm}
+  .orchard-tab{@apply flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-center text-[11px] font-semibold text-slate-600 transition-colors sm:flex-row sm:gap-2 sm:px-3 sm:text-sm}
+  .orchard-tab:hover{@apply bg-emerald-50 text-emerald-900}
+  .orchard-tab-active,.orchard-tab-active:hover{@apply bg-emerald-800 text-white shadow-sm}
+  .orchard-home .card-heading h2{line-height:1.55;text-wrap:balance;color:#203e35}
+  .orchard-home .group-source{display:inline-flex;max-width:100%;border:1px solid currentColor;border-radius:8px;padding:4px 8px;font-size:11px;line-height:1.6;background:#ffffff80}
+  .orchard-home .metric::before{display:none}
+  .orchard-home .metric{box-shadow:none;border-color:#dce8e0}
+  .orchard-home .metric:hover{border-color:#9eb9aa;box-shadow:0 3px 12px #163e3408}
+  .orchard-home .metric>p:nth-of-type(2){font-variant-numeric:tabular-nums}
+  .orchard-home details>summary{line-height:1.7;padding-block:4px}
+  .orchard-home details[open]>summary{padding-bottom:12px;border-bottom:1px solid #dce8e0}
+  .orchard-home .card-heading{align-items:flex-start}
+  .orchard-home .card-heading .btn{min-height:44px}
+}
+summary:focus-visible,[role=tabpanel]:focus-visible{outline:3px solid #18775b;outline-offset:4px}
+#orchard-stage-details{scroll-margin-top:110px}
+@media(max-width:639px){
+  .orchard-home{gap:16px}
+  .orchard-home .page-stack{gap:20px}
+  .orchard-home .card{padding:16px;border-radius:16px}
+  .orchard-home .card-heading{margin-bottom:16px;gap:10px}
+  .orchard-home .card-heading h2{font-size:15px}
+  .orchard-home .metric{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:14px}
+  .orchard-home .metric>div:first-child{grid-column:1/-1;margin-bottom:8px;align-items:center}
+  .orchard-home .metric .metric-icon{width:30px;height:30px;border-radius:9px}
+  .orchard-home .metric>p:first-of-type{align-self:center;font-size:13px;line-height:1.65}
+  .orchard-home .metric>p:nth-of-type(2){margin:0;font-size:26px;flex-wrap:wrap;justify-content:flex-end}
+  .orchard-home .metric>p:last-child{grid-column:1/-1;margin-top:6px;overflow-wrap:anywhere}
+  .orchard-home .btn,.orchard-home .btn-primary{min-height:44px}
+}

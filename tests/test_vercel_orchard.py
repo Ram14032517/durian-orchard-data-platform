@@ -19,7 +19,7 @@ class VercelTests(unittest.TestCase):
         import re
         data=json.loads(re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',html,re.S)[1])
         self.assertEqual(data['boundaries']['features'],[]);self.assertEqual(data['soil_properties'],[])
-        self.assertEqual(data['districts'],[]);self.assertIn('Public HOLD',html)
+        self.assertEqual(data['districts'],[]);self.assertEqual(result['public_release'],'HOLD');self.assertNotIn('เว็บส่วนตัวบน Vercel',html);self.assertNotIn('เว็บส่วนตัว · แผนที่ GAP/ดินอ่านผ่านลิงก์จำกัดเวลา',html)
 
     def test_deployment_auth_secure_cookies_and_tmp_cache(self):
         prepare()

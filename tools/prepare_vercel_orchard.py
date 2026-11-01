@@ -33,9 +33,6 @@ def prepare(private_gis=False):
         data.update(boundaries={'type':'FeatureCollection','features':[]},districts=[],soil_properties=[],district_exploration=[])
     payload=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
     html=html[:match.start(1)]+payload+html[match.end(1):]
-    banner='<div role="status" style="padding:12px;background:#fff3cd;font:14px Tahoma">เว็บส่วนตัวบน Vercel · GAP / Derived GIS ไม่รวมในชุดออนไลน์ (Public HOLD) · ข้อมูลสวนต้องเข้าสู่ระบบ</div>'
-    if private_gis:banner='<div role="status" style="padding:12px;background:#e8f3ed;font:14px Tahoma">เว็บส่วนตัว · แผนที่ GAP/ดินอ่านผ่านลิงก์จำกัดเวลา · Public HOLD</div>'
-    html=html.replace('<body>','<body>'+banner)
     files[base+'UNIFIED_MAP.html']=html.encode()
     for name in ['app.py','vercel.json','requirements.txt','pyproject.toml','.vercelignore']:
         copy('deployment/vercel/'+name,name)

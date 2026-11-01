@@ -82,7 +82,7 @@ def create_app():
         base='/research_data/five_province_history/UNIFIED_MAP.html'
         candidate=request.values.get('next',base)
         path,separator,fragment=candidate.partition('#')
-        return candidate if path==base and fragment in ('','home','map','weather','yield','seasons') else base
+        return candidate if path in (base,'/home','/map','/weather','/yield','/seasons') and fragment in ('','home','map','weather','yield','seasons') else base
 
     @app.before_request
     def authenticate():
@@ -92,7 +92,7 @@ def create_app():
         if request.path=='/login':return None
         if session.get('authenticated') is not True or session.get('principal',username) not in accounts:
             if request.path.startswith('/api/'):return jsonify(error='กรุณาเข้าสู่ระบบ',login_url='/login'),401
-            return redirect('/login')
+            return redirect('/login?next='+request.path) if request.path in ('/home','/map','/weather','/yield','/seasons') else redirect('/login')
 
     @app.after_request
     def security_headers(response):
@@ -128,7 +128,16 @@ def create_app():
         return auth_page(logout=True)
 
     @app.get('/')
-    def home():return redirect('/research_data/five_province_history/UNIFIED_MAP.html')
+    def home():return redirect('/home')
+
+    @app.get('/home')
+    @app.get('/map')
+    @app.get('/weather')
+    @app.get('/yield')
+    @app.get('/seasons')
+    def dashboard_page():
+        html=(ROOT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
+        return html if '<base ' in html else html.replace('<head>','<head><base href="/research_data/five_province_history/">',1)
 
     @app.get('/api/project')
     def identity():return jsonify(**project_identity(),mode='cloud',orchard_source='supabase')

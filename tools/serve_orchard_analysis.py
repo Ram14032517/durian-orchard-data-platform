@@ -122,6 +122,7 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
     def private_route(self):
         path=urlparse(self.path).path
+        if path in ('/home','/map','/weather','/yield','/seasons'):return True
         if path in ('/api/orchard-status','/api/orchard-history') and os.environ.get('SUPABASE_URL'):
             return True
         return path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
