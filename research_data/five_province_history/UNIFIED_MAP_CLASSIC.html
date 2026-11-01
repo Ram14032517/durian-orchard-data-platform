@@ -1,7 +1,242 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>
+<!doctype html><html lang="th"><head><script>/* Presentation only. Runs in <head> before paint; never reads orchard data. */
+(function (root) {
+  'use strict';
+  const key = 'durian.orchard.theme.v1';
+  const valid = value => ['light', 'dark', 'system'].includes(value);
+  const media = typeof root.matchMedia === 'function' ? root.matchMedia('(prefers-color-scheme: dark)') : null;
+  let preference = 'system';
+  try { const saved = root.localStorage.getItem(key); if (valid(saved)) preference = saved; } catch { /* Storage can be disabled. */ }
+  const resolved = () => preference === 'system' ? (media?.matches ? 'dark' : 'light') : preference;
+  function apply() {
+    const theme = resolved();
+    root.document.documentElement.dataset.theme = theme;
+    root.document.documentElement.style.colorScheme = theme;
+    root.document.querySelectorAll('[data-theme-select]').forEach(control => { control.value = preference; });
+    root.dispatchEvent(new root.CustomEvent('orchard:theme-change', {detail: {preference, theme}}));
+  }
+  root.OrchardTheme = Object.freeze({
+    getPreference: () => preference,
+    getTheme: resolved,
+    setPreference(value) {
+      if (!valid(value)) return false;
+      preference = value;
+      try { root.localStorage.setItem(key, value); } catch { /* Still works for this page. */ }
+      apply();
+      return true;
+    },
+    subscribe(listener) {
+      const notify = event => listener(event.detail);
+      root.addEventListener('orchard:theme-change', notify);
+      return () => root.removeEventListener('orchard:theme-change', notify);
+    }
+  });
+  const systemChanged = () => { if (preference === 'system') apply(); };
+  if (media?.addEventListener) media.addEventListener('change', systemChanged);
+  else if (media?.addListener) media.addListener(systemChanged);
+  root.addEventListener('storage', event => {
+    if (event.key !== key && event.key !== null) return;
+    preference = valid(event.newValue) ? event.newValue : 'system';
+    apply();
+  });
+  root.document.addEventListener('DOMContentLoaded', () => {
+    const header = root.document.querySelector('header.orchard-header');
+    if (header && !root.document.getElementById('orchard-react-root')) {
+      const label = root.document.createElement('label'), select = root.document.createElement('select');
+      label.className = 'theme-control';
+      select.dataset.themeSelect = '';
+      select.setAttribute('aria-label', 'ธีมหน้าจอ');
+      for (const [value, text] of [['system','ตามระบบ'],['light','Light · สว่าง'],['dark','Dark · มืด']]) {
+        const option = root.document.createElement('option'); option.value = value; option.textContent = text; select.append(option);
+      }
+      label.append(select); header.append(label);
+    }
+    root.document.querySelectorAll('[data-theme-select]').forEach(control => {
+      control.value = preference;
+      control.addEventListener('change', () => root.OrchardTheme.setPreference(control.value));
+    });
+  }, {once: true});
+  apply();
+})(window);
+</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
 <link rel="stylesheet" href="orchard_lumen.css"><script type="module" src="orchard_lumen.js?v=20261028-1"></script>
-<style>*{box-sizing:border-box}body{margin:0}header h1{margin:0 0 6px}h2{margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{max-width:100%;padding:7px}button{cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;text-align:right}td:first-child,th:first-child{text-align:left}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style></head><body>
+<style>*{box-sizing:border-box}body{margin:0}header h1{margin:0 0 6px}h2{margin:0 0 10px}label{display:inline-block;margin:4px 2px}select,input,button{max-width:100%;padding:7px}button{cursor:pointer;margin:5px 0}p{line-height:1.5;margin:9px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:7px;text-align:right}td:first-child,th:first-child{text-align:left}details{margin:10px 0}summary{cursor:pointer;font-weight:bold}.leaflet-popup-content{font-family:Tahoma;line-height:1.6}</style><style>/* Shared theme tokens. No map-tile inversion or recolouring of data series. */
+:root {
+  color-scheme: light;
+  --orchard-canvas: #f4f7f6;
+  --orchard-paper: #ffffff;
+  --orchard-soft: #edf3f0;
+  --orchard-ink: #203c34;
+  --orchard-muted: #526b62;
+  --orchard-line: #d7e3dc;
+  --orchard-accent: #176d51;
+  --orchard-green-bg: #eaf5ee;
+  --orchard-green-text: #176346;
+  --orchard-blue-bg: #eaf2fa;
+  --orchard-blue-text: #205d87;
+  --orchard-amber-bg: #fff4df;
+  --orchard-amber-text: #80551c;
+  --orchard-red-bg: #fcebee;
+  --orchard-red-text: #a3344a;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --orchard-canvas: #101b19;
+  --orchard-paper: #192824;
+  --orchard-soft: #22352e;
+  --orchard-ink: #e3eee7;
+  --orchard-muted: #adbfB4;
+  --orchard-line: #3e554a;
+  --orchard-accent: #8cd8b4;
+  --orchard-green-bg: #203e30;
+  --orchard-green-text: #a1e0b5;
+  --orchard-blue-bg: #203849;
+  --orchard-blue-text: #9fd2f4;
+  --orchard-amber-bg: #3d3320;
+  --orchard-amber-text: #f2d18e;
+  --orchard-red-bg: #432b33;
+  --orchard-red-text: #f6adbc;
+  --studio-canvas: var(--orchard-canvas);
+  --studio-paper: var(--orchard-paper);
+  --studio-ink: var(--orchard-ink);
+  --studio-muted: var(--orchard-muted);
+  --studio-line: var(--orchard-line);
+  --studio-soft: var(--orchard-soft);
+  --studio-teal: var(--orchard-accent);
+  --studio-teal-soft: var(--orchard-green-bg);
+  --ink: 140 24% 91%;
+  --ink-soft: 142 12% 71%;
+  --ink-muted: 142 12% 71%;
+  --surface: 164 23% 13%;
+  --surface-muted: 158 22% 17%;
+  --line: 153 16% 29%;
+  --brand: 151 49% 70%;
+  --brand-soft: 151 32% 18%;
+}
+html,body,.app-shell { background: var(--orchard-canvas); color: var(--orchard-ink); }
+.theme-control {
+  display: inline-flex; align-items: center; gap: 5px; flex: none;
+  min-height: 40px; padding: 0 8px; border: 1px solid var(--orchard-line);
+  border-radius: 12px; color: var(--orchard-ink); background: var(--orchard-paper);
+  font: 12px -apple-system,BlinkMacSystemFont,"Thonburi",Tahoma,sans-serif;
+}
+.theme-control svg { width: 17px; height: 17px; flex: none; }
+.theme-control select,.theme-control select:not([size]) {
+  width: auto; max-width: 126px; min-height: 38px; margin: 0; padding: 4px;
+  border: 0; background: transparent; color: inherit; font: inherit;
+  border-radius: 7px; cursor: pointer;
+}
+.theme-control select:focus-visible { outline: 2px solid var(--orchard-accent); outline-offset: 2px; }
+
+/* Existing semantic classes and light utilities keep a single dark palette. */
+html[data-theme="dark"] :is(.card,.metric,.app-header,.auth-dialog,.orchard-tabs,.react-gap,.gap-orchards,.gap-selected,.weather-plot,.telemetry-panel,.report-stat,.month-card,.training-links a,fieldset,.atlas-side-panel,.atlas-map-panel) { background: var(--orchard-paper); color: var(--orchard-ink); border-color: var(--orchard-line); box-shadow: none; }
+html[data-theme="dark"] :is(.bg-white,.bg-white\/95,.bg-white\/80,.bg-white\/75,.bg-white\/70,.bg-white\/60,.bg-white\/50) { background-color: var(--orchard-paper); }
+html[data-theme="dark"] :is(.bg-slate-50,.bg-slate-50\/70,.bg-slate-50\/60,.bg-slate-50\/50,.bg-slate-100,.bg-stone-50,.bg-stone-50\/70,.empty-state,.segment,.stage-step,.month-tile,.badge-neutral) { background-color: var(--orchard-soft); }
+html[data-theme="dark"] :is(.text-slate-400,.text-slate-500,.text-slate-600,.badge-neutral,.orchard-tab,.page-title p:not(.eyebrow),.empty-state,.segment button,.table-scroll td,.table-scroll th,.month-tile small,.area-summary small) { color: var(--orchard-muted); }
+html[data-theme="dark"] :is(.text-slate-700,.text-slate-800,.text-slate-900,.orchard-home .card-heading h2,h1,h2,h3,h4,label,legend) { color: var(--orchard-ink); }
+html[data-theme="dark"] :is(.border-slate-100,.border-slate-200,.border-slate-200\/80,.border-slate-200\/70,.border-emerald-100,.border-emerald-100\/80,.border-emerald-100\/70,.table-scroll,.data-group>.card-heading,.orchard-home details[open]>summary,td,th) { border-color: var(--orchard-line); }
+html[data-theme="dark"] :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea,.btn,.react-gap button,.gap-orchards button) { background-color: var(--orchard-paper); color: var(--orchard-ink); border-color: var(--orchard-line); }
+html[data-theme="dark"] :is(.btn:hover,.react-gap button:hover,.gap-orchards button:hover,.month-tile:hover,.orchard-tab:hover) { background-color: var(--orchard-soft); color: var(--orchard-ink); }
+html[data-theme="dark"] :is(.btn-primary,.btn-primary:hover,.orchard-tab-active,.orchard-tab-active:hover) { background: #25674d; border-color: #64b18c; color: #f4fff7; }
+html[data-theme="dark"] :is(.eyebrow,.text-link,.text-emerald-600,.text-emerald-700,.text-emerald-800,.text-emerald-800\/70,.text-emerald-900,.text-emerald-950,.gap-status,.gap-orchards a) { color: var(--orchard-green-text); }
+html[data-theme="dark"] :is(.bg-emerald-50,.bg-emerald-50\/80,.bg-emerald-50\/70,.bg-emerald-50\/60,.bg-emerald-50\/50,.bg-emerald-50\/40,.bg-emerald-50\/35,.bg-emerald-50\/30,.badge-green,.icon-box,.advice-green,.area-A,.month-active,.group-sensor,.group-stage) { background-color: var(--orchard-green-bg); color: var(--orchard-green-text); border-color: #42634e; }
+html[data-theme="dark"] :is(.bg-blue-50,.bg-blue-50\/60,.bg-blue-50\/50,.bg-sky-50,.bg-sky-50\/60,.bg-sky-100,.advice-blue,.notice,.group-forecast) { background-color: var(--orchard-blue-bg); color: var(--orchard-blue-text); border-color: #43647b; }
+html[data-theme="dark"] :is(.text-sky-600,.text-sky-800,.text-sky-900,.text-blue-700,.text-blue-800) { color: var(--orchard-blue-text); }
+html[data-theme="dark"] :is(.bg-amber-50,.bg-amber-50\/70,.bg-amber-50\/60,.bg-amber-50\/50,.badge-amber,.advice-amber,.stage-active,.area-B,.group-attention,.warn,#server-notice,.gap-warning) { background-color: var(--orchard-amber-bg); color: var(--orchard-amber-text); border-color: #816840; }
+html[data-theme="dark"] :is(.text-amber-700,.text-amber-800,.text-amber-900,.text-amber-950,.text-stone-600,.text-stone-700) { color: var(--orchard-amber-text); }
+html[data-theme="dark"] :is(.badge-red,.bg-rose-50) { background-color: var(--orchard-red-bg); color: var(--orchard-red-text); }
+html[data-theme="dark"] .group-soil { background: #342e25; color: var(--orchard-ink); border-color: #7a684b; }
+html[data-theme="dark"] :is(.group-source,.orchard-home .group-source) { color: inherit; background: transparent; }
+html[data-theme="dark"] :is(.group-sensor,.group-stage) .group-source { color: var(--orchard-green-text); }
+html[data-theme="dark"] .group-forecast .group-source { color: var(--orchard-blue-text); }
+html[data-theme="dark"] :is(.group-soil,.group-attention) .group-source { color: var(--orchard-amber-text); }
+html[data-theme="dark"] .metric-icon { background: var(--orchard-soft); color: var(--orchard-accent); }
+html[data-theme="dark"] .metric::before { opacity: .07; }
+html[data-theme="dark"] .table-scroll th,html[data-theme="dark"] th { background: var(--orchard-soft); color: var(--orchard-muted); }
+html[data-theme="dark"] .chart-label,html[data-theme="dark"] .telemetry-panel svg text,html[data-theme="dark"] #chart text { fill: var(--orchard-muted); }
+html[data-theme="dark"] svg[role="img"] line[stroke="#e4eaf0"],html[data-theme="dark"] svg[role="img"] line[stroke="#dce5f0"] { stroke: var(--orchard-line); }
+html[data-theme="dark"] .segment button[aria-pressed="true"] { background: var(--orchard-paper); color: var(--orchard-accent); }
+html[data-theme="dark"] :is(.bg-linear-to-br,.bg-linear-to-b) { background-image: none; background-color: var(--orchard-green-bg); }
+html[data-theme="dark"] .orchard-home .metric,html[data-theme="dark"] .orchard-home .metric:hover { border-color: var(--orchard-line); }
+html[data-theme="dark"] :is(.leaflet-popup-content-wrapper,.leaflet-popup-tip,.leaflet-tooltip,.leaflet-control-zoom a,.leaflet-control-attribution,.leaflet-control-scale-line) { background: var(--orchard-paper); color: var(--orchard-ink); border-color: var(--orchard-line); }
+html[data-theme="dark"] .leaflet-control-attribution a { color: var(--orchard-accent); }
+html[data-theme="dark"] .gap-scope { color: var(--orchard-muted); }
+html[data-theme="dark"] .gap-orchards button[aria-pressed="true"] { background: var(--orchard-green-bg); color: var(--orchard-green-text); }
+html[data-theme="dark"] :is(.workspace-top,.atlas-side-panel summary,.atlas-map-actions,.soil-props,.point,.report-months,.physiology-panel) { background-color: var(--orchard-paper); color: var(--orchard-ink); }
+html[data-theme="dark"] :is(#daily tbody tr:nth-child(even),#weather table tr:nth-child(odd):not(:first-child),#soil-analysis-properties tr:nth-child(odd):not(:first-child)) { background: var(--orchard-soft); }
+
+/* Classic defines tokens on body and .oc (not :root), so override at that scope. */
+html[data-theme="dark"] body.advisor-ui {
+  --studio-canvas: var(--orchard-canvas); --studio-paper: var(--orchard-paper);
+  --studio-ink: var(--orchard-ink); --studio-muted: var(--orchard-muted);
+  --studio-line: var(--orchard-line); --field-ink: var(--orchard-ink);
+  color: var(--orchard-ink); background: var(--orchard-canvas);
+}
+html[data-theme="dark"] .advisor-ui main>aside,
+html[data-theme="dark"] .advisor-ui #workspace-tabs>section { background: var(--orchard-canvas); color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui :is(.advisor-card,.advisor-stat,.advisor-province-card,.advisor-map-filters,.atlas-extra-filter-grid,.atlas-meta,.weather-filters,.report-controls,.orchard-stage-card,.orchard-advice-card,.orchard-telemetry,.orchard-reference-context,.private-harvest,.advisor-province-overview,.telemetry-table,.province-context,.advisor-map-legend,.atlas-soil-details,#soil-picker,#soil-legend) { background: var(--orchard-paper); color: var(--orchard-ink); border-color: var(--orchard-line); box-shadow: none; }
+html[data-theme="dark"] .advisor-ui #current-section { color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui #current-section :is(.telemetry-panel,.orchard-reference-grid>div,.orchard-phase,.harvest-chart) { background: var(--orchard-soft); border-color: var(--orchard-line); color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui #current-section #orchard-care-advice article { background: var(--orchard-blue-bg); border-color: var(--orchard-line); color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui #current-orchard .report-stat { background: var(--orchard-paper); border-color: var(--orchard-line); }
+html[data-theme="dark"] .advisor-ui #current-orchard .report-stat strong { color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui .workspace-top .orchard-header h1,
+html[data-theme="dark"] .advisor-ui :is(.advisor-card>h3,.advisor-stat strong,.advisor-province-card strong,.advisor-soil-name,.advisor-empty-selection strong) { color: var(--orchard-ink); }
+html[data-theme="dark"] .advisor-ui :is(.header-description,.advisor-snapshot small,.atlas-subtitle,.advisor-definition dt,.advisor-selected-heading small,.advisor-stat span,.advisor-stat small,.advisor-province-card small,.advisor-empty,.advisor-weather-empty,.scope-note,.muted) { color: var(--orchard-muted); }
+html[data-theme="dark"] .advisor-ui :is(button,input,select,textarea) { background-color: var(--orchard-paper); color: var(--orchard-ink); border-color: var(--orchard-line); }
+html[data-theme="dark"] .advisor-ui :is(.advisor-button.primary,.month-card[aria-pressed="true"],.orchard-phase.is-current) { background: var(--orchard-green-bg); border-color: var(--orchard-accent); color: var(--orchard-green-text); }
+html[data-theme="dark"] .advisor-ui :is(#province-shortcuts,.orchard-atlas .map-selection,.advisor-not-ready,.advisor-registry-stats,.advisor-small-stats>div,.advisor-compare-area,.advisor-compare-area.is-b,.atlas-map-note,#view-summary) { background: var(--orchard-soft); color: var(--orchard-ink); border-color: var(--orchard-line); }
+html[data-theme="dark"] .advisor-ui :is(.advisor-scope-badge,.advisor-callout) { background: var(--orchard-amber-bg); color: var(--orchard-amber-text); border-color: #816840; }
+html[data-theme="dark"] .advisor-ui .oc {
+  --oc-bg: var(--orchard-canvas); --oc-paper: var(--orchard-paper);
+  --oc-ink: var(--orchard-ink); --oc-muted: var(--orchard-muted);
+  --oc-border: var(--orchard-line); --oc-shadow: none;
+}
+html[data-theme="dark"] .oc :is(.oc-icon,.oc-pill,.oc-segment,.oc-stage,.oc-info-box,.oc-empty,.oc-chart-empty,.oc-guidance-item) { background: var(--orchard-soft); color: var(--orchard-muted); border-color: var(--orchard-line); }
+html[data-theme="dark"] .oc .oc-metric::after { opacity: .05; }
+html[data-theme="dark"] .oc :is(.oc-metric-meta,.oc-chart-footer,.oc-recs-note,.oc-foot,.oc-guidance-item p,.oc-guidance-item footer,.oc-stage small,.oc-info-box p,.oc-source-row p) { color: var(--orchard-muted); border-color: var(--orchard-line); }
+html[data-theme="dark"] .oc :is(.oc-pill.good,.oc-guidance-item.action) { background: var(--orchard-green-bg); color: var(--orchard-green-text); }
+html[data-theme="dark"] .oc :is(.oc-pill.warn,.oc-guidance-item.warn,.oc-stage.active) { background: var(--orchard-amber-bg); color: var(--orchard-amber-text); }
+html[data-theme="dark"] .oc .oc-pill.bad { background: var(--orchard-red-bg); color: var(--orchard-red-text); }
+html[data-theme="dark"] .oc :is(.oc-pill.blue,.oc-guidance-item.info) { background: var(--orchard-blue-bg); color: var(--orchard-blue-text); }
+html[data-theme="dark"] .oc .oc-chart-grid { stroke: var(--orchard-line); }
+html[data-theme="dark"] .oc .oc-chart-label { fill: var(--orchard-muted); }
+@media(max-width:639px) { .theme-control { gap: 2px; padding: 0 4px; } .theme-control svg { display: none; } .theme-control select { max-width: 108px; } }
+
+/* Explicit active-tab selector wins over the broad muted-text rule. */
+html[data-theme="dark"] .orchard-home .orchard-tabs .orchard-tab-active,
+html[data-theme="dark"] .orchard-home .orchard-tabs .orchard-tab-active:hover { color:#f4fff7; }
+.theme-control.theme-toggle { min-height:44px; gap:8px; padding:8px 12px; font-weight:600; transition:background-color .15s; }
+.theme-control.theme-toggle:hover { background:var(--orchard-soft); }
+.theme-control.theme-toggle:focus-visible { outline:3px solid var(--orchard-accent); outline-offset:3px; }
+@media(max-width:639px) { .theme-control.theme-toggle svg { display:block; } }
+@media(prefers-reduced-motion:reduce) { .theme-control.theme-toggle { transition:none; } }
+
+/* Charcoal surfaces leave semantic colour to the measurements and their sources. */
+:root[data-theme="dark"]{--orchard-canvas:#11161e;--orchard-paper:#1a222e;--orchard-soft:#242e3c;--orchard-ink:#edf2f8;--orchard-muted:#b5c1d0;--orchard-line:#394659;--studio-canvas:#11161e;--studio-paper:#1a222e;--studio-soft:#242e3c}
+html[data-theme="dark"] .metric{background:#1a222e;border-color:#394659}
+html[data-theme="dark"] .metric .metric-icon.tone-blue{background:#173b54;color:#8ed5ff}
+html[data-theme="dark"] .metric .metric-icon.tone-cyan{background:#173e40;color:#8edbd5}
+html[data-theme="dark"] .metric .metric-icon.tone-amber{background:#453621;color:#f5ce83}
+html[data-theme="dark"] .metric .metric-icon.tone-violet{background:#352d4d;color:#cfbcf0}
+html[data-theme="dark"] .metric .metric-icon.tone-green{background:#1e3c31;color:#a1dfbd}
+html[data-theme="dark"] .metric .metric-icon.tone-rose{background:#442d3b;color:#edafc6}
+html[data-theme="dark"] .orchard-home .metric-blue{border-top-color:#6eb6df}
+html[data-theme="dark"] .orchard-home .metric-cyan{border-top-color:#6ebbb3}
+html[data-theme="dark"] .orchard-home .metric-amber{border-top-color:#d3ac69}
+html[data-theme="dark"] .orchard-home .metric-violet{border-top-color:#b29bd4}
+html[data-theme="dark"] .orchard-home .metric-green{border-top-color:#80b99b}
+html[data-theme="dark"] .orchard-home .metric-rose{border-top-color:#d298b1}
+html[data-theme="dark"] .group-sensor{background:#192a29;border-color:#426b5b}
+html[data-theme="dark"] .group-forecast{background:#192b3b;border-color:#466c87}
+html[data-theme="dark"] .group-soil{background:#302b26;border-color:#82705a}
+html[data-theme="dark"] .group-attention{background:#302b20;border-color:#8a7144}
+html[data-theme="dark"] .group-stage{background:#202e27;border-color:#52705a}
+html[data-theme="dark"] .data-chart{background:#171f2a;border-color:#394659}
+html[data-theme="dark"] .data-chart .chart-readout{background:#223247;color:#edf2f8}
+html[data-theme="dark"] .data-chart .chart-label{fill:#b5c1d0}
+html[data-theme="dark"] .data-chart .chart-meta,html[data-theme="dark"] .data-chart .chart-readout>span:first-child{color:#b5c1d0}
+</style></head><body>
 <style>@media(max-width:800px){#map{position:relative;top:auto;z-index:0}}#season-calendar th,#season-calendar td{white-space:nowrap}</style>
 <header class="orchard-header"><svg class="orchard-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 16Q31 5 40 4M36 10Q50 0 57 12Q44 20 36 10" fill="#8B9D83" stroke="#D4B895" stroke-width="3"/><path d="M29 16L37 14 42 21 50 24 49 33 54 40 48 47 44 56 35 55 27 59 20 53 12 49 14 40 9 32 17 27 20 19Z" fill="#C08E3A" stroke="#D4B895" stroke-width="2"/><path d="M31 23Q48 40 32 52Q16 40 31 23Z" fill="#E8DCC7"/><path d="M31 28L33 46" stroke="#C08E3A" stroke-width="2"/></svg><div class="orchard-heading"><h1>ข้อมูลดิน อากาศ และผลผลิตทุเรียน 5 จังหวัด</h1><p class="header-description">เปรียบเทียบพื้นที่ A/B ดูอากาศตามช่วงวันที่และผลผลิตรายปี พร้อมดาวน์โหลดไปวิเคราะห์ต่อ</p><details class="usage-guide"><summary>วิธีใช้</summary><ol><li>เลือกจังหวัด อำเภอ และหน่วยดินของ A เพิ่ม B เมื่ออยากเปรียบเทียบ แล้วกด “ตกลง / ดูข้อมูล”</li><li>เลือกช่วงวันที่และตัวแปรอากาศ แล้วกด “ดูอากาศ” ข้อมูลดินและผลผลิตอยู่คนละแท็บ</li><li>กด “แก้ไขพื้นที่” เพื่อเลือกใหม่ หรือเปิดแท็บข้อมูลเพื่อดาวน์โหลด</li></ol><p>พิกัดในระบบเป็นจุดอ้างอิง ไม่ใช่พิกัดสวน ผลผลิตกำกับระดับพื้นที่และปีแยกจากอากาศ</p></details></div></header>
 <div id="server-notice" role="alert" hidden>API ของเว็บยังไม่พร้อม หากเปิดในเครื่องให้ใช้ 00_OPEN_REPORT.cmd ไม่ใช้ file:// หากเป็นเว็บที่ deploy ให้ตรวจสถานะเซิร์ฟเวอร์และการตั้งค่า</div>

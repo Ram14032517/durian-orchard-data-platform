@@ -426,6 +426,14 @@
       if (!provinceCode) { loading = false; updateDisabled(); status.textContent = 'เลือกจังหวัดเพื่อโหลดหมุดเฉพาะจังหวัดนั้น'; return; }
       loading = true; updateDisabled(); status.textContent = 'กำลังโหลดทะเบียน GAP เฉพาะจังหวัด…';
       try {
+        const capability = typeof options.availability === 'function' ? await options.availability() : null;
+        if (destroyed || requestVersion !== version) return;
+        if (capability?.available === false) {
+          loading = false; updateDisabled();
+          status.textContent = capability.message || 'เซิร์ฟเวอร์นี้ยังไม่เปิดชั้นหมุด GAP';
+          retry.hidden = true;
+          return;
+        }
         await loadManifest();
         if (destroyed || requestVersion !== version) return;
         const item = currentProvince();
@@ -447,7 +455,11 @@
         currentFeatures = cache.get(provinceCode); loading = false; refreshFilters(); updateDisabled(); applyFilters();
       } catch (error) {
         if (destroyed || requestVersion !== version) return;
-        loading = false; updateDisabled(); status.textContent = `${error.message} · เปิดผ่านเซิร์ฟเวอร์โปรเจกต์ ไม่ใช้ file://`; retry.hidden = false;
+        loading = false; updateDisabled();
+        const hint = new URL(doc.baseURI || root.location.href).protocol === 'file:'
+          ? 'เปิดผ่านเซิร์ฟเวอร์โปรเจกต์ ไม่ใช้ file://'
+          : 'ตรวจการเชื่อมต่อและชุดข้อมูล GAP ของเซิร์ฟเวอร์นี้ แล้วลองใหม่';
+        status.textContent = `${error.message} · ${hint}`; retry.hidden = false;
         if (typeof options.onError === 'function') options.onError(error);
       }
     }

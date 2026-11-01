@@ -34,6 +34,8 @@ def render_assets(payload,output=OUT,include_seasons=True):
     template=(ROOT/'web/templates/unified_orchard_map.html').read_text(encoding='utf-8')
     substitutions={
         '__DATA__':script_json(payload),
+        '__THEME_BOOTSTRAP__':(ROOT/'web/assets/js/orchard_theme.js').read_text(encoding='utf-8'),
+        '__THEME_STYLE__':(ROOT/'web/assets/css/orchard_theme.css').read_text(encoding='utf-8'),
         '__MONTHLY_CODE__':(ROOT/'web/assets/js/my_orchard_cards.js').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8'),
         '__MONTHLY_STYLE__':(ROOT/'web/assets/css/orchard_monthly_report.css').read_text(encoding='utf-8'),
         '__TAILWIND_STYLE__':(ROOT/'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8'),
@@ -52,7 +54,7 @@ def render_assets(payload,output=OUT,include_seasons=True):
     (output/'UNIFIED_MAP_CLASSIC.html').write_text(template,encoding='utf-8')
     react_template=(ROOT/'web/templates/unified_orchard_react.html').read_text(encoding='utf-8')
     asset_version=hashlib.sha256(b''.join((OUT/name).read_bytes() for name in ('orchard_app.js','orchard_app.css'))).hexdigest()[:12]
-    (output/'UNIFIED_MAP.html').write_text(react_template.replace('__DATA__',script_json(payload)).replace('__ASSET_VERSION__',asset_version),encoding='utf-8')
+    (output/'UNIFIED_MAP.html').write_text(react_template.replace('__DATA__',script_json(payload)).replace('__ASSET_VERSION__',asset_version).replace('__THEME_BOOTSTRAP__',substitutions['__THEME_BOOTSTRAP__']),encoding='utf-8')
     if not include_seasons:return
     season_template=(ROOT/'web/templates/five_province_seasons.html').read_text(encoding='utf-8')
     season_payload={k:v for k,v in payload.items() if k not in ('monthly_weather','phenology','soil_properties','district_exploration')}
