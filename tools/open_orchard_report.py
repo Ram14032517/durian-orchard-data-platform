@@ -14,7 +14,7 @@ import webbrowser
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = 'http://127.0.0.1:8871/research_data/five_province_history/UNIFIED_MAP.html'
-MARKER = '<title>แผนที่วิเคราะห์ทุเรียน • ดิน อากาศ ฤดูกาล</title>'.encode()
+MARKER = '<title>Durian Orchard · Soil, Weather &amp; Yield</title>'.encode()
 
 def load_local_settings():
     """Read only the ignored local server configuration; never send it to the page."""

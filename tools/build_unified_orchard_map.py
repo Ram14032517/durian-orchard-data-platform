@@ -35,7 +35,8 @@ def render_assets(payload,output=OUT,include_seasons=True):
     substitutions={
         '__DATA__':script_json(payload),
         '__THEME_BOOTSTRAP__':(ROOT/'web/assets/js/orchard_theme.js').read_text(encoding='utf-8'),
-        '__THEME_STYLE__':(ROOT/'web/assets/css/orchard_theme.css').read_text(encoding='utf-8'),
+        '__THEME_STYLE__':(ROOT/'web/assets/css/orchard_theme.css').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/css/orchard_motion.css').read_text(encoding='utf-8'),
+        '__ENGLISH_CODE__':(OUT/'orchard_english.js').read_text(encoding='utf-8'),
         '__MONTHLY_CODE__':(ROOT/'web/assets/js/my_orchard_cards.js').read_text(encoding='utf-8')+'\n'+(ROOT/'web/assets/js/orchard_monthly_report.js').read_text(encoding='utf-8'),
         '__MONTHLY_STYLE__':(ROOT/'web/assets/css/orchard_monthly_report.css').read_text(encoding='utf-8'),
         '__TAILWIND_STYLE__':(ROOT/'web/assets/css/orchard_tailwind.generated.css').read_text(encoding='utf-8'),

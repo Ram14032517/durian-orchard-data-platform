@@ -12,6 +12,12 @@
     root.document.documentElement.dataset.theme = theme;
     root.document.documentElement.style.colorScheme = theme;
     root.document.querySelectorAll('[data-theme-select]').forEach(control => { control.value = preference; });
+    root.document.querySelectorAll('[data-theme-toggle]').forEach(control => {
+      control.textContent = 'Mode: ' + (theme === 'dark' ? 'Dark' : 'Light');
+      control.dataset.mode = theme;
+      control.setAttribute('aria-pressed', String(theme === 'dark'));
+      control.setAttribute('aria-label', 'Mode: ' + (theme === 'dark' ? 'Dark' : 'Light') + '. Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+    });
     root.dispatchEvent(new root.CustomEvent('orchard:theme-change', {detail: {preference, theme}}));
   }
   root.OrchardTheme = Object.freeze({
@@ -41,14 +47,11 @@
   root.document.addEventListener('DOMContentLoaded', () => {
     const header = root.document.querySelector('header.orchard-header');
     if (header && !root.document.getElementById('orchard-react-root')) {
-      const label = root.document.createElement('label'), select = root.document.createElement('select');
-      label.className = 'theme-control';
-      select.dataset.themeSelect = '';
-      select.setAttribute('aria-label', 'ธีมหน้าจอ');
-      for (const [value, text] of [['system','ตามระบบ'],['light','Light · สว่าง'],['dark','Dark · มืด']]) {
-        const option = root.document.createElement('option'); option.value = value; option.textContent = text; select.append(option);
-      }
-      label.append(select); header.append(label);
+      const button = root.document.createElement('button');
+      button.type = 'button'; button.className = 'theme-control theme-toggle';
+      button.dataset.themeToggle = '';
+      button.addEventListener('click', () => root.OrchardTheme.setPreference(resolved() === 'dark' ? 'light' : 'dark'));
+      header.append(button); apply();
     }
     root.document.querySelectorAll('[data-theme-select]').forEach(control => {
       control.value = preference;

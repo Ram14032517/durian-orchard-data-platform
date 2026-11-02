@@ -1,6 +1,13 @@
 # Explicit allowlist: no secrets, raw orchard data, notebooks or private exports.
 **
 !Dockerfile
+!web/
+!web/assets/
+!web/assets/js/
+!web/assets/js/orchard_theme.js
+!web/assets/css/
+!web/assets/css/orchard_theme.css
+!web/assets/css/orchard_motion.css
 !tools/
 !tools/requirements-cloud.txt
 !tools/serve_orchard_cloud.py
@@ -27,6 +34,7 @@
 !research_data/five_province_history/orchard_lumen.css
 !research_data/five_province_history/orchard_app.js
 !research_data/five_province_history/orchard_app.css
+!research_data/five_province_history/orchard_english.js
 !research_data/five_province_history/*.csv
 !research_data/five_province_history/*.json
 !research_data/five_province_history/*.md

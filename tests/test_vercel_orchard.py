@@ -13,6 +13,10 @@ from prepare_vercel_orchard import OUT,prepare
 class VercelTests(unittest.TestCase):
     def test_package_allowlist_and_no_derived_geometry(self):
         result=prepare()
+        for asset in ('research_data/five_province_history/orchard_english.js',
+                      'web/assets/js/orchard_theme.js','web/assets/css/orchard_theme.css',
+                      'web/assets/css/orchard_motion.css'):
+            self.assertIn(asset,result['files'])
         self.assertLess(result['bytes'],20_000_000)
         self.assertFalse(any('.secrets' in p or 'gap_orchards' in p or p.endswith('.geojson') for p in result['files']))
         html=(OUT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
@@ -31,6 +35,8 @@ assert c.get('/healthz',headers=h).status_code==200
 assert c.get('/api/orchard-status',headers=h).status_code==401
 assert c.get('/research_data/five_province_history/orchard_app.js',headers=h).status_code==302
 r=c.get('/login',headers=h)
+assert b'header class="orchard-header auth-theme-host"' in r.data
+assert b'data-theme-toggle' in r.data and b'orchard:theme-change' in r.data
 assert 'Secure;' in r.headers['Set-Cookie']
 with c.session_transaction() as s: token=s['csrf']
 assert c.post('/login',data={'csrf':token,'username':'owner','password':'synthetic-vercel-password-123'},headers=h).status_code==302

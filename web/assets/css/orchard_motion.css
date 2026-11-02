@@ -1,0 +1,25 @@
+/* Gentle presentation-only motion. No global transition:all or map-tile filters. */
+:root { --orchard-ease: cubic-bezier(.2,.7,.2,1); --orchard-motion: 180ms; }
+.theme-toggle { cursor: pointer; justify-content: center; gap: 7px; min-width: 128px; font-weight: 600; }
+.theme-toggle .mode-caption { color: var(--orchard-muted); font-weight: 400; }
+.theme-toggle .mode-value { min-width: 35px; text-align: left; }
+.theme-toggle svg { transition: transform var(--orchard-motion) var(--orchard-ease); }
+.theme-toggle[data-mode="dark"] svg { transform: rotate(-12deg); }
+.theme-toggle:hover { border-color: var(--orchard-accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--orchard-accent); outline-offset: 3px; }
+@media(prefers-reduced-motion:no-preference) {
+  /* No forward-filled transforms: fixed map/dialog overlays must retain viewport geometry. */
+  .page-view:not(.hidden):not([hidden]),.page-stack[role="tabpanel"]:not([hidden]) { animation: orchard-view-in 200ms var(--orchard-ease); }
+  .app-shell,.app-header,.card,.metric,.orchard-tabs,.notice,.theme-control,.table-scroll,.auth-dialog { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease; }
+  .btn,.btn-primary,.nav-item,.orchard-tab,.theme-toggle { transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms var(--orchard-ease); }
+  .btn:active:not(:disabled),.btn-primary:active:not(:disabled),.theme-toggle:active { transform: translateY(1px); }
+  .sidebar { transition: transform 200ms var(--orchard-ease), width 200ms var(--orchard-ease); }
+  .app-content { transition: margin-left 200ms var(--orchard-ease); }
+  @keyframes orchard-view-in { from { opacity: .65; } to { opacity: 1; } }
+}
+@media(prefers-reduced-motion:reduce) {
+  .page-view,.theme-toggle,.theme-toggle svg,.app-content,.sidebar { animation: none !important; transition: none !important; transform: none; }
+  .sidebar:not(.sidebar-open) { transform: translateX(-100%); }
+}
+@media(min-width:1024px) and (prefers-reduced-motion:reduce) { .sidebar:not(.sidebar-open) { transform: none; } }
+@media(max-width:639px) { .theme-toggle { min-width: 118px; gap: 5px; padding-inline: 8px; } .theme-toggle svg { display: block; width: 15px; } }

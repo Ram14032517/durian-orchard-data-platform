@@ -23,28 +23,28 @@ function renderMonthlyReport(){
   if(!A)return;
   const code=A.code,name=DATA.provinces.find(p=>p.province_code===code).province_name;
   $('report-province').value=code;
-  $('month-buttons').innerHTML=reportShort.map((m,i)=>`<button class="month-card" data-month="${i+1}" aria-pressed="${reportMonth===i+1}" aria-label="รายงาน${reportMonths[i]} ${reportYear+543}"><strong>${m}</strong><small>${stagesFor(code,i+1).map(p=>esc(DATA.phenology.stages[p.stage].short)).join(' · ')}</small></button>`).join('');
+  $('month-buttons').innerHTML=reportShort.map((m,i)=>`<button class="month-card" data-month="${i+1}" aria-pressed="${reportMonth===i+1}" aria-label="รายงาน${reportMonths[i]} ${reportYear}"><strong>${m}</strong><small>${stagesFor(code,i+1).map(p=>esc(DATA.phenology.stages[p.stage].short)).join(' · ')}</small></button>`).join('');
   $('month-buttons').querySelectorAll('[data-month]').forEach(b=>b.onclick=()=>selectReportMonth(+b.dataset.month));
-  $('report-title').textContent=`${name} · ${reportMonths[reportMonth-1]} ${reportYear+543}`;
+  $('report-title').textContent=`${name} · ${reportMonths[reportMonth-1]} ${reportYear}`;
   $('view-summary').textContent=`ช่วงอากาศ: ${$('start').value} ถึง ${$('end').value} ผลผลิตใช้ปีตามระเบียนที่แสดง`;
   renderAreaStrip();
   updateMapTarget(activeArea);
   const totals=annualRecords(A,B,reportYear);
-  $('yield-comparison').innerHTML='<h3>ปีข้อมูลผลผลิต '+(reportYear+543)+' · ระดับจังหวัด ทุกพันธุ์</h3>'+table(['ค่า','A: '+esc(name),B?'B: '+esc(DATA.provinces.find(p=>p.province_code===B.code).province_name):'ยังไม่เลือก B'],[['ผลผลิตรวม ตัน','production_tonnes'],['พื้นที่ให้ผล ไร่','bearing_rai'],['ผลผลิตต่อไร่ กก./ไร่','yield_kg_per_rai_calculated'],['เปลี่ยนต่อไร่จากปีก่อน %','yield_yoy_pct']].map(([label,key])=>[label,fmt(totals.a?.[key]),fmt(totals.b?.[key])]))+'<p class="scope-note">— คือไม่มีระเบียนปีนี้ ไม่ยกปีอื่นมาแทน ผลผลิตจังหวัดเดียวกันจะแสดงเท่ากัน แม้เลือกคนละอำเภอ/ชุดดิน ไม่ใช่ target ผลผลิตจุด A/B</p>';
+  $('yield-comparison').innerHTML='<h3>ปีข้อมูลผลผลิต '+(reportYear)+' · ระดับจังหวัด ทุกพันธุ์</h3>'+table(['ค่า','A: '+esc(name),B?'B: '+esc(DATA.provinces.find(p=>p.province_code===B.code).province_name):'ยังไม่เลือก B'],[['ผลผลิตรวม ตัน','production_tonnes'],['พื้นที่ให้ผล ไร่','bearing_rai'],['ผลผลิตต่อไร่ กก./ไร่','yield_kg_per_rai_calculated'],['เปลี่ยนต่อไร่จากปีก่อน %','yield_yoy_pct']].map(([label,key])=>[label,fmt(totals.a?.[key]),fmt(totals.b?.[key])]))+'<p class="scope-note">— คือไม่มีระเบียนปีนี้ ไม่ยกปีอื่นมาแทน ผลผลิตจังหวัดเดียวกันจะแสดงเท่ากัน แม้เลือกคนละอำเภอ/ชุดดิน ไม่ใช่ target ผลผลิตจุด A/B</p>';
   const region=regionFor(code),source=DATA.phenology.calendar_source;
-  $('report-stage').innerHTML=stageChips(code,reportMonth)+`<p class="scope-note">กรอบฤดูทั่วไป: ${esc(region.label)} · หมอนทองในฤดู ไม่ใช่ระยะยืนยันของจุด A หรือของปี ${reportYear+543}</p>`+
+  $('report-stage').innerHTML=stageChips(code,reportMonth)+`<p class="scope-note">กรอบฤดูทั่วไป: ${esc(region.label)} · หมอนทองในฤดู ไม่ใช่ระยะยืนยันของจุด A หรือของปี ${reportYear}</p>`+
     stagesFor(code,reportMonth).map(p=>`<p><b>${esc(DATA.phenology.stages[p.stage].label)} (${esc(p.range)})</b><br>${esc(DATA.phenology.stages[p.stage].description)}</p>`).join('')+
     (region.note?`<p class="warn">${esc(region.note)}</p>`:'')+
     `<p class="scope-note"><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.title)}</a> · ${esc(source.locator)}</p>`;
   const w=monthWeather(code),h=monthHarvest(code),point=DATA.provinces.find(p=>p.province_code===code);
-  const stats=[['ผลผลิตรายเดือน '+(reportYear+543),h?fmt(h.tonnes,0)+' ตัน':'ไม่มีระเบียน','สศก. XLSX · ทั้งจังหวัดทุกพันธุ์ · ยังไม่ยืนยันยอดปิด'],
+  const stats=[['ผลผลิตรายเดือน '+(reportYear),h?fmt(h.tonnes,0)+' ตัน':'ไม่มีระเบียน','สศก. XLSX · ทั้งจังหวัดทุกพันธุ์ · ยังไม่ยืนยันยอดปิด'],
     ['อุณหภูมิเฉลี่ย',w?fmt(w.temperature_c)+' °C':'—',w?`มีค่า ${w.days_temperature}/${w.expected_days} วัน`:'ไม่มีข้อมูลเดือนนี้'],
     ['ฝนรวม',w?fmt(w.rain_mm,2)+' มม.':'—',w?`มีค่า ${w.days_rain}/${w.expected_days} วัน`:'ไม่มีข้อมูลเดือนนี้'],
     ['ความชื้นอากาศ',w?fmt(w.humidity_pct)+' %':'—','เฉลี่ยวันที่มีค่า'],
     ['รังสีดวงอาทิตย์',w?fmt(w.solar_mj_m2_day,2):'—','MJ/m²/วัน; เฉลี่ยวันที่มีค่า'],
     ['ต่างจากเดือนเดียวกัน 1991–2020',w?fmt(w.temperature_anomaly_c)+' °C':'—','อุณหภูมิเฉลี่ย ไม่ใช่ผลต่อผลผลิต']];
   $('report-metrics').innerHTML=stats.map(([label,value,note])=>`<div class="report-stat">${esc(label)}<strong>${esc(value)}</strong><small>${esc(note)}</small></div>`).join('');
-  $('report-weather-note').innerHTML=`อากาศ <a href="https://power.larc.nasa.gov/docs/services/api/temporal/daily/" target="_blank" rel="noopener">NASA POWER</a> ณ จุดอ้างอิงจังหวัด ${point.weather_latitude}, ${point.weather_longitude} ไม่ใช่อากาศจุด A/B; วัน LST ใช้เฉพาะวันที่มีค่า ผลผลิตจาก <a href="https://catalog.oae.go.th/dataset/durian_product_month/resource/93c0421b-ebc5-443b-b763-2be1b4a86c5b" target="_blank" rel="noopener">สศก. durian_monthly_province.xlsx</a> ปีตามแถว ${reportYear+543} • วันที่ข้อมูลในไฟล์ 22 ก.ค. 2569 ไม่ใช่ปีผลผลิต • หน้าแคตตาล็อกระบุถึง 2567 แต่ไฟล์ที่ตรวจมีถึง 2568 จึงยังไม่ระบุว่าเป็นยอดปิดจริง • ไม่ใช่ PDF สุราษฎร์ฯ กรกฎาคม 2567`;
+  $('report-weather-note').innerHTML=`อากาศ <a href="https://power.larc.nasa.gov/docs/services/api/temporal/daily/" target="_blank" rel="noopener">NASA POWER</a> ณ จุดอ้างอิงจังหวัด ${point.weather_latitude}, ${point.weather_longitude} ไม่ใช่อากาศจุด A/B; วัน LST ใช้เฉพาะวันที่มีค่า ผลผลิตจาก <a href="https://catalog.oae.go.th/dataset/durian_product_month/resource/93c0421b-ebc5-443b-b763-2be1b4a86c5b" target="_blank" rel="noopener">สศก. durian_monthly_province.xlsx</a> ปีตามแถว ${reportYear} • วันที่ข้อมูลในไฟล์ 22 ก.ค. 2569 ไม่ใช่ปีผลผลิต • หน้าแคตตาล็อกระบุถึง 2567 แต่ไฟล์ที่ตรวจมีถึง 2568 จึงยังไม่ระบุว่าเป็นยอดปิดจริง • ไม่ใช่ PDF สุราษฎร์ฯ กรกฎาคม 2567`;
   const events=DATA.phenology.events.filter(e=>e.province_code===code&&e.year===reportYear&&e.months.includes(reportMonth));
   $('report-events').innerHTML=events.length?events.map(e=>`<article class="evidence-item"><small>${esc(e.kind)} · ${esc(e.district||'ระดับจังหวัด')}</small><p><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a></p><p>${esc(e.summary)}</p><small>วันเหตุ/วันกำหนด: ${esc(e.event_date||'ไม่ระบุ')} · เผยแพร่: ${esc(e.published_date||'ไม่ระบุวันแน่นอน')} · ตรวจแหล่ง ${DATA.phenology.reviewed_on}</small></article>`).join(''):'<p class="scope-note">ยังไม่มีรายงานที่ตรวจยืนยันสำหรับจังหวัดและเดือน–ปีนี้ในฐาน ไม่ได้หมายความว่าไม่มีเหตุการณ์เกิดขึ้น และไม่ดึงข่าวปีอื่นมาแทน</p>';
   $('report-questions').innerHTML=stagesFor(code,reportMonth).map(p=>`<li>${esc(DATA.phenology.stages[p.stage].check)}</li>`).join('');
@@ -52,7 +52,7 @@ function renderMonthlyReport(){
   $('report-compare').querySelectorAll('[data-compare-province]').forEach(b=>b.onclick=()=>{$('province').value=b.dataset.compareProvince;provinceChange();});
 }
 DATA.provinces.forEach(p=>$('report-province').add(new Option(p.province_name,p.province_code)));
-for(let y=2026;y>=1981;y--)$('report-year').add(new Option(y+543,y));
+for(let y=2026;y>=1981;y--)$('report-year').add(new Option(y,y));
 $('report-year').value=reportYear;
 $('report-year').onchange=()=>{reportYear=+$('report-year').value;selectReportMonth(reportMonth);};
 $('report-province').onchange=()=>{$('province').value=$('report-province').value;provinceChange();};
@@ -245,7 +245,7 @@ const historyHeading=document.createElement('h3');historyHeading.textContent='�
 
 // Keep orchard observations independent from A/B reference-point selection.
 const currentYear=new Date().getFullYear();
-[currentYear,currentYear+1].forEach(y=>$('current-year').add(new Option(String(y+543),String(y))));
+[currentYear,currentYear+1].forEach(y=>$('current-year').add(new Option(String(y),String(y))));
 DATA.provinces.forEach(p=>$('orchard-province').add(new Option(p.province_name,p.province_code)));
 const orchardStateKey='durian.orchard.observations.v1';
 let savedOrchardObservation=null;
@@ -268,7 +268,7 @@ $('save-orchard-state').onclick=()=>{
     for(const field of ['province','stage','water','situation'])entry[field]=$('orchard-'+field).value;
     localStorage.setItem(orchardStateKey,JSON.stringify([...(Array.isArray(previous)?previous:[]),entry].slice(-200)));
     savedOrchardObservation=entry;renderOrchardInsights();
-    $('orchard-state-note').textContent='บันทึกเมื่อ '+new Date(entry.observed_at).toLocaleString('th-TH')+' · เก็บเฉพาะเบราว์เซอร์นี้ ยังไม่ส่งชีตหรือใช้เทรน';
+    $('orchard-state-note').textContent='บันทึกเมื่อ '+new Date(entry.observed_at).toLocaleString('en-GB')+' · เก็บเฉพาะเบราว์เซอร์นี้ ยังไม่ส่งชีตหรือใช้เทรน';
   }catch{$('orchard-state-note').textContent='บันทึกไม่ได้: ตรวจการอนุญาตพื้นที่เก็บข้อมูลของเบราว์เซอร์';}
 };
 const telemetryFields=[
@@ -299,8 +299,8 @@ async function refreshCurrent(){
   if(!A)return;
   const request=++currentRequest,code=A.code,year=$('current-year').value;
   const name=DATA.provinces.find(p=>p.province_code===code).province_name;
-  if(!$('current-section').hidden)$('view-summary').textContent='จังหวัด '+name+' ปี '+(+year+543)+' · สวนส่วนตัวแยกจากตำแหน่งอ้างอิง A/B';
-  $('current-province').textContent='กำลังคำนวณ '+name+' '+(+year+543)+' จากโมเดลเดิมและอากาศล่าสุด…';
+  if(!$('current-section').hidden)$('view-summary').textContent='จังหวัด '+name+' ปี '+(+year)+' · สวนส่วนตัวแยกจากตำแหน่งอ้างอิง A/B';
+  $('current-province').textContent='กำลังคำนวณ '+name+' '+(+year)+' จากโมเดลเดิมและอากาศล่าสุด…';
   await Promise.all([
     currentJson('/api/orchard-status').then(data=>{
       if(request!==currentRequest)return;
@@ -316,7 +316,7 @@ async function refreshCurrent(){
       const primary=metrics?orchardReferenceCards(data):`<div class="report-stat"><span>ความชื้นจุดเซนเซอร์</span><strong>${fmt(data.soil_percent,1)}%</strong><small>ยังไม่สอบเทียบ ไม่ใช่ค่าเฉลี่ยทั้งสวน</small></div>`;
       const previous=data.last_valid_soil;
       const previousCards=previous?telemetryFields.slice(0,7).map(([key,label,unit])=>`<div class="report-stat"><span>${label}</span><strong>${fmt(previous.readings[key],2)} ${unit}</strong></div>`).join(''):'';
-      const previousSoil=previous?`<details class="telemetry-more"><summary>ข้อมูลดินล่าสุดที่ใช้ได้ · ค่าย้อนหลัง</summary><p class="scope-note">วัดเมื่อ ${esc(new Date(previous.sensor_time).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}))} · ไม่ใช่ค่าปัจจุบัน</p><div class="telemetry-more-grid">${previousCards}</div><button type="button" id="show-last-soil-history">ดูกราฟวันนั้น</button></details>`:data.last_valid_soil_note?`<p class="scope-note">${esc(data.last_valid_soil_note)}</p>`:'';
+      const previousSoil=previous?`<details class="telemetry-more"><summary>ข้อมูลดินล่าสุดที่ใช้ได้ · ค่าย้อนหลัง</summary><p class="scope-note">วัดเมื่อ ${esc(new Date(previous.sensor_time).toLocaleString('en-GB',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}))} · ไม่ใช่ค่าปัจจุบัน</p><div class="telemetry-more-grid">${previousCards}</div><button type="button" id="show-last-soil-history">ดูกราฟวันนั้น</button></details>`:data.last_valid_soil_note?`<p class="scope-note">${esc(data.last_valid_soil_note)}</p>`:'';
       const extra=metrics?`<details class="telemetry-more"><summary>ข้อมูลดินทั้งหมด · ${qualityText(data.sensor_quality?.soil)}</summary><div class="telemetry-more-grid">${telemetryFields.slice(0,7).map(card).join('')}</div><p class="scope-note">ค่าจุดวัด ยังไม่ยืนยันการสอบเทียบ N/P/K ไม่ใช่ผลตรวจห้องปฏิบัติการ</p></details>${previousSoil}<details class="telemetry-more"><summary>ข้อมูลอากาศทั้งหมด · ${qualityText(data.sensor_quality?.weather)}</summary><div class="telemetry-more-grid">${telemetryFields.slice(7).map(card).join('')}</div><p class="scope-note">อุณหภูมิและความชื้นในบ้านแยกจากอากาศภายนอก · ฝน 1/24 ชั่วโมงเป็นค่าช่วงย้อนหลังของอุปกรณ์</p></details>`:'';
       $('current-orchard').innerHTML=`${primary}${projection}<p class="scope-note">${sourceLabel} · เวลาได้รับระเบียน ${esc(data.sensor_time)} · ${stale?'ระเบียนเก่า ตรวจการส่งจากอุปกรณ์':'ระเบียนภายใน 1 ชั่วโมง'} · อายุ ${fmt(data.age_minutes,0)} นาที · ตรวจสถานะดินและอากาศแยกกัน</p>${data.prediction_note?`<p class="scope-note">${esc(data.prediction_note)}</p>`:''}${extra}`;
       renderOrchardInsights(data);
@@ -325,7 +325,7 @@ async function refreshCurrent(){
     }).catch(e=>{if(request===currentRequest){$('current-orchard').innerHTML=orchardReferenceCards({readings:{},sensor_quality:{soil:'missing',weather:'missing'}})+'<p class="scope-note" id="orchard-data-message"></p>';showOrchardAccessError($('orchard-data-message'),e,'อ่านข้อมูลสวนไม่ได้: ');renderOrchardInsights(null);}}),
     currentJson('/api/province-estimate?province='+encodeURIComponent(code)+'&year='+year).then(data=>{
       if(request!==currentRequest)return;
-      $('current-province').innerHTML=`<div class="report-stat"><span>${esc(name)} · ปี ${+year+543} · ระดับจังหวัด ทุกพันธุ์</span><strong>${data.predicted_kg_rai===null?'ยังคำนวณไม่ได้':fmt(data.predicted_kg_rai,1)+' กก./ไร่'}</strong><p>${esc(data.message)}</p><small>ตัดข้อมูล ${esc(data.as_of)} · หน้าต่างอากาศ ${esc(data.weather_start)} ถึง ${esc(data.weather_end)} · อายุผลสมมุติ ${data.age_days} วัน</small>${data.stale_cache?'<p class="warn">ใช้ cache เก่า เพราะดึงข้อมูลใหม่ไม่สำเร็จ</p>':''}</div>`;
+      $('current-province').innerHTML=`<div class="report-stat"><span>${esc(name)} · ปี ${+year} · ระดับจังหวัด ทุกพันธุ์</span><strong>${data.predicted_kg_rai===null?'ยังคำนวณไม่ได้':fmt(data.predicted_kg_rai,1)+' กก./ไร่'}</strong><p>${esc(data.message)}</p><small>ตัดข้อมูล ${esc(data.as_of)} · หน้าต่างอากาศ ${esc(data.weather_start)} ถึง ${esc(data.weather_end)} · อายุผลสมมุติ ${data.age_days} วัน</small>${data.stale_cache?'<p class="warn">ใช้ cache เก่า เพราะดึงข้อมูลใหม่ไม่สำเร็จ</p>':''}</div>`;
     }).catch(e=>{if(request===currentRequest)$('current-province').textContent='คำนวณจังหวัดไม่ได้: '+e.message;})
   ]);
 }
@@ -353,12 +353,12 @@ function renderOrchardInsights(data=latestOrchardReading){
   const phases=[['recovery','ฟื้นต้น'],['bloom','ออกดอก'],['young','ติดผล'],['growth','พัฒนาผล'],['harvest','เก็บเกี่ยว']];
   const active=stage==='flower'?'bloom':stage;
   const stageName=phases.find(p=>p[0]===active)?.[1];
-  const stamp=savedOrchardObservation?.observed_at?new Date(savedOrchardObservation.observed_at).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}):'';
+  const stamp=savedOrchardObservation?.observed_at?new Date(savedOrchardObservation.observed_at).toLocaleString('en-GB',{timeZone:'Asia/Bangkok'}):'';
   $('orchard-stage-current').textContent=stageName?'ระยะที่บันทึก: '+stageName+' · '+stamp:'ยังไม่ได้บันทึกระยะการผลิต';
   const phaseShapes={recovery:'M18 27V16M18 20C9 20 9 12 10 10c6 0 8 3 8 8M18 18c0-6 4-9 9-9 1 6-2 10-9 11',bloom:'M18 27V20M18 17c-7-10-11 0-4 1-7 5 1 9 4 2 3 7 11 3 4-2 7-1 3-11-4-1Z',young:'M18 13V8M13 15c-6 7-3 13 5 13s11-6 5-13c-3-4-7-4-10 0Z',growth:'M18 9V6M10 14c-7 9-3 16 8 16s15-7 8-16c-4-5-12-5-16 0ZM14 17l-2 2m10-2 2 2m-7 4 2 2',harvest:'M18 8V5M10 14c-7 9-3 16 8 16s15-7 8-16c-4-5-12-5-16 0ZM12 18l-2 2m5 3-2 2m9-7 2 2m-5 3 2 2'};
   $('orchard-stage-timeline').innerHTML=phases.map(([key,label],i)=>`<div class="orchard-phase ${key===active?'is-current':''}"><svg aria-hidden="true" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><path d="${phaseShapes[key]}"/></svg><strong>${label}</strong><small>${key===active?'ระยะที่บันทึก':'ระยะ '+(i+1)}</small></div>`).join('');
   const advice=[];
-  const measured=data?.sensor_time?new Date(data.sensor_time).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}):'ไม่มีเวลาวัด';
+  const measured=data?.sensor_time?new Date(data.sensor_time).toLocaleString('en-GB',{timeZone:'Asia/Bangkok'}):'ไม่มีเวลาวัด';
   if(!data)advice.push('<article><strong>ยังอ่านข้อมูลเซนเซอร์ไม่ได้</strong><p>ตรวจการเชื่อมต่อหรือเข้าสู่ระบบ แล้วกดโหลดข้อมูลใหม่ ระบบยังสรุปสถานะอุปกรณ์ไม่ได้</p></article>');
   else if(data.status==='stale_live'||data.sensor_quality?.soil!=='valid')advice.push(`<article><strong>ตรวจการส่งข้อมูลเซนเซอร์ดิน</strong><p>ข้อมูลความชื้นดินยังไม่พร้อมใช้ ตรวจไฟ สาย และการส่งข้อมูลก่อนตัดสินใจ · แหล่ง: สถานะอุปกรณ์ผ่าน Supabase · สถานะ ${esc(data?.sensor_quality?.soil||'ไม่มีข้อมูล')} · เวลา ${esc(measured)}</p></article>`);
   if(data&&data.sensor_quality?.weather!=='valid')advice.push(`<article><strong>ตรวจการส่งข้อมูลอากาศ</strong><p>สถานะอุปกรณ์อากาศ ${esc(data.sensor_quality?.weather||'ไม่ยืนยัน')} · ระเบียนล่าสุด ${esc(measured)} · แหล่ง Supabase ตรวจอุปกรณ์ก่อนใช้ค่าปัจจุบัน</p></article>`);
@@ -383,10 +383,10 @@ function telemetryChart(rows,field,label,unit,color){
   let path='',connected=false;
   const dots=rows.map((r,i)=>{const v=r[field];if(!Number.isFinite(v)){connected=false;return '';}
     path+=`${connected?'L':'M'}${x(i).toFixed(1)},${y(v).toFixed(1)} `;connected=true;
-    return `<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${color}"><title>${esc(new Date(r.time).toLocaleString('th-TH'))}: ${fmt(v,2)} ${unit} · ${r.valid_counts[field]} ตัวอย่าง</title></circle>`;
+    return `<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${color}"><title>${esc(new Date(r.time).toLocaleString('en-GB'))}: ${fmt(v,2)} ${unit} · ${r.valid_counts[field]} ตัวอย่าง</title></circle>`;
   }).join('');
   const grid=[0,1,2,3].map(i=>{const v=low+(high-low)*i/3;return `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#dce5f0"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${fmt(v,1)}</text>`;}).join('');
-  const ticks=[0,Math.floor((rows.length-1)/2),rows.length-1].map(i=>`<text x="${x(i)}" y="${H-10}" text-anchor="${i===0?'start':i===rows.length-1?'end':'middle'}">${esc(new Date(rows[i].time).toLocaleString('th-TH',{month:'short',day:'numeric',...(rows.length<=25?{hour:'2-digit',minute:'2-digit'}:{})}))}</text>`).join('');
+  const ticks=[0,Math.floor((rows.length-1)/2),rows.length-1].map(i=>`<text x="${x(i)}" y="${H-10}" text-anchor="${i===0?'start':i===rows.length-1?'end':'middle'}">${esc(new Date(rows[i].time).toLocaleString('en-GB',{month:'short',day:'numeric',...(rows.length<=25?{hour:'2-digit',minute:'2-digit'}:{})}))}</text>`).join('');
   const summary=['rain_1h_mm','rain_24h_mm'].includes(field)?'ค่าล่าสุดของแต่ละช่วง':field==='wind_gust'?'ค่าสูงสุดของแต่ละช่วง':`เฉลี่ย ${fmt(valid.reduce((a,b)=>a+b,0)/valid.length,1)}`;
   return `<article class="telemetry-panel"><div class="telemetry-panel-heading"><h3>${label} <small>${unit}</small></h3><span style="color:${color}">${summary}</span><button type="button" data-expand-plot aria-label="ขยายกราฟ${label}">ขยายกราฟ</button></div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} ตามเวลา หน่วย ${unit}">${grid}<path d="${path}" stroke="${color}" stroke-width="2" fill="none"/>${dots}${ticks}</svg><p class="plot-message" role="status">ต่ำสุด ${fmt(Math.min(...valid),1)} · สูงสุด ${fmt(Math.max(...valid),1)} · มีค่า ${valid.length}/${rows.length} ช่วง</p></article>`;
 }
@@ -407,7 +407,7 @@ async function refreshOrchardHistory(){
     if(request!==historyRequest)return;
     $('orchard-history-note').textContent=`${data.source} · ${data.raw_count} ระเบียน · ${data.aggregation||''} · ${data.message}${data.truncated?' · ข้อมูลบางส่วน: ถึงขีดจำกัด 30,000 ระเบียน':''}`;
     $('orchard-timeseries').innerHTML=selectedTelemetryFields().map(f=>telemetryChart(data.rows,...f)).join('');
-    $('orchard-history-table').innerHTML=table(['เวลาไทย',...telemetryFields.map(f=>f[1]+' ('+f[2]+')')],data.rows.map(r=>[esc(new Date(r.time).toLocaleString('th-TH')),...telemetryFields.map(f=>`${fmt(r[f[0]],2)} (${r.valid_counts[f[0]]} ตัวอย่าง)`)]));
+    $('orchard-history-table').innerHTML=table(['เวลาไทย',...telemetryFields.map(f=>f[1]+' ('+f[2]+')')],data.rows.map(r=>[esc(new Date(r.time).toLocaleString('en-GB')),...telemetryFields.map(f=>`${fmt(r[f[0]],2)} (${r.valid_counts[f[0]]} ตัวอย่าง)`)]));
   }catch(error){if(request===historyRequest)showOrchardAccessError($('orchard-history-note'),error,'โหลดประวัติสวนไม่ได้: ');}
 }
 const historyEndLabel=document.createElement('label');historyEndLabel.textContent='ถึงวันที่';

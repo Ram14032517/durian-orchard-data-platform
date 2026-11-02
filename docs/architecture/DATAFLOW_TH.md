@@ -83,9 +83,11 @@ Cache พยากรณ์อยู่ในหน่วยความจำ �
 
 ## 7. ธีมและการสร้างเว็บ
 
-[orchard_theme.js](../../web/assets/js/orchard_theme.js) อ่านค่า `durian.orchard.theme.v1` → ถ้าไม่มีใช้ `prefers-color-scheme` → ตั้ง `data-theme` และ `color-scheme` ใน `<head>` ก่อนแสดงหน้า → [orchard_theme.css](../../web/assets/css/orchard_theme.css) เปลี่ยนสี → [ThemeControl.jsx](../../web/react/src/ThemeControl.jsx) ให้เลือก Light / Dark / ตามระบบ
+[orchard_theme.js](../../web/assets/js/orchard_theme.js) อ่านค่า `durian.orchard.theme.v1` → ถ้าไม่มีใช้ `prefers-color-scheme` → ตั้ง `data-theme` และ `color-scheme` ใน `<head>` ก่อนแสดงหน้า → [orchard_theme.css](../../web/assets/css/orchard_theme.css) เปลี่ยนสี → [ThemeControl.jsx](../../web/react/src/ThemeControl.jsx) แสดง `Mode: Light` / `Mode: Dark` ตามธีมจริง กดครั้งเดียวเปลี่ยนทันที ถ้ายังไม่เลือกเองจะตาม OS
 
-บันทึกเฉพาะค่าธีม ไม่เรียก API, ไม่เก็บ telemetry/credentials เพิ่ม และไม่เปลี่ยน A/B/ฟอร์ม/ข้อมูลที่วัด เลือกตามระบบแล้ว OS เปลี่ยนตามได้ ค่าที่เลือกเองคงเดิม มีการ sync ระหว่างแท็บ origin เดียวกัน หาก storage ถูกบล็อก ยังสลับได้ในหน้าปัจจุบัน แผนที่ฐาน/สีชุดดิน/เส้นข้อมูลไม่ถูก invert เพื่อไม่เปลี่ยนความหมายข้อมูล
+บันทึกเฉพาะค่าธีม ไม่เรียก API, ไม่เก็บ telemetry/credentials เพิ่ม และไม่เปลี่ยน A/B/ฟอร์ม/ข้อมูลที่วัด หากยังใช้ค่าตามระบบ OS เปลี่ยนตามได้ ค่าที่เลือกเองคงเดิม มีการ sync ระหว่างแท็บ origin เดียวกัน หาก storage ถูกบล็อก ยังสลับได้ในหน้าปัจจุบัน แผนที่ฐาน/สีชุดดิน/เส้นข้อมูลไม่ถูก invert เพื่อไม่เปลี่ยนความหมายข้อมูล
+
+ชั้นภาษาอังกฤษแปลข้อความก่อน React render และแปล text node เฉพาะส่วน Classic/Leaflet ไม่เปลี่ยนค่าที่บันทึกหรือ DATA snapshot ดู [รายละเอียดการแยกภาษาออกจากหลักฐาน](../updates/ENGLISH_UI_UX_2026-11-02.md)
 
 Source React/CSS → `node tools/build_orchard_react.mjs` (React + Tailwind รุ่นล็อก ทำงานบน Mac/Windows/Linux) → `orchard_app.js`/`orchard_app.css` → `tools/build_unified_orchard_map.py --reuse-bundled-data` ใส่ DATA snapshot เดิม, theme bootstrap และ fingerprint ของ assets → `UNIFIED_MAP.html` กับ `UNIFIED_MAP_CLASSIC.html`
 

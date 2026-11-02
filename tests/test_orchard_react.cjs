@@ -11,12 +11,14 @@ const {renderToStaticMarkup}=frontRequire('react-dom/server');
 const fixture={provinces:[{province_code:'22',weather_latitude:12,weather_longitude:102,province_name:'จังหวัดทดสอบ'}]};
 function load(file,fetch){const compiled=buildSync({entryPoints:[file],bundle:true,write:false,format:'cjs',platform:'node',external:['react'],logLevel:'silent'}).outputFiles[0].text;const module={exports:{}};vm.runInNewContext(compiled,{module,exports:module.exports,require:frontRequire,window:{__ORCHARD_DATA__:fixture},fetch,URLSearchParams,AbortController,Date,Intl,console,setTimeout,clearTimeout,setInterval,clearInterval});return module.exports;}
 test('React entry uses bundled React and compiled Tailwind, not a CDN transpiler',()=>{const html=fs.readFileSync('research_data/five_province_history/UNIFIED_MAP.html','utf8');assert.match(html,/orchard-react-root/);assert.match(html,/orchard_app\.js/);assert.match(html,/orchard_app\.css/);assert.doesNotMatch(html,/text\/babel|react\.development|orchard_lumen/);assert.ok(fs.statSync('research_data/five_province_history/orchard_app.css').size>1000);});
-test('theme control has a labelled native selector with explicit light, dark and system choices',()=>{
+test('theme control is a one-click native button showing its current mode',()=>{
   const Theme=load('web/react/src/ThemeControl.jsx').default;
   const html=renderToStaticMarkup(React.createElement(Theme));
-  assert.match(html,/aria-label="ธีมหน้าจอ"/);
-  for(const value of ['light','dark','system'])assert.match(html,new RegExp('value="'+value+'"'));
-  assert.match(html,/value="system" selected=""/);
+  assert.match(html,/aria-label="Mode: Light. Switch to dark mode"/);
+  assert.match(html,/data-mode="light"/);
+  assert.match(html,/aria-pressed="false"/);
+  assert.match(html,/Mode:/);assert.match(html,/Light/);
+  assert.doesNotMatch(html,/<select/);
   assert.doesNotMatch(html,/<form|type="submit"/);
 });
 test('sensor cards reject invalid/stale data, preserve zero, and JSX escapes external text',()=>{const d=load('web/react/src/data.js');assert.equal(d.num(null),null);assert.equal(d.num(''),null);assert.equal(d.num(0),0);const r={status:'fresh_live',sensor_quality:{soil:'invalid',weather:'valid'},readings:{soil_moisture_percent:0,rain_1h_mm:0}};assert.equal(d.sensorState(r,'soil','soil_moisture_percent'),'invalid');assert.equal(d.sensorState(r,'weather','rain_1h_mm'),'fresh');r.status='stale_live';assert.equal(d.sensorState(r,'weather','rain_1h_mm'),'stale');const ui=load('web/react/src/ui.jsx');const html=renderToStaticMarkup(React.createElement(ui.Metric,{label:'<script>alert(1)</script>',value:0,unit:'%'}));assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);assert.match(html,/>0<\/span>/);});
@@ -162,7 +164,7 @@ test('seven-day view compares all dates, keeps missing values and explains inspe
   const {SevenDayForecast:unused,default:SevenDay}=load('web/react/src/SevenDayForecast.jsx');
   const daily=Array.from({length:7},(_,i)=>({time:`2026-11-0${i+1}`,rain_mm:i===0?0:null,temperature_min_c:22,temperature_max_c:29}));
   const html=renderToStaticMarkup(React.createElement(SevenDay,{forecast:{status:'cached',daily},reading:{},observation:{}}));
-  for(const d of daily)assert.ok(html.includes(d.time)||html.includes(new Date(d.time+'T12:00:00+07:00').toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'})));
+  for(const d of daily)assert.ok(html.includes(d.time)||html.includes(new Date(d.time+'T12:00:00+07:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})));
   assert.match(html,/ตารางเปรียบเทียบครบ 7 วัน/);assert.match(html,/ใช้ข้อมูลนี้เตรียมอะไรได้บ้าง/);
   assert.match(html,/ไม่ใช่ระดับอันตราย/);assert.match(html,/—/);assert.doesNotMatch(html,/NaN|Infinity|สวนปกติ/);
 });

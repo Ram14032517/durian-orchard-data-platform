@@ -23,7 +23,9 @@ def prepare(private_gis=False):
     for name in ['ridge_vpd_final_model.json','ridge_vpd_audit.json']:
         copy('research_data/five_province_history/training/'+name)
     base='research_data/five_province_history/'
-    for name in ['orchard_app.js','orchard_app.css']:copy(base+name)
+    for name in ['orchard_app.js','orchard_app.css','orchard_english.js']:copy(base+name)
+    # Login uses only these reviewed presentation assets; never copy the whole web tree.
+    for name in ['web/assets/js/orchard_theme.js','web/assets/css/orchard_theme.css','web/assets/css/orchard_motion.css']:copy(name)
     html=(ROOT/base/'UNIFIED_MAP.html').read_text(encoding='utf-8')
     match=re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',html,re.S)
     if not match:raise RuntimeError('Build the reviewed React HTML first')

@@ -1,6 +1,6 @@
 # เริ่มตรงนี้ — โปรเจกต์สวนทุเรียน
 
-## เว็บและงานรายงานปัจจุบัน — 1 พฤศจิกายน 2569
+## เว็บและงานรายงานปัจจุบัน — 2 พฤศจิกายน 2569
 
 - **เปิดเว็บ:** Windows ใช้ [00_OPEN_REPORT.cmd](00_OPEN_REPORT.cmd) หรือเว็บออนไลน์ [Durian Orchard](https://map-durian-analysis.vercel.app/home) ซึ่งต้องเข้าสู่ระบบเพื่ออ่านข้อมูลส่วนตัว
 - **แก้เว็บปัจจุบัน:** [React + Tailwind](web/react/README_TH.md) — โค้ดอยู่ `web/react/src/`; อย่าแก้ไฟล์ `orchard_app.js` / `orchard_app.css` ที่สร้างแล้วโดยตรง
@@ -13,7 +13,9 @@
 
 ## บันทึกอัปเดตล่าสุด
 
-ล่าสุด [1 พฤศจิกายน 2569 Sync main + ธีม Dark/Light](docs/updates/THEME_DATAFLOW_2026-11-01_TH.md) · [Dataflow ฉบับภาพสำหรับ Safari](docs/architecture/DATAFLOW_TH.html) · [Dataflow Markdown](docs/architecture/DATAFLOW_TH.md)
+ล่าสุด [2 พฤศจิกายน 2569 ภาษาอังกฤษ + ปุ่ม Mode คลิกเดียว + UX ที่นุ่มขึ้น](docs/updates/ENGLISH_UI_UX_2026-11-02.md) — แก้เฉพาะการแสดงผล คงข้อมูลและระบบ IoT เดิม
+
+รอบก่อน [1 พฤศจิกายน 2569 Sync main + ธีม Dark/Light](docs/updates/THEME_DATAFLOW_2026-11-01_TH.md) · [Dataflow ฉบับภาพสำหรับ Safari](docs/architecture/DATAFLOW_TH.html) · [Dataflow Markdown](docs/architecture/DATAFLOW_TH.md)
 
 บันทึกรอบก่อน: [รวมการแก้ปัญหา](docs/updates/PROJECT_UPDATE_2026-11-01_TH.md) หรือ [ฉบับ HTML สำหรับ Safari](docs/updates/PROJECT_UPDATE_2026-11-01_TH.html): แก้ hash ข้ามเครื่อง คืนหลักฐาน NOAA ปรับโหมด GAP/IoT และเทสต์หลัง clone โดยไม่ train ใหม่ พร้อมแยกสิ่งที่ยังรอข้อมูล/การตั้งค่า การ push ไม่ใช่คำสั่ง deploy cloud
 

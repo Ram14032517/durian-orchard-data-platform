@@ -19,13 +19,13 @@ function renderSoilExploration(){
     $('soil-analysis-properties').innerHTML+='<details><summary>ดูหน่วยดินทั้งหมดในอำเภอ '+side+'</summary>'+table(['รหัสและชื่อ','เนื้อดินบน','ปฏิกิริยาดิน','ความอุดมสมบูรณ์'],units.map(s=>[s.soil_code+' '+s.soil_name,s.topsoil_texture,s.topsoil_ph,s.fertility].map(escape)))+'</details>';
   }
   const rows=DATA.district_exploration.filter(r=>r.province_code===A.code&&(!district||r.district===district));
-  $('district-evidence-table').innerHTML=rows.length?table(['อำเภอ / ปี','ไร่ให้ผล','ตัน','กก./ไร่ รายงาน','กก./ไร่ คำนวณ','ตรวจความละเอียด'],rows.map(r=>[escape(r.district)+' / '+(r.year_ce+543),fmt(r.bearing_rai,0),fmt(r.production_tonnes,0),fmt(r.reported_yield_kg_rai,0),fmt(r.calculated_yield_kg_rai,2),r.yield_precision_warning?'ค่ารายงานไม่ตรงกับยอดปัดเศษ':'—'])):'ยังไม่มีหลักฐานผลผลิตรายอำเภอของพื้นที่นี้ในทะเบียนที่ตรวจแล้ว ไม่แจกยอดจังหวัดลงอำเภอ';
+  $('district-evidence-table').innerHTML=rows.length?table(['อำเภอ / ปี','ไร่ให้ผล','ตัน','กก./ไร่ รายงาน','กก./ไร่ คำนวณ','ตรวจความละเอียด'],rows.map(r=>[escape(r.district)+' / '+(r.year_ce),fmt(r.bearing_rai,0),fmt(r.production_tonnes,0),fmt(r.reported_yield_kg_rai,0),fmt(r.calculated_yield_kg_rai,2),r.yield_precision_warning?'ค่ารายงานไม่ตรงกับยอดปัดเศษ':'—'])):'ยังไม่มีหลักฐานผลผลิตรายอำเภอของพื้นที่นี้ในทะเบียนที่ตรวจแล้ว ไม่แจกยอดจังหวัดลงอำเภอ';
   const numeric=rows.filter(r=>r.reported_yield_kg_rai!==null);
   const max=Math.max(1,...numeric.map(r=>r.reported_yield_kg_rai));
   $('district-yield-bars').replaceChildren();
   for(const r of numeric){
     const line=document.createElement('div');line.className='soil-yield-bar';
-    const label=document.createElement('span');label.textContent=`${r.district} ${r.year_ce+543}`;
+    const label=document.createElement('span');label.textContent=`${r.district} ${r.year_ce}`;
     const bar=document.createElement('span');bar.className='soil-yield-fill';bar.style.width=`${r.reported_yield_kg_rai/max*100}%`;
     const value=document.createElement('span');value.textContent=`${fmt(r.reported_yield_kg_rai,0)} กก./ไร่`;
     line.append(label,bar,value);$('district-yield-bars').append(line);

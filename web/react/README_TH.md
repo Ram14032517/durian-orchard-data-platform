@@ -9,9 +9,13 @@
 - `ui.jsx` — การ์ด, ตาราง, สถานะ และกราฟ SVG ที่ไม่เชื่อมเส้นข้ามค่าที่ขาด
 - `api.js` — API เดิม พร้อม credentials, การยกเลิกคำขอเก่า และล้างข้อมูลเมื่อบริบทเปลี่ยน
 - `style.css` — Tailwind utilities และ components โทนเขียวพร้อมการ์ดสีอ่อน รองรับมือถือ
-- `ThemeControl.jsx` — เลือก Light / Dark / ตามระบบ; ใช้ตัวตั้งค่าร่วมกับหน้า classic ที่ `web/assets/js/orchard_theme.js` และ CSS tokens ใน `web/assets/css/orchard_theme.css`
+- `ThemeControl.jsx` — ปุ่มคลิกเดียว `Mode: Light` / `Mode: Dark` ตามธีมที่แสดงจริง ใช้ร่วมกับ Classic และ login/logout; ถ้ายังไม่เลือกเองจะตาม OS
+- `../i18n/en.json` และ `src/i18n/jsx-runtime.js` — แปลส่วนติดต่อเป็นอังกฤษก่อน React render โดยไม่เปลี่ยนค่า input, enum, ID หรือข้อมูลต้นทาง
+- `web/assets/css/orchard_motion.css` — transition ระยะสั้น และลดการเคลื่อนไหวตาม Reduce Motion ของเครื่อง
 
-ธีมถูกตั้งก่อน paint และจำเฉพาะค่าธีมใน `durian.orchard.theme.v1` ไม่เรียก API หรือเปลี่ยนข้อมูล/พิกัด A/B/บัญชี ปิดการเก็บข้อมูลใน browser แล้วยังสลับในหน้าปัจจุบันได้ แผนที่ฐานและสีข้อมูลไม่ถูก invert หน้า login/logout ของ backend คงรูปแบบเดิม
+ธีมถูกตั้งก่อน paint และจำเฉพาะค่าธีมใน `durian.orchard.theme.v1` ไม่เรียก API หรือเปลี่ยนข้อมูล/พิกัด A/B/บัญชี ปิดการเก็บข้อมูลใน browser แล้วยังสลับในหน้าปัจจุบันได้ แผนที่ฐานและสีข้อมูลไม่ถูก invert หน้า login/logout ใช้ภาษาและสีร่วมกัน แต่คงกฎ Authentication/CSRF/สิทธิ์เดิม
+
+อ่าน [รายการปรับภาษาอังกฤษและ UX วันที่ 2 พฤศจิกายน 2569](../../docs/updates/ENGLISH_UI_UX_2026-11-02.md) ชื่อเฉพาะจากทะเบียนและเอกสารต้นฉบับอาจยังเป็นไทย ไม่เดาการสะกดอังกฤษและไม่แก้ข้อมูลหลักฐาน
 
 ## สร้างหน้าเว็บ
 

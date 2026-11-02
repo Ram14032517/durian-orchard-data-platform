@@ -5,7 +5,8 @@ import { spawnSync } from 'node:child_process';
 const root=new URL('../',import.meta.url);
 const require=createRequire(new URL('web/react/package.json',root));
 const {build}=require('esbuild');
-await build({entryPoints:[fileURLToPath(new URL('web/react/src/main.jsx',root))],outfile:fileURLToPath(new URL('research_data/five_province_history/orchard_app.js',root)),bundle:true,minify:true,format:'iife',jsx:'automatic',target:['es2020'],define:{'process.env.NODE_ENV':'"production"'},legalComments:'eof'});
+await build({entryPoints:[fileURLToPath(new URL('web/i18n/english.js',root))],outfile:fileURLToPath(new URL('research_data/five_province_history/orchard_english.js',root)),bundle:true,minify:true,format:'iife',globalName:'OrchardEnglish',target:['es2020'],legalComments:'eof'});
+await build({entryPoints:[fileURLToPath(new URL('web/react/src/main.jsx',root))],outfile:fileURLToPath(new URL('research_data/five_province_history/orchard_app.js',root)),bundle:true,minify:true,format:'iife',jsx:'automatic',jsxImportSource:'@orchard/i18n',alias:{'@orchard/i18n/jsx-runtime':fileURLToPath(new URL('web/react/src/i18n/jsx-runtime.js',root))},target:['es2020'],define:{'process.env.NODE_ENV':'"production"'},legalComments:'eof'});
 // The same pinned CLI works on macOS, Windows and Linux; no global install.
 const manifestUrl=new URL('web/react/node_modules/@tailwindcss/cli/package.json',root);
 const manifest=JSON.parse(await readFile(manifestUrl,'utf8'));

@@ -62,7 +62,7 @@
     for(const name of ['harvest_start','harvest_end'])form.elements[name].max=today;
     let csrf=null,editing=null,loading=0,busy=false,account=null;
     const status=text=>{el('harvest-status').textContent=text;};
-    const fmt=value=>value===null||value===undefined?'ยังไม่ครบ':Number(value).toLocaleString('th-TH',{maximumFractionDigits:3});
+    const fmt=value=>value===null||value===undefined?'ยังไม่ครบ':Number(value).toLocaleString('en-GB',{maximumFractionDigits:3});
     async function api(path,method='GET',data){
       const response=await root.fetch(path,{method,credentials:'same-origin',cache:'no-store',headers:{...(data?{'Content-Type':'application/json'}:{}),...(csrf?{'X-CSRF-Token':csrf}:{})},...(data?{body:JSON.stringify(data)}:{})});
       if(response.status===401){csrf=null;account=null;reset();fieldset.disabled=true;el('harvest-export').disabled=true;el('harvest-rows').replaceChildren();el('harvest-charts').textContent='กรุณาเข้าสู่ระบบ';el('harvest-baselines').textContent='กรุณาเข้าสู่ระบบ';throw Error('กรุณาเข้าสู่ระบบบันทึกสวน แล้วกดโหลดประวัติใหม่');}
@@ -78,8 +78,8 @@
         const max=Math.max(...group.points.map(p=>p.value),1);let lastYear=null,path='';
         group.points.forEach((p,i)=>{const x=45+i*410/Math.max(group.points.length-1,1),y=110-90*p.value/max;
           path+=(lastYear===p.year-1?'L':'M')+x+','+y+' ';lastYear=p.year;
-          const dot=doc.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',x);dot.setAttribute('cy',y);dot.setAttribute('r','4');const title=doc.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=(p.year+543)+' · '+fmt(p.value)+' กก./ไร่';dot.append(title);svg.append(dot);
-          const text=doc.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',x);text.setAttribute('y','132');text.setAttribute('text-anchor','middle');text.textContent=String(p.year+543);svg.append(text);
+          const dot=doc.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',x);dot.setAttribute('cy',y);dot.setAttribute('r','4');const title=doc.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=(p.year)+' · '+fmt(p.value)+' กก./ไร่';dot.append(title);svg.append(dot);
+          const text=doc.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',x);text.setAttribute('y','132');text.setAttribute('text-anchor','middle');text.textContent=String(p.year);svg.append(text);
         });
         const line=doc.createElementNS('http://www.w3.org/2000/svg','path');line.setAttribute('d',path);line.setAttribute('fill','none');line.setAttribute('stroke','#16835a');line.setAttribute('stroke-width','2');svg.prepend(line);card.append(heading,svg);charts.append(card);
       }
@@ -87,7 +87,7 @@
       const body=el('harvest-rows');body.replaceChildren();
       for(const r of records){
         const tr=doc.createElement('tr');
-        for(const text of [r.orchard_code+' / '+r.season_key,(r.harvest_year+543)+' ('+r.harvest_year+')',r.cultivar||'ยังไม่ระบุ',fmt(r.bearing_area_rai),fmt(r.harvested_kg),fmt(r.yield_kg_per_rai),(r.harvest_start||'—')+' ถึง '+(r.harvest_end||'—'),r.source_type+' · '+(r.status==='complete'?'ปิดฤดู':'ร่าง')+' · '+r.source_reference]){
+        for(const text of [r.orchard_code+' / '+r.season_key,String(r.harvest_year),r.cultivar||'ยังไม่ระบุ',fmt(r.bearing_area_rai),fmt(r.harvested_kg),fmt(r.yield_kg_per_rai),(r.harvest_start||'—')+' ถึง '+(r.harvest_end||'—'),r.source_type+' · '+(r.status==='complete'?'ปิดฤดู':'ร่าง')+' · '+r.source_reference]){
           const td=doc.createElement('td');td.textContent=text;tr.append(td);
         }
         const td=doc.createElement('td'),button=doc.createElement('button');button.type='button';button.textContent='แก้ไขรุ่น '+r.version;
@@ -96,7 +96,7 @@
       }
       if(!records.length){const tr=doc.createElement('tr'),td=doc.createElement('td');td.colSpan=9;td.textContent='ยังไม่มีประวัติของบัญชีนี้ เริ่มบันทึกโดยไม่ต้องเลือกหมุด GAP';tr.append(td);body.append(tr);}
       const bases=el('harvest-baselines');bases.replaceChildren();
-      for(const b of baselines){const box=doc.createElement('article');box.className='report-stat';const label=doc.createElement('span'),value=doc.createElement('strong'),note=doc.createElement('p');label.textContent=b.orchard_code+' / '+b.season_key+' · ค่าฐานสำหรับปี '+(b.target_year+543);value.textContent=fmt(b.kg_per_rai)+' กก./ไร่';note.textContent='อ้างผลจริงที่บันทึกปี '+(b.source_harvest_year+543)+' รุ่น '+b.source_version+' · Baseline ไม่ใช่ AI Forecast';box.append(label,value,note);bases.append(box);}
+      for(const b of baselines){const box=doc.createElement('article');box.className='report-stat';const label=doc.createElement('span'),value=doc.createElement('strong'),note=doc.createElement('p');label.textContent=b.orchard_code+' / '+b.season_key+' · ค่าฐานสำหรับปี '+(b.target_year);value.textContent=fmt(b.kg_per_rai)+' กก./ไร่';note.textContent='อ้างผลจริงที่บันทึกปี '+(b.source_harvest_year)+' รุ่น '+b.source_version+' · Baseline ไม่ใช่ AI Forecast';box.append(label,value,note);bases.append(box);}
       if(!baselines.length)bases.textContent='ยังไม่มีรายการปิดฤดูครบถ้วน จึงยังไม่คำนวณค่าฐาน';
     }
     async function load(){

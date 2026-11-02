@@ -58,7 +58,7 @@ if(typeof document!=='undefined'){
     const harvest=DATA.harvest.filter(r=>r.province_code===A.code&&r.year_ce===year);
     const total=harvest.reduce((sum,r)=>sum+r.tonnes,0);
     try{const lo=physicsNumber('phys-age-min'),hi=physicsNumber('phys-age-max');
-      $('phys-harvest').innerHTML=harvest.length?table(['เดือนเก็บเกี่ยว','สัดส่วนตันในปี %','ช่วงดอกบานที่เป็นไปได้'],harvest.filter(r=>r.tonnes>0).map(r=>{const range=OrchardPhysics.floweringRange(year,r.month_number,lo,hi);return [r.month_number+'/'+(year+543),fmt(r.tonnes/total*100),range.start+' ถึง '+range.end];})):'ไม่มีผลผลิตรายเดือนปีนี้ ไม่ยกปีอื่นมาแทน';
+      $('phys-harvest').innerHTML=harvest.length?table(['เดือนเก็บเกี่ยว','สัดส่วนตันในปี %','ช่วงดอกบานที่เป็นไปได้'],harvest.filter(r=>r.tonnes>0).map(r=>{const range=OrchardPhysics.floweringRange(year,r.month_number,lo,hi);return [r.month_number+'/'+(year),fmt(r.tonnes/total*100),range.start+' ถึง '+range.end];})):'ไม่มีผลผลิตรายเดือนปีนี้ ไม่ยกปีอื่นมาแทน';
     }catch(e){$('phys-harvest').textContent=e.message;}
   }
   $('phys-backdate').onclick=renderHarvestBackdating;

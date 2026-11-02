@@ -9,7 +9,7 @@ function orchardReferenceCards(data){
     if(data.status==='stale_live'&&quality==='valid')quality='stale';
     const value=readings[key], present=Number.isFinite(value), status=quality==='valid'&&!present?'missing':quality;
     const [statusText,statusClass]=label[status]||label.missing;
-    const time=data.sensor_time?esc(new Date(data.sensor_time).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})):'ไม่ระบุเวลา';
+    const time=data.sensor_time?esc(new Date(data.sensor_time).toLocaleString('en-GB',{timeZone:'Asia/Bangkok'})):'ไม่ระบุเวลา';
     return `<article class="oc-surface oc-metric tone-${tone}" aria-label="${name}"><div class="oc-metric-head"><span class="oc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[icon]}</svg></span><span class="oc-pill ${statusClass}">${statusText}</span></div><div class="oc-metric-name">${name}</div><div class="oc-metric-value"><span>${present&&status==='valid'?fmt(value,2):'—'}</span><small>${unit}</small></div><div class="oc-metric-meta">จุดเซนเซอร์สวน · ${time}</div></article>`;
   }).join('')}</div></div>`;
 }
