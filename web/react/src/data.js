@@ -1,7 +1,35 @@
+import {locale,getLanguage} from '../../i18n/language.js';
 export const data=window.__ORCHARD_DATA__;
 export const num=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?null:Number(v);
-export const format=(v,d=1)=>num(v)===null?'—':Number(v).toLocaleString('th-TH',{maximumFractionDigits:d});
-export const dateTime=v=>v&&!Number.isNaN(Date.parse(v))?new Date(v).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}):'ไม่ระบุเวลา';
+const numberFormatters=new Map(),dateFormatters=new Map();
+export const format=(v,d=1)=>{
+  if(num(v)===null)return '—';
+  const key=locale()+':'+d;
+  if(!numberFormatters.has(key)){
+    if(numberFormatters.size>=32)numberFormatters.clear();
+    numberFormatters.set(key,new Intl.NumberFormat(locale(),{maximumFractionDigits:d}));
+  }
+  return numberFormatters.get(key).format(Number(v));
+};
+export const dateTime=v=>{
+  if(!v||Number.isNaN(Date.parse(v)))return 'ไม่ระบุเวลา';
+  const day=/^\d{4}-\d{2}-\d{2}$/.test(String(v)),key=locale()+(day?':date':'');
+  if(!dateFormatters.has(key))dateFormatters.set(key,new Intl.DateTimeFormat(locale(),{timeZone:'Asia/Bangkok',dateStyle:'medium',...(!day?{timeStyle:'short'}:{})}));
+  return dateFormatters.get(key).format(new Date(day?v+'T12:00:00+07:00':v));
+};
+// Display only: timestamps retain their original value in APIs and CSV exports.
+export function chartTime(value,compact=false){
+ if(value===null||value===undefined||value==='')return 'ไม่ระบุเวลา';
+ if(typeof value==='number'||/^\d{4}$/.test(String(value)))return String(value);
+ const text=String(value),day=/^\d{4}-\d{2}-\d{2}$/.test(text);
+ if(!/^\d{4}-\d{2}-\d{2}(?:T|$)/.test(text))return text;
+ const normalized=day?text+'T12:00:00+07:00':(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(text)?text:text+'+07:00');
+ const date=new Date(normalized);if(Number.isNaN(date.getTime()))return 'ไม่ระบุเวลา';
+ const options={timeZone:'Asia/Bangkok',day:'numeric',month:'short',...(compact?{}:{year:'numeric'}),...(!day&&!compact?{hour:'2-digit',minute:'2-digit',hourCycle:'h23'}:{})};
+ const key='chart:'+locale()+':'+day+':'+compact;
+ if(!dateFormatters.has(key))dateFormatters.set(key,new Intl.DateTimeFormat(locale(),options));
+ return dateFormatters.get(key).format(date)+(!day&&!compact?(getLanguage()==='en'?' (Thailand time)':' น. (เวลาไทย)'):'');
+}
 export const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 export const monthNames=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
 export const metrics=[['soil_moisture_percent','ความชื้นดิน','%','drop','blue','soil'],['soil_temperature_c','อุณหภูมิดิน','°C','temp','amber','soil'],['outdoor_temperature_c','อุณหภูมิอากาศ','°C','sun','cyan','weather'],['outdoor_humidity_percent','ความชื้นอากาศ','%','drop','violet','weather'],['rain_1h_mm','ฝนย้อนหลัง 1 ชั่วโมง','มม.','rain','blue','weather'],['vpd_kpa','VPD อากาศภายนอก','kPa','wind','rose','weather'],['soil_ph','ความเป็นกรดด่างดิน','pH','soil','violet','soil'],['soil_ec','การนำไฟฟ้าดิน','µS/cm','soil','amber','soil'],['soil_n','ไนโตรเจน','mg/kg','leaf','green','soil'],['soil_p','ฟอสฟอรัส','mg/kg','leaf','green','soil'],['soil_k','โพแทสเซียม','mg/kg','leaf','green','soil'],['rain_24h_mm','ฝนย้อนหลัง 24 ชั่วโมง','มม.','rain','blue','weather'],['wind_avg','ลมเฉลี่ย','km/h','wind','cyan','weather'],['wind_gust','ลมกระโชก','km/h','wind','cyan','weather'],['pressure_hpa','ความกดอากาศ','hPa','sun','amber','weather'],['uv_index','ดัชนี UV','ดัชนี','sun','amber','weather'],['light_lux','ความเข้มแสง','lux','sun','amber','weather'],['rain_rate_mm_h','อัตราฝน','mm/h','rain','blue','weather'],['dew_point_c','จุดน้ำค้าง','°C','temp','cyan','weather'],['feels_like_c','อุณหภูมิที่รู้สึก','°C','temp','rose','weather'],['heat_index_c','ดัชนีความร้อน','°C','temp','rose','weather']];

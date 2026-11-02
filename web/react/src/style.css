@@ -41,7 +41,7 @@
   .orchard-welcome{@apply flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-5 text-white sm:px-7 sm:py-6;background:linear-gradient(115deg,#164c3e,#276b50);border:1px solid #326f58}
   .orchard-welcome .btn{background:#ffffff18;border-color:#ffffff50;color:#fff}
   .orchard-welcome .btn:hover{background:#ffffff28}
-  .orchard-tabs{@apply grid grid-cols-5 gap-1 rounded-2xl border border-emerald-100 bg-white p-1.5 shadow-sm}
+  .orchard-tabs{@apply grid grid-cols-3 gap-1 rounded-2xl border border-emerald-100 bg-white p-1.5 shadow-sm sm:grid-cols-6}
   .orchard-tab{@apply flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-center text-[11px] font-semibold text-slate-600 transition-colors sm:flex-row sm:gap-2 sm:px-3 sm:text-sm}
   .orchard-tab:hover{@apply bg-emerald-50 text-emerald-900}
   .orchard-tab-active,.orchard-tab-active:hover{@apply bg-emerald-800 text-white shadow-sm}
@@ -175,3 +175,64 @@ html[data-theme="dark"] .eto-panel{background:#192b3b;border-color:#49677e;color
 .sidebar-compact+div .section-view-focused{left:96px}.section-view-focused .section-view-toolbar,.section-view-focused .section-view-hint{flex-shrink:0}.section-view-focused .orchard-scenes-focus{height:auto;min-height:0;max-height:none;flex:1}
 @media(max-width:1023px){.section-view-focused,.sidebar-compact+div .section-view-focused{left:12px;right:12px;top:86px}}
 @media(max-width:639px){.section-view-focused{top:74px;bottom:8px;padding:10px}.section-view-focused .section-view-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.section-view-focused .section-view-steps button{font-size:10px;min-height:48px;gap:2px}.section-view-focused .section-view-steps button>span:first-child{display:none}.section-view-focused .section-view-toggle{min-height:48px;padding:6px}.section-view-focused .section-view-toggle svg{display:none}}
+
+/* Intrinsic grid widths must not force mobile pages wider than their viewport. */
+.page-stack,.orchard-scenes{grid-template-columns:minmax(0,1fr)}
+.app-shell>div,main,.page-stack>*,.orchard-section-view,.section-view-toolbar,.section-view-steps,.chart-summary-strip>div,.chart-readout>span{min-width:0}
+main{width:100%;max-width:1660px}.card,.notice,.data-chart,.table-scroll,.map-inspector,.orchard-scenes{max-width:100%}
+.chart-readout>span,.chart-meta,.chart-summary-strip strong,.notice>div,.knowledge-explanation{overflow-wrap:anywhere}
+@media(max-width:639px){.app-header{gap:8px;padding-inline:12px}.app-header>div:first-child{min-width:0}.app-header>div:last-child{gap:6px}.app-header .theme-control{max-width:108px}.app-header p{overflow-wrap:anywhere}.page-title h1{font-size:24px;overflow-wrap:anywhere}.card-heading h2{min-width:0;overflow-wrap:anywhere}.chart-summary-strip strong{font-size:20px}.table-scroll{width:100%;min-width:0}.table-scroll td,.table-scroll th{padding:10px}.section-view-toggle{max-width:100%}}
+.yield-tools{min-width:0}.yield-tools-tabs{display:flex;gap:6px;padding:5px;background:var(--orchard-soft);border:1px solid var(--orchard-line);border-radius:16px;margin-bottom:16px;width:fit-content;max-width:100%}.yield-tools-tabs>button{min-height:44px;padding:10px 20px;border-radius:11px;color:var(--orchard-muted);font-weight:700;font-size:14px;transition:background-color .15s,color .15s}.yield-tools-tabs>button[aria-selected=true]{background:var(--orchard-paper);color:var(--orchard-ink);box-shadow:0 1px 5px #00000012}.yield-tools-tabs>button:focus-visible{outline:3px solid var(--orchard-accent);outline-offset:2px}.yield-tools [hidden]{display:none!important}.yield-replay.card{padding:0;overflow:hidden}.yield-replay>.card-heading{padding:22px 24px;margin-bottom:0;background:var(--orchard-soft);border-bottom:1px solid var(--orchard-line)}.replay-body{padding:24px}.replay-result{background:#f1f8f6;border-color:#c8dfd6;color:var(--orchard-ink)}.yield-band{display:inline-flex;padding:4px 9px;margin-top:8px;border-radius:7px;background:#e9eef3;color:#304d68;font-weight:700}.yield-band[data-level="ปานกลาง"]{background:#fff0cf;color:#775413}.yield-band[data-level="มาก"]{background:#dcefe5;color:#1c6348}.replay-mobile-row{padding:14px 16px;border:1px solid var(--orchard-line);background:var(--orchard-paper);border-radius:12px}.replay-mobile-row dt,.replay-mobile-row small{color:var(--orchard-muted)}:root[data-theme="dark"] .replay-result{background:#1c3034;border-color:#365153}:root[data-theme="dark"] .yield-band{background:#293e52;color:#bbd7ef}:root[data-theme="dark"] .yield-band[data-level="ปานกลาง"]{background:#443a23;color:#f4d592}:root[data-theme="dark"] .yield-band[data-level="มาก"]{background:#214536;color:#a6dfbf}@media(max-width:639px){.yield-tools-tabs{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.yield-tools-tabs>button{padding:10px 8px;font-size:13px}.yield-replay>.card-heading{padding:16px}.replay-body{padding:16px}.replay-result>div{grid-template-columns:repeat(2,minmax(0,1fr))}.replay-result>div>div:last-child{grid-column:1/-1;padding-top:12px;border-top:1px solid var(--orchard-line)}}@media(prefers-reduced-motion:reduce){.yield-tools-tabs>button{transition:none}}
+
+/* Language preference only: same surfaces and focus colors as the current design. */
+.language-control{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--orchard-line);border-radius:12px;background:var(--orchard-paper);flex-shrink:0}.language-control button{min-height:38px;min-width:40px;border-radius:9px;font-size:12px;font-weight:700;color:var(--orchard-muted);font-variant-numeric:tabular-nums}.language-control button[aria-pressed=true]{background:var(--orchard-soft);color:var(--orchard-ink);box-shadow:inset 0 -2px 0 var(--orchard-accent)}.language-control button:focus-visible{outline:3px solid var(--orchard-accent);outline-offset:1px}@media(max-width:479px){.app-header .theme-toggle>span{display:none}.app-header .theme-toggle{min-width:44px;padding:10px}.language-control button{min-height:44px;min-width:36px}.app-header>.flex.shrink-0{gap:6px}.app-header .min-w-0>p:first-child{font-size:12px}}
+
+/* Date cells remain readable in both themes; selection has a textual/ARIA state. */
+.journal-calendar{margin-inline:-.5rem}
+.journal-day{min-height:64px;display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--border,#dce5df);border-radius:10px;background:var(--surface,#fff);color:var(--text,#20332d);touch-action:manipulation}
+.journal-day:hover{border-color:#32937a}
+.journal-day:focus-visible{outline:3px solid #bc8c32;outline-offset:1px}
+.journal-day-selected{background:#087457;color:#fff;border-color:#087457}
+[data-theme="dark"] .journal-day{background:#202c38;color:#e7edf3;border-color:#475569}
+[data-theme="dark"] .journal-day-selected{background:#166b54;color:#fff;border-color:#a3e2c6}
+@media(min-width:640px){.journal-calendar{margin-inline:0}.journal-day{min-height:76px}}
+
+/* Orchard journal: calendar and selected-day details share a desktop row. */
+.orchard-journal{gap:18px}
+.journal-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.journal-private{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid #c3ddcf;border-radius:9px;background:#eff8f1;color:#285b43;font-size:11px}
+.journal-workspace{display:grid;gap:16px;align-items:start;min-width:0}
+.journal-calendar-card{padding:16px!important}
+.journal-calendar-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.journal-month-controls{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(72px,.6fr) 40px;align-items:end;gap:8px;margin-bottom:16px}
+.journal-month-controls>.btn{padding-left:0;padding-right:0;min-height:42px}
+.journal-day-card .card-heading{gap:10px;margin-bottom:16px}
+.journal-day-card .card-heading h2{font-size:14px}
+.orchard-journal .journal-day{min-height:52px;gap:2px;border-radius:9px;font-size:13px}
+.journal-notes .notice{margin-top:12px;font-size:12px;line-height:1.8}
+[data-theme="dark"] .journal-private{background:#20382d;color:#c4e6d4;border-color:#456453}
+@media(min-width:1024px){.journal-workspace{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}.orchard-journal .journal-day{min-height:60px}.journal-day-card{min-height:260px}}
+@media(max-width:389px){.journal-month-controls{gap:5px;grid-template-columns:34px minmax(0,1fr) 76px 34px}.journal-month-controls select{padding-inline:6px!important}.journal-month-controls>.btn{min-width:0!important}.journal-private{font-size:10px}}
+
+.journal-quickactions>.btn{gap:8px;min-height:48px;padding:8px 10px;font-size:12px}
+.journal-action-icon{display:grid;place-items:center;flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#e4f1e9;color:#246347}
+.journal-quickactions [data-activity="water"] .journal-action-icon{background:#e5f2fb;color:#1c628d}
+.journal-quickactions [data-activity="fertilizer"] .journal-action-icon{background:#f3eadc;color:#775634}
+.journal-quickactions [data-activity="observation"] .journal-action-icon{background:#fff0d2;color:#805719}
+.journal-empty{display:flex;min-height:180px;flex-direction:column;align-items:flex-start;justify-content:center;gap:14px}
+.journal-empty-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--orchard-soft);color:var(--orchard-accent)}
+.journal-empty>p{line-height:1.8;max-width:40ch}
+.orchard-journal .btn:active{transform:translateY(1px)}
+[data-theme="dark"] .journal-action-icon{background:#233f32;color:#bee2c6}
+[data-theme="dark"] .journal-quickactions [data-activity="water"] .journal-action-icon{background:#243d52;color:#bbdef8}
+[data-theme="dark"] .journal-quickactions [data-activity="fertilizer"] .journal-action-icon{background:#43382b;color:#eddbbb}
+[data-theme="dark"] .journal-quickactions [data-activity="observation"] .journal-action-icon{background:#493d27;color:#f6dc9b}
+@media(max-width:639px){.journal-month-controls{grid-template-columns:44px minmax(0,1fr) 92px 44px;gap:6px}.journal-month-controls>.btn{min-height:44px}.orchard-journal input,.orchard-journal select,.orchard-journal textarea{font-size:16px!important}.journal-quickactions>.btn{font-size:12px}.journal-empty{min-height:150px}}
+@media(prefers-reduced-motion:reduce){.orchard-journal .btn:active{transform:none}}
+
+.home-data-notes{padding:10px 0;color:var(--orchard-muted);border-top:1px solid var(--orchard-line)}
+.home-data-notes summary{font-size:12px}
+.orchard-home:has(#orchard-panel-journal:not([hidden])) .orchard-welcome{padding:10px 0;background:transparent;border:0;color:var(--orchard-ink)}
+.orchard-home:has(#orchard-panel-journal:not([hidden])) .orchard-welcome>div>p{display:none}
+.orchard-home:has(#orchard-panel-journal:not([hidden])) .orchard-welcome .btn{background:var(--orchard-paper);border-color:var(--orchard-line);color:var(--orchard-ink)}
+@media(max-width:639px){.orchard-journal .journal-day{min-height:46px}.journal-empty-icon{display:none}.journal-empty{min-height:116px}.journal-day-card .card-heading{flex-wrap:nowrap}.journal-day-card .card-heading>.btn{flex-shrink:0;padding-inline:10px}.journal-day-card .card-heading h2{font-size:13px}.orchard-home:has(#orchard-panel-journal:not([hidden])) .orchard-welcome h1{font-size:18px}}

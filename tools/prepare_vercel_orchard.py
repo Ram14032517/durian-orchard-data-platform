@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'.build/vercel_orchard'
 TOOLS=['serve_orchard_cloud.py','serve_orchard_analysis.py','orchard_current_context.py',
-       'supabase_orchard.py','orchard_harvest.py','orchard_forecast.py','clean_stale_weather.py',
-       'train_monthly_production.py','compare_harvest_stage_yield.py','analyze_harvest_backcast.py','durian_model/common.py','orchard_private_assets.py']
+       'supabase_orchard.py','orchard_harvest.py','orchard_activities.py','orchard_forecast.py','clean_stale_weather.py',
+       'train_monthly_production.py','compare_harvest_stage_yield.py','analyze_harvest_backcast.py','durian_model/common.py','orchard_private_assets.py','orchard_oae_update.py']
 
 def prepare(private_gis=False):
     out=ROOT/'.build/vercel_orchard_private' if private_gis else OUT

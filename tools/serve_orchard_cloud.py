@@ -5,6 +5,11 @@ import json
 import os
 import secrets
 import sys
+import copy
+import threading
+import time
+import re
+from functools import lru_cache
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -12,13 +17,39 @@ from zoneinfo import ZoneInfo
 from flask import Flask, abort, jsonify, redirect, request, send_file, session, render_template_string
 
 ROOT=Path(__file__).resolve().parents[1]
+DEFERRED_FIELDS={'map':('soil_properties',),'seasons':('monthly_weather',)}
+
+
+@lru_cache(maxsize=2)
+def compiled_dashboard(stamp):
+    """Keep the sealed source intact; transport large reference arrays on demand."""
+    html=(ROOT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
+    match=re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',html,re.S)
+    if not match:raise RuntimeError('รูปแบบข้อมูลหน้าเว็บเปลี่ยน กรุณาตรวจ Build')
+    source=json.loads(match[1])
+    groups={group:{field:source[field] for field in fields} for group,fields in DEFERRED_FIELDS.items()}
+    initial={**source,**{field:[] for fields in DEFERRED_FIELDS.values() for field in fields},'_deferred':list(groups)}
+    encoded=json.dumps(initial,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
+    html=html[:match.start(1)]+encoded+html[match.end(1):]
+    # Leaflet is required only by MapPage; other pages must not await its CDN script.
+    html=re.sub(r'<script src="https://cdn\.jsdelivr\.net/npm/leaflet@1\.9\.3/dist/leaflet\.js"></script>','',html)
+    if '<base ' not in html:html=html.replace('<head>','<head><base href="/research_data/five_province_history/">',1)
+    return html,groups
+
+
+def dashboard_content():
+    path=ROOT/'research_data/five_province_history/UNIFIED_MAP.html'
+    return compiled_dashboard((path.stat().st_mtime_ns,path.stat().st_size))
+
 sys.path.insert(0,str(ROOT/'tools'))
 from serve_orchard_analysis import fetch_weather, project_identity, save_weather_export
 from orchard_current_context import province_estimate, province_forecast_readiness
 from supabase_orchard import live_status, orchard_history
 from orchard_harvest import HarvestStore, HarvestConflict, owner_key, public_record, baselines, training_candidates
+from orchard_activities import ActivityStore
 from orchard_forecast import ForecastService, location_config
 from orchard_private_assets import ASSETS, signed_asset
+from orchard_oae_update import read_update
 
 LOGIN_PAGE='''<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ title }} — ข้อมูลสวนทุเรียน</title><style>
@@ -65,7 +96,10 @@ def create_app():
             raise RuntimeError('บัญชีเพิ่มเติมต้องมีชื่อและรหัสผ่านอย่างน้อย 16 ตัวอักษร')
         accounts.update(extra)
     app=Flask(__name__,static_folder=None)
+    sensor_cache={}
+    sensor_cache_lock=threading.Lock()
     app.config['HARVEST_STORE']=HarvestStore()
+    app.config['ACTIVITY_STORE']=ActivityStore()
     app.config['FORECAST_SERVICE']=ForecastService()
     app.config['MAX_CONTENT_LENGTH']=2_100_000
     app.config.update(SECRET_KEY=hashlib.sha256(('orchard-session-v1:'+password).encode()).digest(),
@@ -101,6 +135,10 @@ def create_app():
     @app.after_request
     def security_headers(response):
         response.headers['Cache-Control']='private, no-store'
+        if (response.status_code==200 and request.path.rsplit('/',1)[-1] in ('orchard_app.js','orchard_app.css')
+                and re.fullmatch('[a-f0-9]{12}',request.args.get('v',''))):
+            # Only versioned code/styles; HTML, API and private GIS remain no-store.
+            response.headers['Cache-Control']='private, max-age=31536000, immutable'
         response.headers['X-Content-Type-Options']='nosniff'
         response.headers['X-Frame-Options']='DENY'
         # OSM needs an identifying Referer; cross-origin requests expose only our public origin.
@@ -140,16 +178,42 @@ def create_app():
     @app.get('/yield')
     @app.get('/seasons')
     def dashboard_page():
-        html=(ROOT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
-        return html if '<base ' in html else html.replace('<head>','<head><base href="/research_data/five_province_history/">',1)
+        return dashboard_content()[0]
+
+    @app.get('/api/dashboard-data/<group>')
+    def dashboard_data(group):
+        if group not in DEFERRED_FIELDS:abort(404)
+        return jsonify(dashboard_content()[1][group])
 
     @app.get('/api/project')
     def identity():return jsonify(**project_identity(),mode='cloud',orchard_source='supabase')
 
+    @app.get('/api/province-production')
+    def province_production():return jsonify(read_update())
+
     @app.get('/api/orchard-status')
     def orchard():
         if session.get('principal',username)!=username:abort(403)
-        return jsonify(live_status())
+        credentials=os.environ.get('SUPABASE_SECRET_KEY') or os.environ.get('SUPABASE_SERVICE_ROLE_KEY','')
+        key=(session.get('principal',username),os.environ.get('ORCHARD_DEVICE_ID'),os.environ.get('SUPABASE_URL'),
+             hashlib.sha256(credentials.encode()).hexdigest())
+        with sensor_cache_lock:
+            cached=sensor_cache.get(key)
+            hit=bool(cached and time.monotonic()<cached['expires'])
+            if not hit:
+                payload=live_status()  # Failed requests never refresh the cache.
+                cached={'payload':copy.deepcopy(payload),'expires':time.monotonic()+30,
+                        'fetched_at':datetime.now(ZoneInfo('UTC')).isoformat()}
+                sensor_cache.clear()  # Single configured orchard, no unbounded tenant cache.
+                sensor_cache[key]=cached
+            payload=copy.deepcopy(cached['payload'])
+        # A cache hit must not freeze elapsed age or relabel stale measurements as fresh.
+        if payload.get('sensor_time'):
+            age=(datetime.now(ZoneInfo('UTC'))-datetime.fromisoformat(payload['sensor_time'].replace('Z','+00:00'))).total_seconds()/60
+            payload['age_minutes']=age
+            payload['status']='fresh_live' if 0<=age<=60 else 'stale_live'
+        payload['server_cache']={'hit':hit,'ttl_seconds':30,'fetched_at':cached['fetched_at']}
+        return jsonify(payload)
 
     @app.get('/api/orchard-history')
     def history():
@@ -197,6 +261,25 @@ def create_app():
         return jsonify(records=[public_record(r) for r in rows],baselines=baselines(rows),auto_train=False,
             verification='ผู้ใช้รายงาน ยังไม่ตรวจหลักฐานอิสระ',storage='Supabase')
 
+    @app.get('/api/orchard-activities')
+    def activities_list():
+        month=request.args.get('month',datetime.now(ZoneInfo('Asia/Bangkok')).strftime('%Y-%m'))
+        return jsonify(records=app.config['ACTIVITY_STORE'].list(harvest_owner(),month),month=month,account=session['principal'],storage='Supabase',
+            verification='user_reported_not_independently_verified')
+
+    @app.get('/api/orchard-activities/stage')
+    def activity_stage():return jsonify(record=app.config['ACTIVITY_STORE'].latest_stage(harvest_owner()),account=session['principal'],storage='Supabase')
+
+    @app.post('/api/orchard-activities')
+    def activities_create():
+        return jsonify(record=app.config['ACTIVITY_STORE'].create(harvest_owner(),harvest_write())),201
+
+    @app.patch('/api/orchard-activities/<uuid:record_id>')
+    def activities_update(record_id):
+        try:record=app.config['ACTIVITY_STORE'].update(harvest_owner(),str(record_id),harvest_write())
+        except LookupError:abort(404)
+        return jsonify(record=record)
+
     @app.post('/api/orchard-harvest')
     def harvest_create():
         return jsonify(record=app.config['HARVEST_STORE'].create(harvest_owner(),harvest_write())),201
@@ -240,6 +323,7 @@ def create_app():
 
     @app.get('/research_data/<path:name>')
     def assets(name):
+        if name=='five_province_history/UNIFIED_MAP.html':return dashboard_content()[0]
         if os.environ.get('VERCEL')=='1' and os.environ.get('ORCHARD_GIS_PRIVATE_BUCKET') and name in ASSETS:
             return redirect(signed_asset(name),code=302)
         path=(ROOT/'research_data'/name).resolve()

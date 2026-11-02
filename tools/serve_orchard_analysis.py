@@ -125,7 +125,7 @@ class Handler(SimpleHTTPRequestHandler):
         if path in ('/home','/map','/weather','/yield','/seasons'):return True
         if path in ('/api/orchard-status','/api/orchard-history') and os.environ.get('SUPABASE_URL'):
             return True
-        return path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
+        return path.startswith('/api/dashboard-data/') or path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast','/api/province-production','/api/orchard-activities') or path.startswith('/api/orchard-activities/') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
 
     def serve_private(self):
         """Mount the existing Flask authentication/API on the local report server."""

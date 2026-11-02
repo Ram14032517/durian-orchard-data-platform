@@ -27,6 +27,87 @@ class CloudTests(unittest.TestCase):
 
     def tearDown(self):self.env.stop()
 
+    def test_large_reference_data_loads_only_through_authenticated_named_groups(self):
+        import re,json,hashlib
+        path=ROOT/'research_data/five_province_history/UNIFIED_MAP.html'
+        before=hashlib.sha256(path.read_bytes()).hexdigest()
+        source=json.loads(re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',path.read_text(encoding='utf-8'),re.S)[1])
+        response=self.client.get('/home')
+        initial=json.loads(re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',response.get_data(as_text=True),re.S)[1])
+        self.assertLess(len(response.data),len(path.read_bytes())/4)
+        self.assertEqual(initial['soil_properties'],[])
+        self.assertEqual(initial['monthly_weather'],[])
+        self.assertEqual(initial['annual'],source['annual'])
+        self.assertEqual(initial['phenology'],source['phenology'])
+        self.assertNotIn('leaflet.js',response.get_data(as_text=True))
+        for group,key in [('map','soil_properties'),('seasons','monthly_weather')]:
+            route='/api/dashboard-data/'+group
+            self.assertEqual(self.app.test_client().get(route).status_code,401)
+            data=self.client.get(route)
+            self.assertEqual(data.json,{key:source[key]})
+            self.assertEqual(data.headers['Cache-Control'],'private, no-store')
+        self.assertEqual(self.client.get('/api/dashboard-data/anything').status_code,404)
+        legacy=self.client.get('/research_data/five_province_history/UNIFIED_MAP.html')
+        self.assertEqual(legacy.data,response.data)
+        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),before)
+
+    def test_sensor_cache_is_short_owner_scoped_and_does_not_freeze_measurement_age(self):
+        payload={'sensor_time':'2026-01-01T00:00:00+00:00','status':'fresh_live','readings':{'soil_ph':None},'prediction':None}
+        with patch('serve_orchard_cloud.live_status',return_value=payload) as read, patch('serve_orchard_cloud.time.monotonic',return_value=100):
+            first=self.client.get('/api/orchard-status')
+            second=self.client.get('/api/orchard-status')
+            self.assertFalse(first.json['server_cache']['hit'])
+            self.assertTrue(second.json['server_cache']['hit'])
+            self.assertEqual(read.call_count,1)
+            self.assertEqual(second.json['status'],'stale_live')
+            self.assertIsNone(second.json['readings']['soil_ph'])
+            self.assertEqual(second.headers['Cache-Control'],'private, no-store')
+            anonymous=self.app.test_client()
+            self.assertEqual(anonymous.get('/api/orchard-status').status_code,401)
+            with self.client.session_transaction() as state:state['principal']='someone-else'
+            self.assertIn(self.client.get('/api/orchard-status').status_code,(401,403))
+            self.assertEqual(read.call_count,1)
+        self.assertEqual(payload['status'],'fresh_live')
+
+    def test_sensor_cache_expires_and_credential_or_device_changes_miss_cache(self):
+        with patch('serve_orchard_cloud.live_status',return_value={'status':'missing'}) as read:
+            with patch('serve_orchard_cloud.time.monotonic',return_value=100):
+                self.client.get('/api/orchard-status')
+                with patch.dict(os.environ,{'ORCHARD_DEVICE_ID':'other-device'}):self.client.get('/api/orchard-status')
+                with patch.dict(os.environ,{'SUPABASE_SECRET_KEY':'test-rotated-key'}):self.client.get('/api/orchard-status')
+                self.client.get('/api/orchard-status')
+            with patch('serve_orchard_cloud.time.monotonic',return_value=131):
+                self.client.get('/api/orchard-status')
+            self.assertEqual(read.call_count,5)
+
+    def test_sensor_failure_is_not_cached_or_replaced_by_previous_data(self):
+        with patch('serve_orchard_cloud.live_status',side_effect=[RuntimeError('offline'),{'status':'missing'}]) as read:
+            self.assertEqual(self.client.get('/api/orchard-status').status_code,503)
+            self.assertEqual(self.client.get('/api/orchard-status').status_code,200)
+            self.assertEqual(read.call_count,2)
+
+    def test_only_versioned_code_assets_can_be_cached_by_private_browser(self):
+        prefix='/research_data/five_province_history/'
+        for name in ('orchard_app.js','orchard_app.css'):
+            response=self.client.get(prefix+name+'?v=abcdef012345')
+            self.assertEqual(response.status_code,200)
+            self.assertIn('private, max-age=',response.headers['Cache-Control'])
+            self.assertIn('immutable',response.headers['Cache-Control'])
+            response.close()
+            plain=self.client.get(prefix+name)
+            self.assertEqual(plain.headers['Cache-Control'],'private, no-store')
+            plain.close()
+        self.assertEqual(self.app.test_client().get(prefix+'orchard_app.js?v=abcdef012345').status_code,302)
+
+    def test_production_updates_require_login_and_reuse_validated_snapshot(self):
+        anonymous=self.app.test_client()
+        self.assertEqual(anonymous.get('/api/province-production').status_code,401)
+        with patch('serve_orchard_cloud.read_update',return_value={'status':'checked','rows':[]} ) as update:
+            response=self.client.get('/api/province-production')
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json['status'],'checked')
+            update.assert_called_once_with()
+
     def test_clean_routes_keep_auth_assets_and_safe_login_destination(self):
         anonymous=self.app.test_client()
         for path in ['/home','/map','/weather','/yield','/seasons']:

@@ -1,10 +1,11 @@
+import {locale} from '../../i18n/language.js';
 import React,{useState} from 'react';
 import {dateTime,format,num,sensorState,today} from './data.js';
 import {Badge,Icon,Notice} from './ui.jsx';
 import {careSources} from './OrchardAdvice.jsx';
 
 const value=(v,min=0,max=Infinity)=>{const n=typeof v==='boolean'?null:num(v);return n!==null&&n>=min&&n<=max?n:null;};
-const dayText=time=>new Date(time+'T12:00:00+07:00').toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'});
+const dayText=time=>new Date(time+'T12:00:00+07:00').toLocaleDateString(locale(),{timeZone:'Asia/Bangkok',weekday:'short',day:'numeric',month:'short'});
 
 export function weekOverview(input){
   const days=Array.isArray(input)?input:[];

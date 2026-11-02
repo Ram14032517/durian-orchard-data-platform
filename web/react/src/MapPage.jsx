@@ -1,3 +1,4 @@
+import {observeExternalLanguage} from '../../i18n/language.js';
 import React,{useEffect,useMemo,useRef,useState} from 'react';
 import '../../assets/js/orchard_gap_layer.js';
 import {gapSpatialHelpers} from './geo.js';
@@ -10,6 +11,7 @@ export default function MapPage({areas,setAreas,active,go}){
   const selectionVersion=useRef(0);selectionRef.current={areas,which,setAreas};
   const colorForSoil=useMemo(()=>soilPalette(data.soil_properties.map(p=>p.soil_code)),[]);
   const [legend,setLegend]=useState([]),[soilLoading,setSoilLoading]=useState(false);
+  useEffect(()=>{const a=observeExternalLanguage(registry.current),b=observeExternalLanguage(canvas.current);return()=>{a();b();};},[]);
   useEffect(()=>{
     if(!window.L){setMessage('ยังโหลดแผนที่ไม่ได้ ตรวจการเชื่อมต่อแล้วโหลดหน้าใหม่');return;}
     const L=window.L,map=L.map(canvas.current,{scrollWheelZoom:true}).setView([13,101],6);mapRef.current=map;L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);L.control.scale({imperial:false}).addTo(map);
