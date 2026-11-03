@@ -20,7 +20,7 @@ def prepare(private_gis=False):
     copy('ml/orchard_live_model.py');copy('models/orchard_soil_6h.json')
     for name in ['production_annual.csv','harvest_monthly.csv','weather_daily.csv','reference_points.csv']:
         copy('research_data/five_province_history/'+name)
-    for name in ['ridge_vpd_final_model.json','ridge_vpd_audit.json']:
+    for name in ['ridge_vpd_final_model.json','ridge_vpd_audit.json','annual_yield_feature_comparison.json']:
         copy('research_data/five_province_history/training/'+name)
     base='research_data/five_province_history/'
     for name in ['orchard_app.js','orchard_app.css']:copy(base+name)

@@ -2157,5 +2157,8 @@
   "· เพิ่มจากชุดเดิม": "· Added to the original dataset",
   "ปริมาณฝนสะสมวันที่มีค่า": "Accumulated rain on days with data",
   "ฐานข้อมูลประวัติสวนยังไม่พร้อม ตรวจ migration และสิทธิ์ service role": "The orchard database is not ready. Check migrations and service-role permissions.",
-  "แหล่งข้อมูลและการอัปเดต": "Data sources & updates"
+  "แหล่งข้อมูลและการอัปเดต": "Data sources & updates",
+  "แหล่งข้อมูล OAE และสถานะการอัปเดต": "OAE source and update status",
+  "ไม่พบไฟล์หรือข้อมูลที่ร้องขอ": "The requested file or data was not found",
+  "บริการตอบข้อมูลไม่ถูกต้อง กรุณาลองใหม่": "The service returned an unexpected response. Please try again"
 }

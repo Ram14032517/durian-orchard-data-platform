@@ -55,6 +55,13 @@ test('sensor cards reject invalid/stale data, preserve zero, and JSX escapes ext
 test('React chart does not connect missing measurements or turn missing into zero',()=>{const ui=load('web/react/src/ui.jsx');const html=renderToStaticMarkup(React.createElement(ui.LineChart,{rows:[{time:'1',x:0},{time:'2',x:null},{time:'3',x:25}],series:[{key:'x',label:'test',color:'#123456'}],unit:'%'}));const d=html.match(/<path d="([^"]+)"/)[1];assert.equal((d.match(/M/g)||[]).length,2);assert.equal((d.match(/L/g)||[]).length,0);assert.equal((html.match(/<circle(?! class=)/g)||[]).length,2);assert.equal((html.match(/class="chart-selected-point"/g)||[]).length,1);});
 test('weather fallback labels province proxy; missing days and duplicates fail closed',async()=>{const response=rows=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>rows});let rows=[{date:'2024-01-01',T2M:0},{date:'2024-01-02',T2M:null}];const fetch=async url=>String(url).startsWith('/api/')?{ok:false,status:403,headers:{get:()=> 'application/json'},json:async()=>({error:'unavailable'})}:response(rows);const w=load('web/react/src/Weather.jsx',fetch);const p={code:'22',lat:12.5,lon:102.2};const result=await w.weatherAtPoint(p,'2024-01-01','2024-01-02');assert.equal(result.basis,'province_proxy');assert.match(result.warning,/ไม่ใช่อากาศสวน/);assert.equal(result.rows[0].T2M,0);rows=[{date:'2024-01-01'},{date:'2024-01-01'}];await assert.rejects(w.weatherAtPoint(p,'2024-01-01','2024-01-02'),/ไม่ครอบคลุม/);});
 test('weather sign-in failure is not silently replaced with public province data',async()=>{let calls=0;const w=load('web/react/src/Weather.jsx',async()=>{calls++;return {ok:false,status:401,headers:{get:()=> 'application/json'},json:async()=>({error:'sign in'})};});await assert.rejects(w.weatherAtPoint({code:'22',lat:12,lon:102},'2024-01-01','2024-01-01'),e=>e.status===401);assert.equal(calls,1);});
+
+test('missing cloud files and HTML login redirects have accurate errors instead of local launcher advice',async()=>{
+ for(const [status,redirected,url,expected] of [[404,false,'',404],[503,false,'',503],[200,true,'https://example.test/login?next=/yield',401]]){
+  const {api}=load('web/react/src/api.js',async()=>({status,redirected,url,headers:{get:()=> 'text/html'}}));
+  await assert.rejects(api('training/missing.json'),e=>e.status===expected&&!e.message.includes('00_OPEN_REPORT.cmd'));
+ }
+});
 test('soil codes use deterministic categorical colors; SC and W remain distinct',()=>{
   const {soilPalette,soilLegend}=load('web/react/src/soil.js');
   const a=soilPalette(['W','Ca','SC','Ac','Ca',' Ac ']),b=soilPalette(['Ac','SC','Ca','W']);
