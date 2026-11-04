@@ -152,7 +152,7 @@ class Handler(SimpleHTTPRequestHandler):
         if path in APP_PATHS:return bool(os.environ.get('DASHBOARD_PASSWORD') or os.environ.get('SUPABASE_URL'))
         if (path=='/api/orchard-history' or (path=='/api/orchard-status' and os.environ.get('ORCHARD_DATA_SOURCE','local_snapshot')=='supabase')) and os.environ.get('SUPABASE_URL'):
             return True
-        return path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
+        return path.startswith('/api/dashboard-data/') or path in ('/login','/logout','/api/orchard-session','/api/orchard-forecast','/api/province-production','/api/orchard-activities') or path.startswith('/api/orchard-activities/') or path=='/api/orchard-harvest' or path.startswith('/api/orchard-harvest/')
 
     def serve_private(self):
         """Mount the existing Flask authentication/API on the local report server."""

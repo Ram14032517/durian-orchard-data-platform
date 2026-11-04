@@ -55,6 +55,8 @@ def render_assets(payload,output=OUT,include_seasons=True):
     (output/'UNIFIED_MAP_CLASSIC.html').write_text(template,encoding='utf-8')
     react_template=(ROOT/'web/templates/unified_orchard_react.html').read_text(encoding='utf-8')
     asset_version=hashlib.sha256(b''.join((OUT/name).read_bytes() for name in ('orchard_app.js','orchard_app.css'))).hexdigest()[:12]
+    script_version=hashlib.sha256((OUT/'orchard_app.js').read_bytes()).hexdigest()[:12]
+    react_template=react_template.replace('orchard_app.js?v=__ASSET_VERSION__','orchard_app.js?v='+script_version)
     (output/'UNIFIED_MAP.html').write_text(react_template.replace('__DATA__',script_json(payload)).replace('__ASSET_VERSION__',asset_version).replace('__THEME_BOOTSTRAP__',substitutions['__THEME_BOOTSTRAP__']),encoding='utf-8')
     if not include_seasons:return
     season_template=(ROOT/'web/templates/five_province_seasons.html').read_text(encoding='utf-8')

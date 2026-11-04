@@ -1,7 +1,8 @@
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 const root=new URL('../',import.meta.url);
 const require=createRequire(new URL('web/react/package.json',root));
 const {build}=require('esbuild');
@@ -14,3 +15,9 @@ const cli=new URL(typeof manifest.bin==='string'?manifest.bin:manifest.bin.tailw
 const css=spawnSync(process.execPath,[fileURLToPath(cli),'-i',fileURLToPath(new URL('web/react/src/style.css',root)),'-o',fileURLToPath(new URL('research_data/five_province_history/orchard_app.css',root)),'--minify'],{cwd:fileURLToPath(new URL('web/react/',root)),stdio:'inherit'});
 if(css.error)throw css.error;
 if(css.status!==0)throw Error('Tailwind build failed: '+css.status);
+// A changed dictionary must produce a new immutable asset URL as part of the same build.
+const page=new URL('research_data/five_province_history/UNIFIED_MAP.html',root);
+const version=createHash('sha256').update(await readFile(new URL('research_data/five_province_history/orchard_app.js',root))).digest('hex').slice(0,12);
+const html=await readFile(page,'utf8');
+const updated=html.replace(/orchard_app\.js\?v=[a-f0-9]+/g,'orchard_app.js?v='+version);
+if(updated!==html)await writeFile(page,updated,'utf8');

@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'.build/vercel_orchard'
 TOOLS=['serve_orchard_cloud.py','serve_orchard_analysis.py','orchard_current_context.py',
-       'supabase_orchard.py','orchard_harvest.py','orchard_forecast.py','clean_stale_weather.py',
-       'train_monthly_production.py','compare_harvest_stage_yield.py','analyze_harvest_backcast.py','durian_model/common.py','orchard_private_assets.py']
+       'supabase_orchard.py','orchard_harvest.py','orchard_activities.py','orchard_forecast.py','clean_stale_weather.py',
+       'train_monthly_production.py','compare_harvest_stage_yield.py','analyze_harvest_backcast.py','durian_model/common.py','orchard_private_assets.py','orchard_oae_update.py']
 
 def prepare(private_gis=False):
     out=ROOT/'.build/vercel_orchard_private' if private_gis else OUT
@@ -20,7 +20,7 @@ def prepare(private_gis=False):
     copy('ml/orchard_live_model.py');copy('models/orchard_soil_6h.json')
     for name in ['production_annual.csv','harvest_monthly.csv','weather_daily.csv','reference_points.csv']:
         copy('research_data/five_province_history/'+name)
-    for name in ['ridge_vpd_final_model.json','ridge_vpd_audit.json']:
+    for name in ['ridge_vpd_final_model.json','ridge_vpd_audit.json','annual_yield_feature_comparison.json']:
         copy('research_data/five_province_history/training/'+name)
     base='research_data/five_province_history/'
     for name in ['orchard_app.js','orchard_app.css','orchard_english.js']:copy(base+name)

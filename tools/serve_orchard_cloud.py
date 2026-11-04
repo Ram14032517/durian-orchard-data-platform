@@ -5,6 +5,11 @@ import json
 import os
 import secrets
 import sys
+import copy
+import threading
+import time
+import re
+from functools import lru_cache
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -12,13 +17,39 @@ from zoneinfo import ZoneInfo
 from flask import Flask, abort, jsonify, redirect, request, send_file, session, render_template_string
 
 ROOT=Path(__file__).resolve().parents[1]
+DEFERRED_FIELDS={'map':('soil_properties',),'seasons':('monthly_weather',)}
+
+
+@lru_cache(maxsize=2)
+def compiled_dashboard(stamp):
+    """Keep the sealed source intact; transport large reference arrays on demand."""
+    html=(ROOT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
+    match=re.search(r'const DATA=(.*?);window\.__ORCHARD_DATA__',html,re.S)
+    if not match:raise RuntimeError('รูปแบบข้อมูลหน้าเว็บเปลี่ยน กรุณาตรวจ Build')
+    source=json.loads(match[1])
+    groups={group:{field:source[field] for field in fields} for group,fields in DEFERRED_FIELDS.items()}
+    initial={**source,**{field:[] for fields in DEFERRED_FIELDS.values() for field in fields},'_deferred':list(groups)}
+    encoded=json.dumps(initial,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
+    html=html[:match.start(1)]+encoded+html[match.end(1):]
+    # Leaflet is required only by MapPage; other pages must not await its CDN script.
+    html=re.sub(r'<script src="https://cdn\.jsdelivr\.net/npm/leaflet@1\.9\.3/dist/leaflet\.js"></script>','',html)
+    if '<base ' not in html:html=html.replace('<head>','<head><base href="/research_data/five_province_history/">',1)
+    return html,groups
+
+
+def dashboard_content():
+    path=ROOT/'research_data/five_province_history/UNIFIED_MAP.html'
+    return compiled_dashboard((path.stat().st_mtime_ns,path.stat().st_size))
+
 sys.path.insert(0,str(ROOT/'tools'))
 from serve_orchard_analysis import fetch_weather, project_identity, save_weather_export
 from orchard_current_context import province_estimate, province_forecast_readiness
 from supabase_orchard import live_status, orchard_history
 from orchard_harvest import HarvestStore, HarvestConflict, owner_key, public_record, baselines, training_candidates
+from orchard_activities import ActivityStore
 from orchard_forecast import ForecastService, location_config
 from orchard_private_assets import ASSETS, signed_asset
+from orchard_oae_update import read_update
 
 LOGIN_PAGE='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ title }} — Durian Orchard</title><script>{{ theme_script|safe }}</script><script>{{ english_script|safe }}</script><style>
@@ -31,7 +62,7 @@ input{font:inherit;width:100%;padding:14px;border:1px solid #B08B6E;border-radiu
 input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #C08E3A;outline-offset:3px}a{color:var(--accent)}.error{border-left:3px solid #C66B3D;padding:10px;background:#D4B895;border-radius:16px}section>p:last-child{font-size:13px;color:#5b6048;margin-top:24px;overflow-wrap:anywhere}
 @media(max-width:640px){main{grid-template-columns:1fr;gap:28px;padding:28px 20px;align-content:center}section{padding:24px}.durian-art{width:140px;height:105px}header h1{font-size:28px;margin:8px 0}header p{margin:8px 0}}
 @media(prefers-reduced-motion:reduce){button{transition:none}}
-</style><body class="auth-ui"><header class="orchard-header auth-theme-host" aria-label="Display preferences"></header><main><header><svg class="durian-art" viewBox="0 0 220 170" aria-hidden="true"><path d="M110 36Q109 9 130 8" fill="none" stroke="#303b23" stroke-width="9" stroke-linecap="round"/><path d="M121 24Q160 0 184 28Q147 48 121 24" fill="#606C38" stroke="#E8DCC7" stroke-width="2"/><path d="M103 35L118 31 129 40 145 37 151 52 168 55 170 72 181 85 172 100 176 119 159 127 152 145 133 145 119 155 102 148 83 153 72 139 54 133 54 114 42 101 51 85 48 67 66 59 74 42 92 45Z" fill="#606C38" stroke="#D4B895" stroke-width="3"/><path d="M109 46Q172 92 116 143Q57 101 109 46Z" fill="#C08E3A" stroke="#E8DCC7" stroke-width="5"/><path d="M109 56Q126 76 111 91Q94 74 109 56M111 92Q138 109 117 132Q92 120 111 92" fill="#D4B895"/><path d="M64 73L71 80M59 100L68 99M75 124L83 117M146 67L140 76M159 99L150 97M142 131L135 121" stroke="#8B9D83" stroke-width="5" stroke-linecap="round"/></svg><h1>ข้อมูลสวนทุเรียน<br>และผลผลิต 5 จังหวัด</h1><p>ดูข้อมูลสวน สภาพอากาศ ดิน และผลประมาณการระดับจังหวัดในหน้าเดียว</p><p>เว็บส่วนตัวสำหรับเจ้าของสวนและผู้ร่วมดูที่ได้รับรหัสผ่าน</p></header>
+</style><body class="auth-ui"><header class="orchard-header auth-theme-host" aria-label="Display preferences"></header><main><header><svg class="durian-art" viewBox="0 0 220 170" aria-hidden="true"><path d="M110 36Q109 9 130 8" fill="none" stroke="#303b23" stroke-width="9" stroke-linecap="round"/><path d="M121 24Q160 0 184 28Q147 48 121 24" fill="#606C38" stroke="#E8DCC7" stroke-width="2"/><path d="M103 35L118 31 129 40 145 37 151 52 168 55 170 72 181 85 172 100 176 119 159 127 152 145 133 145 119 155 102 148 83 153 72 139 54 133 54 114 42 101 51 85 48 67 66 59 74 42 92 45Z" fill="#606C38" stroke="#D4B895" stroke-width="3"/><path d="M109 46Q172 92 116 143Q57 101 109 46Z" fill="#C08E3A" stroke="#E8DCC7" stroke-width="5"/><path d="M109 56Q126 76 111 91Q94 74 109 56M111 92Q138 109 117 132Q92 120 111 92" fill="#D4B895"/><path d="M64 73L71 80M59 100L68 99M75 124L83 117M146 67L140 76M159 99L150 97M142 131L135 121" stroke="#8B9D83" stroke-width="5" stroke-linecap="round"/></svg><h1>ข้อมูลสวนทุเรียน<br>และผลผลิต 5 จังหวัด</h1><p>ติดตามเซนเซอร์ อากาศ และประวัติสวนของคุณ</p><p>เว็บส่วนตัวสำหรับเจ้าของสวนและผู้ร่วมดูที่ได้รับรหัสผ่าน</p></header>
 <section aria-labelledby="login-title"><h2 id="login-title">{{ title }}</h2>{% if error %}<p role="alert" class="error">{{ error }}</p>{% endif %}
 <form method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="next" value="{{ next_page }}">
 {% if not logout %}<label for="username">ชื่อผู้ใช้</label><input id="username" name="username" autocomplete="username" required maxlength="128" value="{{ username }}">
@@ -39,11 +70,18 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #C08E
 <button type="button" id="toggle-password" class="password-toggle" aria-controls="password" aria-pressed="false">แสดงรหัสผ่าน</button>
 {% else %}<p>ต้องการออกจากระบบบนเบราว์เซอร์นี้หรือไม่?</p>{% endif %}
 <button type="submit" id="auth-submit">{{ title }}</button></form>
-{% if logout %}<p><a href="/">อยู่ในระบบต่อ / กลับไปแดชบอร์ด</a></p>{% else %}<p>เข้าสู่ระบบเพื่อดูเซนเซอร์และประวัติผลผลิตส่วนตัว เมื่อเข้าสู่ระบบสำเร็จจะกลับไปหน้าที่เลือกไว้</p><p>ใช้บัญชีสวนที่ผู้ดูแลจัดให้ หากไม่ทราบรหัสผ่านให้สอบถามผู้ดูแล ไม่ใช้รหัสบัญชี Supabase</p><p><a href="/research_data/five_province_history/UNIFIED_MAP.html">กลับหน้าหลัก</a></p>{% endif %}
+{% if logout %}<p><a href="/">อยู่ในระบบต่อ / กลับไปแดชบอร์ด</a></p>{% else %}<p>ใช้บัญชีสวนที่ผู้ดูแลจัดให้ หากลืมรหัสผ่าน โปรดติดต่อผู้ดูแล</p>{% endif %}
 </section></main><style>
 :root{font-family:Tahoma,"Segoe UI",Arial,sans-serif;color:#193c32;background:#f2f6f4;--accent:#187456}body{background:radial-gradient(ellipse at 10% 90%,#d8eadd 0,transparent 55%)}header{color:#174d3b}header p{color:#5d766a}section{background:#fff;border-color:#dce7df;box-shadow:0 20px 60px #174b2a10}input{background:#fafcfb;color:#193c32;border-color:#ccdcd2;border-radius:12px}button{border-radius:12px;color:#fff;margin-top:22px}button:hover{background:#105c41}button:disabled{opacity:.65;cursor:wait}.password-toggle{display:block;width:auto;min-height:0;margin:9px 0 0 auto;padding:5px 9px;background:transparent;color:#187456;font-size:13px}.password-toggle:hover{background:#eff7f1;color:#105c41}.error{background:#fff0e8;color:#8e452d;border-color:#c77c4c}section>p:last-child{color:#64776d}a{color:#187456}
+
+:root{background:#f2f5f2;color:#203e35;--accent:#176d51}body{display:grid;place-items:center;min-height:100svh;padding:24px;background:#f2f5f2}main{width:100%;max-width:980px;min-height:560px;margin:auto;padding:0;grid-template-columns:.95fr 1.05fr;gap:0;align-items:stretch;border:1px solid #d8e2da;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 20px 55px #173e2910}header{display:flex;flex-direction:column;justify-content:center;padding:44px;background:#143e32;color:#fff}.durian-art{width:140px;height:110px;filter:none;margin-bottom:20px}header h1{font-size:32px;line-height:1.5;margin:0 0 16px;color:#fff}header p{font-size:14px;line-height:1.9;color:#c4d9cd;margin:0;max-width:34ch}header p:last-child{margin-top:24px;padding-top:20px;border-top:1px solid #ffffff24;font-size:12px;color:#b9d2c4}section{align-self:center;padding:44px;border:0;border-radius:0;box-shadow:none;background:#fff;min-width:0}h2{font-size:26px;line-height:1.5;margin:0 0 24px;color:#193c32}label{font-size:14px;margin:20px 0 8px;color:#345448}input{font-size:16px;min-height:52px;background:#f8faf8;border-color:#bfcec3;border-radius:10px;padding:12px 14px;caret-color:#176d51}button{font-size:15px;min-height:50px;border-radius:10px;background:#176d51;margin-top:20px;transition:background-color 150ms ease}.password-toggle{min-height:44px;margin:4px 0 0 auto;padding:10px 2px;background:transparent;color:#176d51;font-size:12px}.error{border:1px solid #e5b8ac;background:#fff2ee;color:#853c2c;border-radius:10px;padding:12px;font-size:13px}section>p,section>p:last-child{font-size:12px;line-height:1.8;color:#60746a;margin:16px 0 0}a{text-underline-offset:4px}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #389675;outline-offset:3px}
+@media(max-width:640px){body{padding:16px}main{grid-template-columns:1fr;min-height:0;margin:auto;max-width:420px;border-radius:18px}header{display:block;padding:24px}.durian-art{float:left;width:64px;height:60px;margin:0 16px 0 0}header h1{font-size:21px;margin:0;line-height:1.5}header p{font-size:12px;margin-top:14px;clear:both}header p:last-child{display:none}section{padding:26px 24px}h2{font-size:24px;margin-bottom:20px}}
+@media(max-height:600px) and (min-width:641px){body{padding:16px}main{min-height:0}header,section{padding:28px}.durian-art{width:90px;height:75px;margin-bottom:8px}header h1{font-size:26px}}@media(prefers-reduced-motion:reduce){button{transition:none}}
+
 {{ theme_styles|safe }}
 .auth-ui{background:var(--orchard-canvas);color:var(--orchard-ink)}.auth-ui header,.auth-ui h1,.auth-ui h2{color:var(--orchard-ink)}.auth-ui header p,.auth-ui section>p:last-child{color:var(--orchard-muted)}.auth-ui section{background:var(--orchard-paper);border-color:var(--orchard-line);box-shadow:0 16px 48px #0000000a}.auth-ui input{background:var(--orchard-soft);color:var(--orchard-ink);border-color:var(--orchard-line)}.auth-ui a,.auth-ui .password-toggle{color:var(--orchard-accent)}.auth-ui #auth-submit{background:#176d51;color:#fff}.auth-ui .error{background:var(--orchard-red-bg);color:var(--orchard-red-text)}.auth-theme-host{position:absolute;top:12px;right:16px}.auth-theme-host .theme-control{width:auto;min-height:40px;margin:0;padding:0 12px;color:var(--orchard-ink);background:var(--orchard-paper)}
+
+.auth-ui main{background:var(--orchard-paper);border-color:var(--orchard-line)}.auth-ui main>header{background:var(--orchard-soft)}.auth-ui .auth-theme-host{display:block;padding:0;background:transparent;border:0;min-height:0}
 </style><script>
 const toggle=document.getElementById('toggle-password');if(toggle)toggle.addEventListener('click',()=>{const input=document.getElementById('password');const show=input.type==='password';input.type=show?'text':'password';toggle.setAttribute('aria-pressed',String(show));toggle.textContent=show?'ซ่อนรหัสผ่าน':'แสดงรหัสผ่าน';});
 document.querySelector('form').addEventListener('submit',()=>{const button=document.getElementById('auth-submit');button.disabled=true;button.textContent='กำลังดำเนินการ…';});
@@ -63,7 +101,10 @@ def create_app():
             raise RuntimeError('บัญชีเพิ่มเติมต้องมีชื่อและรหัสผ่านอย่างน้อย 16 ตัวอักษร')
         accounts.update(extra)
     app=Flask(__name__,static_folder=None)
+    sensor_cache={}
+    sensor_cache_lock=threading.Lock()
     app.config['HARVEST_STORE']=HarvestStore()
+    app.config['ACTIVITY_STORE']=ActivityStore()
     app.config['FORECAST_SERVICE']=ForecastService()
     app.config['MAX_CONTENT_LENGTH']=2_100_000
     app.config.update(SECRET_KEY=hashlib.sha256(('orchard-session-v1:'+password).encode()).digest(),
@@ -101,6 +142,10 @@ def create_app():
     @app.after_request
     def security_headers(response):
         response.headers['Cache-Control']='private, no-store'
+        if (response.status_code==200 and request.path.rsplit('/',1)[-1] in ('orchard_app.js','orchard_app.css')
+                and re.fullmatch('[a-f0-9]{12}',request.args.get('v',''))):
+            # Only versioned code/styles; HTML, API and private GIS remain no-store.
+            response.headers['Cache-Control']='private, max-age=31536000, immutable'
         response.headers['X-Content-Type-Options']='nosniff'
         response.headers['X-Frame-Options']='DENY'
         # OSM needs an identifying Referer; cross-origin requests expose only our public origin.
@@ -140,8 +185,12 @@ def create_app():
     @app.get('/yield')
     @app.get('/seasons')
     def dashboard_page():
-        html=(ROOT/'research_data/five_province_history/UNIFIED_MAP.html').read_text(encoding='utf-8')
-        return html if '<base ' in html else html.replace('<head>','<head><base href="/research_data/five_province_history/">',1)
+        return dashboard_content()[0]
+
+    @app.get('/api/dashboard-data/<group>')
+    def dashboard_data(group):
+        if group not in DEFERRED_FIELDS:abort(404)
+        return jsonify(dashboard_content()[1][group])
 
     @app.get('/api/project')
     def identity():
@@ -155,10 +204,32 @@ def create_app():
         payload['capabilities']['orchard'].update(source='supabase',configured=payload['capabilities']['orchard']['history_configured'])
         return jsonify(payload)
 
+    @app.get('/api/province-production')
+    def province_production():return jsonify(read_update())
+
     @app.get('/api/orchard-status')
     def orchard():
         if session.get('principal',username)!=username:abort(403)
-        return jsonify(live_status())
+        credentials=os.environ.get('SUPABASE_SECRET_KEY') or os.environ.get('SUPABASE_SERVICE_ROLE_KEY','')
+        key=(session.get('principal',username),os.environ.get('ORCHARD_DEVICE_ID'),os.environ.get('SUPABASE_URL'),
+             hashlib.sha256(credentials.encode()).hexdigest())
+        with sensor_cache_lock:
+            cached=sensor_cache.get(key)
+            hit=bool(cached and time.monotonic()<cached['expires'])
+            if not hit:
+                payload=live_status()  # Failed requests never refresh the cache.
+                cached={'payload':copy.deepcopy(payload),'expires':time.monotonic()+30,
+                        'fetched_at':datetime.now(ZoneInfo('UTC')).isoformat()}
+                sensor_cache.clear()  # Single configured orchard, no unbounded tenant cache.
+                sensor_cache[key]=cached
+            payload=copy.deepcopy(cached['payload'])
+        # A cache hit must not freeze elapsed age or relabel stale measurements as fresh.
+        if payload.get('sensor_time'):
+            age=(datetime.now(ZoneInfo('UTC'))-datetime.fromisoformat(payload['sensor_time'].replace('Z','+00:00'))).total_seconds()/60
+            payload['age_minutes']=age
+            payload['status']='fresh_live' if 0<=age<=60 else 'stale_live'
+        payload['server_cache']={'hit':hit,'ttl_seconds':30,'fetched_at':cached['fetched_at']}
+        return jsonify(payload)
 
     @app.get('/api/orchard-history')
     def history():
@@ -206,6 +277,25 @@ def create_app():
         return jsonify(records=[public_record(r) for r in rows],baselines=baselines(rows),auto_train=False,
             verification='ผู้ใช้รายงาน ยังไม่ตรวจหลักฐานอิสระ',storage='Supabase')
 
+    @app.get('/api/orchard-activities')
+    def activities_list():
+        month=request.args.get('month',datetime.now(ZoneInfo('Asia/Bangkok')).strftime('%Y-%m'))
+        return jsonify(records=app.config['ACTIVITY_STORE'].list(harvest_owner(),month),month=month,account=session['principal'],storage='Supabase',
+            verification='user_reported_not_independently_verified')
+
+    @app.get('/api/orchard-activities/stage')
+    def activity_stage():return jsonify(record=app.config['ACTIVITY_STORE'].latest_stage(harvest_owner()),account=session['principal'],storage='Supabase')
+
+    @app.post('/api/orchard-activities')
+    def activities_create():
+        return jsonify(record=app.config['ACTIVITY_STORE'].create(harvest_owner(),harvest_write())),201
+
+    @app.patch('/api/orchard-activities/<uuid:record_id>')
+    def activities_update(record_id):
+        try:record=app.config['ACTIVITY_STORE'].update(harvest_owner(),str(record_id),harvest_write())
+        except LookupError:abort(404)
+        return jsonify(record=record)
+
     @app.post('/api/orchard-harvest')
     def harvest_create():
         return jsonify(record=app.config['HARVEST_STORE'].create(harvest_owner(),harvest_write())),201
@@ -249,6 +339,7 @@ def create_app():
 
     @app.get('/research_data/<path:name>')
     def assets(name):
+        if name=='five_province_history/UNIFIED_MAP.html':return dashboard_content()[0]
         if os.environ.get('VERCEL')=='1' and os.environ.get('ORCHARD_GIS_PRIVATE_BUCKET') and name in ASSETS:
             return redirect(signed_asset(name),code=302)
         path=(ROOT/'research_data'/name).resolve()

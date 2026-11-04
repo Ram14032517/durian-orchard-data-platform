@@ -140,3 +140,37 @@ html[data-theme="dark"] .oc :is(.oc-pill.blue,.oc-guidance-item.info) { backgrou
 html[data-theme="dark"] .oc .oc-chart-grid { stroke: var(--orchard-line); }
 html[data-theme="dark"] .oc .oc-chart-label { fill: var(--orchard-muted); }
 @media(max-width:639px) { .theme-control { gap: 2px; padding: 0 4px; } .theme-control svg { display: none; } .theme-control select { max-width: 108px; } }
+
+/* Explicit active-tab selector wins over the broad muted-text rule. */
+html[data-theme="dark"] .orchard-home .orchard-tabs .orchard-tab-active,
+html[data-theme="dark"] .orchard-home .orchard-tabs .orchard-tab-active:hover { color:#f4fff7; }
+.theme-control.theme-toggle { min-height:44px; gap:8px; padding:8px 12px; font-weight:600; transition:background-color .15s; }
+.theme-control.theme-toggle:hover { background:var(--orchard-soft); }
+.theme-control.theme-toggle:focus-visible { outline:3px solid var(--orchard-accent); outline-offset:3px; }
+@media(max-width:639px) { .theme-control.theme-toggle svg { display:block; } }
+@media(prefers-reduced-motion:reduce) { .theme-control.theme-toggle { transition:none; } }
+
+/* Charcoal surfaces leave semantic colour to the measurements and their sources. */
+:root[data-theme="dark"]{--orchard-canvas:#11161e;--orchard-paper:#1a222e;--orchard-soft:#242e3c;--orchard-ink:#edf2f8;--orchard-muted:#b5c1d0;--orchard-line:#394659;--studio-canvas:#11161e;--studio-paper:#1a222e;--studio-soft:#242e3c}
+html[data-theme="dark"] .metric{background:#1a222e;border-color:#394659}
+html[data-theme="dark"] .metric .metric-icon.tone-blue{background:#173b54;color:#8ed5ff}
+html[data-theme="dark"] .metric .metric-icon.tone-cyan{background:#173e40;color:#8edbd5}
+html[data-theme="dark"] .metric .metric-icon.tone-amber{background:#453621;color:#f5ce83}
+html[data-theme="dark"] .metric .metric-icon.tone-violet{background:#352d4d;color:#cfbcf0}
+html[data-theme="dark"] .metric .metric-icon.tone-green{background:#1e3c31;color:#a1dfbd}
+html[data-theme="dark"] .metric .metric-icon.tone-rose{background:#442d3b;color:#edafc6}
+html[data-theme="dark"] .orchard-home .metric-blue{border-top-color:#6eb6df}
+html[data-theme="dark"] .orchard-home .metric-cyan{border-top-color:#6ebbb3}
+html[data-theme="dark"] .orchard-home .metric-amber{border-top-color:#d3ac69}
+html[data-theme="dark"] .orchard-home .metric-violet{border-top-color:#b29bd4}
+html[data-theme="dark"] .orchard-home .metric-green{border-top-color:#80b99b}
+html[data-theme="dark"] .orchard-home .metric-rose{border-top-color:#d298b1}
+html[data-theme="dark"] .group-sensor{background:#192a29;border-color:#426b5b}
+html[data-theme="dark"] .group-forecast{background:#192b3b;border-color:#466c87}
+html[data-theme="dark"] .group-soil{background:#302b26;border-color:#82705a}
+html[data-theme="dark"] .group-attention{background:#302b20;border-color:#8a7144}
+html[data-theme="dark"] .group-stage{background:#202e27;border-color:#52705a}
+html[data-theme="dark"] .data-chart{background:#171f2a;border-color:#394659}
+html[data-theme="dark"] .data-chart .chart-readout{background:#223247;color:#edf2f8}
+html[data-theme="dark"] .data-chart .chart-label{fill:#b5c1d0}
+html[data-theme="dark"] .data-chart .chart-meta,html[data-theme="dark"] .data-chart .chart-readout>span:first-child{color:#b5c1d0}

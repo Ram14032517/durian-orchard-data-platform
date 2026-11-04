@@ -34,6 +34,7 @@ c=app.app.test_client();h={'X-Forwarded-Proto':'https'}
 assert c.get('/healthz',headers=h).status_code==200
 assert c.get('/api/orchard-status',headers=h).status_code==401
 assert c.get('/research_data/five_province_history/orchard_app.js',headers=h).status_code==302
+assert c.get('/research_data/five_province_history/training/annual_yield_feature_comparison.json',headers=h).status_code==302
 r=c.get('/login',headers=h)
 assert b'header class="orchard-header auth-theme-host"' in r.data
 assert b'data-theme-toggle' in r.data and b'orchard:theme-change' in r.data
@@ -42,6 +43,9 @@ with c.session_transaction() as s: token=s['csrf']
 assert c.post('/login',data={'csrf':token,'username':'owner','password':'synthetic-vercel-password-123'},headers=h).status_code==302
 assert c.get('/research_data/five_province_history/UNIFIED_MAP.html',headers=h).status_code==200
 assert c.get('/research_data/five_province_history/orchard_app.js',headers=h).status_code==200
+r=c.get('/research_data/five_province_history/training/annual_yield_feature_comparison.json',headers=h)
+assert r.status_code==200 and r.is_json and len(r.json['scores'])>0
+assert r.headers['Cache-Control']=='private, no-store'
 assert c.get('/research_data/five_province_history/gap_orchards/manifest.json',headers=h).status_code==404
 assert c.get('/research_data/priority_provinces/soil_layers/22.geojson',headers=h).status_code==404
 assert c.get('/.secrets/supabase_local.json',headers=h).status_code==404

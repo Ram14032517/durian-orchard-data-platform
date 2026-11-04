@@ -10,6 +10,38 @@ const React=frontRequire('react');
 const {renderToStaticMarkup}=frontRequire('react-dom/server');
 const fixture={provinces:[{province_code:'22',weather_latitude:12,weather_longitude:102,province_name:'จังหวัดทดสอบ'}]};
 function load(file,fetch){const compiled=buildSync({entryPoints:[file],bundle:true,write:false,format:'cjs',platform:'node',external:['react'],logLevel:'silent'}).outputFiles[0].text;const module={exports:{}};vm.runInNewContext(compiled,{module,exports:module.exports,require:frontRequire,window:{__ORCHARD_DATA__:fixture},fetch,URLSearchParams,AbortController,Date,Intl,console,setTimeout,clearTimeout,setInterval,clearInterval});return module.exports;}
+
+test('reused number and date formatters preserve rounding, missing, zero and Bangkok time',()=>{
+ const {format,dateTime,chartTime}=load('web/react/src/data.js');
+ for(const value of [0,1234.567,-1234.567,'1234.5'])for(const d of [0,1,2,4]){
+   assert.equal(format(value,d),Number(value).toLocaleString('en-GB',{maximumFractionDigits:d}));
+   assert.equal(format(value,d),format(value,d));
+ }
+ for(const value of [null,undefined,'',NaN,Infinity])assert.equal(format(value),'—');
+ const stamp='2026-10-26T17:00:00Z';
+ assert.equal(dateTime(stamp),new Date(stamp).toLocaleString('en-GB',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}));
+ assert.equal(chartTime(stamp),chartTime('2026-10-27T00:00:00+07:00'));
+ assert.equal(chartTime('2569'),'2569');
+});
+
+test('DOA levels cover decimal boundaries and keep missing or negative predictions unavailable',()=>{
+ const {yieldLevel,yieldErrorPct}=load('web/react/src/YieldReplay.jsx');
+ for(const v of [null,undefined,'',NaN,-1])assert.equal(yieldLevel(v),null);
+ assert.equal(yieldLevel(0),'น้อย');assert.equal(yieldLevel(1300),'น้อย');assert.equal(yieldLevel(1300.01),'ปานกลาง');assert.equal(yieldLevel(1700),'ปานกลาง');assert.equal(yieldLevel(1700.01),'มาก');
+ assert.equal(yieldErrorPct(0,100),null);assert.equal(yieldErrorPct(100,120),20);assert.equal(yieldErrorPct(100,80),20);assert.equal(yieldErrorPct(null,80),null);
+});
+
+test('historical level replay reproduces metrics on fixed year/province keys without a future fitted model',()=>{
+ const d=JSON.parse(fs.readFileSync('web/react/src/yieldReplay.json','utf8'));
+ const {yieldLevel,yieldErrorPct}=load('web/react/src/YieldReplay.jsx');
+ assert.equal(d.rows.length,45);assert.equal(new Set(d.rows.map(r=>r.province_code+':'+r.year_ce)).size,45);
+ for(const s of d.years){const rows=d.rows.filter(r=>r.year_ce===s.year_ce);assert.equal(rows.length,5);assert.equal(s.train_end,s.year_ce-1);assert.equal(s.training_rows,5*(s.year_ce-2010));
+  assert.ok(Math.abs(rows.reduce((n,r)=>n+yieldErrorPct(r.actual_kg_rai,r.predicted_kg_rai),0)/5-s.mape_pct)<1e-8);
+  assert.equal(rows.filter(r=>yieldLevel(r.actual_kg_rai)===yieldLevel(r.predicted_kg_rai)).length,s.class_correct);
+ }
+ const {YieldReplay}=load('web/react/src/YieldReplay.jsx');const html=renderToStaticMarkup(React.createElement(YieldReplay,{initialProvince:'84'}));
+ assert.match(html,/34,?028|855/);assert.match(html,/Baseline/);assert.match(html,/Exploratory/);assert.match(html,/1300|1,300/);assert.doesNotMatch(html,/พยากรณ์รายสวนที่แม่นยำ/);
+});
 test('React entry uses bundled React and compiled Tailwind, not a CDN transpiler',()=>{const html=fs.readFileSync('research_data/five_province_history/UNIFIED_MAP.html','utf8');assert.match(html,/orchard-react-root/);assert.match(html,/orchard_app\.js/);assert.match(html,/orchard_app\.css/);assert.doesNotMatch(html,/text\/babel|react\.development|orchard_lumen/);assert.ok(fs.statSync('research_data/five_province_history/orchard_app.css').size>1000);});
 test('theme control is a one-click native button showing its current mode',()=>{
   const Theme=load('web/react/src/ThemeControl.jsx').default;
@@ -22,9 +54,16 @@ test('theme control is a one-click native button showing its current mode',()=>{
   assert.doesNotMatch(html,/<form|type="submit"/);
 });
 test('sensor cards reject invalid/stale data, preserve zero, and JSX escapes external text',()=>{const d=load('web/react/src/data.js');assert.equal(d.num(null),null);assert.equal(d.num(''),null);assert.equal(d.num(0),0);const r={status:'fresh_live',sensor_quality:{soil:'invalid',weather:'valid'},readings:{soil_moisture_percent:0,rain_1h_mm:0}};assert.equal(d.sensorState(r,'soil','soil_moisture_percent'),'invalid');assert.equal(d.sensorState(r,'weather','rain_1h_mm'),'fresh');r.status='stale_live';assert.equal(d.sensorState(r,'weather','rain_1h_mm'),'stale');const ui=load('web/react/src/ui.jsx');const html=renderToStaticMarkup(React.createElement(ui.Metric,{label:'<script>alert(1)</script>',value:0,unit:'%'}));assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);assert.match(html,/>0<\/span>/);});
-test('React chart does not connect missing measurements or turn missing into zero',()=>{const ui=load('web/react/src/ui.jsx');const html=renderToStaticMarkup(React.createElement(ui.LineChart,{rows:[{time:'1',x:0},{time:'2',x:null},{time:'3',x:25}],series:[{key:'x',label:'test',color:'#123456'}],unit:'%'}));const d=html.match(/<path d="([^"]+)"/)[1];assert.equal((d.match(/M/g)||[]).length,2);assert.equal((d.match(/L/g)||[]).length,0);assert.equal((html.match(/<circle/g)||[]).length,2);});
+test('React chart does not connect missing measurements or turn missing into zero',()=>{const ui=load('web/react/src/ui.jsx');const html=renderToStaticMarkup(React.createElement(ui.LineChart,{rows:[{time:'1',x:0},{time:'2',x:null},{time:'3',x:25}],series:[{key:'x',label:'test',color:'#123456'}],unit:'%'}));const d=html.match(/<path d="([^"]+)"/)[1];assert.equal((d.match(/M/g)||[]).length,2);assert.equal((d.match(/L/g)||[]).length,0);assert.equal((html.match(/<circle(?! class=)/g)||[]).length,2);assert.equal((html.match(/class="chart-selected-point"/g)||[]).length,1);});
 test('weather fallback labels province proxy; missing days and duplicates fail closed',async()=>{const response=rows=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>rows});let rows=[{date:'2024-01-01',T2M:0},{date:'2024-01-02',T2M:null}];const fetch=async url=>String(url).startsWith('/api/')?{ok:false,status:403,headers:{get:()=> 'application/json'},json:async()=>({error:'unavailable'})}:response(rows);const w=load('web/react/src/Weather.jsx',fetch);const p={code:'22',lat:12.5,lon:102.2};const result=await w.weatherAtPoint(p,'2024-01-01','2024-01-02');assert.equal(result.basis,'province_proxy');assert.match(result.warning,/ไม่ใช่อากาศสวน/);assert.equal(result.rows[0].T2M,0);rows=[{date:'2024-01-01'},{date:'2024-01-01'}];await assert.rejects(w.weatherAtPoint(p,'2024-01-01','2024-01-02'),/ไม่ครอบคลุม/);});
 test('weather sign-in failure is not silently replaced with public province data',async()=>{let calls=0;const w=load('web/react/src/Weather.jsx',async()=>{calls++;return {ok:false,status:401,headers:{get:()=> 'application/json'},json:async()=>({error:'sign in'})};});await assert.rejects(w.weatherAtPoint({code:'22',lat:12,lon:102},'2024-01-01','2024-01-01'),e=>e.status===401);assert.equal(calls,1);});
+
+test('missing cloud files and HTML login redirects have accurate errors instead of local launcher advice',async()=>{
+ for(const [status,redirected,url,expected] of [[404,false,'',404],[503,false,'',503],[200,true,'https://example.test/login?next=/yield',401]]){
+  const {api}=load('web/react/src/api.js',async()=>({status,redirected,url,headers:{get:()=> 'text/html'}}));
+  await assert.rejects(api('training/missing.json'),e=>e.status===expected&&!e.message.includes('00_OPEN_REPORT.cmd'));
+ }
+});
 test('soil codes use deterministic categorical colors; SC and W remain distinct',()=>{
   const {soilPalette,soilLegend}=load('web/react/src/soil.js');
   const a=soilPalette(['W','Ca','SC','Ac','Ca',' Ac ']),b=soilPalette(['Ac','SC','Ca','W']);
@@ -47,7 +86,7 @@ test('all five existing soil layers have mapped colors and preserve their source
 test('durian logo and fruit-set stages use an internal SVG; A/B badges cannot intercept GAP clicks',()=>{
   const ui=load('web/react/src/ui.jsx'),svg=renderToStaticMarkup(React.createElement(ui.Icon,{name:'durian'}));
   assert.match(svg,/<svg/);assert.match(svg,/viewBox="0 0 64 64"/);assert.doesNotMatch(svg,/<image|https?:/);
-  assert.match(fs.readFileSync('web/react/src/Home.jsx','utf8'),/\['young','ติดผล','durian'\]/);
+  assert.match(fs.readFileSync('web/react/src/activityData.js','utf8'),/\['young','ติดผล','durian'\]/);
   assert.match(fs.readFileSync('web/react/src/MapPage.jsx','utf8'),/interactive:false,keyboard:false/);
   const css=fs.readFileSync('research_data/five_province_history/orchard_app.css','utf8');
   assert.match(css,/\.gap-pin-head\{/,'React bundle includes the actual marker shape, not only its empty DOM hit area');
@@ -59,7 +98,7 @@ test('growth timeline highlights only the recorded stage, never the current cale
   const empty=render(null);assert.match(empty,/ยังไม่ได้บันทึกระยะการผลิต/);assert.doesNotMatch(empty,/aria-current="step"/);
   const recorded=render({stage:'young',observed_at:'2026-01-01T00:00:00Z'});
   assert.equal((recorded.match(/aria-current="step"/g)||[]).length,1);assert.match(recorded,/<p[^>]*>ติดผล<\/p>/);
-  assert.match(recorded,/ยังไม่แยกตามบัญชี/);assert.equal((recorded.match(/<li /g)||[]).length,6);
+  assert.match(recorded,/Supabase ส่วนตัวตามบัญชี/);assert.equal((recorded.match(/<li /g)||[]).length,6);
 });
 test('care cards preserve invalid/missing status and do not advise on stale rainfall',()=>{
   const {Care}=load('web/react/src/Home.jsx');
@@ -118,13 +157,31 @@ test('estimate display requires a numeric result with the correct model status',
   assert.equal(estimateView({status:'missing_weather'}).ready,false);
 });
 
-test('home starts with an accessible five-tab view and mounts only Today initially',()=>{
+test('home starts with accessible six-tab view including journal and mounts only Today initially',()=>{
   const {HomeTabs}=load('web/react/src/Home.jsx');
   const html=renderToStaticMarkup(React.createElement(HomeTabs,{children:tab=>React.createElement('p',null,'content-'+tab)}));
-  assert.equal((html.match(/role="tab"/g)||[]).length,5);
+  assert.equal((html.match(/role="tab"/g)||[]).length,6);
   assert.equal((html.match(/role="tabpanel"/g)||[]).length,1);
   assert.match(html,/aria-selected="true" aria-controls="orchard-panel-today"/);
   assert.doesNotMatch(html,/content-history|content-forecast/);
+});
+
+test('journal calendar handles leap years, Monday start and year boundaries without shifting local dates',()=>{
+ const {monthDays,shiftMonth}=load('web/react/src/activityData.js');
+ assert.equal(monthDays('2028-02').filter(Boolean).length,29);
+ assert.equal(monthDays('2026-02').filter(Boolean).length,28);
+ assert.equal(monthDays('2026-06')[0],'2026-06-01');
+ assert.equal(shiftMonth('2026-12',1),'2027-01');assert.equal(shiftMonth('2026-01',-1),'2025-12');
+ assert.equal(load('web/react/src/data.js').dateTime('2026-11-02').includes(':'),false);
+});
+
+test('journal saves owner-scoped dates and stages to backend instead of browser storage',()=>{
+ const journal=fs.readFileSync('web/react/src/OrchardJournal.jsx','utf8'),home=fs.readFileSync('web/react/src/Home.jsx','utf8');
+ assert.ok(journal.includes('X-CSRF-Token'));assert.ok(journal.includes('expected_version'));assert.ok(journal.includes('crypto.randomUUID()'));
+ assert.ok(!journal.includes('localStorage'));assert.ok(home.includes('/api/orchard-activities/stage'));
+ assert.ok(journal.includes('records.data?.account===session.data?.account'));
+ assert.ok(journal.includes('form._account===session.data?.account'));
+ assert.ok(home.includes("['journal','บันทึกสวน','calendar']"));assert.ok(home.includes('<OrchardJournal/>'));
 });
 
 test('care suggestions fail closed for missing, failed and stale sensor/forecast data',()=>{
@@ -211,4 +268,26 @@ test('soil reference image is real LDD excerpt, labels uncertainty and does not 
   assert.match(html,/5.5–6.0/);assert.match(html,/ไม่ยืนยันขอบเขตหรือดินทุกจุด/);
   assert.doesNotMatch(html,/latitude|longitude|8\.833|99\.371/);
   const unlinked=renderToStaticMarkup(React.createElement(SoilReference,{linked:false}));assert.match(unlinked,/ยังไม่ผูกกับบัญชีสวนนี้/);
+});
+
+test('chart times use Bangkok for UTC, offset and naive local timestamps without changing annual labels',()=>{
+ const {chartTime}=load('web/react/src/data.js');
+ const local=chartTime('2026-10-27T00:00:00+07:00');
+ assert.equal(chartTime('2026-10-26T17:00:00Z'),local);
+ assert.equal(chartTime('2026-10-27T00:00:00'),local);
+ assert.match(local,/27.*2026.*00:00/);
+ assert.doesNotMatch(local,/T00|\+07:00/);
+ assert.equal(chartTime(2568),'2568');
+ assert.doesNotMatch(chartTime('2026-10-27'),/00:00|12:00/);
+ assert.equal(chartTime(null),'ไม่ระบุเวลา');
+});
+
+
+test('large history charts retain every valid path value while avoiding invisible SVG markers',()=>{
+ const ui=load('web/react/src/ui.jsx'),rows=Array.from({length:2880},(_,i)=>({time:i,x:i===100?null:i}));
+ const html=renderToStaticMarkup(React.createElement(ui.LineChart,{rows,series:[{key:'x',label:'test',color:'#123456'}],unit:'C'}));
+ const d=html.match(/<path d="([^"]+)"/)[1];
+ assert.equal((d.match(/M/g)||[]).length,2);assert.equal((d.match(/L/g)||[]).length,2877);
+ assert.equal((html.match(/<circle/g)||[]).length,1);
+ assert.match(html,/class="chart-selected-point"/);assert.match(html,/type="range"/);
 });

@@ -102,6 +102,7 @@ def public_record(row):
 
 
 class HarvestStore:
+    table = TABLE
     def _write(self, method, params, payload):
         url = os.environ.get('SUPABASE_URL', '').rstrip('/')
         key = os.environ.get('SUPABASE_SECRET_KEY') or os.environ.get('SUPABASE_SERVICE_ROLE_KEY')
@@ -111,14 +112,14 @@ class HarvestStore:
         if not key.startswith('sb_secret_'):
             headers['Authorization'] = 'Bearer ' + key
         try:
-            response = requests.request(method, url + '/rest/v1/' + TABLE, params=params, json=payload,
+            response = requests.request(method, url + '/rest/v1/' + self.table, params=params, json=payload,
                                         headers=headers, timeout=15, allow_redirects=False)
         except requests.RequestException as exc:
             raise RuntimeError('ยังยืนยันการบันทึกไม่ได้ โหลดประวัติใหม่ก่อนลองอีกครั้ง') from exc
         if response.status_code == 409:
             raise HarvestConflict('มีสวน–ปี–ฤดูนี้แล้ว ให้แก้ไขรายการเดิม')
         if response.status_code not in (200, 201):
-            raise RuntimeError('ฐานข้อมูลประวัติสวนยังไม่พร้อม ตรวจ migration 004 และสิทธิ์ service role')
+            raise RuntimeError('ฐานข้อมูลประวัติสวนยังไม่พร้อม ตรวจ migration และสิทธิ์ service role')
         rows = response.json()
         if not isinstance(rows, list):
             raise RuntimeError('รูปแบบคำตอบฐานข้อมูลไม่ถูกต้อง')
